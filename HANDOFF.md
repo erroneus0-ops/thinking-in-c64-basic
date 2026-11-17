@@ -4,8 +4,17 @@ Read this first in every new session. Update it at the end of each session.
 
 ## Privacy rule
 
-This repo is PUBLIC. Never put anything about the student here: no name, age, or
-description of how he learns. The reader profile lives only in the private plan doc.
+This repo is PUBLIC. Describing the target audience is fine. Never name the student
+or say how he is related to anyone on the project.
+
+## Target audience
+
+A young adult beginner with no programming experience. Bright and strong in spatial
+reasoning; good at video games; easily distracted, so lessons are short and every
+lesson ends with something that runs. Basic math and logic are reasonable but benefit
+from extra practice and repetition. Interested in writing fiction (hence the Story
+Engine project). The goal is less "learn C64 BASIC" than "use programming to build
+organized, orderly thinking habits."
 
 ## People and roles
 
@@ -16,9 +25,11 @@ description of how he learns. The reader profile lives only in the private plan 
 
 ## Where things are
 
-- Book plan (PRIVATE, includes the reader profile): the Claude Doc "Thinking in C64 BASIC — Book Plan &
+- Book plan, editing copy: the Claude Doc "Thinking in C64 BASIC — Book Plan &
   Chapter 1 Draft" (https://claude.ai/artifact/PJj9Ywwp1HJwWLtHqncpUm). The editor edits and
   comments there while the plan is in flux.
+- `book/plan.md`: snapshot of that doc (re-export after changes; drop the byline line).
+  The Claude Doc is the source of truth for the plan.
 - `book/chapters/NN-name.md`: the book itself, one file per chapter. These are the source
   of truth for chapter text (Chapter 1 now lives here, not in the plan).
 - Public site (student edition, no answers): GitHub Pages from the `docs/` folder.
@@ -67,7 +78,7 @@ COLOR (OR), COST (COS), MONEY (ON), TOTAL (TO), SCORE (OR), TIME (TI).
 
 ## Open questions (waiting on the editor)
 
-See the last section of the private plan doc: example name (placeholder KAITO), second-language
+See the last section of `book/plan.md`: example name (placeholder KAITO), second-language
 support, answer keys, paper vs. site notebook, title, reference machine.
 
 ## Next steps
