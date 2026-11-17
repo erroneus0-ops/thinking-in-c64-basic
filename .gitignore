@@ -1,0 +1,13 @@
+# Student data stays local, never in git
+data/
+*.sqlite
+*.sqlite3
+*.db
+
+# Local build output
+build/
+
+# OS clutter
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thinking in C64 BASIC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --paper: #f7f8fb;
+  --ink: #1d2142;
+  --muted: #5a5f80;
+  --rule: #d7d9e6;
+  --accent: #40318d;        /* C64 blue */
+  --tint: #ebe9f8;
+  --screen: #40318d;        /* C64 screen blue */
+  --screen-text: #c4bdf7;   /* brightened C64 light blue, for legibility */
+  --screen-frame: #7869c4;  /* C64 light blue border */
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+    --accent: #a99ff0; --tint: #26244a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+  --accent: #a99ff0; --tint: #26244a;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.125rem/1.6 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+
+.edition { color: var(--muted); font-size: 0.875rem; margin: 0 0 2.5rem; }
+.book-title { font-size: 2.6rem; line-height: 1.05; margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+
+details.toc { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.6rem 0; margin-bottom: 3rem; }
+details.toc summary { cursor: pointer; font-weight: 700; }
+details.toc ul { padding-left: 1.1rem; margin: 0.5rem 0 0; }
+details.toc li { margin: 0.2rem 0; }
+details.toc ul ul { font-size: 0.95rem; }
+
+h1 { font-size: 2rem; line-height: 1.15; margin: 4rem 0 1rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.35rem; line-height: 1.25; margin: 2.75rem 0 0.75rem; padding-top: 1rem; border-top: 3px solid var(--accent); }
+p, ul, ol { margin: 0 0 1rem; }
+li { margin: 0.25rem 0; }
+a { color: var(--accent); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+strong { font-weight: 700; }
+
+/* Code typed into the C64 looks like the C64 screen */
+pre {
+  background: var(--screen);
+  color: var(--screen-text);
+  border: 0.75rem solid var(--screen-frame);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  margin: 0 0 1.25rem;
+  overflow-x: auto;
+  font: 600 0.95rem/1.45 "IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+/* Diagrams are pictures, not something to type */
+pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
+pre code { font: inherit; background: none; padding: 0; color: inherit; }
+code { font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
+
+table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.25rem; font-size: 1rem; max-width: 100%; }
+th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.75rem 0.45rem 0; border-bottom: 1px solid var(--rule); }
+th { border-bottom: 2px solid var(--ink); }
+
+@media print {
+  :root { --paper: #fff; --ink: #000; --muted: #444; --rule: #bbb; --accent: #40318d; --tint: #eee; }
+  details.toc { display: none; }
+  h1 { break-before: page; margin-top: 0; }
+  pre, table { break-inside: avoid; }
+}
+@page { size: letter; margin: 2cm 2cm 2.2cm; }
+</style>
+</head>
+<body>
+<main>
+<p class="edition">Student’s edition, built Nov 17, 2026</p>
+<p class="book-title">Thinking in C64 BASIC</p>
+<details class="toc">
+<summary>Contents</summary>
+<ul>
+<li><a href="#how-this-book-works" id="toc-how-this-book-works">How This
+Book Works</a>
+<ul>
+<li><a href="#what-you-need" id="toc-what-you-need">What you
+need</a></li>
+<li><a href="#how-every-lesson-goes" id="toc-how-every-lesson-goes">How
+every lesson goes</a></li>
+</ul></li>
+<li><a href="#chapter-1-this-is-a-variable"
+id="toc-chapter-1-this-is-a-variable">Chapter 1: This Is a Variable</a>
+<ul>
+<li><a href="#lesson-1.1-boxes-with-labels"
+id="toc-lesson-1.1-boxes-with-labels">Lesson 1.1 — Boxes with
+labels</a></li>
+<li><a href="#lesson-1.2-numbers-and-words"
+id="toc-lesson-1.2-numbers-and-words">Lesson 1.2 — Numbers and
+words</a></li>
+<li><a href="#lesson-1.3-the-two-letter-trap"
+id="toc-lesson-1.3-the-two-letter-trap">Lesson 1.3 — The two-letter
+trap</a></li>
+<li><a href="#lesson-1.4-organize-it-the-variable-dictionary"
+id="toc-lesson-1.4-organize-it-the-variable-dictionary">Lesson 1.4 —
+Organize it: the variable dictionary</a></li>
+<li><a href="#exercises" id="toc-exercises">Exercises</a></li>
+<li><a href="#quiz" id="toc-quiz">Quiz</a></li>
+</ul></li>
+</ul>
+</details>
+<h1 id="how-this-book-works">How This Book Works</h1>
+<p>This book teaches you to program the Commodore 64. It also teaches
+something bigger: how to plan, how to keep things in order, and how to
+break a big job into small ones. Programmers call that <em>organized
+thinking</em>. The C64 is a good place to learn it, because its BASIC
+gives you almost no help. Any order in your program has to come from
+you.</p>
+<h2 id="what-you-need">What you need</h2>
+<ul>
+<li>An emulated C64. This book uses VICE, either on your computer or in
+the browser.</li>
+<li>A paper notebook and a pencil. This is your <strong>programmer’s
+notebook</strong>. You will draw tables and maps in it before you
+type.</li>
+<li>About thirty minutes. Every lesson fits in one sitting.</li>
+</ul>
+<h2 id="how-every-lesson-goes">How every lesson goes</h2>
+<p>Every lesson has the same seven steps, so you always know where you
+are:</p>
+<ol type="1">
+<li><strong>Goal</strong>: what you will be able to do by the end.</li>
+<li><strong>Picture</strong>: a drawing of the idea.</li>
+<li><strong>Try it</strong>: type something short and run it.</li>
+<li><strong>Predict</strong>: change one thing, write down what you
+think will happen, then run it.</li>
+<li><strong>Why it works</strong>: a short explanation.</li>
+<li><strong>Organize it</strong>: one habit to add to your
+notebook.</li>
+<li><strong>Exercises and quiz</strong>: practice, then five quick
+questions.</li>
+</ol>
+<p>Getting a prediction wrong is not a failure. It’s how you find out
+what the computer really does. Error messages are normal too. Every
+chapter makes at least one on purpose.</p>
+<h1 id="chapter-1-this-is-a-variable">Chapter 1: This Is a Variable</h1>
+<p>In this chapter you type commands and press RETURN, and the C64 does
+them right away. This is called <strong>direct mode</strong>. You won’t
+need line numbers until Chapter 2.</p>
+<h2 id="lesson-1.1-boxes-with-labels">Lesson 1.1 — Boxes with
+labels</h2>
+<p><strong>Goal:</strong> Put a number into the computer’s memory and
+get it back.</p>
+<p><strong>Picture:</strong> Imagine a shelf in a garage or a storeroom.
+On it sits a row of boxes. Each box has a label stuck on the front, so
+you can find it again without opening every box. Each box holds one
+thing. A labelled box on the shelf is called a
+<strong>variable</strong>. The computer’s memory is a very long shelf
+with thousands of these boxes.</p>
+<p>If you play video games, you already know variables. Your coin
+counter is a box labelled COINS. Every time you pick up a coin, the game
+opens that box, adds one, and puts the new number back.</p>
+<pre class="diagram"><code>     A           B           C          &lt;- labels
+  +-----+     +-----+     +-----+
+  |  7  |     |  0  |     |  0  |       &lt;- what is inside
+  +-----+     +-----+     +-----+
+=======================================  &lt;- the shelf</code></pre>
+<p><strong>Try it.</strong> Type each line and press RETURN after
+it:</p>
+<pre><code>A = 7
+PRINT A</code></pre>
+<p>The C64 answers <code>7</code>. You put 7 into the box labelled A,
+then asked to see what was inside.</p>
+<p><strong>Predict.</strong> Before typing the next lines, write down
+what you think the C64 will show. Then try it.</p>
+<pre><code>A = A + 1
+PRINT A
+PRINT B</code></pre>
+<p><strong>Why it works.</strong> The <code>=</code> sign does not mean
+“is equal to” here. It means “put into.” <code>A = A + 1</code> means:
+look in box A, add one, and put the answer back in box A. So A now holds
+8. Box B was never filled, so it holds 0. On the C64, an empty number
+box always starts at 0.</p>
+<p>That is exactly the coin counter from a game. <code>A = A + 1</code>
+is picking up one coin.</p>
+<p>You may have noticed a space before each number. The C64 leaves room
+in front of every number for a minus sign, even when there isn’t
+one.</p>
+<h2 id="lesson-1.2-numbers-and-words">Lesson 1.2 — Numbers and
+words</h2>
+<p><strong>Goal:</strong> Store words as well as numbers.</p>
+<p><strong>Try it:</strong></p>
+<pre><code>N$ = &quot;KAITO&quot;
+PRINT N$
+PRINT &quot;MY NAME IS &quot;;N$</code></pre>
+<p>A label that ends in a dollar sign holds <strong>text</strong>
+(programmers call text a <em>string</em>). The text goes inside
+quotation marks. The semicolon in the last line glues two things
+together on the screen.</p>
+<p>Think of two kinds of box on the shelf. A <strong>coin box</strong>
+holds amounts you can count and add. A <strong>note box</strong> holds a
+piece of paper with writing on it. You can’t add two notes together the
+way you add coins, and you can’t put a note in a coin box.</p>
+<p><strong>Predict, then try:</strong></p>
+<pre><code>A = &quot;HELLO&quot;</code></pre>
+<p><strong>Why it fails.</strong> The C64 answers
+<code>?TYPE MISMATCH ERROR</code>. Box A is a number box, and “HELLO” is
+not a number. The label tells the C64 what kind of box it is:</p>
+<table>
+<thead>
+<tr>
+<th>Label looks like</th>
+<th>Box holds</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code>, <code>PR</code>, <code>X1</code></td>
+<td>Any number, including decimals</td>
+<td><code>PR = 23.45</code></td>
+</tr>
+<tr>
+<td><code>N$</code>, <code>PY$</code></td>
+<td>Text, up to 255 characters</td>
+<td><code>N$ = "KAITO"</code></td>
+</tr>
+<tr>
+<td><code>C%</code>, <code>Q%</code></td>
+<td>Whole numbers only, from −32768 to 32767</td>
+<td><code>C% = 3</code></td>
+</tr>
+</tbody>
+</table>
+<p>You will not need the <code>%</code> kind until much later. It is
+here so the table is complete.</p>
+<h2 id="lesson-1.3-the-two-letter-trap">Lesson 1.3 — The two-letter
+trap</h2>
+<p><strong>Goal:</strong> Learn the C64’s naming rules, including the
+strange ones.</p>
+<p><strong>Try it:</strong></p>
+<pre><code>PRICE = 50
+PRIZE = 3
+PRINT PRICE</code></pre>
+<p><strong>Predict before you run the last line.</strong> Most people
+expect 50. The C64 prints 3.</p>
+<p><strong>Why.</strong> The C64 only reads the <strong>first two
+letters</strong> of a variable name. To the computer, PRICE and PRIZE
+are both just PR: the same box. The second line quietly replaced the 50.
+Nothing warned you. That is why the next lesson matters.</p>
+<p>Picture it this way: the C64 makes its labels with a label maker that
+can only print <strong>two letters</strong>. You ask for a label that
+says PRICE, and the machine prints PR. Later you ask for PRIZE, and it
+prints PR again. Now the shelf has one box with the label PR, and both
+names lead to it.</p>
+<p><strong>One more trap. Try it:</strong></p>
+<pre><code>MONEY = 20</code></pre>
+<p>The C64 answers <code>?SYNTAX ERROR</code>. Hidden inside MONEY is
+the word ON, which is a BASIC command. The C64 sees the command and gets
+confused. The same thing happens with TOTAL (contains TO) and SCORE
+(contains OR). A few names are also taken by the computer itself: ST and
+TI, and anything beginning with them, such as TIME.</p>
+<p>The rules, all in one place:</p>
+<ul>
+<li>A name starts with a letter.</li>
+<li>After that, letters and digits are allowed.</li>
+<li>Only the first two characters count.</li>
+<li>A name must not contain a BASIC command word.</li>
+</ul>
+<h2 id="lesson-1.4-organize-it-the-variable-dictionary">Lesson 1.4 —
+Organize it: the variable dictionary</h2>
+<p><strong>Goal:</strong> Start the habit that keeps every program in
+this book under control.</p>
+<p>Because the C64 will not warn you when two names collide, you need a
+written list of every variable a program uses. This is your
+<strong>variable dictionary</strong>. Start a page in your programmer’s
+notebook like this:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Kind</th>
+<th>What it holds</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>Number</td>
+<td>Practice box from Lesson 1.1</td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>N$</code></td>
+<td>Text</td>
+<td>My name</td>
+<td>KAITO</td>
+</tr>
+<tr>
+<td><code>PR</code></td>
+<td>Number</td>
+<td>Price of one item</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notebook rule 1:</strong> Before you use a new variable,
+write it in the dictionary. If its first two letters match one already
+there, pick a different name.</p>
+<h2 id="exercises">Exercises</h2>
+<ol type="1">
+<li><strong>Type and predict.</strong> Put your age into a variable and
+your favorite number into another. Before printing their sum, write down
+what it will be.</li>
+<li><strong>Fix it.</strong> This set of commands does not work. Find
+both problems, explain each in one sentence, and fix them:
+<code>MONEY = 40</code>, then <code>TOTAL = MONEY + 10</code>.</li>
+<li><strong>Build it.</strong> Using three variables (your name, a game
+you like, and how many hours you have played it), make the C64 print one
+sentence about you. Add all three to your variable dictionary
+first.</li>
+</ol>
+<h2 id="quiz">Quiz</h2>
+<ol type="1">
+<li>After <code>A = 5</code> and then <code>A = A * 2</code>, what does
+<code>PRINT A</code> show? (a) 5 (b) 7 (c) 10 (d) An error.</li>
+<li>What does <code>PRINT Q</code> show if Q was never used? (a) Nothing
+(b) 0 (c) <code>?SYNTAX ERROR</code> (d) Q.</li>
+<li>Which variable can hold the word HELLO? (a) <code>H</code> (b)
+<code>H%</code> (c) <code>H$</code> (d) Any of them.</li>
+<li>Why does <code>SCORE = 10</code> fail? (a) Names cannot be five
+letters (b) It contains the command word OR (c) Numbers must be decimals
+(d) S is reserved.</li>
+<li>A program uses COUNT and CODE. What goes wrong? (a) Nothing (b) They
+share one box, CO (c) CODE is a command (d)
+<code>?TYPE MISMATCH ERROR</code>.</li>
+</ol>
+</main>
+</body>
+</html>
