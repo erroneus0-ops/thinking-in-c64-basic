@@ -1,0 +1,36 @@
+/* Shared look for the course site, matching the book. */
+:root {
+  color-scheme: light;
+  --paper: #f7f8fb; --ink: #1d2142; --muted: #5a5f80; --rule: #d7d9e6;
+  --accent: #40318d; --accent-ink: #ffffff; --tint: #ebe9f8;
+  --screen: #40318d; --screen-text: #c4bdf7; --screen-frame: #7869c4;
+  --good: #1e7a46; --bad: #b3261e;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+    --accent: #a99ff0; --accent-ink: #17162a; --tint: #26244a;
+    --good: #6fd39a; --bad: #ff8a80;
+  }
+}
+*, *::before, *::after { box-sizing: inherit; }
+body { margin: 0; background: var(--paper); color: var(--ink);
+  font: 1.0625rem/1.55 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif; }
+a { color: var(--accent); }
+button { font: inherit; cursor: pointer; border-radius: 6px; padding: 0.45rem 0.9rem;
+  border: 1.5px solid var(--accent); background: transparent; color: var(--accent); }
+button.primary { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+select { font: inherit; padding: 0.4rem; border-radius: 6px; border: 1.5px solid var(--rule);
+  background: var(--paper); color: var(--ink); width: 100%; }
+header.bar { display: flex; gap: 1.25rem; align-items: baseline; padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--rule); }
+header.bar .home { font-weight: 700; color: var(--ink); text-decoration: none; margin-right: auto; }
+pre.c64 { background: var(--screen); color: var(--screen-text); border: 0.6rem solid var(--screen-frame);
+  border-radius: 4px; padding: 0.75rem; margin: 0; overflow-x: auto;
+  font: 600 0.9rem/1.45 "IBM Plex Mono", Consolas, "Courier New", monospace; white-space: pre; }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>C64 — Thinking in C64 BASIC</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  main { display: grid; grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr); gap: 1.5rem;
+    padding: 1.25rem; max-width: 84rem; margin: 0 auto; align-items: start; }
+  @media (max-width: 52rem) { main { grid-template-columns: 1fr; } }
+  .screen { background: #000; border-radius: 6px; overflow: hidden; aspect-ratio: 4 / 3; }
+  .screen iframe { width: 100%; height: 100%; border: 0; display: block; }
+  #status { margin: 0.6rem 0 0; color: var(--muted); }
+  #status.bad { color: var(--bad); }
+  aside h2 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+  aside h2:first-child { margin-top: 0; }
+  .row { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+  #message { min-height: 1.5rem; margin: 0.6rem 0 0; }
+  #message.good { color: var(--good); } #message.bad { color: var(--bad); }
+  ol#versions { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+  ol#versions li { display: flex; gap: 0.4rem; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); }
+  ol#versions .what { margin-right: auto; }
+  ol#versions .what small { display: block; color: var(--muted); }
+  ol#versions button { padding: 0.2rem 0.6rem; font-size: 0.9rem; }
+  #empty { color: var(--muted); margin: 0.5rem 0; }
+  #listing-box { margin-top: 1rem; }
+  #listing-box[hidden] { display: none; }
+  .quiet { color: var(--muted); font-size: 0.92rem; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="home" href="/">Thinking in C64 BASIC</a>
+  <a href="/book/">Book</a>
+</header>
+<main>
+  <section>
+    <div class="screen"><iframe id="c64" title="Commodore 64" allow="autoplay; fullscreen"></iframe></div>
+    <p id="status" role="status">Starting the C64…</p>
+  </section>
+  <aside>
+    <h2><label for="exercise">Exercise</label></h2>
+    <select id="exercise"></select>
+
+    <h2>Submit</h2>
+    <div class="row">
+      <button id="submit" class="primary" disabled>Submit program</button>
+    </div>
+    <p class="quiet">Saves the program now in the C64’s memory as a new version. Earlier versions are kept.</p>
+    <p id="message" role="status"></p>
+
+    <h2>Saved versions</h2>
+    <p id="empty">Nothing saved for this exercise yet.</p>
+    <ol id="versions"></ol>
+    <div id="listing-box" hidden>
+      <h2 id="listing-title">Listing</h2>
+      <pre class="c64" id="listing"></pre>
+    </div>
+
+    <h2>The C64 itself</h2>
+    <div class="row"><button id="reset" disabled>Reset the C64</button></div>
+    <p class="quiet">Click the C64 screen before typing. Reset clears the program from memory, so submit first.</p>
+  </aside>
+</main>
+<script src="/assets/c64.js"></script>
+</body>
+</html>

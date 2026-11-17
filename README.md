@@ -18,11 +18,22 @@ and a video-game picture.
 | `book/plan.md` | The book plan: premise, lesson format, mental models, outline, recurring projects, C64 traps |
 | `book/chapters/` | The book, one Markdown file per chapter |
 | `docs/` | The built book (student edition) served by GitHub Pages |
-| `tools/` | The build: `python tools/build.py --student --pages` |
+| `site/` | The course site: router, API, pages, and the C64 page |
+| `setup.bat`, `start.bat` | One-time setup, and starting the course site |
+| `tools/` | The book build (`python tools/build.py --student --pages`) and setup scripts |
 | `HANDOFF.md` | Running notes so each new working session knows the decisions made so far and what comes next |
 
-Coming later: the portable course site (PHP + SQLite) with the
-browser emulator, quizzes, and submissions.
+## Running the course site (Windows)
+
+1. Install [VICE](https://vice-emu.sourceforge.io/) if it isn't already (setup copies the C64 ROMs from it).
+2. Double-click **setup.bat** once. It downloads portable PHP and the vc64web emulator into `runtime/`.
+3. Double-click **start.bat**. Your browser opens the course site; the window shows the address
+   for a phone on the same Wi-Fi. Keep the window open while working.
+
+When typing into the emulator, keep **Caps Lock off**: capital letters typed with Shift or Caps Lock
+become C64 graphics characters, exactly as on a real C64.
+
+Coming later: quizzes, the review page, the progress page, and login.
 
 ## What never lives here
 

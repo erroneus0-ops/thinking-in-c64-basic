@@ -48,6 +48,28 @@ Conventions in chapter files:
 - Quiz answers written as `**Answer: x**` at the end of each question; the student build
   strips them.
 
+## Course site (Milestones 1-3 drafted)
+
+- Design doc (private Claude Doc): "Work Environment - Implementation Sketch",
+  https://claude.ai/artifact/8Ze8EH2K5wBTC686yjHn4T
+- `setup.bat` -> `tools/setup.ps1`: downloads PHP 8.4 (php.net "latest" zip), vc64web pinned to
+  commit 469b63818d1a8f4d654fd3985b82aeb4e03fabba (skips its doc/ folder: long paths), removes
+  vc64web's analytics script, copies ROMs from the local VICE install (fallback: VICE's GitHub mirror).
+  Not yet tested on Windows.
+- `start.bat`: PHP built-in server on port 8064, router `site/router.php`.
+- Routes: `/` home, `/c64` emulator page, `/book/` = docs/, `/emu/` = runtime/vc64web,
+  `/roms/` = runtime/roms, `/api/*` = site/lib/api.php.
+- C64 page talks to vc64web directly through the same-origin iframe: `wasm_loadfile` (ROMs),
+  `wasm_reset`, `wasm_peek`/`wasm_poke`, `wasm_auto_type`. Submit copies memory from TXTTAB ($2B)
+  to VARTAB ($2D) into a PRG. Run/Load resets, pokes the PRG back, sets $2D/$2F/$31, types run/list.
+- Tested end to end in headless Chrome: boot to READY, keyboard typing, Submit -> version 1 with
+  correct listing, NEW, Run -> program runs.
+- Gotchas found: the standard character ROM is chargen-901225-01 (906143-02 is the Japanese one);
+  typed capitals arrive as Shift+letter = C64 graphics, so Caps Lock must be off and auto_type text
+  must be lowercase; headless tests need ~110 ms key holds.
+- Exercise list: `site/exercises.json` (placeholder entries for now). Chapter 1 has no
+  submittable programs (direct mode only).
+
 ## Decisions made
 
 - **Language and machine:** Commodore 64 BASIC V2. Reference emulator is VICE; TheC64
@@ -85,4 +107,5 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 
 1. The editor reviews the plan doc and answers the open questions.
 2. Draft Chapter 2 (Talking to the Computer).
-3. Proof-of-concept: portable PHP + SQLite skeleton with vc64web page, Submit and Run.
+3. Editor runs setup.bat/start.bat on Windows; fix whatever breaks.
+4. Milestone 4: quizzes. Then 5: login, review page, Copy for Claude, progress page.

@@ -11,3 +11,6 @@ build/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Downloaded by setup.bat: never in git
+runtime/
