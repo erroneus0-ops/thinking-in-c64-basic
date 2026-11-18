@@ -5,6 +5,18 @@
 // the emulator, the ROMs) are served from their own folders.
 
 $ROOT = dirname(__DIR__);
+
+// Log every request to the start.bat window: who, what, result, size. PHP's server
+// stops logging details once a router script handles the request, so we do it here.
+$started = microtime(true);
+register_shutdown_function(function () use ($started) {
+    $status = http_response_code() ?: 200;
+    $bytes = 0;
+    foreach (headers_list() as $h) if (stripos($h, 'Content-Length:') === 0) $bytes = (int)trim(substr($h, 15));
+    error_log(sprintf('%s %s %s -> %d (%s, %d ms)',
+        $_SERVER['REMOTE_ADDR'] ?? '?', $_SERVER['REQUEST_METHOD'] ?? '?', $_SERVER['REQUEST_URI'] ?? '?',
+        $status, $bytes ? number_format($bytes) . ' bytes' : 'no size', (microtime(true) - $started) * 1000));
+});
 $path = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/');
 
 const MIME = [
