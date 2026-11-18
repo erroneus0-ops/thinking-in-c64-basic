@@ -90,7 +90,8 @@ Conventions in chapter files:
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
   Leaving things out is fine; a simplified rule that is false is not. Example (from the editor's own
   schooling): DIM A(10) creates ELEVEN elements, 0 to 10, never ten. The book says so plainly, then
-  adopts a stated convention: data in 1..N, and A(0) holds the count of items in use.
+  adopts a stated convention (editor's decision): data in boxes 1..N; box 0 is mentioned briefly as
+  existing and "saved for special jobs", not taught as a lesson. Never claim DIM A(10) = 10 elements.
 - **Writing style:** for a young adult beginner; plain language at roughly an 11-12-year-old reading level, never
   childish (no mascots, no cartoons, no talking down). Short sentences.
 - **Core mental model:** a shelf of labelled boxes, used for every idea from variables
