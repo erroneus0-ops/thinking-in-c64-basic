@@ -146,6 +146,10 @@ Conventions in chapter files:
 
 ## Beta test log
 
+- Story-framed lessons (Micro Adventure style): ASKED, beta tester unsure/not interested; editor:
+  better suited to younger readers. DECISION: no story frame. He wants real work (job/challenge).
+  Stories live in the Story Engine project, where he is the AUTHOR, not a character.
+
 - 18 Nov, Chapters 0-1 (first session): he treats it as a job/challenge (good: matches his work-ethic
   motivation); asked if it might be addicting (editor: yes, the healthy kind). Struggled with the
   two-letter rule until the editor's `? PR` demonstration; GOLD fixed as GLD; A and A$ demo.
