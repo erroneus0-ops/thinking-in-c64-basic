@@ -55,6 +55,11 @@ Content ideas from the editor (to place in chapters):
 - TI jiffies (1/60 s) to HH:MM:SS with INT and division.
 - Sprites: a Windows-style spinner ("baller coaster") with 8 sprites and a DATA position table.
 - Premise gains the habit "know the subject before you write the code."
+- "Break it" challenge (Ch 5, habit "never trust input"): the editor tries to crash the student's
+  program (letters for numbers, negatives, empty input, very long text); points both ways. Also a
+  deliberately fragile sample program for the student to break, then fix. From the editor's own
+  classroom, where students tried to crash each other's BASIC and so learned validation for life.
+  Arrays chapter: trigger ?BAD SUBSCRIPT ERROR on purpose (BASIC checks bounds; C does not).
 
 Conventions in chapter files:
 - Plain fenced code block = something to type. Renders as a C64 screen.
