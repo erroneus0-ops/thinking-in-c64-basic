@@ -62,6 +62,9 @@ Content ideas from the editor (to place in chapters):
   Arrays chapter: trigger ?BAD SUBSCRIPT ERROR on purpose (BASIC checks bounds; C does not).
 
 Conventions in chapter files:
+- Anecdotes go in parentheses in the running text (editor's decision).
+- Optional clarifying details go in a "Good to know" box: a fenced div `::: good-to-know` ... `:::`.
+  The template styles it and adds the heading. Readers can skip these on a first pass.
 - Plain fenced code block = something to type. Renders as a C64 screen.
 - ` ```{.diagram} ` fenced block = a picture, not to be typed. Renders as a dashed box.
 - Quiz answers written as `**Answer: x**` at the end of each question; the student build

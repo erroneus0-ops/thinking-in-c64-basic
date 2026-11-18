@@ -78,6 +78,12 @@ pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var
 pre code { font: inherit; background: none; padding: 0; color: inherit; }
 code { font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
 
+/* "Good to know" boxes: optional clarifying details, safe to skip on a first read */
+div.good-to-know { border-left: 4px solid var(--accent); background: var(--tint);
+  padding: 0.75rem 1rem; margin: 0 0 1.25rem; border-radius: 0 6px 6px 0; }
+div.good-to-know::before { content: "Good to know"; display: block; font-weight: 700;
+  color: var(--accent); margin-bottom: 0.25rem; }
+div.good-to-know > :last-child { margin-bottom: 0; }
 table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.25rem; font-size: 1rem; max-width: 100%; }
 th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.75rem 0.45rem 0; border-bottom: 1px solid var(--rule); }
 th { border-bottom: 2px solid var(--ink); }
