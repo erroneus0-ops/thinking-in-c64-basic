@@ -91,6 +91,16 @@ A = "HELLO"
 
 You will not need the `%` kind until much later. It is here so the table is complete.
 
+**Try it.** The same letter can label two different boxes:
+
+```
+A = 5
+A$ = "MILLION DOLLARS"
+PRINT A;A$
+```
+
+The C64 answers ` 5 MILLION DOLLARS`. A and A$ are two separate boxes, one holding coins and one holding a note. The dollar sign is part of the label, so they never get mixed up.
+
 ## Lesson 1.3 — The two-letter trap
 
 **Goal:** Learn the C64's naming rules, including the strange ones.
@@ -107,6 +117,16 @@ PRINT PRICE
 
 **Why.** The C64 only reads the **first two letters** of a variable name. To the computer, PRICE and PRIZE are both just PR: the same box. The second line quietly replaced the 50. Nothing warned you. Lesson 1.5 shows how to make sure it never happens to you.
 
+**Prove it.** Ask the C64 what's in all three names:
+
+```
+? PRICE
+? PRIZE
+? PR
+```
+
+All three answer ` 3`. Three names, one box.
+
 Picture it this way: the C64 makes its labels with a label maker that can only print **two letters**. You ask for a label that says PRICE, and the machine prints PR. Later you ask for PRIZE, and it prints PR again. Now the shelf has one box with the label PR, and both names lead to it.
 
 ## Lesson 1.4 — Words the C64 has already claimed
@@ -122,6 +142,8 @@ GOLD = 100
 ```
 
 **Why it fails.** The C64 answers `?SYNTAX  ERROR`. When you press RETURN, the C64 reads your line looking for its own words, and it finds them even in the middle of a name. Hidden inside GOLD is GO, as in `GO TO`. The C64 sees GO and can't make sense of the rest.
+
+The fix is easy: pick a name with no hidden word. `GLD = 100` works, and so does `GD = 100`.
 
 Plenty of good names have a reserved word hiding inside:
 

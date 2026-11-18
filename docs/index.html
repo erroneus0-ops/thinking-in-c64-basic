@@ -364,6 +364,14 @@ is not a number. The label tells the C64 what kind of box it is:</p>
 </table>
 <p>You will not need the <code>%</code> kind until much later. It is
 here so the table is complete.</p>
+<p><strong>Try it.</strong> The same letter can label two different
+boxes:</p>
+<pre><code>A = 5
+A$ = &quot;MILLION DOLLARS&quot;
+PRINT A;A$</code></pre>
+<p>The C64 answers <code>5 MILLION DOLLARS</code>. A and A$ are two
+separate boxes, one holding coins and one holding a note. The dollar
+sign is part of the label, so they never get mixed up.</p>
 <h2 id="lesson-1.3-the-two-letter-trap">Lesson 1.3 — The two-letter
 trap</h2>
 <p><strong>Goal:</strong> Learn the C64’s naming rules, including the
@@ -379,6 +387,11 @@ letters</strong> of a variable name. To the computer, PRICE and PRIZE
 are both just PR: the same box. The second line quietly replaced the 50.
 Nothing warned you. Lesson 1.5 shows how to make sure it never happens
 to you.</p>
+<p><strong>Prove it.</strong> Ask the C64 what’s in all three names:</p>
+<pre><code>? PRICE
+? PRIZE
+? PR</code></pre>
+<p>All three answer <code>3</code>. Three names, one box.</p>
 <p>Picture it this way: the C64 makes its labels with a label maker that
 can only print <strong>two letters</strong>. You ask for a label that
 says PRICE, and the machine prints PR. Later you ask for PRIZE, and it
@@ -402,6 +415,8 @@ try it:</p>
 line looking for its own words, and it finds them even in the middle of
 a name. Hidden inside GOLD is GO, as in <code>GO TO</code>. The C64 sees
 GO and can’t make sense of the rest.</p>
+<p>The fix is easy: pick a name with no hidden word.
+<code>GLD = 100</code> works, and so does <code>GD = 100</code>.</p>
 <p>Plenty of good names have a reserved word hiding inside:</p>
 <table>
 <thead>
