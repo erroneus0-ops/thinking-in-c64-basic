@@ -56,6 +56,14 @@ function Get-VCRuntimeVersion {
     $fv = (Get-Item $dll).VersionInfo
     return [version]('{0}.{1}' -f $fv.FileMajorPart, $fv.FileMinorPart)
 }
+# When the DLL is in use, the installer queues the new one for the next restart.
+function Test-VCRestartPending {
+    $pending = (Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager' `
+                -ErrorAction SilentlyContinue).PendingFileRenameOperations
+    return [bool]($pending | Where-Object { $_ -match 'vcruntime140' })
+}
+$RestartMsg = ("A newer Visual C++ runtime is installed, but Windows will only switch to it after a restart`n" +
+               "(the old one was in use). Restart the computer, then run setup.bat again.")
 
 $found = Get-VCRuntimeVersion
 if ($found -and $found -ge $VcMin) {
@@ -63,17 +71,20 @@ if ($found -and $found -ge $VcMin) {
 } else {
     if ($found) { Write-Host "Found version $found, but PHP needs $VcMin or later." }
     else        { Write-Host 'Not installed.' }
+    if (Test-VCRestartPending) { Fail $RestartMsg }
     $vc = Join-Path $Runtime 'vc_redist.x64.exe'
     Write-Host 'Downloading Microsoft''s installer (about 25 MB)...'
     Invoke-WebRequest -Uri $VcUrl -OutFile $vc -UseBasicParsing
     Write-Host 'Installing. Windows will ask for permission, because it installs for the whole computer.'
     try {
-        Start-Process -FilePath $vc -ArgumentList '/install', '/passive', '/norestart' -Verb RunAs -Wait
+        $proc = Start-Process -FilePath $vc -ArgumentList '/install', '/passive', '/norestart' -Verb RunAs -Wait -PassThru
     } catch {
         Fail "The Visual C++ installer didn't run (the permission prompt may have been declined). Run setup.bat again to retry."
     } finally {
         Remove-Item $vc -ErrorAction SilentlyContinue
     }
+    # 3010 = installed, restart required
+    if ($proc.ExitCode -eq 3010 -or ((Get-VCRuntimeVersion) -lt $VcMin -and (Test-VCRestartPending))) { Fail $RestartMsg }
     $found = Get-VCRuntimeVersion
     if (-not ($found -and $found -ge $VcMin)) {
         Fail ("The Visual C++ runtime is still too old or missing. Install it by hand from`n$VcUrl`n" +
