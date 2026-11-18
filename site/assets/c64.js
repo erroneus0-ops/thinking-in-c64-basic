@@ -52,6 +52,28 @@ function focusC64() {
   try { emu.document.getElementById('canvas').focus(); } catch (e) {}
 }
 
+// Press a C64 key that has no PC key of its own. vc64web knows these keys by name
+// ('runStop', 'restore', 'commodore') but only offers them on its on-screen keyboard.
+function c64Key(name) {
+  const k = emu.translateKey2(name, '', true);
+  return k && k.raw_key ? k.raw_key : null;
+}
+// vc64web releases every key whenever its window gains or loses focus, so hand focus
+// back to the C64 first and let that settle before pressing anything.
+async function pressKeys(names, holdMs = 150) {
+  const keys = names.map(c64Key).filter(Boolean);
+  if (document.activeElement !== frame) { focusC64(); await sleep(150); }
+  for (const k of keys) emu.wasm_schedule_key(k[0], k[1], 1, 0);
+  await sleep(holdMs);
+  for (const k of keys.reverse()) emu.wasm_schedule_key(k[0], k[1], 0, 0);
+}
+// Same PC keys as VICE: Esc = RUN/STOP, Page Up = RESTORE.
+function specialKeys(e) {
+  if (!emu) return;
+  if (e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); pressKeys(['runStop']); }
+  else if (e.code === 'PageUp') { e.preventDefault(); e.stopPropagation(); pressKeys(['restore']); }
+}
+
 async function boot() {
   const config = { navbar: false, dialog_on_missing_roms: false, dialog_on_disk: false };
   frame.src = '/emu/index.html#' + encodeURIComponent(JSON.stringify(config));
@@ -59,6 +81,8 @@ async function boot() {
                                    && typeof frame.contentWindow.wasm_peek === 'function', 60000);
   if (!started) { setStatus('The emulator didn’t start. Check that setup has been run, then reload the page.', true); return; }
   emu = frame.contentWindow;
+  emu.addEventListener('keydown', specialKeys, true);
+  window.addEventListener('keydown', specialKeys, true);
   for (const [file, name] of ROMS) {
     const res = await fetch('/roms/' + file);
     if (!res.ok) { setStatus(`The C64 ROM file ${file} is missing. Run setup.bat again, then reload.`, true); return; }
@@ -67,6 +91,7 @@ async function boot() {
   }
   await resetAndWait();
   submitBtn.disabled = false; resetBtn.disabled = false;
+  for (const b of document.querySelectorAll('[data-keys]')) b.disabled = false;
   setStatus('Ready. Click the C64 screen, then type.');
   focusC64();
 }
@@ -167,6 +192,7 @@ async function loadExercises() {
 }
 
 submitBtn.onclick = submit;
+for (const b of document.querySelectorAll('[data-keys]')) b.onclick = () => pressKeys(b.dataset.keys.split(' '));
 resetBtn.onclick = async () => { setMessage(''); await resetAndWait(); setStatus('Ready. Click the C64 screen, then type.'); focusC64(); };
 loadExercises();
 boot();
