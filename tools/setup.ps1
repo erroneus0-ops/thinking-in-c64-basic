@@ -47,21 +47,24 @@ function Expand-Zip($Zip, $Dest, [string[]]$Skip = @()) {
 # ------------------------------------------- 0. Visual C++ runtime
 Step 'Microsoft Visual C++ runtime (PHP needs it)'
 
-# Microsoft's installer records itself here. PHP 8.4 needs version 14.30 or later.
-function Test-VCRuntime {
-    foreach ($key in @('HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64',
-                       'HKLM:\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\x64')) {
-        $r = Get-ItemProperty -Path $key -ErrorAction SilentlyContinue
-        if ($r -and $r.Installed -eq 1 -and ([version]"$($r.Major).$($r.Minor)" -ge [version]'14.30')) { return $true }
-    }
-    return $false
+# PHP 8.4's Windows build needs the runtime DLL at version 14.44 or later. Check the
+# actual DLL, not the installer's registry record: the two can disagree.
+$VcMin = [version]'14.44'
+function Get-VCRuntimeVersion {
+    $dll = Join-Path $env:SystemRoot 'System32\vcruntime140.dll'
+    if (-not (Test-Path $dll)) { return $null }
+    $fv = (Get-Item $dll).VersionInfo
+    return [version]('{0}.{1}' -f $fv.FileMajorPart, $fv.FileMinorPart)
 }
 
-if (Test-VCRuntime) {
-    Write-Host 'Already installed.'
+$found = Get-VCRuntimeVersion
+if ($found -and $found -ge $VcMin) {
+    Write-Host "Already installed (version $found)."
 } else {
+    if ($found) { Write-Host "Found version $found, but PHP needs $VcMin or later." }
+    else        { Write-Host 'Not installed.' }
     $vc = Join-Path $Runtime 'vc_redist.x64.exe'
-    Write-Host 'Not installed. Downloading Microsoft''s installer (about 25 MB)...'
+    Write-Host 'Downloading Microsoft''s installer (about 25 MB)...'
     Invoke-WebRequest -Uri $VcUrl -OutFile $vc -UseBasicParsing
     Write-Host 'Installing. Windows will ask for permission, because it installs for the whole computer.'
     try {
@@ -71,11 +74,12 @@ if (Test-VCRuntime) {
     } finally {
         Remove-Item $vc -ErrorAction SilentlyContinue
     }
-    if (-not (Test-VCRuntime)) {
-        Fail ("The Visual C++ runtime still isn't installed. Install it by hand from`n$VcUrl`n" +
+    $found = Get-VCRuntimeVersion
+    if (-not ($found -and $found -ge $VcMin)) {
+        Fail ("The Visual C++ runtime is still too old or missing. Install it by hand from`n$VcUrl`n" +
               "then run setup.bat again.")
     }
-    Write-Host 'Installed.'
+    Write-Host "Installed (version $found)."
 }
 
 # ---------------------------------------------------------------- 1. PHP
@@ -95,8 +99,13 @@ $ini = Get-Content (Join-Path $PhpDir 'php.ini-production')
 $ini = $ini -replace '^;\s*extension=pdo_sqlite', 'extension=pdo_sqlite' `
             -replace '^;\s*extension=sqlite3', 'extension=sqlite3'
 Set-Content -Path (Join-Path $PhpDir 'php.ini') -Value $ini
-$modules = & $PhpExe -c (Join-Path $PhpDir 'php.ini') -d "extension_dir=$(Join-Path $PhpDir 'ext')" -m 2>&1
-if ($LASTEXITCODE -ne 0 -or -not ($modules -match 'pdo_sqlite')) {
+# PHP prints warnings on stderr; don't let PowerShell treat them as fatal here.
+$ErrorActionPreference = 'Continue'
+$modules = (& $PhpExe -c (Join-Path $PhpDir 'php.ini') -d "extension_dir=$(Join-Path $PhpDir 'ext')" -m 2>&1 | Out-String)
+$phpExit = $LASTEXITCODE
+$ErrorActionPreference = 'Stop'
+if ($phpExit -ne 0 -or $modules -notmatch 'pdo_sqlite' -or $modules -match 'Warning') {
+    Write-Host $modules
     Fail ("PHP didn't start, even though the Visual C++ runtime is installed.`n" +
           "Paste the lines above into the chat so we can see why.")
 }
