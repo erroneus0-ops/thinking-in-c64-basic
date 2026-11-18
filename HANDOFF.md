@@ -87,6 +87,10 @@ Conventions in chapter files:
   (8 sprites, 2-letter names, 80-character lines) and works within them. No sidebars on tricks that
   break limits (sprite multiplexing, opening the borders, etc.). Fun for the editor, confusing for
   a learner who does best with rules that hold.
+- **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
+  Leaving things out is fine; a simplified rule that is false is not. Example (from the editor's own
+  schooling): DIM A(10) creates ELEVEN elements, 0 to 10, never ten. The book says so plainly, then
+  adopts a stated convention: data in 1..N, and A(0) holds the count of items in use.
 - **Writing style:** for a young adult beginner; plain language at roughly an 11-12-year-old reading level, never
   childish (no mascots, no cartoons, no talking down). Short sentences.
 - **Core mental model:** a shelf of labelled boxes, used for every idea from variables
