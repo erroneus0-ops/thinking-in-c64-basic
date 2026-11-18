@@ -209,6 +209,10 @@ Conventions in chapter files:
 - **Rules, not innards** (editor's decision): state the machine's behavior as rules the reader can rely
   on; leave out the internals behind them (variable-table bytes, type bits, string pointers, etc.).
   Fascinating, but not this book.
+- **Least liked first, best last** (from the editor's dinner-table lesson, which the student adopted):
+  each lesson saves its most satisfying moment (the thing that runs, the surprise, the payoff) for
+  the end; careful parts come first. Same at every scale: the book opens on the maze; each sitting
+  stops on a success. Habits are always given with a reason and framed as "what programmers do".
 - **Know where to look:** chapters that front-load rules say so (Ch 1 opening): read once, don't
   memorize, come back when something bites. "Good programmers know where to look."
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
