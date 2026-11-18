@@ -108,6 +108,8 @@ When programs get long, you won't want to see all of it at once. `LIST` can show
 | `LIST -20` | Everything up to line 20 |
 | `LIST 20-` | Line 20 and everything after it |
 
+`RUN` can start partway through, too: `RUN 20` starts the program at line 20 instead of at the beginning.
+
 And `NEW` erases the whole program. There's no undo, so be sure before you use it.
 
 ## Lesson 2.4 — Fixing a line on the screen

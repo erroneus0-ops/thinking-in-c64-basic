@@ -39,7 +39,7 @@ the browser emulator; check before writing them into a lesson).
 | 19 | A lone period means zero: `?.` prints 0 | Tested | Appendix (trivia, not style) |
 | 20 | Commas in PRINT jump to the next 10-character column; semicolons keep things together | Tested | Ch 1 or Ch 15 |
 | 21 | Putting items side by side in PRINT, with no separator, works like a semicolon (`? A "APPLES."`) | Tested | Ch 1 (done) |
-| 22 | In direct mode, `GOTO 20` starts a program at line 20 and *keeps* the variables; `RUN 20` starts there but wipes them (`A=7:GOTO 20` prints 7, `A=7:RUN 20` prints 0) | Tested | Ch 9 Good to know |
+| 22 | In direct mode, `GOTO 20` starts a program at line 20 and *keeps* the variables; `RUN 20` starts there but wipes them (`A=7:GOTO 20` prints 7, `A=7:RUN 20` prints 0) | Tested | Ch 2: `RUN 20` (done). Ch 11 lesson point: test one block at a time with hand-set variables, `GOTO`, and a `STOP` at the block's end (editor's own habit, as an anecdote) |
 | 23 | `STOP` in a program pauses it like RUN/STOP (`BREAK IN 20`); `CONT` carries on from there. A built-in breakpoint for finding bugs | Tested | Ch 9 or Ch 10 lesson point (debugging) |
 | 24 | Several statements fit on one line, separated by colons | Tested | Ch 3 (with the style advice: one idea per line) |
 
