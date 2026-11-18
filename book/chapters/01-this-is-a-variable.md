@@ -1,5 +1,9 @@
 # Chapter 1: This Is a Variable
 
+This chapter teaches two things. The first is the **variable**: how the C64 remembers numbers and words. The second is the C64's **rules** about variables. Some of those rules are strange, and sooner or later one of them will trip you up. That happens to every C64 programmer.
+
+You don't need to memorize the rules now. Read them once, and remember that they're here. Later, when a name doesn't work or a number lands in the wrong place, come back to this chapter and check whether one of these rules explains it. Good programmers don't know everything. They know where to look.
+
 In this chapter you type commands and press RETURN, and the C64 does them right away. This is called **direct mode**. You won't need line numbers until Chapter 2.
 
 ## Lesson 1.1 — Boxes with labels

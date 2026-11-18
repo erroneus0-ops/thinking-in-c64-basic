@@ -206,6 +206,11 @@ Conventions in chapter files:
   revealed once CHR$ and READ are known; a findable-but-not-obvious bug in the Detective chapter;
   something in the sample story's scene numbering. All of it must still be true (simplify, never
   falsify) and inside known limits.
+- **Rules, not innards** (editor's decision): state the machine's behavior as rules the reader can rely
+  on; leave out the internals behind them (variable-table bytes, type bits, string pointers, etc.).
+  Fascinating, but not this book.
+- **Know where to look:** chapters that front-load rules say so (Ch 1 opening): read once, don't
+  memorize, come back when something bites. "Good programmers know where to look."
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
   Leaving things out is fine; a simplified rule that is false is not. Example (from the editor's own
   schooling): DIM A(10) creates ELEVEN elements, 0 to 10, never ten. The book says so plainly, then
