@@ -13,7 +13,6 @@ param([string]$ViceDir = '')
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'      # makes downloads much faster
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $Root    = Split-Path -Parent $PSScriptRoot
 $Runtime = Join-Path $Root 'runtime'
@@ -27,22 +26,6 @@ $VcUrl      = 'https://aka.ms/vs/17/release/vc_redist.x64.exe'
 
 function Step($text) { Write-Host ''; Write-Host "== $text" -ForegroundColor Cyan }
 function Fail($text) { Write-Host ''; Write-Host $text -ForegroundColor Red; exit 1 }
-
-# Unpack a zip, dropping its top folder and skipping paths that start
-# with any of $Skip (relative to that top folder).
-function Expand-Zip($Zip, $Dest, [string[]]$Skip = @()) {
-    $archive = [IO.Compression.ZipFile]::OpenRead($Zip)
-    try {
-        foreach ($entry in $archive.Entries) {
-            $rel = ($entry.FullName -split '/', 2)[1]
-            if (-not $rel -or $rel.EndsWith('/')) { continue }
-            if ($Skip | Where-Object { $rel.StartsWith($_) }) { continue }
-            $target = Join-Path $Dest ($rel -replace '/', '\')
-            New-Item -ItemType Directory -Force -Path (Split-Path -Parent $target) | Out-Null
-            [IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $target, $true)
-        }
-    } finally { $archive.Dispose() }
-}
 
 # ------------------------------------------- 0. Visual C++ runtime
 Step 'Microsoft Visual C++ runtime (PHP needs it)'
@@ -133,9 +116,18 @@ if ((Test-Path $Stamp) -and ((Get-Content $Stamp -Raw).Trim() -eq $EmuCommit)) {
     Write-Host 'Downloading vc64web (about 10 MB)...'
     Invoke-WebRequest -Uri $EmuUrl -OutFile $zip -UseBasicParsing
     if (Test-Path $EmuDir) { Remove-Item -Recurse -Force $EmuDir }
-    # doc\ is the project's demo website: not needed, and its long paths trip Windows.
-    Expand-Zip $zip $EmuDir @('doc/', 'sw.js', 'sw_template.js')
+    # Unpack with Windows' own tar.exe (it reads zip files). Called by full path, because
+    # PortableGit ships a different tar that can't. Drop the archive's top folder; skip
+    # doc\ (the project's demo website: not needed, and its long paths trip Windows) and
+    # the offline-cache service worker.
+    New-Item -ItemType Directory -Force -Path $EmuDir | Out-Null
+    & (Join-Path $env:SystemRoot 'System32\tar.exe') -xf $zip -C $EmuDir --strip-components 1 `
+        --exclude '*/doc/*' --exclude '*/sw.js' --exclude '*/sw_template.js'
+    if ($LASTEXITCODE -ne 0) { Fail "Unpacking vc64web failed (tar exit code $LASTEXITCODE)." }
     Remove-Item $zip
+    foreach ($needed in @('index.html', 'vc64.js', 'vc64.wasm')) {
+        if (-not (Test-Path (Join-Path $EmuDir $needed))) { Fail "Unpacking vc64web left out $needed. Paste this window into the chat." }
+    }
     # Our local copy sends nothing to third-party analytics.
     $index = Join-Path $EmuDir 'index.html'
     $html  = [IO.File]::ReadAllText($index)
