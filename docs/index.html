@@ -808,6 +808,18 @@ versions of BASIC, you might reach for <code>CLS</code>. The C64 doesn’t
 have it.)</p>
 </div>
 <div class="good-to-know">
+<p>Here’s how C64 programmers clear the screen from <em>inside</em> a
+program. Type a line up to the opening quote, then press SHIFT +
+CLR/HOME:</p>
+<pre><code>10 PRINT &quot;{clr}LEVEL 1&quot;</code></pre>
+<p>Inside quotes, SHIFT + CLR/HOME doesn’t clear anything. Instead, it
+types the clear-screen code into your text, and the C64 shows it as a
+<strong>reversed heart</strong>. When the program runs, PRINT sends that
+code, the screen clears, and then LEVEL 1 appears. This book writes the
+reversed heart as <code>{clr}</code>, because a heart is hard to print
+on paper.</p>
+</div>
+<div class="good-to-know">
 <p>A single program line can be at most 80 characters, which is two rows
 of the screen. Long lines are also hard to read, so this book keeps them
 short.</p>

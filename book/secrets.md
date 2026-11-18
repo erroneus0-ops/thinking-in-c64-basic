@@ -21,7 +21,7 @@ the browser emulator; check before writing them into a lesson).
 | 6 | Holding CTRL slows down a `LIST` (or any screen output); RUN/STOP stops a `LIST` | Manual | Ch 2 Good to know, once the PC key for CTRL is confirmed in both emulators |
 | 7 | SHIFT + RETURN moves to the next line *without* entering the current one: an escape hatch after a bad edit | Manual | Ch 2 Good to know (test first) |
 | 8 | SHIFT + INST/DEL inserts a space to make room in the middle of a line | Manual | Ch 2 or Appendix A (test first) |
-| 9 | Quote mode: after typing an odd number of `"`, cursor and color keys become reversed symbols that are *stored* in the string; DEL still works normally | Manual | Ch 15 (cursor and color codes) |
+| 9 | Quote mode: after typing an odd number of `"`, cursor and color keys become reversed symbols that are *stored* in the string; DEL still works normally | Tested (CLR) | Ch 2: the `{clr}` reversed heart (done). Full treatment in Ch 15 (cursor and color codes) |
 | 10 | CTRL + 1 to 8 and C= + 1 to 8 change the text color; CTRL + 9 / CTRL + 0 turn reverse on/off | Manual | Ch 15; Appendix A keyboard map |
 | 11 | SHIFT + C= switches between capitals-and-graphics and lowercase-and-capitals | Manual | Ch 15 |
 | 12 | RUN/STOP + RESTORE resets the screen and colors but keeps the program | Tested | Ch 2 Good to know (already on the C64 page) |

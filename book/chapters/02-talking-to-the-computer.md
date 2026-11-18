@@ -144,6 +144,16 @@ Clearing the screen never touches your program: type `LIST` and it's all still t
 :::
 
 ::: good-to-know
+Here's how C64 programmers clear the screen from *inside* a program. Type a line up to the opening quote, then press SHIFT + CLR/HOME:
+
+```
+10 PRINT "{clr}LEVEL 1"
+```
+
+Inside quotes, SHIFT + CLR/HOME doesn't clear anything. Instead, it types the clear-screen code into your text, and the C64 shows it as a **reversed heart**. When the program runs, PRINT sends that code, the screen clears, and then LEVEL 1 appears. This book writes the reversed heart as `{clr}`, because a heart is hard to print on paper.
+:::
+
+::: good-to-know
 A single program line can be at most 80 characters, which is two rows of the screen. Long lines are also hard to read, so this book keeps them short.
 :::
 
