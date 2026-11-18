@@ -60,7 +60,7 @@ if ($path === '/book')                { header('Location: /book/'); return true;
 if (str_starts_with($path, '/book/')) { serve_from("$ROOT/docs", substr($path, 6)); return true; }
 if (str_starts_with($path, '/assets/')) { serve_from(__DIR__ . '/assets', substr($path, 8)); return true; }
 
-$pages = ['/' => 'index.html', '/c64' => 'c64.html'];
+$pages = ['/' => 'index.html', '/c64' => 'c64.html', '/work' => 'work.html', '/review' => 'review.html'];
 if (isset($pages[$path])) { serve_from(__DIR__ . '/pages', $pages[$path]); return true; }
 
 http_response_code(404);

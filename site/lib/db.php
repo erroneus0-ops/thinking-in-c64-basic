@@ -21,5 +21,28 @@ function db(string $root): PDO {
         created_at  TEXT    NOT NULL DEFAULT (datetime(\'now\', \'localtime\')),
         UNIQUE (exercise, version)
     )');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS quiz_attempts (
+        id          INTEGER PRIMARY KEY,
+        chapter     INTEGER NOT NULL,
+        score       INTEGER NOT NULL,
+        total       INTEGER NOT NULL,
+        created_at  TEXT    NOT NULL DEFAULT (datetime(\'now\', \'localtime\'))
+    )');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS quiz_answers (
+        attempt_id  INTEGER NOT NULL REFERENCES quiz_attempts(id),
+        question    INTEGER NOT NULL,
+        choice      TEXT    NOT NULL,
+        correct     INTEGER NOT NULL
+    )');
+    // Written work: exercise answers and beta tester notes. Every save is a new row,
+    // so nothing is ever overwritten; the newest row per item is the current one.
+    $pdo->exec('CREATE TABLE IF NOT EXISTS responses (
+        id          INTEGER PRIMARY KEY,
+        chapter     INTEGER NOT NULL,
+        kind        TEXT    NOT NULL,   -- exercise | note
+        item        TEXT    NOT NULL,   -- e.g. ex2, or 1.3:boring
+        text        TEXT    NOT NULL,
+        created_at  TEXT    NOT NULL DEFAULT (datetime(\'now\', \'localtime\'))
+    )');
     return $pdo;
 }

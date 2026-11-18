@@ -95,6 +95,86 @@ function handle_api(string $route, string $root): void {
             return;
         }
 
+        // ---- Chapter work: content, quizzes, written responses ----
+        $content = fn() => json_decode(file_get_contents("$root/site/content.json"), true) ?: [];
+
+        if ($route === 'chapters' && $method === 'GET') {
+            // Everything the page needs, minus the quiz answers.
+            $out = array_map(function ($ch) {
+                $ch['quiz'] = array_map(fn($q) => ['n' => $q['n'], 'question' => $q['question'], 'options' => $q['options']], $ch['quiz']);
+                return $ch;
+            }, $content());
+            json_out($out);
+            return;
+        }
+
+        if ($route === 'quiz' && $method === 'POST') {
+            $in = json_decode(file_get_contents('php://input'), true) ?: [];
+            $n = (int)($in['chapter'] ?? -1);
+            $chapter = null;
+            foreach ($content() as $c) if ($c['n'] === $n) $chapter = $c;
+            if (!$chapter || !$chapter['quiz']) { json_out(['error' => 'No quiz for that chapter'], 400); return; }
+            $answers = $in['answers'] ?? [];
+            $results = []; $score = 0;
+            foreach ($chapter['quiz'] as $q) {
+                $choice = strtolower((string)($answers[(string)$q['n']] ?? ''));
+                $ok = $choice !== '' && $choice === $q['answer'];
+                if ($ok) $score++;
+                $results[] = ['n' => $q['n'], 'choice' => $choice, 'correct' => $ok, 'answer' => $q['answer']];
+            }
+            $pdo = db($root);
+            $pdo->beginTransaction();
+            $pdo->prepare('INSERT INTO quiz_attempts (chapter, score, total) VALUES (?, ?, ?)')->execute([$n, $score, count($results)]);
+            $id = (int)$pdo->lastInsertId();
+            $ins = $pdo->prepare('INSERT INTO quiz_answers (attempt_id, question, choice, correct) VALUES (?, ?, ?, ?)');
+            foreach ($results as $r) $ins->execute([$id, $r['n'], $r['choice'], $r['correct'] ? 1 : 0]);
+            $pdo->commit();
+            json_out(['score' => $score, 'total' => count($results), 'results' => $results]);
+            return;
+        }
+
+        if ($route === 'quiz-history' && $method === 'GET') {
+            $q = db($root)->prepare('SELECT id, chapter, score, total, created_at FROM quiz_attempts WHERE (? < 0 OR chapter = ?) ORDER BY id DESC');
+            $ch = isset($_GET['chapter']) ? (int)$_GET['chapter'] : -1;
+            $q->bindValue(1, $ch, PDO::PARAM_INT); $q->bindValue(2, $ch, PDO::PARAM_INT);
+            $q->execute();
+            json_out($q->fetchAll());
+            return;
+        }
+
+        if ($route === 'response' && $method === 'POST') {
+            $in = json_decode(file_get_contents('php://input'), true) ?: [];
+            $kind = (string)($in['kind'] ?? '');
+            $item = (string)($in['item'] ?? '');
+            $text = trim((string)($in['text'] ?? ''));
+            if (!in_array($kind, ['exercise', 'note'], true) || !preg_match('/^[\w.:-]{1,40}$/', $item) || strlen($text) > 20000) {
+                json_out(['error' => 'That couldn’t be saved'], 400); return;
+            }
+            db($root)->prepare('INSERT INTO responses (chapter, kind, item, text) VALUES (?, ?, ?, ?)')
+                     ->execute([(int)($in['chapter'] ?? 0), $kind, $item, $text]);
+            json_out(['saved' => true]);
+            return;
+        }
+
+        if ($route === 'responses' && $method === 'GET') {
+            // Newest version of each item, or the full history with ?all=1.
+            $ch = isset($_GET['chapter']) ? (int)$_GET['chapter'] : -1;
+            $sql = isset($_GET['all'])
+                ? 'SELECT * FROM responses WHERE (? < 0 OR chapter = ?) ORDER BY id DESC'
+                : 'SELECT r.* FROM responses r JOIN (SELECT MAX(id) id FROM responses WHERE (? < 0 OR chapter = ?) GROUP BY chapter, kind, item) m ON r.id = m.id ORDER BY r.chapter, r.kind, r.item';
+            $q = db($root)->prepare($sql);
+            $q->bindValue(1, $ch, PDO::PARAM_INT); $q->bindValue(2, $ch, PDO::PARAM_INT);
+            $q->execute();
+            json_out($q->fetchAll());
+            return;
+        }
+
+        if ($route === 'submissions' && $method === 'GET') {
+            $q = db($root)->query('SELECT id, exercise, version, listing, created_at FROM submissions ORDER BY id DESC LIMIT 50');
+            json_out($q->fetchAll());
+            return;
+        }
+
         json_out(['error' => 'Unknown request'], 404);
     } catch (Throwable $e) {
         json_out(['error' => 'Server problem: ' . $e->getMessage()], 500);

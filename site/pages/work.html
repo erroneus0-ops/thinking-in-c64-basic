@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chapter work — Thinking in C64 BASIC</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  main { max-width: 44rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+  h1 { font-size: 1.8rem; margin: 0 0 1rem; }
+  h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; padding-top: 0.75rem; border-top: 3px solid var(--accent); }
+  h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+  .pick { display: flex; gap: 0.6rem; align-items: center; }
+  .pick select { width: auto; flex: 1; }
+  .card { border: 1px solid var(--rule); border-radius: 8px; padding: 1rem; margin: 0 0 1rem; }
+  .card p { margin: 0 0 0.6rem; }
+  textarea { font: inherit; width: 100%; min-height: 4.5rem; padding: 0.5rem; border-radius: 6px;
+    border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); resize: vertical; }
+  textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+  label.small { display: block; font-weight: 700; font-size: 0.92rem; margin: 0.6rem 0 0.25rem; }
+  .save-row { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.6rem; }
+  .saved { color: var(--good); font-size: 0.92rem; }
+  .bad { color: var(--bad); }
+  .quiet { color: var(--muted); font-size: 0.95rem; }
+  fieldset { border: 0; padding: 0; margin: 0; }
+  legend { font-weight: 700; margin-bottom: 0.4rem; padding: 0; }
+  .opt { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.2rem 0; }
+  .result { margin-top: 0.5rem; font-weight: 700; }
+  .result.good { color: var(--good); } .result.bad { color: var(--bad); }
+  #score { font-size: 1.15rem; font-weight: 700; margin: 0.75rem 0; }
+  ul.history { padding-left: 1.2rem; margin: 0.4rem 0 0; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="home" href="/">Thinking in C64 BASIC</a>
+  <a href="/book/">Book</a>
+  <a href="/c64">C64</a>
+</header>
+<main>
+  <h1>Chapter work</h1>
+  <div class="pick">
+    <label for="chapter"><strong>Chapter</strong></label>
+    <select id="chapter"></select>
+  </div>
+
+  <section id="exercises-section">
+    <h2>Exercises</h2>
+    <p class="quiet">Write your answer, or what happened when you tried it. If an exercise asks for a program, also submit the program on the <a href="/c64">C64 page</a>.</p>
+    <div id="exercises"></div>
+  </section>
+
+  <section id="quiz-section">
+    <h2>Quiz</h2>
+    <form id="quiz"></form>
+    <div id="score" role="status"></div>
+    <div id="history"></div>
+  </section>
+
+  <section>
+    <h2>My notes</h2>
+    <p class="quiet">You’re the beta tester. After each lesson, write a line or two. Short answers are fine, and anything confusing is the book’s fault, not yours.</p>
+    <div id="notes"></div>
+  </section>
+</main>
+<script src="/assets/work.js"></script>
+</body>
+</html>

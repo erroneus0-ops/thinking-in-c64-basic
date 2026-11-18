@@ -1,4 +1,18 @@
 [
-  {"id": "practice", "title": "Free practice"},
-  {"id": "test-hello", "title": "Test: a two-line HELLO program"}
+ {
+  "id": "practice",
+  "title": "Free practice"
+ },
+ {
+  "id": "ch02-ex1",
+  "title": "Chapter 2, exercise 1: Predict the order"
+ },
+ {
+  "id": "ch02-ex2",
+  "title": "Chapter 2, exercise 2: Fix it two ways"
+ },
+ {
+  "id": "ch02-ex3",
+  "title": "Chapter 2, exercise 3: Build it"
+ }
 ]

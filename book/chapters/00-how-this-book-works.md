@@ -21,3 +21,9 @@ Every lesson has the same seven steps, so you always know where you are:
 7. **Exercises and quiz**: practice, then five quick questions.
 
 Getting a prediction wrong is not a failure. It's how you find out what the computer really does. Error messages are normal too. Every chapter makes at least one on purpose.
+
+## A note for the beta tester
+
+This book is a **draft**, and you're its **beta tester**. Like a beta tester for a game, your job is to find the problems before anyone else does.
+
+If something confuses you, that's the book's fault, not yours, and you've just found something to fix. After each lesson, open **My notes** on the course site and write a line or two: what was confusing, what was boring, and what was fun. Short answers are fine. Each chapter's exercises and quiz are on the course site too, so your work is saved as you go.

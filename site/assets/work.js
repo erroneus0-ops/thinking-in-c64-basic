@@ -1,0 +1,142 @@
+// Chapter work: exercises (written answers), the quiz, and beta tester notes.
+// Everything is saved to the course database on this computer.
+'use strict';
+
+const chapterEl = document.getElementById('chapter');
+let chapters = [];
+let saved = {};   // latest saved text per kind:item
+
+const el = (tag, props = {}, ...kids) => {
+  const e = document.createElement(tag);
+  Object.assign(e, props);
+  for (const k of kids) e.append(k);
+  return e;
+};
+
+async function save(chapter, kind, item, text) {
+  const res = await fetch('/api/response', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chapter, kind, item, text }),
+  });
+  if (!res.ok) throw new Error('save failed');
+  saved[kind + ':' + item] = text;
+}
+
+// A save button with its own little "Saved" message.
+function saveRow(onSave) {
+  const btn = el('button', { type: 'button', textContent: 'Save' });
+  const msg = el('span', { className: 'saved', role: 'status' });
+  btn.onclick = async () => {
+    btn.disabled = true; msg.textContent = '';
+    try { await onSave(); msg.className = 'saved'; msg.textContent = 'Saved.'; }
+    catch (e) { msg.className = 'bad'; msg.textContent = 'Couldn’t save. Is start.bat still running?'; }
+    finally { btn.disabled = false; }
+  };
+  return el('div', { className: 'save-row' }, btn, msg);
+}
+
+function renderExercises(ch) {
+  const box = document.getElementById('exercises');
+  box.replaceChildren();
+  document.getElementById('exercises-section').hidden = !ch.exercises.length;
+  for (const ex of ch.exercises) {
+    const id = `ex${ex.n}`;
+    const ta = el('textarea', { id: `t-${id}`, value: saved['exercise:' + id] || '' });
+    box.append(el('div', { className: 'card' },
+      el('h3', { textContent: `${ex.n}. ${ex.title}` }),
+      el('p', { textContent: ex.text }),
+      el('label', { className: 'small', htmlFor: ta.id, textContent: 'Your answer' }), ta,
+      saveRow(() => save(ch.n, 'exercise', id, ta.value))));
+  }
+}
+
+async function renderQuiz(ch) {
+  const form = document.getElementById('quiz');
+  document.getElementById('quiz-section').hidden = !ch.quiz.length;
+  document.getElementById('score').textContent = '';
+  form.replaceChildren();
+  if (!ch.quiz.length) return;
+  for (const q of ch.quiz) {
+    const fs = el('fieldset', { className: 'card' }, el('legend', { textContent: `${q.n}. ${q.question}` }));
+    for (const o of q.options) {
+      const id = `q${q.n}${o.letter}`;
+      fs.append(el('div', { className: 'opt' },
+        el('input', { type: 'radio', name: `q${q.n}`, id, value: o.letter }),
+        el('label', { htmlFor: id, textContent: `(${o.letter}) ${o.text}` })));
+    }
+    fs.append(el('div', { className: 'result', id: `r${q.n}` }));
+    form.append(fs);
+  }
+  const submit = el('button', { type: 'submit', className: 'primary', textContent: 'Check my answers' });
+  form.append(submit);
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const answers = {};
+    for (const q of ch.quiz) {
+      const picked = form.querySelector(`input[name="q${q.n}"]:checked`);
+      if (picked) answers[q.n] = picked.value;
+    }
+    submit.disabled = true;
+    try {
+      const res = await fetch('/api/quiz', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chapter: ch.n, answers }) });
+      const out = await res.json();
+      for (const r of out.results) {
+        const box = document.getElementById(`r${r.n}`);
+        box.className = 'result ' + (r.correct ? 'good' : 'bad');
+        box.textContent = r.correct ? 'Right.' : (r.choice ? `Not quite. The answer is (${r.answer}).` : `Skipped. The answer is (${r.answer}).`);
+      }
+      document.getElementById('score').textContent = `You got ${out.score} out of ${out.total}. Try again any time; every attempt is kept.`;
+      await renderHistory(ch);
+    } finally { submit.disabled = false; }
+  };
+  await renderHistory(ch);
+}
+
+async function renderHistory(ch) {
+  const rows = await (await fetch('/api/quiz-history?chapter=' + ch.n)).json();
+  const box = document.getElementById('history');
+  box.replaceChildren();
+  if (!rows.length) return;
+  box.append(el('p', { className: 'quiet', textContent: 'Earlier attempts:' }),
+    el('ul', { className: 'history' }, ...rows.map(r => el('li', { textContent: `${r.score} out of ${r.total}, ${r.created_at}` }))));
+}
+
+function renderNotes(ch) {
+  const box = document.getElementById('notes');
+  box.replaceChildren();
+  for (const lesson of ch.lessons) {
+    const label = /^\d/.test(lesson.id) ? `Lesson ${lesson.id}: ${lesson.title}` : lesson.title;
+    const fields = ['confusing', 'boring', 'fun'].map(kind => {
+      const item = `${lesson.id}:${kind}`;
+      const ta = el('textarea', { id: `n-${item}`, value: saved['note:' + item] || '' });
+      ta.style.minHeight = '2.8rem';
+      const prompt = { confusing: 'What was confusing?', boring: 'What was boring?', fun: 'What was fun?' }[kind];
+      return { item, ta, nodes: [el('label', { className: 'small', htmlFor: ta.id, textContent: prompt }), ta] };
+    });
+    box.append(el('div', { className: 'card' },
+      el('h3', { textContent: label }),
+      ...fields.flatMap(f => f.nodes),
+      saveRow(async () => { for (const f of fields) await save(ch.n, 'note', f.item, f.ta.value); })));
+  }
+}
+
+async function show() {
+  const ch = chapters.find(c => String(c.n) === chapterEl.value);
+  const rows = await (await fetch('/api/responses?chapter=' + ch.n)).json();
+  saved = {};
+  for (const r of rows) saved[r.kind + ':' + r.item] = r.text;
+  renderExercises(ch);
+  await renderQuiz(ch);
+  renderNotes(ch);
+  history.replaceState(null, '', '#ch' + ch.n);
+}
+
+(async () => {
+  chapters = await (await fetch('/api/chapters')).json();
+  for (const c of chapters) chapterEl.append(new Option(c.n === 0 ? c.title : `Chapter ${c.n}: ${c.title}`, c.n));
+  const fromHash = (location.hash.match(/^#ch(\d+)$/) || [])[1];
+  chapterEl.value = fromHash ?? (chapters.find(c => c.n === 1) ? '1' : String(chapters[0].n));
+  chapterEl.onchange = show;
+  show();
+})();

@@ -159,6 +159,20 @@ Conventions in chapter files:
   10 at a time, so the C64 moves the cursor itself (wrapping, scrolling: all authentic). Plain click
   still only focuses.
 
+## Course site: chapter work (Milestones 4-5, partly)
+
+- `/work` (Chapter work): per chapter, exercises with written answers, the quiz (graded on the
+  server; answers never sent to the page), and beta tester notes (confusing / boring / fun per lesson).
+- `/review` (Editor's view): latest notes and answers, every quiz attempt, recent programs. No login
+  (LAN only, by design for now).
+- Content comes from the chapter files: `tools/build.py` writes `site/content.json` (lessons,
+  exercises, quizzes with answers) and `site/exercises.json` (the C64 page's picker: practice plus
+  every exercise from Chapter 2 on, ids like ch02-ex3). Rebuild after any chapter change.
+- Tables: quiz_attempts, quiz_answers, responses (every save is a new row; newest wins).
+- Chapters 1-2 are labelled DRAFTS and the reader is the BETA TESTER (editor's decision). Examples
+  were refreshed after the first test session so his second pass isn't a rerun; data types became
+  Lesson 1.2 (the A;A$ demo "lit a bulb"). Keep refreshing specifics between passes.
+
 ## Decisions made
 
 - **Language and machine:** Commodore 64 BASIC V2. Reference emulator is VICE; TheC64
