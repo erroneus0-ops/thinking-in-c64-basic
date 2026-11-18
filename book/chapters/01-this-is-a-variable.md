@@ -41,6 +41,24 @@ That is exactly the coin counter from a game. `A = A + 1` is picking up one coin
 
 You may have noticed a space before each number. The C64 leaves room in front of every number for a minus sign, even when there isn't one.
 
+::: good-to-know
+Want to know a secret? Type `?` instead of the whole word `PRINT`, and you get the same thing, quicker.
+
+Think of `PRINT` as a "what is?" command: you ask, and the C64 answers with what it is. So to ask "what is in A?", you can type:
+
+```
+? A
+```
+
+To make the answer more meaningful, add a word after it:
+
+```
+? A "APPLES."
+```
+
+The C64 answers ` 8 APPLES.` And if you use `?` inside a program, `LIST` shows it spelled out as `PRINT`, because to the C64 they're the same word.
+:::
+
 ## Lesson 1.2 — Numbers and words
 
 **Goal:** Store words as well as numbers.
