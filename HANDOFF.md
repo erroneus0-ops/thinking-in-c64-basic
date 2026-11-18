@@ -43,6 +43,10 @@ answers shown, output in `build/`) or `python tools/build.py --student --pages` 
 removed, written to `docs/` for the public site). Commit `docs/` after building. Pandoc Markdown; template and styles in `tools/template.html`.
 
 Content ideas from the editor (to place in chapters):
+- OPENER (editor's decision): the book's first page is the classic one-line maze,
+  10 PRINT CHR$(205.5 + RND(1)); / 20 GOTO 10, stopped with RUN/STOP (Esc). Instant payoff,
+  with a promise that within a few chapters he'll understand every character. Use the readable
+  version; the golfed one (0 I=205.5:PRINTCHR$(RND(.)+I);:GOTO) can be a Good to know box.
 - Chapter 7 price checker: "buy only at the maker's price, never collector prices"; markup percent.
 - Wish list with a waiting period; Spending Tracker flags purchases above the maker's price.
 - Variable dictionary gets units in "What it holds" (e.g. "in cents"); Mars Climate Orbiter story.
