@@ -33,14 +33,19 @@ organized, orderly thinking habits."
 - `book/chapters/NN-name.md`: the book itself, one file per chapter. These are the source
   of truth for chapter text (Chapter 1 now lives here, not in the plan).
 - Public site (student edition, no answers): GitHub Pages from the `docs/` folder.
-- Private preview of the editor's edition (with answers), republished after each change:
-  https://claude.ai/artifact/8oDEifbK2sqmeAtf1hiy9t
+- Editor's edition (with answers), password-locked on GitHub Pages: .../thinking-in-c64-basic/editor/
+  The password is NEVER in the repo; ask the editor for it in each new session. (The old claude.ai
+  preview link is retired.)
 
 ## Building the book
 
 `pip install -r tools/requirements.txt`, then `python tools/build.py` (editor's edition,
 answers shown, output in `build/`) or `python tools/build.py --student --pages` (answers
-removed, written to `docs/` for the public site). Commit `docs/` after building. Pandoc Markdown; template and styles in `tools/template.html`.
+removed, written to `docs/` for the public site). Then lock the editor's edition:
+`python tools/build.py --no-pdf` followed by `python tools/lock_editor.py` (password from the
+C64BOOK_PASSWORD environment variable, or asked for; AES-256-GCM, PBKDF2-SHA256 600k rounds;
+writes docs/editor/index.html). Commit `docs/` after building. Note: the quiz answers are still
+readable in the public chapter sources (honor system, by the editor's decision). Pandoc Markdown; template and styles in `tools/template.html`.
 
 Content ideas from the editor (to place in chapters):
 - SECRETS: catalog in `book/secrets.md` (43 entries, status and proposed chapter for each).
