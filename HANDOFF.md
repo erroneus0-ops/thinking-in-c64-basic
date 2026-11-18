@@ -242,6 +242,11 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 
 ## Next steps
 
+0. IMPROVEMENT CHART (editor request): quiz score per attempt over time, from quiz_attempts.
+   On /work under each quiz (his own attempts) and on /review (all chapters, all names). Name
+   sign-in also lets him start fresh under a new name for a second pass; retakes under the same
+   name show the climb. Present both as features ("proof of accomplishment").
+
 1. The editor reviews the plan doc and answers the open questions.
 2. Chapter 2 drafted (and the maze opener); editor to review. Next: Chapter 3.
 3. Test from the son's laptop over the LAN (start.bat 80 on the editor's machine).
