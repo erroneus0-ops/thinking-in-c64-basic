@@ -15,7 +15,7 @@ Now type this and press RETURN:
 RUN
 ```
 
-A maze fills the screen, row after row, and never stops. Run it again and you get a different maze. No two are ever the same.
+A maze fills the screen, row after row, and never stops. Stop it and run it again, and you get a different maze. (There's a surprise hiding in that word "random", which Chapter 3 will let you discover for yourself.)
 
 To stop it, press **RUN/STOP**. On a PC keyboard, that's **Esc**. The C64 answers `BREAK IN 10` (or `20`) and `READY.`
 

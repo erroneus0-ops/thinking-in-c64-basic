@@ -43,6 +43,10 @@ answers shown, output in `build/`) or `python tools/build.py --student --pages` 
 removed, written to `docs/` for the public site). Commit `docs/` after building. Pandoc Markdown; template and styles in `tools/template.html`.
 
 Content ideas from the editor (to place in chapters):
+- SECRETS: catalog in `book/secrets.md` (43 entries, status and proposed chapter for each).
+  Placed ones get marked there. Unplaced ones form the appendix.
+- Ch 3 must teach that RND(1) repeats after every reset (tested); the opener now hints at it.
+- The ↑ (power) key: `^` on a PC keyboard types nothing in the browser emulator. Solve before Ch 3.
 - OPENER (editor's decision): the book's first page is the classic one-line maze,
   10 PRINT CHR$(205.5 + RND(1)); / 20 GOTO 10, stopped with RUN/STOP (Esc). Instant payoff,
   with a promise that within a few chapters he'll understand every character. Use the readable
