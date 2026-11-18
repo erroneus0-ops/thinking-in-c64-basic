@@ -81,7 +81,13 @@ Conventions in chapter files:
 - `setup.bat` -> `tools/setup.ps1`: downloads PHP 8.4 (php.net "latest" zip), vc64web pinned to
   commit 469b63818d1a8f4d654fd3985b82aeb4e03fabba (skips its doc/ folder: long paths), removes
   vc64web's analytics script, copies ROMs from the local VICE install (fallback: VICE's GitHub mirror).
-  Not yet tested on Windows.
+  TESTED on the editor's Windows 10 LTSC 2021 machine (17 Nov 2026): setup, start, boot, typing,
+  Esc = RUN/STOP, Submit, Run all work. Fixes needed on the way: VC++ runtime check reads the real
+  vcruntime140.dll version (needs 14.44; registry can claim newer while an update waits for restart);
+  unpacking uses C:\Windows\System32\tar.exe (PortableGit's GNU tar can't read zip; the earlier
+  .NET unzip silently extracted nothing under Windows PowerShell 5.1).
+- Update notices to the editor: end every message that changes the site with
+  "To pick this up: git pull, then Ctrl+F5".
 - `start.bat`: PHP built-in server on port 8064, router `site/router.php`.
 - Routes: `/` home, `/c64` emulator page, `/book/` = docs/, `/emu/` = runtime/vc64web,
   `/roms/` = runtime/roms, `/api/*` = site/lib/api.php.
@@ -146,5 +152,5 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 
 1. The editor reviews the plan doc and answers the open questions.
 2. Draft Chapter 2 (Talking to the Computer).
-3. Editor runs setup.bat/start.bat on Windows; fix whatever breaks.
+3. Test from the son's laptop over the LAN (start.bat 80 on the editor's machine).
 4. Milestone 4: quizzes. Then 5: login, review page, Copy for Claude, progress page.
