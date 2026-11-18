@@ -42,6 +42,15 @@ organized, orderly thinking habits."
 answers shown, output in `build/`) or `python tools/build.py --student --pages` (answers
 removed, written to `docs/` for the public site). Commit `docs/` after building. Pandoc Markdown; template and styles in `tools/template.html`.
 
+Content ideas from the editor (to place in chapters):
+- Chapter 7 price checker: "buy only at the maker's price, never collector prices"; markup percent.
+- Wish list with a waiting period; Spending Tracker flags purchases above the maker's price.
+- Variable dictionary gets units in "What it holds" (e.g. "in cents"); Mars Climate Orbiter story.
+- Arrays: the Roman calendar off-by-two (September = 7th month, now 9th).
+- TI jiffies (1/60 s) to HH:MM:SS with INT and division.
+- Sprites: a Windows-style spinner ("baller coaster") with 8 sprites and a DATA position table.
+- Premise gains the habit "know the subject before you write the code."
+
 Conventions in chapter files:
 - Plain fenced code block = something to type. Renders as a C64 screen.
 - ` ```{.diagram} ` fenced block = a picture, not to be typed. Renders as a dashed box.
@@ -74,6 +83,10 @@ Conventions in chapter files:
 
 - **Language and machine:** Commodore 64 BASIC V2. Reference emulator is VICE; TheC64
   gets its own appendix. Cassette covered only via VICE's datasette (appendix).
+- **Known limits, no loopholes:** the book teaches the machine's documented limits as firm rules
+  (8 sprites, 2-letter names, 80-character lines) and works within them. No sidebars on tricks that
+  break limits (sprite multiplexing, opening the borders, etc.). Fun for the editor, confusing for
+  a learner who does best with rules that hold.
 - **Writing style:** for a young adult beginner; plain language at roughly an 11-12-year-old reading level, never
   childish (no mascots, no cartoons, no talking down). Short sentences.
 - **Core mental model:** a shelf of labelled boxes, used for every idea from variables
