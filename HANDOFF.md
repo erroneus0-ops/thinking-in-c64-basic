@@ -45,6 +45,8 @@ removed, written to `docs/` for the public site). Commit `docs/` after building.
 Content ideas from the editor (to place in chapters):
 - SECRETS: catalog in `book/secrets.md` (43 entries, status and proposed chapter for each).
   Placed ones get marked there. Unplaced ones form the appendix.
+- Reserved words: Ch 1 Lesson 1.4 (editor asked for a briefing so names don't feel like a minefield).
+  Key safe rule (tested): any two-letter name is safe except IF ON OR TO GO FN ST TI.
 - Ch 3 must teach that RND(1) repeats after every reset (tested); the opener now hints at it.
 - The ↑ (power) key: `^` on a PC keyboard types nothing in the browser emulator. Solve before Ch 3.
 - OPENER (editor's decision): the book's first page is the classic one-line maze,

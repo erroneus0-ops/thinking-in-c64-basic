@@ -105,26 +105,65 @@ PRINT PRICE
 
 **Predict before you run the last line.** Most people expect 50. The C64 prints 3.
 
-**Why.** The C64 only reads the **first two letters** of a variable name. To the computer, PRICE and PRIZE are both just PR: the same box. The second line quietly replaced the 50. Nothing warned you. That is why the next lesson matters.
+**Why.** The C64 only reads the **first two letters** of a variable name. To the computer, PRICE and PRIZE are both just PR: the same box. The second line quietly replaced the 50. Nothing warned you. Lesson 1.5 shows how to make sure it never happens to you.
 
 Picture it this way: the C64 makes its labels with a label maker that can only print **two letters**. You ask for a label that says PRICE, and the machine prints PR. Later you ask for PRIZE, and it prints PR again. Now the shelf has one box with the label PR, and both names lead to it.
 
-**One more trap. Try it:**
+## Lesson 1.4 — Words the C64 has already claimed
+
+**Goal:** Know which names are taken, so you can pick names without worrying.
+
+**Picture:** Usernames in an online game. When you sign up, some names are already taken, and the game won't let you have them. The C64 has about seventy words it has already claimed for itself: its commands and functions, like `PRINT`, `GOTO` and `RUN`. Programmers call them **reserved words**. Appendix E lists every one.
+
+**Predict.** Will this work? Write down yes or no, then try it:
 
 ```
-MONEY = 20
+GOLD = 100
 ```
 
-The C64 answers `?SYNTAX  ERROR`. Hidden inside MONEY is the word ON, which is a BASIC command. The C64 sees the command and gets confused. The same thing happens with TOTAL (contains TO) and SCORE (contains OR). A few names are also taken by the computer itself: ST and TI, and anything beginning with them, such as TIME.
+**Why it fails.** The C64 answers `?SYNTAX  ERROR`. When you press RETURN, the C64 reads your line looking for its own words, and it finds them even in the middle of a name. Hidden inside GOLD is GO, as in `GO TO`. The C64 sees GO and can't make sense of the rest.
 
-The rules, all in one place:
+Plenty of good names have a reserved word hiding inside:
 
-- A name starts with a letter.
-- After that, letters and digits are allowed.
+| Name | Hidden word |
+| --- | --- |
+| GOLD | GO |
+| LIFE | IF |
+| SCORE | OR |
+| MONEY | ON |
+| TOTAL | TO |
+| COST | COS |
+| FRIEND | END |
+| LENGTH | LEN |
+| FORMAT | FOR |
+| STATUS | ST |
+| TIME | TI |
+
+That list can make names feel like a minefield. They aren't. Three facts turn it into a map:
+
+1. **Inside quotes, nothing is reserved.** `PRINT "GOLD, LIFE AND SCORE"` works perfectly. The C64 only hunts for its words outside quotes.
+2. **You almost always find out right away.** A name with a reserved word inside usually stops with an error the moment you press RETURN, so you fix it and move on. (There's one sneaky exception, in the box below.)
+3. **Two-letter names are safe, with just eight exceptions.** The C64 only reads the first two letters of a name anyway, and only eight pairs are taken:
+
+| Taken pair | Why |
+| --- | --- |
+| IF, ON, OR, TO, GO, FN | They're reserved words themselves |
+| ST, TI | They're the C64's own boxes (ST reports on disks and tapes; TI is its clock) |
+
+Any other two letters can never contain a reserved word. HP, XP, GD, SC, PR: all safe.
+
+::: good-to-know
+Here's the sneaky one. A name like `TITLE$` starts with TI, so to the C64 it's `TI$`, the clock shown as hours, minutes and seconds. `TITLE$ = "MY GAME"` gives `?ILLEGAL QUANTITY  ERROR`, which at least warns you. But `TITLE$ = "120000"` gives no error at all: it quietly sets the clock to 12:00:00. Names that start with TI or ST are best avoided completely.
+:::
+
+The rules for names, all in one place:
+
+- A name starts with a letter. After that, letters and digits are allowed.
 - Only the first two characters count.
-- A name must not contain a BASIC command word.
+- A name must not contain a reserved word.
+- Two-letter names are always safe, except IF, ON, OR, TO, GO, FN, ST and TI.
 
-## Lesson 1.4 — Organize it: the variable dictionary
+## Lesson 1.5 — Organize it: the variable dictionary
 
 **Goal:** Start the habit that keeps every program in this book under control.
 
@@ -136,7 +175,7 @@ Because the C64 will not warn you when two names collide, you need a written lis
 | `N$` | Text | My name | KAITO |
 | `PR` | Number | Price of one item, in dollars | 50 |
 
-**Notebook rule 1:** Before you use a new variable, write it in the dictionary. If its first two letters match one already there, pick a different name.
+**Notebook rule 1:** Before you use a new variable, write it in the dictionary. If its first two letters match one already there, or it's one of the eight taken pairs, pick a different name. Short names are fine: the dictionary is where you write down what they mean.
 
 When a box holds an amount, write its **unit** in the dictionary too. Is PR the price in dollars or in cents? The number 50 means something very different in each. Later in this book, money is always stored in cents, and the dictionary is where you say so.
 
@@ -155,5 +194,5 @@ In 1999, a spacecraft called the Mars Climate Orbiter was lost at Mars. One team
 1. After `A = 5` and then `A = A * 2`, what does `PRINT A` show? (a) 5 (b) 7 (c) 10 (d) An error. **Answer: c**
 2. What does `PRINT Q` show if Q was never used? (a) Nothing (b) 0 (c) `?SYNTAX  ERROR` (d) Q. **Answer: b**
 3. Which variable can hold the word HELLO? (a) `H` (b) `H%` (c) `H$` (d) Any of them. **Answer: c**
-4. Why does `SCORE = 10` fail? (a) Names cannot be five letters (b) It contains the command word OR (c) Numbers must be decimals (d) S is reserved. **Answer: b**
+4. Which of these names is always safe? (a) `GOLD` (b) `HP` (c) `IF` (d) `TITLE$`. **Answer: b**
 5. A program uses COUNT and CODE. What goes wrong? (a) Nothing (b) They share one box, CO (c) CODE is a command (d) `?TYPE MISMATCH  ERROR`. **Answer: b**

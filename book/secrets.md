@@ -51,7 +51,7 @@ the browser emulator; check before writing them into a lesson).
 | 26 | `X = RND(-TI)` mixes in the clock, so each run starts somewhere different | Manual | Ch 3, right after #25 |
 | 27 | `INT(RND(1)*6)+1` rolls a die (whole numbers 1 to 6) | Manual | Ch 3 lesson point |
 | 28 | `TI` counts jiffies (1/60 second) since power-on; `TI$` shows the time as HHMMSS; `TI$="000000"` sets the clock | Manual | Ch 3 or Ch 4 (the base-60 exercise) |
-| 29 | `TITLE$` is really `TI$`: `TITLE$="MY GAME"` gives `?ILLEGAL QUANTITY  ERROR`, and `TITLE$="120000"` sets the clock | Tested | Ch 1 Good to know (the TI trap, with a name he'd actually choose) |
+| 29 | `TITLE$` is really `TI$`: `TITLE$="MY GAME"` gives `?ILLEGAL QUANTITY  ERROR`, and `TITLE$="120000"` sets the clock | Tested | Ch 1, Lesson 1.4 (done) |
 | 30 | `FRE(0)` reports free memory, but shows a negative number on a fresh C64 (`-26627`); add 65536 for the real figure (38909) | Tested | Ch 13 (arrays and memory) Good to know |
 | 31 | The power operator is the up-arrow key: `2↑3` is 8 | Manual | Ch 3. NOTE: typing `^` on a PC keyboard produced nothing in the browser emulator; find the right key (or add a button) before Ch 3 |
 

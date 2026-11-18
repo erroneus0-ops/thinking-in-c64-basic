@@ -126,8 +126,11 @@ words</a></li>
 <li><a href="#lesson-1.3-the-two-letter-trap"
 id="toc-lesson-1.3-the-two-letter-trap">Lesson 1.3 — The two-letter
 trap</a></li>
-<li><a href="#lesson-1.4-organize-it-the-variable-dictionary"
-id="toc-lesson-1.4-organize-it-the-variable-dictionary">Lesson 1.4 —
+<li><a href="#lesson-1.4-words-the-c64-has-already-claimed"
+id="toc-lesson-1.4-words-the-c64-has-already-claimed">Lesson 1.4 — Words
+the C64 has already claimed</a></li>
+<li><a href="#lesson-1.5-organize-it-the-variable-dictionary"
+id="toc-lesson-1.5-organize-it-the-variable-dictionary">Lesson 1.5 —
 Organize it: the variable dictionary</a></li>
 <li><a href="#exercises" id="toc-exercises">Exercises</a></li>
 <li><a href="#quiz" id="toc-quiz">Quiz</a></li>
@@ -374,27 +377,144 @@ expect 50. The C64 prints 3.</p>
 <p><strong>Why.</strong> The C64 only reads the <strong>first two
 letters</strong> of a variable name. To the computer, PRICE and PRIZE
 are both just PR: the same box. The second line quietly replaced the 50.
-Nothing warned you. That is why the next lesson matters.</p>
+Nothing warned you. Lesson 1.5 shows how to make sure it never happens
+to you.</p>
 <p>Picture it this way: the C64 makes its labels with a label maker that
 can only print <strong>two letters</strong>. You ask for a label that
 says PRICE, and the machine prints PR. Later you ask for PRIZE, and it
 prints PR again. Now the shelf has one box with the label PR, and both
 names lead to it.</p>
-<p><strong>One more trap. Try it:</strong></p>
-<pre><code>MONEY = 20</code></pre>
-<p>The C64 answers <code>?SYNTAX  ERROR</code>. Hidden inside MONEY is
-the word ON, which is a BASIC command. The C64 sees the command and gets
-confused. The same thing happens with TOTAL (contains TO) and SCORE
-(contains OR). A few names are also taken by the computer itself: ST and
-TI, and anything beginning with them, such as TIME.</p>
-<p>The rules, all in one place:</p>
+<h2 id="lesson-1.4-words-the-c64-has-already-claimed">Lesson 1.4 — Words
+the C64 has already claimed</h2>
+<p><strong>Goal:</strong> Know which names are taken, so you can pick
+names without worrying.</p>
+<p><strong>Picture:</strong> Usernames in an online game. When you sign
+up, some names are already taken, and the game won’t let you have them.
+The C64 has about seventy words it has already claimed for itself: its
+commands and functions, like <code>PRINT</code>, <code>GOTO</code> and
+<code>RUN</code>. Programmers call them <strong>reserved words</strong>.
+Appendix E lists every one.</p>
+<p><strong>Predict.</strong> Will this work? Write down yes or no, then
+try it:</p>
+<pre><code>GOLD = 100</code></pre>
+<p><strong>Why it fails.</strong> The C64 answers
+<code>?SYNTAX  ERROR</code>. When you press RETURN, the C64 reads your
+line looking for its own words, and it finds them even in the middle of
+a name. Hidden inside GOLD is GO, as in <code>GO TO</code>. The C64 sees
+GO and can’t make sense of the rest.</p>
+<p>Plenty of good names have a reserved word hiding inside:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Hidden word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GOLD</td>
+<td>GO</td>
+</tr>
+<tr>
+<td>LIFE</td>
+<td>IF</td>
+</tr>
+<tr>
+<td>SCORE</td>
+<td>OR</td>
+</tr>
+<tr>
+<td>MONEY</td>
+<td>ON</td>
+</tr>
+<tr>
+<td>TOTAL</td>
+<td>TO</td>
+</tr>
+<tr>
+<td>COST</td>
+<td>COS</td>
+</tr>
+<tr>
+<td>FRIEND</td>
+<td>END</td>
+</tr>
+<tr>
+<td>LENGTH</td>
+<td>LEN</td>
+</tr>
+<tr>
+<td>FORMAT</td>
+<td>FOR</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>ST</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>TI</td>
+</tr>
+</tbody>
+</table>
+<p>That list can make names feel like a minefield. They aren’t. Three
+facts turn it into a map:</p>
+<ol type="1">
+<li><strong>Inside quotes, nothing is reserved.</strong>
+<code>PRINT "GOLD, LIFE AND SCORE"</code> works perfectly. The C64 only
+hunts for its words outside quotes.</li>
+<li><strong>You almost always find out right away.</strong> A name with
+a reserved word inside usually stops with an error the moment you press
+RETURN, so you fix it and move on. (There’s one sneaky exception, in the
+box below.)</li>
+<li><strong>Two-letter names are safe, with just eight
+exceptions.</strong> The C64 only reads the first two letters of a name
+anyway, and only eight pairs are taken:</li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Taken pair</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IF, ON, OR, TO, GO, FN</td>
+<td>They’re reserved words themselves</td>
+</tr>
+<tr>
+<td>ST, TI</td>
+<td>They’re the C64’s own boxes (ST reports on disks and tapes; TI is
+its clock)</td>
+</tr>
+</tbody>
+</table>
+<p>Any other two letters can never contain a reserved word. HP, XP, GD,
+SC, PR: all safe.</p>
+<div class="good-to-know">
+<p>Here’s the sneaky one. A name like <code>TITLE$</code> starts with
+TI, so to the C64 it’s <code>TI$</code>, the clock shown as hours,
+minutes and seconds. <code>TITLE$ = "MY GAME"</code> gives
+<code>?ILLEGAL QUANTITY  ERROR</code>, which at least warns you. But
+<code>TITLE$ = "120000"</code> gives no error at all: it quietly sets
+the clock to 12:00:00. Names that start with TI or ST are best avoided
+completely.</p>
+</div>
+<p>The rules for names, all in one place:</p>
 <ul>
-<li>A name starts with a letter.</li>
-<li>After that, letters and digits are allowed.</li>
+<li>A name starts with a letter. After that, letters and digits are
+allowed.</li>
 <li>Only the first two characters count.</li>
-<li>A name must not contain a BASIC command word.</li>
+<li>A name must not contain a reserved word.</li>
+<li>Two-letter names are always safe, except IF, ON, OR, TO, GO, FN, ST
+and TI.</li>
 </ul>
-<h2 id="lesson-1.4-organize-it-the-variable-dictionary">Lesson 1.4 —
+<h2 id="lesson-1.5-organize-it-the-variable-dictionary">Lesson 1.5 —
 Organize it: the variable dictionary</h2>
 <p><strong>Goal:</strong> Start the habit that keeps every program in
 this book under control.</p>
@@ -434,7 +554,9 @@ notebook like this:</p>
 </table>
 <p><strong>Notebook rule 1:</strong> Before you use a new variable,
 write it in the dictionary. If its first two letters match one already
-there, pick a different name.</p>
+there, or it’s one of the eight taken pairs, pick a different name.
+Short names are fine: the dictionary is where you write down what they
+mean.</p>
 <p>When a box holds an amount, write its <strong>unit</strong> in the
 dictionary too. Is PR the price in dollars or in cents? The number 50
 means something very different in each. Later in this book, money is
@@ -466,9 +588,8 @@ first.</li>
 (b) 0 (c) <code>?SYNTAX  ERROR</code> (d) Q.</li>
 <li>Which variable can hold the word HELLO? (a) <code>H</code> (b)
 <code>H%</code> (c) <code>H$</code> (d) Any of them.</li>
-<li>Why does <code>SCORE = 10</code> fail? (a) Names cannot be five
-letters (b) It contains the command word OR (c) Numbers must be decimals
-(d) S is reserved.</li>
+<li>Which of these names is always safe? (a) <code>GOLD</code> (b)
+<code>HP</code> (c) <code>IF</code> (d) <code>TITLE$</code>.</li>
 <li>A program uses COUNT and CODE. What goes wrong? (a) Nothing (b) They
 share one box, CO (c) CODE is a command (d)
 <code>?TYPE MISMATCH  ERROR</code>.</li>
