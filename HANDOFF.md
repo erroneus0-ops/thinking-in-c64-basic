@@ -45,6 +45,20 @@ removed, written to `docs/` for the public site). Commit `docs/` after building.
 Content ideas from the editor (to place in chapters):
 - SECRETS: catalog in `book/secrets.md` (43 entries, status and proposed chapter for each).
   Placed ones get marked there. Unplaced ones form the appendix.
+- PLANNED CHAPTER (editor approved): "Detective Work", right after Ch 11 Program Maps (book becomes
+  23 chapters; later chapters shift by one). Tools in rising order: reading the error; playing
+  computer with a trace table (one column per variable, one row per step; suits spatial strength);
+  print probes in a reserved line range; STOP/PRINT/CONT breakpoints; testing one block alone
+  (editor's GOTO technique; game picture: speedrunner practicing a segment from a save state);
+  splitting the search in halves with STOP. Plus a thread in every chapter: "an error is a clue".
+- PLANNED TOOL (editor approved), build alongside Ch 11, not before: block-aware RENUMBER on the C64
+  page. Start/step fields; rewrites GOTO, GOSUB, THEN n, ON..GOTO/GOSUB lists, RUN n, LIST n in
+  programs; lists computed jumps (GOTO X) it can't fix; before/after preview; saves as a new version.
+  Block markers are the Ch 11 REM headers (e.g. `1000 REM ===== MENU =====`): blocks keep their
+  hundreds/thousands. Editor's additions from his CoCo 3 experience (RENUM was "simple only"):
+  DATA regions stay together; important subroutines can be PINNED so they never move. Teach it in
+  Ch 11 AFTER he has felt the pain of renumbering by hand; present it honestly as what C64
+  programmers added via cartridges and BASIC extensions (the C64 itself had no RENUMBER).
 - Ch 11: "test one neighborhood at a time": set variables by hand, `GOTO` the block's first line
   (keeps variables; RUN n wipes them, tested), `STOP` at the block's end, PRINT to check, CONT.
   The editor's own habit, told as a parenthetical anecdote.
