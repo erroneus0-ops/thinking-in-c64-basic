@@ -154,7 +154,7 @@ These are the behaviors that confuse every C64 beginner. Each one is taught deli
 | Reserved variables | `ST`, `TI` and `TI$` belong to the system; even `TIME` fails because it starts with `TI` | 1 |
 | Numbers print with extra spaces | `PRINT 5` shows a space before the 5 (room for a minus sign) and one after | 1 |
 | Integer variables are small | `A%` holds only −32768 to 32767, so cents stored in an integer overflow past $327.67 | 3, 13 |
-| 80-character line limit | A line can be at most two screen rows; abbreviated keywords can make a line LIST longer than it can be re-edited | 2 |
+| 80-character line limit | A line can be at most two screen rows, and a typed line must stay under 80 characters: typing the 80th wraps the cursor to a new row, and RETURN enters that empty row instead (tested). Abbreviated keywords can make a line LIST longer than it can be re-edited | 2 |
 | INPUT and commas | Typing a comma into a string INPUT gives `?EXTRA IGNORED` and loses the rest | 5 |
 | `LOAD"$",8` erases your program | The directory is loaded as if it were a program, replacing what is in memory | 6 |
 | Save-with-replace | `SAVE"@0:NAME",8` has a long reputation for corrupting 1541 disks; the book always scratches first, then saves | 6, 18 |

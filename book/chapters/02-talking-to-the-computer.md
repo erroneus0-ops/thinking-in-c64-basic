@@ -154,7 +154,7 @@ Inside quotes, SHIFT + CLR/HOME doesn't clear anything. Instead, it types the cl
 :::
 
 ::: good-to-know
-A single program line can be at most 80 characters, which is two rows of the screen. Long lines are also hard to read, so this book keeps them short.
+A program line can fill two rows of the screen, but keep it **shorter than 80 characters**. When you type the 80th character, the cursor jumps down to a fresh row, and pressing RETURN then enters that empty row instead of your line, so your line is never stored. Long lines are also hard to read, so this book keeps them short.
 :::
 
 ## Lesson 2.5 — Organize it: plan, then number

@@ -240,6 +240,23 @@ COLOR (OR), COST (COS), MONEY (ON), TOTAL (TO), SCORE (OR), TIME (TI).
 See the last section of `book/plan.md`: example name (placeholder KAITO), second-language
 support, answer keys, paper vs. site notebook, title, reference machine.
 
+## Variable list helper (tested)
+
+BASIC V2 can't list variables, but its variable table is documented: from VARTAB (45/46) to
+ARYTAB (47/48), 7 bytes each, 2-byte name (only two letters stored), type in the high bits.
+Program version, run with GOTO 63000 (keeps variables; RUN would wipe them):
+
+    63000 ZS=PEEK(45)+256*PEEK(46):ZE=PEEK(47)+256*PEEK(48)-1
+    63010 FOR ZI=ZS TO ZE STEP 7:ZA=PEEK(ZI):ZB=PEEK(ZI+1)
+    63020 ZT=1-(ZA>127)-2*(ZB>127)
+    63030 PRINT CHR$(ZA AND 127)CHR$(ZB AND 127)MID$(" F$%",ZT,1)
+    63040 NEXT:END
+
+After COINS=40:COMBO=6:P$="BONUS":P%=3:G=1 it prints CO, P$, P%, G, ZS, ZE. Idea (editor
+interested): a "Show variables" panel on the C64 page that draws the shelf from the same table.
+Discovered on the way: a TYPED line must be under 80 characters (an 80-character line is never
+stored: the cursor wraps and RETURN enters the empty row). Chapter 2 and the plan now say so.
+
 ## Next steps
 
 0. IMPROVEMENT CHART (editor request): quiz score per attempt over time, from quiz_attempts.
