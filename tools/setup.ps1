@@ -1,6 +1,7 @@
 # One-time setup for the course site. Safe to run again: it skips what is
 # already done. Run it through setup.bat (double-click).
 #
+#   0. Installs the Microsoft Visual C++ runtime if missing (PHP needs it)
 #   1. Downloads portable PHP into runtime\php
 #   2. Downloads the vc64web C64 emulator into runtime\vc64web (pinned version)
 #   3. Copies the C64 ROMs from your VICE installation into runtime\roms
@@ -22,6 +23,7 @@ $PhpUrl     = 'https://www.php.net/~windows/releases/latest/php-8.4-nts-Win32-vs
 $EmuCommit  = '469b63818d1a8f4d654fd3985b82aeb4e03fabba'
 $EmuUrl     = "https://github.com/vc64web/vc64web.github.io/archive/$EmuCommit.zip"
 $RomMirror  = 'https://raw.githubusercontent.com/VICE-Team/svn-mirror/main/vice/data'
+$VcUrl      = 'https://aka.ms/vs/17/release/vc_redist.x64.exe'
 
 function Step($text) { Write-Host ''; Write-Host "== $text" -ForegroundColor Cyan }
 function Fail($text) { Write-Host ''; Write-Host $text -ForegroundColor Red; exit 1 }
@@ -40,6 +42,40 @@ function Expand-Zip($Zip, $Dest, [string[]]$Skip = @()) {
             [IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $target, $true)
         }
     } finally { $archive.Dispose() }
+}
+
+# ------------------------------------------- 0. Visual C++ runtime
+Step 'Microsoft Visual C++ runtime (PHP needs it)'
+
+# Microsoft's installer records itself here. PHP 8.4 needs version 14.30 or later.
+function Test-VCRuntime {
+    foreach ($key in @('HKLM:\SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64',
+                       'HKLM:\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\x64')) {
+        $r = Get-ItemProperty -Path $key -ErrorAction SilentlyContinue
+        if ($r -and $r.Installed -eq 1 -and ([version]"$($r.Major).$($r.Minor)" -ge [version]'14.30')) { return $true }
+    }
+    return $false
+}
+
+if (Test-VCRuntime) {
+    Write-Host 'Already installed.'
+} else {
+    $vc = Join-Path $Runtime 'vc_redist.x64.exe'
+    Write-Host 'Not installed. Downloading Microsoft''s installer (about 25 MB)...'
+    Invoke-WebRequest -Uri $VcUrl -OutFile $vc -UseBasicParsing
+    Write-Host 'Installing. Windows will ask for permission, because it installs for the whole computer.'
+    try {
+        Start-Process -FilePath $vc -ArgumentList '/install', '/passive', '/norestart' -Verb RunAs -Wait
+    } catch {
+        Fail "The Visual C++ installer didn't run (the permission prompt may have been declined). Run setup.bat again to retry."
+    } finally {
+        Remove-Item $vc -ErrorAction SilentlyContinue
+    }
+    if (-not (Test-VCRuntime)) {
+        Fail ("The Visual C++ runtime still isn't installed. Install it by hand from`n$VcUrl`n" +
+              "then run setup.bat again.")
+    }
+    Write-Host 'Installed.'
 }
 
 # ---------------------------------------------------------------- 1. PHP
@@ -61,8 +97,8 @@ $ini = $ini -replace '^;\s*extension=pdo_sqlite', 'extension=pdo_sqlite' `
 Set-Content -Path (Join-Path $PhpDir 'php.ini') -Value $ini
 $modules = & $PhpExe -c (Join-Path $PhpDir 'php.ini') -d "extension_dir=$(Join-Path $PhpDir 'ext')" -m 2>&1
 if ($LASTEXITCODE -ne 0 -or -not ($modules -match 'pdo_sqlite')) {
-    Fail ("PHP didn't start. It usually needs the Microsoft Visual C++ Redistributable.`n" +
-          "Install it from https://aka.ms/vs/17/release/vc_redist.x64.exe, then run setup.bat again.")
+    Fail ("PHP didn't start, even though the Visual C++ runtime is installed.`n" +
+          "Paste the lines above into the chat so we can see why.")
 }
 Write-Host 'PHP works, with SQLite.'
 
