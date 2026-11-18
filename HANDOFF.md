@@ -149,8 +149,8 @@ Conventions in chapter files:
   motivation); asked if it might be addicting (editor: yes, the healthy kind). Struggled with the
   two-letter rule until the editor's `? PR` demonstration; GOLD fixed as GLD; A and A$ demo.
   All three demos are now in Chapter 1. He liked "MILLION DOLLARS" much more than "APPLES":
-  category = STAKES AND ASPIRATION. Choose examples with weight (treasure, high scores, prize funds,
-  paychecks, rocket fuel, boss hit points), but VARY the specifics so none wears out by repetition
+  category = STAKES AND ASPIRATION, i.e. words of POSITIVE VALUE (editor): points, rewards, coins,
+  credits, gems, stars, bonus points, XP, treasure, high scores, prize funds, paychecks, but VARY the specifics so none wears out by repetition
   (editor's rule: never take a reaction literally). He edits by using the full screen, and wants the MOUSE to
   place the cursor.
 - Requested tool (approved idea, not yet built): SHIFT+CLICK on the C64 screen moves the cursor
