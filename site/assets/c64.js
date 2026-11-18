@@ -70,11 +70,13 @@ async function pressKeys(names, holdMs = 150) {
   await sleep(holdMs);
   for (const k of keys.reverse()) emu.wasm_schedule_key(k[0], k[1], 0, 0);
 }
-// Same PC keys as VICE: Esc = RUN/STOP, Page Up = RESTORE.
+// Same PC keys as VICE: Esc = RUN/STOP, Page Up = RESTORE, Home = CLR/HOME
+// (so Shift + Home clears the screen, as SHIFT + CLR/HOME does on a real C64).
 function specialKeys(e) {
   if (!emu) return;
   if (e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); pressKeys(['runStop']); }
   else if (e.code === 'PageUp') { e.preventDefault(); e.stopPropagation(); pressKeys(['restore']); }
+  else if (e.code === 'Home') { e.preventDefault(); e.stopPropagation(); pressKeys(e.shiftKey ? ['ShiftLeft', 'home'] : ['home']); }
 }
 
 // vc64web docks its on-screen keyboard at the bottom of its frame and stacks the C64

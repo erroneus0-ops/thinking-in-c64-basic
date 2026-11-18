@@ -128,8 +128,9 @@ Conventions in chapter files:
   to VARTAB ($2D) into a PRG. Run/Load resets, pokes the PRG back, sets $2D/$2F/$31, types run/list.
 - Tested end to end in headless Chrome: boot to READY, keyboard typing, Submit -> version 1 with
   correct listing, NEW, Run -> program runs.
-- Special keys: vc64web maps no PC key to RUN/STOP, RESTORE or C= (only its on-screen keyboard).
-  Our page adds Esc = RUN/STOP and Page Up = RESTORE (same as VICE) plus buttons, via
+- Special keys: vc64web maps no PC key to RUN/STOP, RESTORE, CLR/HOME or C= (only its on-screen
+  keyboard). Our page adds Esc = RUN/STOP, Page Up = RESTORE, Home = CLR/HOME (Shift + Home clears;
+  same as VICE) plus buttons incl. "Clear screen" (beta tester reached for CLS and couldn't clear), via
   `emu.translateKey2(name,'',true)` + `emu.wasm_schedule_key(row,col,pressed,0)`. vc64web calls
   wasm_keyboard_reset on every focus change, so focus the iframe and wait ~150 ms before pressing.
 - On-screen keyboard (phones/touch): "Show keyboard" button under the screen toggles vc64web's

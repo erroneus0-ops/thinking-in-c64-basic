@@ -138,6 +138,12 @@ The C64 prints the first line, then stops with `?SYNTAX  ERROR IN 20`. Helpfully
 When you press RETURN, the C64 reads the whole line from the screen and stores it, exactly as if you had typed it fresh. `LIST` and `RUN` to check.
 
 ::: good-to-know
+To clear the screen, hold SHIFT and press **CLR/HOME**. On a PC keyboard, that's **Shift + Home** (the course site's C64 page also has a Clear screen button). CLR/HOME without SHIFT just moves the cursor to the top left corner, without erasing anything.
+
+Clearing the screen never touches your program: type `LIST` and it's all still there. (If you've used other versions of BASIC, you might reach for `CLS`. The C64 doesn't have it.)
+:::
+
+::: good-to-know
 A single program line can be at most 80 characters, which is two rows of the screen. Long lines are also hard to read, so this book keeps them short.
 :::
 
