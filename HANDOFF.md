@@ -151,6 +151,14 @@ Conventions in chapter files:
   (8 sprites, 2-letter names, 80-character lines) and works within them. No sidebars on tricks that
   break limits (sprite multiplexing, opening the borders, etc.). Fun for the editor, confusing for
   a learner who does best with rules that hold.
+- **Earned discoveries, never announced** (the editor's lifelong way of teaching his sons): each part
+  of the book quietly contains things worth noticing, pitched just beyond easy but within reach,
+  so finding them gives the feeling of being smart. Never label them ("puzzle", "trick", "secret
+  challenge"); at most, a small honest hint. Examples: the opener's hint that "random" holds a
+  surprise (Ch 3: same maze after every reset); a message hidden in a sample program's DATA,
+  revealed once CHR$ and READ are known; a findable-but-not-obvious bug in the Detective chapter;
+  something in the sample story's scene numbering. All of it must still be true (simplify, never
+  falsify) and inside known limits.
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
   Leaving things out is fine; a simplified rule that is false is not. Example (from the editor's own
   schooling): DIM A(10) creates ELEVEN elements, 0 to 10, never ten. The book says so plainly, then
