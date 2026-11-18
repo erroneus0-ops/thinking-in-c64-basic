@@ -10,7 +10,8 @@ if "%PORT%"=="80" set SHOWPORT=
 
 if not exist "runtime\php\php.exe" (
     echo The course isn't set up on this computer yet. Double-click setup.bat first.
-    pause
+    echo Press Space or Enter to close this window.
+    pause >nul
     exit /b 1
 )
 
