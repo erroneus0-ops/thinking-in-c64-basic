@@ -49,6 +49,9 @@ Content ideas from the editor (to place in chapters):
 - Arrays: the Roman calendar off-by-two (September = 7th month, now 9th).
 - Sorting (Ch 14): box 0 is the "parking space" for swaps (A(0)=A(I):A(I)=A(I+1):A(I+1)=A(0)).
   This is box 0's first "special job", promised in Ch 13.
+- Box 0's second special job: tables whose numbers naturally start at 0 (hex digits 0-F, the 16
+  colors 0-15, sprites 0-7), so the number and the box always match. E.g. DIM H$(15) hex table.
+  Underlying habit: make the box number mean something.
 - TI jiffies (1/60 s) to HH:MM:SS with INT and division.
 - Sprites: a Windows-style spinner ("baller coaster") with 8 sprites and a DATA position table.
 - Premise gains the habit "know the subject before you write the code."
