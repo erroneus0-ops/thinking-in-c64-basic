@@ -10,6 +10,7 @@
 
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/detokenize.php';
+require_once __DIR__ . '/who.php';
 
 function json_out($data, int $status = 200): void {
     http_response_code($status);
@@ -26,6 +27,39 @@ function exercise_ids(string $root): array {
 function handle_api(string $route, string $root): void {
     try {
         $method = $_SERVER['REQUEST_METHOD'];
+        $c = client();
+
+        if ($route === 'login' && $method === 'POST') {
+            $in = json_decode(file_get_contents('php://input'), true) ?: [];
+            $name = trim(preg_replace('/\s+/', ' ', (string)($in['name'] ?? '')));
+            if (!preg_match("/^[\\p{L}\\p{N} ._'-]{1,30}$/u", $name)) {
+                json_out(['error' => 'Use up to 30 letters, numbers and spaces.'], 400); return;
+            }
+            $pdo = db($root);
+            $pdo->prepare('INSERT OR IGNORE INTO users (name) VALUES (?)')->execute([$name]);
+            $q = $pdo->prepare('SELECT name FROM users WHERE name = ?'); $q->execute([$name]);
+            $name = $q->fetchColumn();   // same capitalisation as the first time it was used
+            setcookie('c64user', $name, ['expires' => time() + 365 * 86400, 'path' => '/', 'samesite' => 'Lax']);
+            $_COOKIE['c64user'] = $name;
+            log_visit($pdo, 'sign in');
+            json_out(['name' => $name]);
+            return;
+        }
+        if ($route === 'logout' && $method === 'POST') {
+            setcookie('c64user', '', ['expires' => time() - 3600, 'path' => '/']);
+            json_out(['ok' => true]);
+            return;
+        }
+        if ($route === 'me' && $method === 'GET') {
+            json_out(['name' => current_user(), 'device' => $c['device']]);
+            return;
+        }
+        if ($route === 'visits' && $method === 'GET') {
+            json_out(db($root)->query('SELECT user, ip, device, page, created_at FROM visits ORDER BY id DESC LIMIT 60')->fetchAll());
+            return;
+        }
+        // Everything that saves needs a name.
+        if ($method === 'POST' && !$c['user']) { json_out(['error' => 'Please sign in first.'], 401); return; }
 
         if ($route === 'exercises' && $method === 'GET') {
             header('Content-Type: application/json; charset=utf-8');
@@ -50,15 +84,18 @@ function handle_api(string $route, string $root): void {
             $capture = in_array($in['capture'] ?? '', ['memory', 'upload'], true) ? $in['capture'] : 'memory';
             $pdo = db($root);
             $pdo->beginTransaction();
-            $q = $pdo->prepare('SELECT COALESCE(MAX(version), 0) + 1 FROM submissions WHERE exercise = ?');
-            $q->execute([$exercise]);
+            $q = $pdo->prepare('SELECT COALESCE(MAX(version), 0) + 1 FROM submissions WHERE user = ? AND exercise = ?');
+            $q->execute([$c['user'], $exercise]);
             $version = (int)$q->fetchColumn();
-            $ins = $pdo->prepare('INSERT INTO submissions (exercise, version, prg, listing, capture) VALUES (?, ?, ?, ?, ?)');
+            $ins = $pdo->prepare('INSERT INTO submissions (exercise, version, prg, listing, capture, user, ip, device) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
             $ins->bindValue(1, $exercise);
             $ins->bindValue(2, $version, PDO::PARAM_INT);
             $ins->bindValue(3, $prg, PDO::PARAM_LOB);
             $ins->bindValue(4, $d['listing']);
             $ins->bindValue(5, $capture);
+            $ins->bindValue(6, $c['user']);
+            $ins->bindValue(7, $c['ip']);
+            $ins->bindValue(8, $c['device']);
             $ins->execute();
             $id = (int)$pdo->lastInsertId();
             $pdo->commit();
@@ -68,8 +105,8 @@ function handle_api(string $route, string $root): void {
         }
 
         if ($route === 'versions' && $method === 'GET') {
-            $q = db($root)->prepare('SELECT id, version, created_at, listing FROM submissions WHERE exercise = ? ORDER BY version DESC');
-            $q->execute([(string)($_GET['exercise'] ?? '')]);
+            $q = db($root)->prepare('SELECT id, version, created_at, listing FROM submissions WHERE user = ? AND exercise = ? ORDER BY version DESC');
+            $q->execute([$c['user'], (string)($_GET['exercise'] ?? '')]);
             $rows = array_map(fn($r) => [
                 'id' => (int)$r['id'], 'version' => (int)$r['version'], 'created_at' => $r['created_at'],
                 'lines' => $r['listing'] === '' ? 0 : substr_count($r['listing'], "\n") + 1,
@@ -124,7 +161,8 @@ function handle_api(string $route, string $root): void {
             }
             $pdo = db($root);
             $pdo->beginTransaction();
-            $pdo->prepare('INSERT INTO quiz_attempts (chapter, score, total) VALUES (?, ?, ?)')->execute([$n, $score, count($results)]);
+            $pdo->prepare('INSERT INTO quiz_attempts (chapter, score, total, user, ip, device) VALUES (?, ?, ?, ?, ?, ?)')
+                ->execute([$n, $score, count($results), $c['user'], $c['ip'], $c['device']]);
             $id = (int)$pdo->lastInsertId();
             $ins = $pdo->prepare('INSERT INTO quiz_answers (attempt_id, question, choice, correct) VALUES (?, ?, ?, ?)');
             foreach ($results as $r) $ins->execute([$id, $r['n'], $r['choice'], $r['correct'] ? 1 : 0]);
@@ -134,9 +172,12 @@ function handle_api(string $route, string $root): void {
         }
 
         if ($route === 'quiz-history' && $method === 'GET') {
-            $q = db($root)->prepare('SELECT id, chapter, score, total, created_at FROM quiz_attempts WHERE (? < 0 OR chapter = ?) ORDER BY id DESC');
+            // Your own attempts, or everyone's with ?everyone=1 (the Editor's view).
+            $q = db($root)->prepare('SELECT id, chapter, score, total, user, ip, device, created_at FROM quiz_attempts
+                                     WHERE (? < 0 OR chapter = ?) AND (? = 1 OR user = ?) ORDER BY id DESC');
             $ch = isset($_GET['chapter']) ? (int)$_GET['chapter'] : -1;
             $q->bindValue(1, $ch, PDO::PARAM_INT); $q->bindValue(2, $ch, PDO::PARAM_INT);
+            $q->bindValue(3, isset($_GET['everyone']) ? 1 : 0, PDO::PARAM_INT); $q->bindValue(4, $c['user']);
             $q->execute();
             json_out($q->fetchAll());
             return;
@@ -150,8 +191,8 @@ function handle_api(string $route, string $root): void {
             if (!in_array($kind, ['exercise', 'note'], true) || !preg_match('/^[\w.:-]{1,40}$/', $item) || strlen($text) > 20000) {
                 json_out(['error' => 'That couldn’t be saved'], 400); return;
             }
-            db($root)->prepare('INSERT INTO responses (chapter, kind, item, text) VALUES (?, ?, ?, ?)')
-                     ->execute([(int)($in['chapter'] ?? 0), $kind, $item, $text]);
+            db($root)->prepare('INSERT INTO responses (chapter, kind, item, text, user, ip, device) VALUES (?, ?, ?, ?, ?, ?, ?)')
+                     ->execute([(int)($in['chapter'] ?? 0), $kind, $item, $text, $c['user'], $c['ip'], $c['device']]);
             json_out(['saved' => true]);
             return;
         }
@@ -159,18 +200,20 @@ function handle_api(string $route, string $root): void {
         if ($route === 'responses' && $method === 'GET') {
             // Newest version of each item, or the full history with ?all=1.
             $ch = isset($_GET['chapter']) ? (int)$_GET['chapter'] : -1;
-            $sql = isset($_GET['all'])
-                ? 'SELECT * FROM responses WHERE (? < 0 OR chapter = ?) ORDER BY id DESC'
-                : 'SELECT r.* FROM responses r JOIN (SELECT MAX(id) id FROM responses WHERE (? < 0 OR chapter = ?) GROUP BY chapter, kind, item) m ON r.id = m.id ORDER BY r.chapter, r.kind, r.item';
+            // Newest version of each item: your own, or everyone's with ?everyone=1.
+            $sql = 'SELECT r.* FROM responses r JOIN (SELECT MAX(id) id FROM responses
+                      WHERE (? < 0 OR chapter = ?) AND (? = 1 OR user = ?) GROUP BY user, chapter, kind, item) m
+                    ON r.id = m.id ORDER BY r.user, r.chapter, r.kind, r.item';
             $q = db($root)->prepare($sql);
             $q->bindValue(1, $ch, PDO::PARAM_INT); $q->bindValue(2, $ch, PDO::PARAM_INT);
+            $q->bindValue(3, isset($_GET['everyone']) ? 1 : 0, PDO::PARAM_INT); $q->bindValue(4, $c['user']);
             $q->execute();
             json_out($q->fetchAll());
             return;
         }
 
         if ($route === 'submissions' && $method === 'GET') {
-            $q = db($root)->query('SELECT id, exercise, version, listing, created_at FROM submissions ORDER BY id DESC LIMIT 50');
+            $q = db($root)->query('SELECT id, user, ip, device, exercise, version, listing, created_at FROM submissions ORDER BY id DESC LIMIT 50');
             json_out($q->fetchAll());
             return;
         }

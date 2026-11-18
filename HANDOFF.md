@@ -153,6 +153,8 @@ Conventions in chapter files:
   credits, gems, stars, bonus points, XP, treasure, high scores, prize funds, paychecks, but VARY the specifics so none wears out by repetition
   (editor's rule: never take a reaction literally). He edits by using the full screen, and wants the MOUSE to
   place the cursor.
+- He opened the book and the emulator side by side on his laptop almost immediately (reference
+  on one side, machine on the other). Idea, not built: a "study view" page with both in one window.
 - Requested tool (approved idea, not yet built): SHIFT+CLICK on the C64 screen moves the cursor
   there. Read cursor row/column from zero page, compute the target cell, feed cursor-key PETSCII
   codes (29 right, 157 left, 17 down, 145 up) through the keyboard buffer (631-640, count at 198),
@@ -163,8 +165,13 @@ Conventions in chapter files:
 
 - `/work` (Chapter work): per chapter, exercises with written answers, the quiz (graded on the
   server; answers never sent to the page), and beta tester notes (confusing / boring / fun per lesson).
-- `/review` (Editor's view): latest notes and answers, every quiz attempt, recent programs. No login
-  (LAN only, by design for now).
+- `/review` (Editor's view): everyone's latest notes and answers, every quiz attempt, recent
+  programs, each tagged with who / device / IP, plus a "Who and where" visit log.
+- SIGN-IN by name only (editor's decision; family LAN). Cookie `c64user`, case-insensitive names
+  (users table). /c64 and /work require a name and log visits (visits table: user, ip, device
+  like "Phone (Android)", user agent, page). Every save records user, ip, device. Work, quiz
+  history and program versions are per person; ?everyone=1 for the Editor's view. Databases from
+  before sign-in are upgraded in place; old rows are labelled "(before sign-in)".
 - Content comes from the chapter files: `tools/build.py` writes `site/content.json` (lessons,
   exercises, quizzes with answers) and `site/exercises.json` (the C64 page's picker: practice plus
   every exercise from Chapter 2 on, ids like ch02-ex3). Rebuild after any chapter change.

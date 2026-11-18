@@ -1,8 +1,11 @@
+'use strict';
+// If the server says "sign in first", go to the sign-in page and come back.
+const _fetch = window.fetch.bind(window);
+window.fetch = async (...a) => { const r = await _fetch(...a); if (r.status === 401) location.href = '/login?next=' + encodeURIComponent(location.pathname); return r; };
 // The C64 page: boots vc64web with real ROMs, captures the BASIC program
 // from emulated memory for Submit, and puts saved versions back for Run.
 // vc64web is served from this same server, so this page can call its
 // wasm_* functions directly through the iframe.
-'use strict';
 
 const frame = document.getElementById('c64');
 const statusEl = document.getElementById('status');

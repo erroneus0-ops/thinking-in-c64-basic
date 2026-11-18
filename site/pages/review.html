@@ -29,22 +29,24 @@
   <a class="home" href="/">Thinking in C64 BASIC</a>
   <a href="/work">Chapter work</a>
   <a href="/c64">C64</a>
+  <span class="who"></span>
 </header>
 <main>
   <h1>Editor’s view</h1>
-  <p class="quiet">Everything the beta tester has saved: newest version of each note and answer, every quiz attempt, and recent programs.</p>
+  <p class="quiet">Everyone’s saved work, newest version of each note and answer, every quiz attempt, recent programs, and who used the site from which device.</p>
   <h2>Beta tester notes</h2><div id="notes"></div>
   <h2>Exercise answers</h2><div id="answers"></div>
   <h2>Quiz attempts</h2><div id="quizzes"></div>
   <h2>Recent programs</h2><div id="programs"></div>
+  <h2>Who and where</h2><div id="visits"></div>
 </main>
 <script>
 'use strict';
 const el = (tag, props = {}, ...kids) => { const e = document.createElement(tag); Object.assign(e, props); for (const k of kids) e.append(k); return e; };
 const none = (box, what) => box.append(el('p', { className: 'quiet', textContent: `No ${what} yet.` }));
 (async () => {
-  const [chapters, responses, attempts, programs] = await Promise.all(
-    ['/api/chapters', '/api/responses', '/api/quiz-history', '/api/submissions'].map(u => fetch(u).then(r => r.json())));
+  const [chapters, responses, attempts, programs, visits] = await Promise.all(
+    ['/api/chapters', '/api/responses?everyone=1', '/api/quiz-history?everyone=1', '/api/submissions', '/api/visits'].map(u => fetch(u).then(r => r.json())));
   const lessonTitle = (n, id) => { const c = chapters.find(c => c.n === n); const l = c && c.lessons.find(l => l.id === id); return l ? l.title : id; };
   const exTitle = (n, id) => { const c = chapters.find(c => c.n === n); const e = c && c.exercises.find(e => 'ex' + e.n === id); return e ? `${e.n}. ${e.title}` : id; };
 
@@ -58,28 +60,34 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
     if (head !== last) { notes.append(el('h3', { textContent: head })); last = head; }
     notes.append(el('div', { className: 'entry' },
       el('div', {}, el('span', { className: 'tag ' + kind, textContent: kind[0].toUpperCase() + kind.slice(1) + ': ' }), el('span', { className: 'text', textContent: r.text })),
-      el('div', { className: 'what', textContent: r.created_at })));
+      el('div', { className: 'what', textContent: `${r.user} · ${r.device || 'unknown device'} · ${r.ip || 'no address'} · ${r.created_at}` })));
   }
 
   const answers = document.getElementById('answers');
   const as = responses.filter(r => r.kind === 'exercise' && r.text);
   if (!as.length) none(answers, 'answers');
   for (const r of as) answers.append(el('div', { className: 'entry' },
-    el('div', { className: 'what', textContent: `Chapter ${r.chapter}, exercise ${exTitle(r.chapter, r.item)} · ${r.created_at}` }),
+    el('div', { className: 'what', textContent: `${r.user} · Chapter ${r.chapter}, exercise ${exTitle(r.chapter, r.item)} · ${r.device || 'unknown device'} · ${r.created_at}` }),
     el('div', { className: 'text', textContent: r.text })));
 
   const quizzes = document.getElementById('quizzes');
   if (!attempts.length) none(quizzes, 'quiz attempts');
   else quizzes.append(el('table', {},
-    el('tr', {}, el('th', { textContent: 'Chapter' }), el('th', { textContent: 'Score' }), el('th', { textContent: 'When' })),
-    ...attempts.map(a => el('tr', {}, el('td', { textContent: a.chapter }), el('td', { textContent: `${a.score} / ${a.total}` }), el('td', { textContent: a.created_at })))));
+    el('tr', {}, el('th', { textContent: 'Who' }), el('th', { textContent: 'Chapter' }), el('th', { textContent: 'Score' }), el('th', { textContent: 'Device' }), el('th', { textContent: 'When' })),
+    ...attempts.map(a => el('tr', {}, el('td', { textContent: a.user }), el('td', { textContent: a.chapter }), el('td', { textContent: `${a.score} / ${a.total}` }), el('td', { textContent: a.device || '' }), el('td', { textContent: a.created_at })))));
 
   const progs = document.getElementById('programs');
   if (!programs.length) none(progs, 'programs');
   for (const p of programs) progs.append(
-    el('div', { className: 'what quiet', textContent: `${p.exercise}, version ${p.version} · ${p.created_at}` }),
+    el('div', { className: 'what quiet', textContent: `${p.user} · ${p.exercise}, version ${p.version} · ${p.device || 'unknown device'} · ${p.created_at}` }),
     el('pre', { className: 'c64', textContent: p.listing }));
+  const vbox = document.getElementById('visits');
+  if (!visits.length) none(vbox, 'visits');
+  else vbox.append(el('table', {},
+    el('tr', {}, ...['Who', 'Page', 'Device', 'Address', 'When'].map(h => el('th', { textContent: h }))),
+    ...visits.map(v => el('tr', {}, ...[v.user, v.page, v.device, v.ip, v.created_at].map(t => el('td', { textContent: t }))))));
 })();
 </script>
+<script src="/assets/who.js"></script>
 </body>
 </html>

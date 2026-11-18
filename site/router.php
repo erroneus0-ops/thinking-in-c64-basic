@@ -60,8 +60,18 @@ if ($path === '/book')                { header('Location: /book/'); return true;
 if (str_starts_with($path, '/book/')) { serve_from("$ROOT/docs", substr($path, 6)); return true; }
 if (str_starts_with($path, '/assets/')) { serve_from(__DIR__ . '/assets', substr($path, 8)); return true; }
 
-$pages = ['/' => 'index.html', '/c64' => 'c64.html', '/work' => 'work.html', '/review' => 'review.html'];
-if (isset($pages[$path])) { serve_from(__DIR__ . '/pages', $pages[$path]); return true; }
+$pages = ['/' => 'index.html', '/c64' => 'c64.html', '/work' => 'work.html', '/review' => 'review.html', '/login' => 'login.html'];
+if (isset($pages[$path])) {
+    // The C64 and Chapter work pages need a name; their visits are logged with IP and device.
+    if (in_array($path, ['/c64', '/work'], true)) {
+        require_once __DIR__ . '/lib/db.php';
+        require_once __DIR__ . '/lib/who.php';
+        if (!current_user()) { header('Location: /login?next=' . rawurlencode($path)); return true; }
+        log_visit(db($ROOT), $path);
+    }
+    serve_from(__DIR__ . '/pages', $pages[$path]);
+    return true;
+}
 
 http_response_code(404);
 header('Content-Type: text/plain; charset=utf-8');

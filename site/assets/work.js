@@ -1,6 +1,9 @@
+'use strict';
+// If the server says "sign in first", go to the sign-in page and come back.
+const _fetch = window.fetch.bind(window);
+window.fetch = async (...a) => { const r = await _fetch(...a); if (r.status === 401) location.href = '/login?next=' + encodeURIComponent(location.pathname); return r; };
 // Chapter work: exercises (written answers), the quiz, and beta tester notes.
 // Everything is saved to the course database on this computer.
-'use strict';
 
 const chapterEl = document.getElementById('chapter');
 let chapters = [];
