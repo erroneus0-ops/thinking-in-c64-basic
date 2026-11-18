@@ -47,6 +47,8 @@ Content ideas from the editor (to place in chapters):
 - Wish list with a waiting period; Spending Tracker flags purchases above the maker's price.
 - Variable dictionary gets units in "What it holds" (e.g. "in cents"); Mars Climate Orbiter story.
 - Arrays: the Roman calendar off-by-two (September = 7th month, now 9th).
+- Sorting (Ch 14): box 0 is the "parking space" for swaps (A(0)=A(I):A(I)=A(I+1):A(I+1)=A(0)).
+  This is box 0's first "special job", promised in Ch 13.
 - TI jiffies (1/60 s) to HH:MM:SS with INT and division.
 - Sprites: a Windows-style spinner ("baller coaster") with 8 sprites and a DATA position table.
 - Premise gains the habit "know the subject before you write the code."
