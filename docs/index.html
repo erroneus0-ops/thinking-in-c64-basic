@@ -76,8 +76,14 @@ pre {
 /* Diagrams are pictures, not something to type */
 pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
 pre code { font: inherit; background: none; padding: 0; color: inherit; }
-code { font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
+code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
 
+/* "Good to know" boxes: optional clarifying details, safe to skip on a first read */
+div.good-to-know { border-left: 4px solid var(--accent); background: var(--tint);
+  padding: 0.75rem 1rem; margin: 0 0 1.25rem; border-radius: 0 6px 6px 0; }
+div.good-to-know::before { content: "Good to know"; display: block; font-weight: 700;
+  color: var(--accent); margin-bottom: 0.25rem; }
+div.good-to-know > :last-child { margin-bottom: 0; }
 table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.25rem; font-size: 1rem; max-width: 100%; }
 th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.75rem 0.45rem 0; border-bottom: 1px solid var(--rule); }
 th { border-bottom: 2px solid var(--ink); }
@@ -93,11 +99,13 @@ th { border-bottom: 2px solid var(--ink); }
 </head>
 <body>
 <main>
-<p class="edition">Student’s edition, built Nov 17, 2026</p>
+<p class="edition">Student’s edition, built Nov 18, 2026</p>
 <p class="book-title">Thinking in C64 BASIC</p>
 <details class="toc">
 <summary>Contents</summary>
 <ul>
+<li><a href="#a-maze-in-two-lines" id="toc-a-maze-in-two-lines">A Maze
+in Two Lines</a></li>
 <li><a href="#how-this-book-works" id="toc-how-this-book-works">How This
 Book Works</a>
 <ul>
@@ -124,8 +132,95 @@ Organize it: the variable dictionary</a></li>
 <li><a href="#exercises" id="toc-exercises">Exercises</a></li>
 <li><a href="#quiz" id="toc-quiz">Quiz</a></li>
 </ul></li>
+<li><a href="#chapter-2-talking-to-the-computer"
+id="toc-chapter-2-talking-to-the-computer">Chapter 2: Talking to the
+Computer</a>
+<ul>
+<li><a href="#lesson-2.1-now-or-later"
+id="toc-lesson-2.1-now-or-later">Lesson 2.1 — Now or later</a></li>
+<li><a href="#lesson-2.2-lines-know-their-places"
+id="toc-lesson-2.2-lines-know-their-places">Lesson 2.2 — Lines know
+their places</a></li>
+<li><a href="#lesson-2.3-changing-your-mind"
+id="toc-lesson-2.3-changing-your-mind">Lesson 2.3 — Changing your
+mind</a></li>
+<li><a href="#lesson-2.4-fixing-a-line-on-the-screen"
+id="toc-lesson-2.4-fixing-a-line-on-the-screen">Lesson 2.4 — Fixing a
+line on the screen</a></li>
+<li><a href="#lesson-2.5-organize-it-plan-then-number"
+id="toc-lesson-2.5-organize-it-plan-then-number">Lesson 2.5 — Organize
+it: plan, then number</a></li>
+<li><a href="#exercises-1" id="toc-exercises-1">Exercises</a></li>
+<li><a href="#quiz-1" id="toc-quiz-1">Quiz</a></li>
+</ul></li>
 </ul>
 </details>
+<h1 id="a-maze-in-two-lines">A Maze in Two Lines</h1>
+<p>Before anything else, let’s make the C64 do something worth
+seeing.</p>
+<p>Click the C64 screen. Type these two lines exactly as shown, and
+press RETURN at the end of each one. Keep Caps Lock off: type ordinary
+small letters, and the C64 will show them as capitals.</p>
+<pre><code>10 PRINT CHR$(205.5 + RND(1));
+20 GOTO 10</code></pre>
+<p>Now type this and press RETURN:</p>
+<pre><code>RUN</code></pre>
+<p>A maze fills the screen, row after row, and never stops. Run it again
+and you get a different maze. No two are ever the same.</p>
+<p>To stop it, press <strong>RUN/STOP</strong>. On a PC keyboard, that’s
+<strong>Esc</strong>. The C64 answers <code>BREAK IN 10</code> (or
+<code>20</code>) and <code>READY.</code></p>
+<p>Right now this probably looks like magic. It isn’t. Every piece has a
+meaning, and this book teaches you each one:</p>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>What it does</th>
+<th>Taught in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>10</code> and <code>20</code></td>
+<td>Line numbers: the order of the steps</td>
+<td>Chapter 2</td>
+</tr>
+<tr>
+<td><code>PRINT</code></td>
+<td>Puts something on the screen</td>
+<td>Chapter 1</td>
+</tr>
+<tr>
+<td><code>;</code></td>
+<td>Keeps the next thing on the same row</td>
+<td>Chapter 1</td>
+</tr>
+<tr>
+<td><code>RND(1)</code></td>
+<td>Picks a random number</td>
+<td>Chapter 3</td>
+</tr>
+<tr>
+<td><code>CHR$( )</code></td>
+<td>Turns a number into a character</td>
+<td>Chapter 4</td>
+</tr>
+<tr>
+<td><code>GOTO 10</code></td>
+<td>Jumps back to line 10</td>
+<td>Chapter 9</td>
+</tr>
+</tbody>
+</table>
+<p>When you finish Chapter 9, come back to this page. You’ll be able to
+explain every character in it.</p>
+<div class="good-to-know">
+<p>Programmers sometimes squeeze this same maze into a single, very
+short line, as a kind of puzzle. It works, but it’s hard to read. This
+book always writes programs to be read, because a program you can read
+is a program you can fix.</p>
+</div>
 <h1 id="how-this-book-works">How This Book Works</h1>
 <p>This book teaches you to program the Commodore 64. It also teaches
 something bigger: how to plan, how to keep things in order, and how to
@@ -221,8 +316,8 @@ way you add coins, and you can’t put a note in a coin box.</p>
 <p><strong>Predict, then try:</strong></p>
 <pre><code>A = &quot;HELLO&quot;</code></pre>
 <p><strong>Why it fails.</strong> The C64 answers
-<code>?TYPE MISMATCH ERROR</code>. Box A is a number box, and “HELLO” is
-not a number. The label tells the C64 what kind of box it is:</p>
+<code>?TYPE MISMATCH  ERROR</code>. Box A is a number box, and “HELLO”
+is not a number. The label tells the C64 what kind of box it is:</p>
 <table>
 <thead>
 <tr>
@@ -272,7 +367,7 @@ prints PR again. Now the shelf has one box with the label PR, and both
 names lead to it.</p>
 <p><strong>One more trap. Try it:</strong></p>
 <pre><code>MONEY = 20</code></pre>
-<p>The C64 answers <code>?SYNTAX ERROR</code>. Hidden inside MONEY is
+<p>The C64 answers <code>?SYNTAX  ERROR</code>. Hidden inside MONEY is
 the word ON, which is a BASIC command. The C64 sees the command and gets
 confused. The same thing happens with TOTAL (contains TO) and SCORE
 (contains OR). A few names are also taken by the computer itself: ST and
@@ -317,7 +412,7 @@ notebook like this:</p>
 <tr>
 <td><code>PR</code></td>
 <td>Number</td>
-<td>Price of one item</td>
+<td>Price of one item, in dollars</td>
 <td>50</td>
 </tr>
 </tbody>
@@ -325,6 +420,16 @@ notebook like this:</p>
 <p><strong>Notebook rule 1:</strong> Before you use a new variable,
 write it in the dictionary. If its first two letters match one already
 there, pick a different name.</p>
+<p>When a box holds an amount, write its <strong>unit</strong> in the
+dictionary too. Is PR the price in dollars or in cents? The number 50
+means something very different in each. Later in this book, money is
+always stored in cents, and the dictionary is where you say so.</p>
+<div class="good-to-know">
+<p>In 1999, a spacecraft called the Mars Climate Orbiter was lost at
+Mars. One team’s program measured thruster force in one unit, and
+another team’s program read those numbers as a different unit. Every
+number was right. Nobody had written down which units they were in.</p>
+</div>
 <h2 id="exercises">Exercises</h2>
 <ol type="1">
 <li><strong>Type and predict.</strong> Put your age into a variable and
@@ -343,7 +448,7 @@ first.</li>
 <li>After <code>A = 5</code> and then <code>A = A * 2</code>, what does
 <code>PRINT A</code> show? (a) 5 (b) 7 (c) 10 (d) An error.</li>
 <li>What does <code>PRINT Q</code> show if Q was never used? (a) Nothing
-(b) 0 (c) <code>?SYNTAX ERROR</code> (d) Q.</li>
+(b) 0 (c) <code>?SYNTAX  ERROR</code> (d) Q.</li>
 <li>Which variable can hold the word HELLO? (a) <code>H</code> (b)
 <code>H%</code> (c) <code>H$</code> (d) Any of them.</li>
 <li>Why does <code>SCORE = 10</code> fail? (a) Names cannot be five
@@ -351,7 +456,219 @@ letters (b) It contains the command word OR (c) Numbers must be decimals
 (d) S is reserved.</li>
 <li>A program uses COUNT and CODE. What goes wrong? (a) Nothing (b) They
 share one box, CO (c) CODE is a command (d)
-<code>?TYPE MISMATCH ERROR</code>.</li>
+<code>?TYPE MISMATCH  ERROR</code>.</li>
+</ol>
+<h1 id="chapter-2-talking-to-the-computer">Chapter 2: Talking to the
+Computer</h1>
+<p>In Chapter 1, the C64 did each thing the moment you pressed RETURN.
+Now you’ll learn to give it a list of steps to do later, in order, as
+many times as you like. That list is a <strong>program</strong>.</p>
+<h2 id="lesson-2.1-now-or-later">Lesson 2.1 — Now or later</h2>
+<p><strong>Goal:</strong> Tell the C64 to do something now, or save it
+for later.</p>
+<p><strong>Picture:</strong> A recipe card. Reading a recipe card
+doesn’t cook anything. You write the steps down first, then follow them
+when it’s time to cook. A video game level works the same way: the level
+is built in advance, and it plays out when you press Start.</p>
+<p><strong>Try it.</strong> Type this and press RETURN:</p>
+<pre><code>PRINT &quot;HELLO&quot;</code></pre>
+<p>The C64 prints <code>HELLO</code> straight away. That’s
+<strong>direct mode</strong>, the way you worked in Chapter 1.</p>
+<p>Now type this, with a number in front, and press RETURN:</p>
+<pre><code>10 PRINT &quot;HELLO&quot;</code></pre>
+<p><strong>Predict.</strong> Before you look, write down what you think
+happened.</p>
+<p><strong>Why it works.</strong> Nothing was printed. The number at the
+start told the C64: don’t do this now, <em>store</em> it as line 10 of a
+program. That’s <strong>program mode</strong>. To follow the stored
+steps, type:</p>
+<pre><code>RUN</code></pre>
+<p>Now <code>HELLO</code> appears. To see the stored program, type:</p>
+<pre><code>LIST</code></pre>
+<h2 id="lesson-2.2-lines-know-their-places">Lesson 2.2 — Lines know
+their places</h2>
+<p><strong>Goal:</strong> Understand how line numbers keep a program in
+order.</p>
+<p><strong>Try it.</strong> Type these three lines in this exact
+order:</p>
+<pre><code>NEW
+30 PRINT &quot;THIRD&quot;
+10 PRINT &quot;FIRST&quot;
+20 PRINT &quot;SECOND&quot;</code></pre>
+<p><code>NEW</code> erases any program already stored, so you start
+clean.</p>
+<p><strong>Predict.</strong> You typed 30, then 10, then 20. What order
+will <code>LIST</code> show? What will <code>RUN</code> print? Write
+both down, then try them.</p>
+<p><strong>Why it works.</strong> The C64 files every line by its
+number, no matter what order you typed it in, like index cards sorted in
+a box:</p>
+<pre class="diagram"><code>  You typed:            The C64 keeps:
+  30 PRINT &quot;THIRD&quot;      10 PRINT &quot;FIRST&quot;
+  10 PRINT &quot;FIRST&quot;  -&gt;  20 PRINT &quot;SECOND&quot;
+  20 PRINT &quot;SECOND&quot;     30 PRINT &quot;THIRD&quot;</code></pre>
+<p><code>RUN</code> always starts at the lowest number and works
+upward.</p>
+<p>Notice the gaps: 10, 20, 30, not 1, 2, 3. If you later need a step
+between FIRST and SECOND, there’s room for it:</p>
+<pre><code>15 PRINT &quot;ONE AND A HALF&quot;</code></pre>
+<p><code>LIST</code> it and see where it went. Line numbers can be
+anything from 0 to 63999, so there’s plenty of room.</p>
+<div class="good-to-know">
+<p>Some later versions of BASIC have a command that renumbers a whole
+program for you. The C64’s BASIC doesn’t. If you number by ones and run
+out of room, you have to retype lines. Numbering by tens is how C64
+programmers avoid that.</p>
+</div>
+<h2 id="lesson-2.3-changing-your-mind">Lesson 2.3 — Changing your
+mind</h2>
+<p><strong>Goal:</strong> Replace, remove, and look at parts of a
+program.</p>
+<p><strong>Try it.</strong> With the four-line program from Lesson 2.2
+still stored, type:</p>
+<pre><code>20 PRINT &quot;SECOND, CHANGED&quot;</code></pre>
+<p><strong>Predict,</strong> then <code>LIST</code> it.</p>
+<p><strong>Why it works.</strong> A line with a number that already
+exists <strong>replaces</strong> the old line. The C64 keeps only one
+line 20.</p>
+<p>Now type just the number, and press RETURN:</p>
+<pre><code>15</code></pre>
+<p><code>LIST</code> again. Line 15 is gone. A line number with nothing
+after it <strong>removes</strong> that line.</p>
+<p>When programs get long, you won’t want to see all of it at once.
+<code>LIST</code> can show part of a program:</p>
+<table>
+<thead>
+<tr>
+<th>You type</th>
+<th>The C64 shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LIST</code></td>
+<td>Every line</td>
+</tr>
+<tr>
+<td><code>LIST 20</code></td>
+<td>Only line 20</td>
+</tr>
+<tr>
+<td><code>LIST 10-20</code></td>
+<td>Lines 10 through 20</td>
+</tr>
+<tr>
+<td><code>LIST -20</code></td>
+<td>Everything up to line 20</td>
+</tr>
+<tr>
+<td><code>LIST 20-</code></td>
+<td>Line 20 and everything after it</td>
+</tr>
+</tbody>
+</table>
+<p>And <code>NEW</code> erases the whole program. There’s no undo, so be
+sure before you use it.</p>
+<h2 id="lesson-2.4-fixing-a-line-on-the-screen">Lesson 2.4 — Fixing a
+line on the screen</h2>
+<p><strong>Goal:</strong> Fix a mistake without retyping the whole
+line.</p>
+<p><strong>Try it.</strong> Type this program, mistake included:</p>
+<pre><code>NEW
+10 PRINT &quot;MY FAVORITE GAME IS&quot;
+20 PRNT &quot;CHESS&quot;
+30 PRINT &quot;I PLAY IT A LOT&quot;
+RUN</code></pre>
+<p>The C64 prints the first line, then stops with
+<code>?SYNTAX  ERROR IN 20</code>. Helpfully, it tells you which line
+has the problem. (Yes, the C64 really does print two spaces before the
+word ERROR.)</p>
+<p><strong>Why it works.</strong> <code>PRNT</code> isn’t a word the C64
+knows. You could fix it by retyping all of line 20. But there’s a faster
+way, because the C64 lets you edit anything on the screen:</p>
+<ol type="1">
+<li>Type <code>LIST</code> so line 20 is on the screen.</li>
+<li>Use the <strong>arrow keys</strong> to move the cursor up to line
+20, and right until it’s on the <code>N</code> of
+<code>PRNT</code>.</li>
+<li>Type <code>INT</code>. Each letter you type replaces the one under
+the cursor, so <code>N</code>, <code>T</code> and the space become
+<code>I</code>, <code>N</code> and <code>T</code>. The line now reads
+<code>20 PRINT"CHESS"</code>. The space is gone, but that’s fine: the
+C64 doesn’t need spaces between words.</li>
+<li>Press RETURN while the cursor is anywhere on that line.</li>
+</ol>
+<p>When you press RETURN, the C64 reads the whole line from the screen
+and stores it, exactly as if you had typed it fresh. <code>LIST</code>
+and <code>RUN</code> to check.</p>
+<div class="good-to-know">
+<p>A single program line can be at most 80 characters, which is two rows
+of the screen. Long lines are also hard to read, so this book keeps them
+short.</p>
+</div>
+<h2 id="lesson-2.5-organize-it-plan-then-number">Lesson 2.5 — Organize
+it: plan, then number</h2>
+<p><strong>Goal:</strong> Start every program on paper, not on the
+keyboard.</p>
+<p>A program is a list of steps in order. Before you type, write the
+steps in your notebook in plain words, one per line, the way you’d write
+a recipe. Then give each step a line number, counting by tens.</p>
+<table>
+<thead>
+<tr>
+<th>Step in plain words</th>
+<th>Line</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Show a title</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Show my name</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Show my favorite game</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>Now the typing is just copying, and the thinking is already done.</p>
+<p><strong>Notebook rule 2:</strong> Plan the steps on paper first, in
+order. Number the lines by tens, so there’s always room to add a step
+later.</p>
+<h2 id="exercises-1">Exercises</h2>
+<ol type="1">
+<li><strong>Predict the order.</strong> Type <code>NEW</code>, then
+these lines in this order: <code>40 PRINT "D"</code>,
+<code>20 PRINT "B"</code>, <code>10 PRINT "A"</code>,
+<code>30 PRINT "C"</code>. Before typing <code>LIST</code> and
+<code>RUN</code>, write down what each will show.</li>
+<li><strong>Fix it two ways.</strong> Type the CHESS program from Lesson
+2.4. Fix line 20 once by retyping the whole line, then break it again
+and fix it with the screen editor. Which way was faster?</li>
+<li><strong>Build it.</strong> Plan a program on paper that shows three
+facts about you, one per line, using variables from your variable
+dictionary. Number the lines by tens, type it, and run it. Then add a
+title line at the top <em>without</em> retyping anything else.</li>
+</ol>
+<h2 id="quiz-1">Quiz</h2>
+<ol type="1">
+<li>You type <code>10 PRINT "HI"</code> and press RETURN. What happens?
+(a) HI appears (b) The line is stored and nothing is printed (c)
+<code>?SYNTAX  ERROR</code> (d) The program runs.</li>
+<li>You type lines 30, then 10, then 20. What does <code>LIST</code>
+show first? (a) Line 30 (b) Line 10 (c) Whichever you typed last (d)
+Line 20.</li>
+<li>What does typing <code>20</code> by itself and pressing RETURN do?
+(a) Runs line 20 (b) Lists line 20 (c) Removes line 20 (d) Nothing.</li>
+<li>Why number lines 10, 20, 30 instead of 1, 2, 3? (a) The C64 requires
+it (b) It leaves room to add lines in between (c) It runs faster (d) It
+saves memory.</li>
+<li>Which command erases the whole program? (a) <code>LIST</code> (b)
+<code>END</code> (c) <code>CLR</code> (d) <code>NEW</code>.</li>
 </ol>
 </main>
 </body>

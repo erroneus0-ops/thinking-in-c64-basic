@@ -63,7 +63,7 @@ Think of two kinds of box on the shelf. A **coin box** holds amounts you can cou
 A = "HELLO"
 ```
 
-**Why it fails.** The C64 answers `?TYPE MISMATCH ERROR`. Box A is a number box, and "HELLO" is not a number. The label tells the C64 what kind of box it is:
+**Why it fails.** The C64 answers `?TYPE MISMATCH  ERROR`. Box A is a number box, and "HELLO" is not a number. The label tells the C64 what kind of box it is:
 
 | Label looks like | Box holds | Example |
 | --- | --- | --- |
@@ -97,7 +97,7 @@ Picture it this way: the C64 makes its labels with a label maker that can only p
 MONEY = 20
 ```
 
-The C64 answers `?SYNTAX ERROR`. Hidden inside MONEY is the word ON, which is a BASIC command. The C64 sees the command and gets confused. The same thing happens with TOTAL (contains TO) and SCORE (contains OR). A few names are also taken by the computer itself: ST and TI, and anything beginning with them, such as TIME.
+The C64 answers `?SYNTAX  ERROR`. Hidden inside MONEY is the word ON, which is a BASIC command. The C64 sees the command and gets confused. The same thing happens with TOTAL (contains TO) and SCORE (contains OR). A few names are also taken by the computer itself: ST and TI, and anything beginning with them, such as TIME.
 
 The rules, all in one place:
 
@@ -116,9 +116,15 @@ Because the C64 will not warn you when two names collide, you need a written lis
 | --- | --- | --- | --- |
 | `A` | Number | Practice box from Lesson 1.1 | 8 |
 | `N$` | Text | My name | KAITO |
-| `PR` | Number | Price of one item | 50 |
+| `PR` | Number | Price of one item, in dollars | 50 |
 
 **Notebook rule 1:** Before you use a new variable, write it in the dictionary. If its first two letters match one already there, pick a different name.
+
+When a box holds an amount, write its **unit** in the dictionary too. Is PR the price in dollars or in cents? The number 50 means something very different in each. Later in this book, money is always stored in cents, and the dictionary is where you say so.
+
+::: good-to-know
+In 1999, a spacecraft called the Mars Climate Orbiter was lost at Mars. One team's program measured thruster force in one unit, and another team's program read those numbers as a different unit. Every number was right. Nobody had written down which units they were in.
+:::
 
 ## Exercises
 
@@ -129,7 +135,7 @@ Because the C64 will not warn you when two names collide, you need a written lis
 ## Quiz
 
 1. After `A = 5` and then `A = A * 2`, what does `PRINT A` show? (a) 5 (b) 7 (c) 10 (d) An error. **Answer: c**
-2. What does `PRINT Q` show if Q was never used? (a) Nothing (b) 0 (c) `?SYNTAX ERROR` (d) Q. **Answer: b**
+2. What does `PRINT Q` show if Q was never used? (a) Nothing (b) 0 (c) `?SYNTAX  ERROR` (d) Q. **Answer: b**
 3. Which variable can hold the word HELLO? (a) `H` (b) `H%` (c) `H$` (d) Any of them. **Answer: c**
 4. Why does `SCORE = 10` fail? (a) Names cannot be five letters (b) It contains the command word OR (c) Numbers must be decimals (d) S is reserved. **Answer: b**
-5. A program uses COUNT and CODE. What goes wrong? (a) Nothing (b) They share one box, CO (c) CODE is a command (d) `?TYPE MISMATCH ERROR`. **Answer: b**
+5. A program uses COUNT and CODE. What goes wrong? (a) Nothing (b) They share one box, CO (c) CODE is a command (d) `?TYPE MISMATCH  ERROR`. **Answer: b**

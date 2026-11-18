@@ -66,6 +66,10 @@ Content ideas from the editor (to place in chapters):
   Arrays chapter: trigger ?BAD SUBSCRIPT ERROR on purpose (BASIC checks bounds; C does not).
 
 Conventions in chapter files:
+- Show C64 messages exactly as on screen: error messages have TWO spaces before ERROR
+  (`?SYNTAX  ERROR IN 20`). Inline code keeps double spaces (white-space: pre-wrap).
+- Verify every example on the emulated C64 before publishing (headless test harness in this repo's
+  history: auto_type the lines, read screen RAM at $0400).
 - Anecdotes go in parentheses in the running text (editor's decision).
 - Optional clarifying details go in a "Good to know" box: a fenced div `::: good-to-know` ... `:::`.
   The template styles it and adds the heading. Readers can skip these on a first pass.
@@ -156,6 +160,6 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 ## Next steps
 
 1. The editor reviews the plan doc and answers the open questions.
-2. Draft Chapter 2 (Talking to the Computer).
+2. Chapter 2 drafted (and the maze opener); editor to review. Next: Chapter 3.
 3. Test from the son's laptop over the LAN (start.bat 80 on the editor's machine).
 4. Milestone 4: quizzes. Then 5: login, review page, Copy for Claude, progress page.
