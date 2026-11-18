@@ -106,6 +106,8 @@ The book has 22 chapters in six parts, plus appendices. Each chapter is two to f
 
 Appendices: (A) setting up VICE and the browser emulator, with a keyboard map; (B) using the cassette datasette in VICE; (C) every error message and what usually causes it; (D) memory map and POKE reference; (E) BASIC keywords and their abbreviations; (F) notes for TheC64.
 
+**Approved additions (Nov 18).** A new chapter, *Detective Work*, goes right after Chapter 11, so later chapters shift by one and the book becomes 23 chapters. It teaches debugging in rising order: reading the error, playing computer with a trace table, print probes, `STOP`/`CONT` breakpoints, testing one block alone, and splitting the search in halves. Alongside Chapter 11, the C64 page gains a block-aware **Renumber** tool that keeps REM-headed blocks on their hundreds, keeps DATA regions together, and lets important subroutines be pinned in place. It is introduced only after the student has felt the pain of renumbering by hand.
+
 ## The two recurring projects
 
 The Spending Tracker is rebuilt four times, and each rebuild shows why the new tool is better than the old one. The Story Engine gives his interest in fiction a home without anyone having to read his writing.
