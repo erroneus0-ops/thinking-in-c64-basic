@@ -148,7 +148,10 @@ Conventions in chapter files:
 - 18 Nov, Chapters 0-1 (first session): he treats it as a job/challenge (good: matches his work-ethic
   motivation); asked if it might be addicting (editor: yes, the healthy kind). Struggled with the
   two-letter rule until the editor's `? PR` demonstration; GOLD fixed as GLD; A and A$ demo.
-  All three demos are now in Chapter 1. He edits by using the full screen, and wants the MOUSE to
+  All three demos are now in Chapter 1. He liked "MILLION DOLLARS" much more than "APPLES":
+  category = STAKES AND ASPIRATION. Choose examples with weight (treasure, high scores, prize funds,
+  paychecks, rocket fuel, boss hit points), but VARY the specifics so none wears out by repetition
+  (editor's rule: never take a reaction literally). He edits by using the full screen, and wants the MOUSE to
   place the cursor.
 - Requested tool (approved idea, not yet built): SHIFT+CLICK on the C64 screen moves the cursor
   there. Read cursor row/column from zero page, compute the target cell, feed cursor-key PETSCII
