@@ -100,6 +100,11 @@ Conventions in chapter files:
   Our page adds Esc = RUN/STOP and Page Up = RESTORE (same as VICE) plus buttons, via
   `emu.translateKey2(name,'',true)` + `emu.wasm_schedule_key(row,col,pressed,0)`. vc64web calls
   wasm_keyboard_reset on every focus change, so focus the iframe and wait ~150 ms before pressing.
+- On-screen keyboard (phones/touch): "Show keyboard" button under the screen toggles vc64web's
+  #virtual_keyboard (bootstrap collapse). fitFrame() grows our frame to picture + keyboard and sets
+  vc64web's CSS var --keycap_zoom so the keyboard fits the width; key size depends on frame width AND
+  height, so it adjusts both in turns until stable. Phone browsers can't raise their native keyboard
+  for the emulator canvas, so this is the only way to type on a phone.
 - Gotchas found: the standard character ROM is chargen-901225-01 (906143-02 is the Japanese one);
   typed capitals arrive as Shift+letter = C64 graphics, so Caps Lock must be off and auto_type text
   must be lowercase; headless tests need ~110 ms key holds.

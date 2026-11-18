@@ -12,7 +12,9 @@
   @media (max-width: 52rem) { main { grid-template-columns: 1fr; } }
   .screen { background: #000; border-radius: 6px; overflow: hidden; aspect-ratio: 4 / 3; }
   .screen iframe { width: 100%; height: 100%; border: 0; display: block; }
-  #status { margin: 0.6rem 0 0; color: var(--muted); }
+  .under-screen { display: flex; gap: 0.75rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
+  #status { margin: 0; color: var(--muted); }
+  #keyboard { flex: none; }
   #status.bad { color: var(--bad); }
   aside h2 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
   aside h2:first-child { margin-top: 0; }
@@ -38,7 +40,10 @@
 <main>
   <section>
     <div class="screen"><iframe id="c64" title="Commodore 64" allow="autoplay; fullscreen"></iframe></div>
-    <p id="status" role="status">Starting the C64…</p>
+    <div class="under-screen">
+      <p id="status" role="status">Starting the C64…</p>
+      <button id="keyboard" disabled>Show keyboard</button>
+    </div>
   </section>
   <aside>
     <h2><label for="exercise">Exercise</label></h2>
@@ -65,7 +70,7 @@
       <button data-keys="restore" disabled>RESTORE</button>
       <button data-keys="runStop restore" disabled>RUN/STOP + RESTORE</button>
     </div>
-    <p class="quiet">On your keyboard: <strong>Esc</strong> is RUN/STOP and <strong>Page Up</strong> is RESTORE. RUN/STOP stops a running program. RUN/STOP + RESTORE also tidies the screen and colors, and keeps your program.</p>
+    <p class="quiet">On your keyboard: <strong>Esc</strong> is RUN/STOP and <strong>Page Up</strong> is RESTORE. RUN/STOP stops a running program. RUN/STOP + RESTORE also tidies the screen and colors, and keeps your program. <strong>Show keyboard</strong>, under the C64 screen, brings up a C64 keyboard you can tap, for phones and touch screens.</p>
 
     <h2>The C64 itself</h2>
     <div class="row"><button id="reset" disabled>Reset the C64</button></div>

@@ -74,6 +74,40 @@ function specialKeys(e) {
   else if (e.code === 'PageUp') { e.preventDefault(); e.stopPropagation(); pressKeys(['restore']); }
 }
 
+// vc64web docks its on-screen keyboard at the bottom of its frame and stacks the C64
+// picture on top of it, but only if the frame is tall enough for both. While the
+// keyboard is showing, grow the frame to picture + keyboard. The keyboard's own size
+// changes a little with the frame's height, so measure and adjust until it settles.
+const keyboardBtn = document.getElementById('keyboard');
+async function fitFrame() {
+  const box = frame.parentElement;
+  const kb = emu.$('#virtual_keyboard');
+  const open = kb.is(':visible');
+  keyboardBtn.textContent = open ? 'Hide keyboard' : 'Show keyboard';
+  if (!open) { box.style.height = ''; box.style.aspectRatio = ''; return; }
+  // Key size depends on both the frame's width and height, so fit the two together:
+  // shrink the keys until the keyboard fits the width, grow the frame until picture
+  // and keyboard both fit, and repeat until neither changes.
+  const root = emu.document.documentElement;
+  const rows = emu.document.getElementById('divKeyboardRows');
+  const canvas = emu.document.getElementById('canvas');
+  box.style.aspectRatio = 'auto';
+  let zoom = parseFloat(root.style.getPropertyValue('--keycap_zoom')) || 1;
+  for (let i = 0; i < 10; i++) {
+    await sleep(200);
+    let changed = false;
+    const target = box.getBoundingClientRect().width - 6;
+    const w = rows.scrollWidth;
+    if (w > target + 1 || (w < target - 25 && zoom < 1)) {
+      const z = Math.max(0.4, Math.min(1, Math.floor(zoom * target / w * 100) / 100));
+      if (z !== zoom) { zoom = z; root.style.setProperty('--keycap_zoom', zoom.toFixed(2)); changed = true; }
+    }
+    const want = Math.ceil(canvas.getBoundingClientRect().height + kb.outerHeight() + 4);
+    if (Math.abs(box.getBoundingClientRect().height - want) >= 2) { box.style.height = want + 'px'; changed = true; }
+    if (!changed) break;
+  }
+}
+
 async function boot() {
   const config = { navbar: false, dialog_on_missing_roms: false, dialog_on_disk: false };
   frame.src = '/emu/index.html#' + encodeURIComponent(JSON.stringify(config));
@@ -92,6 +126,9 @@ async function boot() {
   await resetAndWait();
   submitBtn.disabled = false; resetBtn.disabled = false;
   for (const b of document.querySelectorAll('[data-keys]')) b.disabled = false;
+  emu.$('#virtual_keyboard').on('shown.bs.collapse hidden.bs.collapse', fitFrame);
+  window.addEventListener('resize', () => setTimeout(fitFrame, 200));
+  keyboardBtn.disabled = false;
   setStatus('Ready. Click the C64 screen, then type.');
   focusC64();
 }
@@ -192,6 +229,10 @@ async function loadExercises() {
 }
 
 submitBtn.onclick = submit;
+keyboardBtn.onclick = () => {
+  emu.$('#virtual_keyboard').collapse('toggle');
+  frame.parentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 for (const b of document.querySelectorAll('[data-keys]')) b.onclick = () => pressKeys(b.dataset.keys.split(' '));
 resetBtn.onclick = async () => { setMessage(''); await resetAndWait(); setStatus('Ready. Click the C64 screen, then type.'); focusC64(); };
 loadExercises();
