@@ -143,6 +143,19 @@ Conventions in chapter files:
 - Exercise list: `site/exercises.json` (placeholder entries for now). Chapter 1 has no
   submittable programs (direct mode only).
 
+## Beta test log
+
+- 18 Nov, Chapters 0-1 (first session): he treats it as a job/challenge (good: matches his work-ethic
+  motivation); asked if it might be addicting (editor: yes, the healthy kind). Struggled with the
+  two-letter rule until the editor's `? PR` demonstration; GOLD fixed as GLD; A and A$ demo.
+  All three demos are now in Chapter 1. He edits by using the full screen, and wants the MOUSE to
+  place the cursor.
+- Requested tool (approved idea, not yet built): SHIFT+CLICK on the C64 screen moves the cursor
+  there. Read cursor row/column from zero page, compute the target cell, feed cursor-key PETSCII
+  codes (29 right, 157 left, 17 down, 145 up) through the keyboard buffer (631-640, count at 198),
+  10 at a time, so the C64 moves the cursor itself (wrapping, scrolling: all authentic). Plain click
+  still only focuses.
+
 ## Decisions made
 
 - **Language and machine:** Commodore 64 BASIC V2. Reference emulator is VICE; TheC64
@@ -151,6 +164,9 @@ Conventions in chapter files:
   (8 sprites, 2-letter names, 80-character lines) and works within them. No sidebars on tricks that
   break limits (sprite multiplexing, opening the borders, etc.). Fun for the editor, confusing for
   a learner who does best with rules that hold.
+- **Proof beats explanation** (from the first beta test, 18 Nov): the label-maker picture didn't
+  land; the editor's demo `? PRICE`, `? PRIZE`, `? PR` (all print 3) did. Every rule a lesson
+  explains should also give the student a way to catch the C64 in the act.
 - **Earned discoveries, never announced** (the editor's lifelong way of teaching his sons): each part
   of the book quietly contains things worth noticing, pitched just beyond easy but within reach,
   so finding them gives the feeling of being smart. Never label them ("puzzle", "trick", "secret
