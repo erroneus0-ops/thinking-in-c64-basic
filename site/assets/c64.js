@@ -111,6 +111,46 @@ async function fitFrame() {
   }
 }
 
+// SHIFT+CLICK on the C64 screen moves the cursor there, by feeding cursor keys through the
+// C64's own keyboard buffer, so the C64 moves its cursor exactly as if the keys were pressed.
+// Only while typing commands: BASIC in direct mode (157 = 128), waiting for input (204 = 0),
+// and not in quote mode (212) or insert mode (216), where cursor keys would become characters.
+// The visible picture is 384 x 270 C64 pixels with the 320 x 200 text area at (32, 35).
+const KEYBUF = 631, KEYCOUNT = 198;
+const CRSR = { down: 17, up: 145, right: 29, left: 157 };
+let hintTimer = null;
+function hint(text) {
+  setStatus(text);
+  clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => setStatus('Ready. Click the C64 screen, then type.'), 4000);
+}
+async function feedKeys(codes) {
+  for (let i = 0; i < codes.length; i += 10) {
+    for (let t = 0; t < 40 && peek(KEYCOUNT) !== 0; t++) await sleep(25);   // wait for the buffer to empty
+    const chunk = codes.slice(i, i + 10);
+    chunk.forEach((c, k) => emu.wasm_poke(KEYBUF + k, c));
+    emu.wasm_poke(KEYCOUNT, chunk.length);
+  }
+}
+async function shiftClick(e) {
+  if (!e.shiftKey) return;
+  e.preventDefault(); e.stopPropagation();
+  const r = e.currentTarget.getBoundingClientRect();
+  const col = Math.floor(((e.clientX - r.left) / r.width * 384 - 32) / 8);
+  const row = Math.floor(((e.clientY - r.top) / r.height * 270 - 35) / 8);
+  if (col < 0 || col > 39 || row < 0 || row > 24) return;
+  if (peek(157) !== 128 || peek(204) !== 0) { hint('Shift-click moves the cursor while you type commands, not while a program runs.'); return; }
+  if (peek(212) !== 0) { hint('Close the quotes first: inside quotes, cursor moves would be typed into your text.'); return; }
+  if (peek(216) !== 0) { hint('Finish inserting first: in insert mode, cursor moves would be typed as characters.'); return; }
+  const curRow = peek(214), curCol = peek(211) % 40;
+  const codes = [];
+  const dy = row - curRow, dx = col - curCol;
+  for (let i = 0; i < Math.abs(dy); i++) codes.push(dy > 0 ? CRSR.down : CRSR.up);
+  for (let i = 0; i < Math.abs(dx); i++) codes.push(dx > 0 ? CRSR.right : CRSR.left);
+  await feedKeys(codes);
+  focusC64();
+}
+
 async function boot() {
   const config = { navbar: false, dialog_on_missing_roms: false, dialog_on_disk: false };
   frame.src = '/emu/index.html#' + encodeURIComponent(JSON.stringify(config));
@@ -119,6 +159,7 @@ async function boot() {
   if (!started) { setStatus('The emulator didn’t start. Check that setup has been run, then reload the page.', true); return; }
   emu = frame.contentWindow;
   emu.addEventListener('keydown', specialKeys, true);
+  emu.document.getElementById('canvas').addEventListener('click', shiftClick, true);
   window.addEventListener('keydown', specialKeys, true);
   for (const [file, name] of ROMS) {
     const res = await fetch('/roms/' + file);

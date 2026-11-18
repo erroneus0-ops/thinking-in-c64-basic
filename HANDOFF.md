@@ -155,11 +155,13 @@ Conventions in chapter files:
   place the cursor.
 - He opened the book and the emulator side by side on his laptop almost immediately (reference
   on one side, machine on the other). Idea, not built: a "study view" page with both in one window.
-- Requested tool (approved idea, not yet built): SHIFT+CLICK on the C64 screen moves the cursor
-  there. Read cursor row/column from zero page, compute the target cell, feed cursor-key PETSCII
-  codes (29 right, 157 left, 17 down, 145 up) through the keyboard buffer (631-640, count at 198),
-  10 at a time, so the C64 moves the cursor itself (wrapping, scrolling: all authentic). Plain click
-  still only focuses.
+- BUILT (beta tester request): SHIFT+CLICK on the C64 screen moves the cursor there. Allowed only
+  when 157 = 128 (direct mode), 204 = 0 (waiting for typing), 212 = 0 (not quote mode) and
+  216 = 0 (not insert mode); otherwise a status message explains why. Cursor = row 214, column
+  211 mod 40 (211 is the column in the LOGICAL line, 0-79). Click -> cell via the measured
+  picture geometry: 384 x 270 C64 pixels, text area 320 x 200 at (32, 35). Moves are fed as
+  cursor-key PETSCII codes through the keyboard buffer (631-640, count at 198), 10 at a time.
+  Note: 57/58 (current line) is NOT a direct-mode test: it reads 0 at a fresh READY.
 
 ## Course site: chapter work (Milestones 4-5, partly)
 
