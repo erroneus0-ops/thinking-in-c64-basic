@@ -127,6 +127,9 @@ Conventions in chapter files:
   with default credentials; on failure it prints the URL and the exact file path to save it to by
   hand (work networks may cut off .zip downloads), and a saved file is used on the next run.
   Zips are test-opened first (Test-Zip): a cut-off zip is deleted and downloaded again.
+  Files saved by a browser under their own names (php-*-Win32-*.zip, the vc64web commit zip) are
+  found and used automatically. Editor's work network does TLS interception (MitM) and cut off
+  PowerShell downloads; browser downloads got through.
 - `start.bat`: PHP built-in server on port 8064, router `site/router.php`.
 - Routes: `/` home, `/c64` emulator page, `/book/` = docs/, `/emu/` = runtime/vc64web,
   `/roms/` = runtime/roms, `/api/*` = site/lib/api.php.

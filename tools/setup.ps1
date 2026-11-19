@@ -36,8 +36,14 @@ function Test-Zip($Path) {
     try { [IO.Compression.ZipFile]::OpenRead($Path).Dispose(); return $true } catch { return $false }
 }
 
-function Get-Download($Url, $Out, $What) {
+function Get-Download($Url, $Out, $What, $BrowserName = '') {
     $isZip = $Out.EndsWith('.zip')
+    # A browser saves the file under its own name; if one like that is in the same folder, use it.
+    if ($BrowserName -and -not (Test-Path $Out)) {
+        $found = Get-ChildItem -Path (Split-Path $Out) -Filter $BrowserName -File -ErrorAction SilentlyContinue |
+                 Where-Object { -not $isZip -or (Test-Zip $_.FullName) } | Select-Object -First 1
+        if ($found) { Move-Item $found.FullName $Out; Write-Host "Found $What saved by a browser: $($found.Name)" }
+    }
     if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0)) {
         if (-not $isZip -or (Test-Zip $Out)) {
             Write-Host "Using $What, already saved at $Out"
@@ -125,7 +131,7 @@ if (Test-Path $PhpExe) {
 } else {
     $zip = Join-Path $Runtime 'php-download.zip'
     Write-Host 'Downloading PHP 8.4 for Windows (about 35 MB)...'
-    Get-Download $PhpUrl $zip 'PHP'
+    Get-Download $PhpUrl $zip 'PHP' 'php-*-Win32-*.zip'
     Expand-Archive -Path $zip -DestinationPath $PhpDir -Force
     Remove-Item $zip
 }
@@ -154,7 +160,7 @@ if ((Test-Path $Stamp) -and ((Get-Content $Stamp -Raw).Trim() -eq $EmuCommit)) {
 } else {
     $zip = Join-Path $Runtime 'vc64web-download.zip'
     Write-Host 'Downloading vc64web (about 10 MB)...'
-    Get-Download $EmuUrl $zip 'the vc64web emulator'
+    Get-Download $EmuUrl $zip 'the vc64web emulator' '*469b63818d1a8f4d654fd3985b82aeb4e03fabba*.zip'
     if (Test-Path $EmuDir) { Remove-Item -Recurse -Force $EmuDir }
     # Unpack with Windows' own tar.exe (it reads zip files). Called by full path, because
     # PortableGit ships a different tar that can't. Drop the archive's top folder; skip
