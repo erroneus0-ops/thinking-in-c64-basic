@@ -48,8 +48,8 @@ figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; bord
 code { font: 600 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; white-space: pre; }
 kbd { font: 700 0.85em "Atkinson Hyperlegible", "Segoe UI Symbol", "DejaVu Sans", sans-serif; border: 1px solid var(--muted);
   border-bottom-width: 2px; border-radius: 4px; padding: 0.05em 0.4em; background: var(--paper); }
-nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.25rem;
-  border-top: 1px solid var(--rule); }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.6rem 1.25rem;
+  border-bottom: 1px solid var(--rule); }
 button, .btn { font: inherit; font-weight: 700; padding: 0.5rem 1.1rem; border-radius: 6px; cursor: pointer;
   border: 1.5px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; display: inline-block; }
 #next, .btn { background: var(--accent); color: var(--accent-ink); }
@@ -61,14 +61,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outlin
 <body>
 <header><strong>C64 quick tour</strong><a href="../">Back to the book</a></header>
 <div class="progress" aria-hidden="true"><div id="bar"></div></div>
-<main id="slides">
-<!--SLIDES-->
-</main>
 <nav>
   <button id="prev" type="button">← Back</button>
   <span id="where" aria-live="polite"></span>
   <button id="next" type="button">Next →</button>
 </nav>
+<main id="slides">
+<!--SLIDES-->
+</main>
 <script>
 const COUNT = /*COUNT*/0;
 const slides = [...document.querySelectorAll('.slide')];
