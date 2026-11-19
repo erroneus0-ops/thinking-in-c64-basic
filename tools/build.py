@@ -24,6 +24,8 @@ def extract_content(chapters):
     Writes site/content.json (the server grades quizzes from it; answers never go to the page)."""
     out = []
     for path in chapters:
+        if path.stem.startswith("9"):   # appendices: reference pages, no lessons or quizzes
+            continue
         text = path.read_text(encoding="utf-8")
         m = re.search(r"^# Chapter (\d+): (.+)$", text, re.M)
         if m:
