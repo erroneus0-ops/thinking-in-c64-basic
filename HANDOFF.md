@@ -160,6 +160,12 @@ Conventions in chapter files:
     `$c = client()` (who is signed in), so the attempt had no user and the insert failed. Fixed
     (loop var renamed) and the page now reports save failures. Lesson: retest every save path after
     changing shared code.
+  * UNPROMPTED EXPERIMENTING (told the editor at dinner): changed values, displayed them, added more
+    math to the addition lines. Strongest engagement signal; it's in variables + arithmetic, so
+    Ch 3 (Working Things Out) should land.
+  * His model of RETURN: "a text box like a web form". Nearly right; the C64 twist is that the
+    whole screen is the form and RETURN submits WHICHEVER line the cursor is on. Candidate opening
+    picture for Lesson 2.4 (screen editor), in his own words.
   * Proposed: lighter notes (one tap per lesson: too slow / about right / too fast, plus one
     optional box), quiz moved up. Awaiting editor's decision.
 
