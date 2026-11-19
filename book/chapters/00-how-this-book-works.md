@@ -16,7 +16,7 @@ Anything shown on a dark blue screen like this is something to type:
 PRINT "HELLO"
 ```
 
-The little **RETURN** tag at the end of the line means: press RETURN (Enter on a PC keyboard). The C64 does nothing with a line until you do. You don't type the tag itself.
+The little **↵** key at the end of the line means: press RETURN (Enter on a PC keyboard). The C64 does nothing with a line until you do. You don't type the symbol itself.
 
 ## How every lesson goes
 

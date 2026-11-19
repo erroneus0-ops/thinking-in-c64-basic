@@ -74,9 +74,9 @@ pre {
   font: 600 0.95rem/1.45 "IBM Plex Mono", Consolas, "Courier New", monospace;
 }
 /* A RETURN keycap after each line to type: press RETURN (Enter) at the end of every line */
-pre code .ln::after { content: "RETURN"; display: inline-block; margin-left: 0.7em; padding: 0 0.35em;
-  font: 700 0.58em/1.6 "Atkinson Hyperlegible", "Segoe UI", sans-serif; letter-spacing: 0.04em;
-  border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.15em; }
+pre code .ln::after { content: "\21B5"; display: inline-block; margin-left: 0.6em; padding: 0 0.3em;
+  font: 400 0.9em/1.15 "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols", "Arial Unicode MS", sans-serif;
+  border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.05em; }
 /* Diagrams are pictures, not something to type */
 pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
 pre code { font: inherit; background: none; padding: 0; color: inherit; }
@@ -254,9 +254,9 @@ type.</li>
 <p>Anything shown on a dark blue screen like this is something to
 type:</p>
 <pre><code><span class="ln">PRINT &quot;HELLO&quot;</span></code></pre>
-<p>The little <strong>RETURN</strong> tag at the end of the line means:
-press RETURN (Enter on a PC keyboard). The C64 does nothing with a line
-until you do. You don’t type the tag itself.</p>
+<p>The little <strong>↵</strong> key at the end of the line means: press
+RETURN (Enter on a PC keyboard). The C64 does nothing with a line until
+you do. You don’t type the symbol itself.</p>
 <h2 id="how-every-lesson-goes">How every lesson goes</h2>
 <p>Every lesson has the same seven steps, so you always know where you
 are:</p>
