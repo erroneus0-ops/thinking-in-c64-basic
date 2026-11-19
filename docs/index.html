@@ -99,7 +99,7 @@ th { border-bottom: 2px solid var(--ink); }
 </head>
 <body>
 <main>
-<p class="edition">Beta tester’s draft, built Nov 18, 2026</p>
+<p class="edition">Beta tester’s draft, built Nov 19, 2026</p>
 <p class="book-title">Thinking in C64 BASIC</p>
 <details class="toc">
 <summary>Contents</summary>
@@ -395,6 +395,17 @@ and it tells the C64 what kind of box it is:</p>
 </tr>
 </tbody>
 </table>
+<p><strong>Mixing words and boxes.</strong> The semicolon glues things
+together on one row, and it can glue words in quotes to boxes:</p>
+<pre><code>C = 8
+PRINT &quot;YOU HAVE&quot;;C;&quot;COINS&quot;
+N$ = &quot;ACE&quot;
+PRINT N$;&quot; EARNED&quot;;C;&quot;COINS&quot;</code></pre>
+<p>The C64 answers <code>YOU HAVE 8 COINS</code> and
+<code>ACE EARNED 8 COINS</code>. Look closely at the spaces. A number
+brings its own space on each side, but words don’t. That’s why
+<code>" EARNED"</code> starts with a space inside its quotes: without
+it, you’d get ACEEARNED.</p>
 <p><strong>Predict, then try:</strong></p>
 <pre><code>P = &quot;BONUS&quot;</code></pre>
 <p>The C64 answers <code>?TYPE MISMATCH  ERROR</code>. You tried to put
@@ -643,8 +654,8 @@ problems, explain each in one sentence, and fix them:
 <code>SCORE = 40</code>, then <code>TOTAL = SCORE + 10</code>.</li>
 <li><strong>Build it.</strong> Use three variables: your name, a reward
 you’d like to earn, and how many points it costs. Make the C64 print one
-sentence about it. Add all three to your variable dictionary first, with
-their data types.</li>
+sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add
+all three to your variable dictionary first, with their data types.</li>
 </ol>
 <h2 id="quiz">Quiz</h2>
 <ol type="1">

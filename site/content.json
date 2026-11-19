@@ -54,7 +54,7 @@
    {
     "n": 3,
     "title": "Build it",
-    "text": "Use three variables: your name, a reward you'd like to earn, and how many points it costs. Make the C64 print one sentence about it. Add all three to your variable dictionary first, with their data types."
+    "text": "Use three variables: your name, a reward you'd like to earn, and how many points it costs. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types."
    }
   ],
   "quiz": [

@@ -230,6 +230,11 @@ Conventions in chapter files:
   each lesson saves its most satisfying moment (the thing that runs, the surprise, the payoff) for
   the end; careful parts come first. Same at every scale: the book opens on the maze; each sitting
   stops on a success. Habits are always given with a reason and framed as "what programmers do".
+- **Exercises only use what's been taught.** Before publishing, check every exercise against the lessons
+  before it. (Beta test caught Ch 1 Ex 3 needing PRINT with words and boxes mixed, which draft 2 had
+  dropped; fixed in Lesson 1.2.) Joining strings with + stays in Ch 4.
+- **Short patience is a design constraint** (the student's known trait, per the editor): short steps,
+  fast payoffs, light forms. Never treat it as his problem to fix.
 - **Know where to look:** chapters that front-load rules say so (Ch 1 opening): read once, don't
   memorize, come back when something bites. "Good programmers know where to look."
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.

@@ -88,6 +88,17 @@ PRINT P;P$;P%
 | `P$`, `N$` | Text (a **string**) | Letters, digits and symbols, up to 255 of them, in quotes | `P$ = "BONUS POINTS"` |
 | `P%`, `L%` | Whole number | Whole numbers only, from −32768 to 32767 | `P% = 3` |
 
+**Mixing words and boxes.** The semicolon glues things together on one row, and it can glue words in quotes to boxes:
+
+```
+C = 8
+PRINT "YOU HAVE";C;"COINS"
+N$ = "ACE"
+PRINT N$;" EARNED";C;"COINS"
+```
+
+The C64 answers `YOU HAVE 8 COINS` and `ACE EARNED 8 COINS`. Look closely at the spaces. A number brings its own space on each side, but words don't. That's why `" EARNED"` starts with a space inside its quotes: without it, you'd get ACEEARNED.
+
 **Predict, then try:**
 
 ```
@@ -220,7 +231,7 @@ In 1999, a spacecraft called the Mars Climate Orbiter was lost at Mars. One team
 
 1. **Type and predict.** Put the number of levels you've beaten in one variable and the number still to go in another. Before printing their sum, write down what it will be.
 2. **Fix it.** These commands don't work. Find both problems, explain each in one sentence, and fix them: `SCORE = 40`, then `TOTAL = SCORE + 10`.
-3. **Build it.** Use three variables: your name, a reward you'd like to earn, and how many points it costs. Make the C64 print one sentence about it. Add all three to your variable dictionary first, with their data types.
+3. **Build it.** Use three variables: your name, a reward you'd like to earn, and how many points it costs. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types.
 
 ## Quiz
 
