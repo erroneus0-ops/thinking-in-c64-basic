@@ -7,7 +7,7 @@ window.fetch = async (...a) => { const r = await _fetch(...a); if (r.status === 
 
 const chapterEl = document.getElementById('chapter');
 let chapters = [];
-let saved = {};   // latest saved text per kind:item
+let saved = {};   // latest save per kind:item: { text, at }
 
 const el = (tag, props = {}, ...kids) => {
   const e = document.createElement(tag);
@@ -22,7 +22,14 @@ async function save(chapter, kind, item, text) {
     body: JSON.stringify({ chapter, kind, item, text }),
   });
   if (!res.ok) throw new Error('save failed');
-  saved[kind + ':' + item] = text;
+  saved[kind + ':' + item] = { text, at: 'just now' };
+}
+
+// Each pass starts with an empty box; the previous answer is shown underneath for comparison.
+function lastTime(key) {
+  const prev = saved[key];
+  if (!prev || !prev.text) return el('span');
+  return el('p', { className: 'last' }, el('strong', { textContent: `Last time (${prev.at}): ` }), prev.text);
 }
 
 // A save button with its own little "Saved" message.
@@ -44,11 +51,12 @@ function renderExercises(ch) {
   document.getElementById('exercises-section').hidden = !ch.exercises.length;
   for (const ex of ch.exercises) {
     const id = `ex${ex.n}`;
-    const ta = el('textarea', { id: `t-${id}`, value: saved['exercise:' + id] || '' });
+    const ta = el('textarea', { id: `t-${id}` });
     box.append(el('div', { className: 'card' },
       el('h3', { textContent: `${ex.n}. ${ex.title}` }),
       el('p', { textContent: ex.text }),
       el('label', { className: 'small', htmlFor: ta.id, textContent: 'Your answer' }), ta,
+      lastTime('exercise:' + id),
       saveRow(() => save(ch.n, 'exercise', id, ta.value))));
   }
 }
@@ -118,15 +126,15 @@ function renderNotes(ch) {
     const label = /^\d/.test(lesson.id) ? `Lesson ${lesson.id}: ${lesson.title}` : lesson.title;
     const fields = ['confusing', 'boring', 'fun'].map(kind => {
       const item = `${lesson.id}:${kind}`;
-      const ta = el('textarea', { id: `n-${item}`, value: saved['note:' + item] || '' });
+      const ta = el('textarea', { id: `n-${item}` });
       ta.style.minHeight = '2.8rem';
       const prompt = { confusing: 'What was confusing?', boring: 'What was boring?', fun: 'What was fun?' }[kind];
-      return { item, ta, nodes: [el('label', { className: 'small', htmlFor: ta.id, textContent: prompt }), ta] };
+      return { item, ta, nodes: [el('label', { className: 'small', htmlFor: ta.id, textContent: prompt }), ta, lastTime('note:' + item)] };
     });
     box.append(el('div', { className: 'card' },
       el('h3', { textContent: label }),
       ...fields.flatMap(f => f.nodes),
-      saveRow(async () => { for (const f of fields) await save(ch.n, 'note', f.item, f.ta.value); })));
+      saveRow(async () => { for (const f of fields) if (f.ta.value.trim()) await save(ch.n, 'note', f.item, f.ta.value); })));
   }
 }
 
@@ -134,7 +142,7 @@ async function show() {
   const ch = chapters.find(c => String(c.n) === chapterEl.value);
   const rows = await (await fetch('/api/responses?chapter=' + ch.n)).json();
   saved = {};
-  for (const r of rows) saved[r.kind + ':' + r.item] = r.text;
+  for (const r of rows) saved[r.kind + ':' + r.item] = { text: r.text, at: r.created_at };
   renderExercises(ch);
   await renderQuiz(ch);
   renderNotes(ch);

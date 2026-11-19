@@ -57,7 +57,15 @@ if (str_starts_with($path, '/api/')) {
 if (str_starts_with($path, '/emu/'))  { serve_from("$ROOT/runtime/vc64web", substr($path, 5), true); return true; }
 if (str_starts_with($path, '/roms/')) { serve_from("$ROOT/runtime/roms", substr($path, 6), true); return true; }
 if ($path === '/book')                { header('Location: /book/'); return true; }
-if (str_starts_with($path, '/book/')) { serve_from("$ROOT/docs", substr($path, 6)); return true; }
+if (str_starts_with($path, '/book/')) {
+    if (preg_match('#^/book/(index\.html)?$#', $path)) {   // the book itself, not its images or PDF
+        require_once __DIR__ . '/lib/db.php';
+        require_once __DIR__ . '/lib/who.php';
+        log_visit(db($ROOT), '/book');
+    }
+    serve_from("$ROOT/docs", substr($path, 6));
+    return true;
+}
 if (str_starts_with($path, '/assets/')) { serve_from(__DIR__ . '/assets', substr($path, 8)); return true; }
 
 $pages = ['/' => 'index.html', '/c64' => 'c64.html', '/work' => 'work.html', '/review' => 'review.html', '/login' => 'login.html'];

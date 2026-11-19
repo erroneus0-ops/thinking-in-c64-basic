@@ -198,6 +198,10 @@ Conventions in chapter files:
 
 - `/work` (Chapter work): per chapter, exercises with written answers, the quiz (graded on the
   server; answers never sent to the page), and beta tester notes (confusing / boring / fun per lesson).
+- Second passes (editor: "then why would he revise them?"): Chapter work boxes always START EMPTY;
+  the previous answer shows underneath in grey ("Last time (date): ..."). Every save is a new row;
+  empty note boxes are never saved, so they can't wipe earlier notes. Book page loads (/book/) are
+  logged in visits too (user may be blank: the book doesn't require sign-in).
 - `/review` (Editor's view): everyone's latest notes and answers, every quiz attempt, recent
   programs, each tagged with who / device / IP, plus a "Who and where" visit log.
 - SIGN-IN by name only (editor's decision; family LAN). Cookie `c64user`, case-insensitive names

@@ -85,7 +85,7 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
   if (!visits.length) none(vbox, 'visits');
   else vbox.append(el('table', {},
     el('tr', {}, ...['Who', 'Page', 'Device', 'Address', 'When'].map(h => el('th', { textContent: h }))),
-    ...visits.map(v => el('tr', {}, ...[v.user, v.page, v.device, v.ip, v.created_at].map(t => el('td', { textContent: t }))))));
+    ...visits.map(v => el('tr', {}, ...[v.user || '(not signed in)', v.page, v.device, v.ip, v.created_at].map(t => el('td', { textContent: t }))))));
 })();
 </script>
 <script src="/assets/who.js"></script>
