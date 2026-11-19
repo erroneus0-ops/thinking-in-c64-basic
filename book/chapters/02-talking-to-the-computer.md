@@ -116,6 +116,8 @@ And `NEW` erases the whole program. There's no undo, so be sure before you use i
 
 **Goal:** Fix a mistake without retyping the whole line.
 
+**Picture:** You might think of the C64's screen as a web form: you type in a box, then press Submit. It is, with one twist. The *whole screen* is the form, and every line on it has its own invisible Submit button. RETURN submits whichever line the cursor is on, not just the one you typed last.
+
 **Try it.** Type this program, mistake included:
 
 ```
@@ -133,9 +135,13 @@ The C64 prints the first line, then stops with `?SYNTAX  ERROR IN 20`. Helpfully
 1. Type `LIST` so line 20 is on the screen.
 2. Use the **arrow keys** to move the cursor up to line 20, and right until it's on the `I` of `PIRNT`.
 3. Type `RI`. Each letter you type replaces the one under the cursor, so `IR` becomes `RI`, and the line reads `20 PRINT "A NEW HIGH SCORE"`.
-4. Press RETURN while the cursor is anywhere on that line.
+4. Press RETURN while the cursor is anywhere on that line. That's the line's Submit button.
 
 When you press RETURN, the C64 reads the whole line from the screen and stores it, exactly as if you had typed it fresh. `LIST` and `RUN` to check.
+
+::: good-to-know
+On the course site's C64 page, holding **Shift** and clicking on the C64 screen moves the cursor straight to where you clicked, instead of using the arrow keys.
+:::
 
 ::: good-to-know
 To clear the screen, hold SHIFT and press **CLR/HOME**. On a PC keyboard, that's **Shift + Home**. (On many laptops, Home is **Fn + Left Arrow**, so it's Shift + Fn + Left Arrow. The course site's C64 page also has a Clear screen button right under the screen.) CLR/HOME without SHIFT just moves the cursor to the top left corner, without erasing anything.

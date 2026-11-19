@@ -168,7 +168,7 @@ Conventions in chapter files:
     Ch 3 (Working Things Out) should land.
   * His model of RETURN: "a text box like a web form". Nearly right; the C64 twist is that the
     whole screen is the form and RETURN submits WHICHEVER line the cursor is on. Candidate opening
-    picture for Lesson 2.4 (screen editor), in his own words.
+    picture for Lesson 2.4 (screen editor), in his own words. DONE: Lesson 2.4 now opens with it.
   * Proposed: lighter notes (one tap per lesson: too slow / about right / too fast, plus one
     optional box), quiz moved up. Awaiting editor's decision.
 
