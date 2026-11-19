@@ -146,6 +146,20 @@ Conventions in chapter files:
 
 ## Beta test log
 
+- 18 Nov evening, Chapter 1 draft 2 (second pass), ~1 hour, laptop, notes on all 5 lessons:
+  * PATIENCE "running thin" in nearly every "boring" note (he added "it's my own problem, not
+    yours"). Likely: second pass is slow for him, AND the notes form is heavy (3 boxes x 5 lessons).
+    Answers turned terse ("maybe", "I guess so") = form fatigue.
+  * Productive struggle in his own words: discovering the error was "oh, now it makes sense, yet
+    very frustrating" = the target zone.
+  * Exercises show real understanding: fixed SCORE/TOTAL as SC/TTL (no hidden words); exercise 3
+    combined two strings and a number in one PRINT.
+  * Two-letter trap still "some of it" confusing despite the ? CO proof -> supports building the
+    "Show variables" shelf panel.
+  * Quiz not attempted (maybe missed: it sits between exercises and notes).
+  * Proposed: lighter notes (one tap per lesson: too slow / about right / too fast, plus one
+    optional box), quiz moved up. Awaiting editor's decision.
+
 - Story-framed lessons (Micro Adventure style): ASKED, beta tester unsure/not interested; editor:
   better suited to younger readers. DECISION: no story frame. He wants real work (job/challenge).
   Stories live in the Story Engine project, where he is the AUTHOR, not a character.
