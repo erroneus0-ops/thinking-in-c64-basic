@@ -38,19 +38,21 @@ function Test-Zip($Path) {
 
 function Get-Download($Url, $Out, $What, $BrowserName = '') {
     $isZip = $Out.EndsWith('.zip')
-    # A browser saves the file under its own name; if one like that is in the same folder, use it.
+    # 1. A saved copy that is incomplete (a cut-off zip) is thrown away.
+    if ((Test-Path $Out) -and $isZip -and -not (Test-Zip $Out)) {
+        Write-Host "The saved copy of $What is incomplete; setting it aside." -ForegroundColor Yellow
+        Remove-Item $Out
+    }
+    # 2. A browser saves the file under its own name; if a good one is in the same folder, use it.
     if ($BrowserName -and -not (Test-Path $Out)) {
         $found = Get-ChildItem -Path (Split-Path $Out) -Filter $BrowserName -File -ErrorAction SilentlyContinue |
                  Where-Object { -not $isZip -or (Test-Zip $_.FullName) } | Select-Object -First 1
         if ($found) { Move-Item $found.FullName $Out; Write-Host "Found $What saved by a browser: $($found.Name)" }
     }
+    # 3. A good saved copy is used as it is.
     if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0)) {
-        if (-not $isZip -or (Test-Zip $Out)) {
-            Write-Host "Using $What, already saved at $Out"
-            return
-        }
-        Write-Host "The saved copy of $What is incomplete; downloading it again." -ForegroundColor Yellow
-        Remove-Item $Out
+        Write-Host "Using $What, already saved at $Out"
+        return
     }
     $agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) thinking-in-c64-basic-setup'
     for ($try = 1; $try -le 3; $try++) {
