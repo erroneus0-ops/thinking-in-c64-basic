@@ -48,6 +48,10 @@ main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
 .edition { color: var(--muted); font-size: 0.875rem; margin: 0 0 2.5rem; }
 .book-title { font-weight: 700; font-size: 2.6rem; line-height: 1.05; margin: 0 0 0.4rem; letter-spacing: -0.02em; }
 
+.tour-link { margin: 0.75rem 0 1.75rem; }
+.tour-link a { display: block; padding: 0.7rem 0.9rem; border-radius: 8px; background: var(--tint);
+  color: var(--ink); text-decoration: none; border-left: 4px solid var(--accent); }
+.tour-link span { color: var(--accent); font-weight: 700; white-space: nowrap; }
 details.toc { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.6rem 0; margin-bottom: 3rem; }
 details.toc summary { cursor: pointer; font-weight: 700; }
 details.toc ul { padding-left: 1.1rem; margin: 0.5rem 0 0; }
@@ -94,7 +98,7 @@ th { border-bottom: 2px solid var(--ink); }
 
 @media print {
   :root { --paper: #fff; --ink: #000; --muted: #444; --rule: #bbb; --accent: #40318d; --tint: #eee; }
-  details.toc { display: none; }
+  details.toc, .tour-link { display: none; }
   h1 { break-before: page; margin-top: 0; }
   pre, table { break-inside: avoid; }
 }
@@ -105,6 +109,9 @@ th { border-bottom: 2px solid var(--ink); }
 <main>
 <p class="edition">$edition$, built $date$</p>
 <p class="book-title">$title$</p>
+$if(tourhref)$
+<p class="tour-link"><a href="$tourhref$">New to the Commodore 64 and the emulator? <span>Take the quick tour →</span></a></p>
+$endif$
 <details class="toc">
 <summary>Contents</summary>
 $toc$

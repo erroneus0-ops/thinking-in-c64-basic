@@ -99,6 +99,9 @@ def main():
             f"--metadata=title:{TITLE}",
             f"--metadata=edition:{edition}",
             f"--metadata=date:{datetime.date.today():%b %d, %Y}",
+            # The tour link appears only in the published HTML (the student page at the site's root,
+            # and the editor's page, which is locked into docs/editor/).
+            f"--metadata=tourhref:{'tour/' if args.pages else '../tour/'}",
         ],
     )
     html = mark_return_keys(html)

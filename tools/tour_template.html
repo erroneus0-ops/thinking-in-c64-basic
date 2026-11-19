@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>New to the Commodore 64? A quick tour</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --paper: #f7f8fb; --ink: #1d2142; --muted: #5a5f80; --rule: #d7d9e6;
+  --accent: #40318d; --accent-ink: #ffffff; --tint: #ebe9f8;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark; --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+    --accent: #a99ff0; --accent-ink: #17162a; --tint: #26244a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark; --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+  --accent: #a99ff0; --accent-ink: #17162a; --tint: #26244a;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); display: flex; flex-direction: column;
+  font: 1.125rem/1.55 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif; }
+header { display: flex; align-items: baseline; gap: 1rem; padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--rule); }
+header strong { margin-right: auto; }
+a { color: var(--accent); }
+.progress { height: 4px; background: var(--rule); }
+.progress div { height: 100%; width: 0; background: var(--accent); transition: width 0.3s ease; }
+main { flex: 1; overflow-y: auto; }
+.slide { display: none; max-width: 70rem; margin: 0 auto; padding: 2rem 1.25rem 2.5rem;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 2.5rem; align-items: center; }
+.slide.on { display: grid; }
+.slide.closing { grid-template-columns: 1fr; max-width: 38rem; text-align: center; padding-top: 4rem; }
+@media (max-width: 52rem) { .slide { grid-template-columns: 1fr; gap: 1rem; padding-top: 1.25rem; } h1 { font-size: 1.6rem; } figure img { max-height: 46vh; } }
+h1 { font-size: 1.9rem; line-height: 1.15; margin: 0 0 1rem; letter-spacing: -0.01em; }
+.slide p { margin: 0 0 0.9rem; }
+.big { font-size: 1.35rem; }
+figure { margin: 0; }
+figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 6px;
+  box-shadow: 0 2px 14px rgb(0 0 0 / 0.18); max-height: 62vh; }
+code { font: 600 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; white-space: pre; }
+kbd { font: 700 0.85em "Atkinson Hyperlegible", "Segoe UI Symbol", "DejaVu Sans", sans-serif; border: 1px solid var(--muted);
+  border-bottom-width: 2px; border-radius: 4px; padding: 0.05em 0.4em; background: var(--paper); }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--rule); }
+button, .btn { font: inherit; font-weight: 700; padding: 0.5rem 1.1rem; border-radius: 6px; cursor: pointer;
+  border: 1.5px solid var(--accent); background: transparent; color: var(--accent); text-decoration: none; display: inline-block; }
+#next, .btn { background: var(--accent); color: var(--accent-ink); }
+button:disabled { opacity: 0.35; cursor: default; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+#where { color: var(--muted); font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<header><strong>C64 quick tour</strong><a href="../">Back to the book</a></header>
+<div class="progress" aria-hidden="true"><div id="bar"></div></div>
+<main id="slides">
+<!--SLIDES-->
+</main>
+<nav>
+  <button id="prev" type="button">← Back</button>
+  <span id="where" aria-live="polite"></span>
+  <button id="next" type="button">Next →</button>
+</nav>
+<script>
+const COUNT = /*COUNT*/0;
+const slides = [...document.querySelectorAll('.slide')];
+const prev = document.getElementById('prev'), next = document.getElementById('next');
+let at = 1;
+function show(n, push) {
+  at = Math.min(Math.max(n, 1), COUNT);
+  slides.forEach((s, i) => s.classList.toggle('on', i === at - 1));
+  document.getElementById('bar').style.width = (at / COUNT * 100) + '%';
+  document.getElementById('where').textContent = `${at} of ${COUNT}`;
+  prev.disabled = at === 1;
+  next.disabled = at === COUNT;
+  document.getElementById('slides').scrollTop = 0;
+  if (push !== false && location.hash !== '#slide-' + at) history.replaceState(null, '', '#slide-' + at);
+}
+prev.onclick = () => show(at - 1);
+next.onclick = () => show(at + 1);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') { show(at + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(at - 1); e.preventDefault(); }
+});
+let x0 = null;
+document.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0; x0 = null;
+  if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
+}, { passive: true });
+function fromHash() { const m = location.hash.match(/^#slide-(\d+)$/); show(m ? +m[1] : 1, false); }
+window.addEventListener('hashchange', fromHash);
+fromHash();
+</script>
+</body>
+</html>

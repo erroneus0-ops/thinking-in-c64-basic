@@ -37,6 +37,14 @@ organized, orderly thinking habits."
   The password is NEVER in the repo; ask the editor for it in each new session. (The old claude.ai
   preview link is retired.)
 
+## The C64 tour (docs/tour/)
+
+Ten slides introducing the C64 and the course site, linked from the top of the book's HTML editions
+as "New to the Commodore 64 and the emulator? Take the quick tour" (not in the PDF; editor's choice).
+Slide text lives in `tools/build_tour.py`; real screenshots in `tools/tour_shots/`, captured by
+`tools/capture_tour.py` from the running course site (needs runtime/, Playwright, Pillow). After the
+site's look changes: capture, then `python tools/build_tour.py`, and commit docs/tour/.
+
 ## Building the book
 
 `pip install -r tools/requirements.txt`, then `python tools/build.py` (editor's edition,
