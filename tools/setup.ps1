@@ -27,6 +27,34 @@ $VcUrl      = 'https://aka.ms/vs/17/release/vc_redist.x64.exe'
 function Step($text) { Write-Host ''; Write-Host "== $text" -ForegroundColor Cyan }
 function Fail($text) { Write-Host ''; Write-Host $text -ForegroundColor Red; exit 1 }
 
+# Download with retries, using the system proxy (and its sign-in) like a browser would.
+# If a file of that name was already saved into runtime\ by hand, use it instead.
+# If every attempt fails, explain how to download it in a browser instead.
+function Get-Download($Url, $Out, $What) {
+    if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0)) {
+        Write-Host "Using $What, already saved at $Out"
+        return
+    }
+    $agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) thinking-in-c64-basic-setup'
+    for ($try = 1; $try -le 3; $try++) {
+        try {
+            $proxy = [Net.WebRequest]::GetSystemWebProxy()
+            $proxy.Credentials = [Net.CredentialCache]::DefaultCredentials
+            [Net.WebRequest]::DefaultWebProxy = $proxy
+            Invoke-WebRequest -Uri $Url -OutFile $Out -UseBasicParsing -UserAgent $agent
+            if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0)) { return }
+        } catch {
+            Write-Host "  Attempt $try didn't finish: $($_.Exception.Message)" -ForegroundColor Yellow
+            Remove-Item $Out -ErrorAction SilentlyContinue
+            Start-Sleep -Seconds (3 * $try)
+        }
+    }
+    Fail ("Couldn't download $What. This often happens on work networks that filter downloads.`n" +
+          "Instead, open this link in your browser:`n  $Url`n" +
+          "save the file as:`n  $Out`n" +
+          "then run setup.bat again. It will use the saved file.")
+}
+
 # ------------------------------------------- 0. Visual C++ runtime
 Step 'Microsoft Visual C++ runtime (PHP needs it)'
 
@@ -57,7 +85,7 @@ if ($found -and $found -ge $VcMin) {
     if (Test-VCRestartPending) { Fail $RestartMsg }
     $vc = Join-Path $Runtime 'vc_redist.x64.exe'
     Write-Host 'Downloading Microsoft''s installer (about 25 MB)...'
-    Invoke-WebRequest -Uri $VcUrl -OutFile $vc -UseBasicParsing
+    Get-Download $VcUrl $vc 'the Visual C++ installer'
     Write-Host 'Installing. Windows will ask for permission, because it installs for the whole computer.'
     try {
         $proc = Start-Process -FilePath $vc -ArgumentList '/install', '/passive', '/norestart' -Verb RunAs -Wait -PassThru
@@ -85,7 +113,7 @@ if (Test-Path $PhpExe) {
 } else {
     $zip = Join-Path $Runtime 'php-download.zip'
     Write-Host 'Downloading PHP 8.4 for Windows (about 35 MB)...'
-    Invoke-WebRequest -Uri $PhpUrl -OutFile $zip -UseBasicParsing
+    Get-Download $PhpUrl $zip 'PHP'
     Expand-Archive -Path $zip -DestinationPath $PhpDir -Force
     Remove-Item $zip
 }
@@ -114,7 +142,7 @@ if ((Test-Path $Stamp) -and ((Get-Content $Stamp -Raw).Trim() -eq $EmuCommit)) {
 } else {
     $zip = Join-Path $Runtime 'vc64web-download.zip'
     Write-Host 'Downloading vc64web (about 10 MB)...'
-    Invoke-WebRequest -Uri $EmuUrl -OutFile $zip -UseBasicParsing
+    Get-Download $EmuUrl $zip 'the vc64web emulator'
     if (Test-Path $EmuDir) { Remove-Item -Recurse -Force $EmuDir }
     # Unpack with Windows' own tar.exe (it reads zip files). Called by full path, because
     # PortableGit ships a different tar that can't. Drop the archive's top folder; skip
@@ -193,8 +221,7 @@ if ($missing.Count -eq 0) {
         $answer = Read-Host 'Download the ROMs from the VICE project''s official GitHub mirror instead? (Y/N)'
         if ($answer -match '^[Yy]') {
             foreach ($rom in $missing) {
-                Invoke-WebRequest -Uri "$RomMirror/$($rom.Sub)/$($rom.Files[0])" `
-                                  -OutFile (Join-Path $RomDir $rom.Name) -UseBasicParsing
+                Get-Download "$RomMirror/$($rom.Sub)/$($rom.Files[0])" (Join-Path $RomDir $rom.Name) "the ROM file $($rom.Name)"
             }
         }
     }

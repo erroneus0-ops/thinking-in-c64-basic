@@ -123,6 +123,9 @@ Conventions in chapter files:
   .NET unzip silently extracted nothing under Windows PowerShell 5.1).
 - Update notices to the editor: end every message that changes the site with
   "To pick this up: git pull, then Ctrl+F5".
+- Downloads go through Get-Download in setup.ps1: 3 retries, browser-like user agent, system proxy
+  with default credentials; on failure it prints the URL and the exact file path to save it to by
+  hand (work networks may cut off .zip downloads), and a saved file is used on the next run.
 - `start.bat`: PHP built-in server on port 8064, router `site/router.php`.
 - Routes: `/` home, `/c64` emulator page, `/book/` = docs/, `/emu/` = runtime/vc64web,
   `/roms/` = runtime/roms, `/api/*` = site/lib/api.php.
