@@ -103,6 +103,9 @@ Conventions in chapter files:
   The template styles it and adds the heading. Readers can skip these on a first pass.
 - Plain fenced code block = something to type. Renders as a C64 screen.
 - ` ```{.diagram} ` fenced block = a picture, not to be typed. Renders as a dashed box.
+- Every non-blank line in a typed block gets a RETURN keycap, added by the build (mark_return_keys)
+  and drawn by CSS, never part of the text (beta tester kept forgetting RETURN; editor's choice).
+  So never write RETURN symbols into chapter code blocks yourself.
 - Quiz answers written as `**Answer: x**` at the end of each question; the student build
   strips them.
 
