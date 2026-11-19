@@ -63,6 +63,14 @@ def extract_content(chapters):
         for c in out if c["n"] >= 2 for e in c["exercises"]]
     (ROOT / "site" / "exercises.json").write_text(json.dumps(picker, indent=1, ensure_ascii=False), encoding="utf-8")
 
+def mark_return_keys(html):
+    """Every line in a typed code block gets a RETURN keycap at its end (drawn by CSS, so it is
+    never part of the text). Diagram blocks are left alone."""
+    def mark(m):
+        lines = m.group(1).split("\n")
+        return "<pre><code>" + "\n".join(f'<span class="ln">{l}</span>' if l.strip() else l for l in lines) + "</code></pre>"
+    return re.sub(r"<pre><code>(.*?)</code></pre>", mark, html, flags=re.S)
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--student", action="store_true", help="remove quiz answers")
@@ -91,6 +99,7 @@ def main():
             f"--metadata=date:{datetime.date.today():%b %d, %Y}",
         ],
     )
+    html = mark_return_keys(html)
     html_path = out / ("index.html" if args.pages else f"book-{suffix}.html")
     html_path.write_text(html, encoding="utf-8")
     print("wrote", html_path)

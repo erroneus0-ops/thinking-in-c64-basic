@@ -73,6 +73,10 @@ pre {
   overflow-x: auto;
   font: 600 0.95rem/1.45 "IBM Plex Mono", Consolas, "Courier New", monospace;
 }
+/* A RETURN keycap after each line to type: press RETURN (Enter) at the end of every line */
+pre code .ln::after { content: "RETURN"; display: inline-block; margin-left: 0.7em; padding: 0 0.35em;
+  font: 700 0.58em/1.6 "Atkinson Hyperlegible", "Segoe UI", sans-serif; letter-spacing: 0.04em;
+  border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.15em; }
 /* Diagrams are pictures, not something to type */
 pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
 pre code { font: inherit; background: none; padding: 0; color: inherit; }
@@ -111,6 +115,8 @@ Book Works</a>
 <ul>
 <li><a href="#what-you-need" id="toc-what-you-need">What you
 need</a></li>
+<li><a href="#reading-the-code" id="toc-reading-the-code">Reading the
+code</a></li>
 <li><a href="#how-every-lesson-goes" id="toc-how-every-lesson-goes">How
 every lesson goes</a></li>
 <li><a href="#a-note-for-the-beta-tester"
@@ -166,10 +172,10 @@ seeing.</p>
 <p>Click the C64 screen. Type these two lines exactly as shown, and
 press RETURN at the end of each one. Keep Caps Lock off: type ordinary
 small letters, and the C64 will show them as capitals.</p>
-<pre><code>10 PRINT CHR$(205.5 + RND(1));
-20 GOTO 10</code></pre>
+<pre><code><span class="ln">10 PRINT CHR$(205.5 + RND(1));</span>
+<span class="ln">20 GOTO 10</span></code></pre>
 <p>Now type this and press RETURN:</p>
-<pre><code>RUN</code></pre>
+<pre><code><span class="ln">RUN</span></code></pre>
 <p>A maze fills the screen, row after row, and never stops. Stop it and
 run it again, and you get a different maze. (There’s a surprise hiding
 in that word “random”, which Chapter 3 will let you discover for
@@ -244,6 +250,13 @@ notebook</strong>. You will draw tables and maps in it before you
 type.</li>
 <li>About thirty minutes. Every lesson fits in one sitting.</li>
 </ul>
+<h2 id="reading-the-code">Reading the code</h2>
+<p>Anything shown on a dark blue screen like this is something to
+type:</p>
+<pre><code><span class="ln">PRINT &quot;HELLO&quot;</span></code></pre>
+<p>The little <strong>RETURN</strong> tag at the end of the line means:
+press RETURN (Enter on a PC keyboard). The C64 does nothing with a line
+until you do. You don’t type the tag itself.</p>
 <h2 id="how-every-lesson-goes">How every lesson goes</h2>
 <p>Every lesson has the same seven steps, so you always know where you
 are:</p>
@@ -306,15 +319,15 @@ opens that box, adds one, and puts the new number back.</p>
 =======================================  &lt;- the shelf</code></pre>
 <p><strong>Try it.</strong> Type each line and press RETURN after
 it:</p>
-<pre><code>C = 7
-PRINT C</code></pre>
+<pre><code><span class="ln">C = 7</span>
+<span class="ln">PRINT C</span></code></pre>
 <p>The C64 answers <code>7</code>. You put 7 into the box labelled C,
 then asked to see what was inside.</p>
 <p><strong>Predict.</strong> Before typing the next lines, write down
 what you think the C64 will show. Then try it.</p>
-<pre><code>C = C + 1
-PRINT C
-PRINT B</code></pre>
+<pre><code><span class="ln">C = C + 1</span>
+<span class="ln">PRINT C</span>
+<span class="ln">PRINT B</span></code></pre>
 <p><strong>Why it works.</strong> The <code>=</code> sign does not mean
 “is equal to” here. It means “put into.” <code>C = C + 1</code> means:
 look in box C, add one, and put the answer back in box C. So C now holds
@@ -331,9 +344,9 @@ one.</p>
 <p>Think of <code>PRINT</code> as a “what is?” command: you ask, and the
 C64 answers with what it is. So to ask “what is in C?”, you can
 type:</p>
-<pre><code>? C</code></pre>
+<pre><code><span class="ln">? C</span></code></pre>
 <p>To make the answer more meaningful, add a word after it:</p>
-<pre><code>? C &quot;COINS&quot;</code></pre>
+<pre><code><span class="ln">? C &quot;COINS&quot;</span></code></pre>
 <p>The C64 answers <code>8 COINS</code>. And if you use <code>?</code>
 inside a program, <code>LIST</code> shows it spelled out as
 <code>PRINT</code>, because to the C64 they’re the same word.</p>
@@ -349,10 +362,10 @@ add coins, and you can’t stuff a note into a coin box. The kind of thing
 a box can hold is called its <strong>data type</strong>.</p>
 <p><strong>Try it.</strong> The same letter can label three different
 boxes:</p>
-<pre><code>P = 5000
-P$ = &quot;BONUS POINTS&quot;
-P% = 3
-PRINT P;P$;P%</code></pre>
+<pre><code><span class="ln">P = 5000</span>
+<span class="ln">P$ = &quot;BONUS POINTS&quot;</span>
+<span class="ln">P% = 3</span>
+<span class="ln">PRINT P;P$;P%</span></code></pre>
 <p><strong>Predict</strong> what the last line will show before you
 press RETURN.</p>
 <p><strong>Why it works.</strong> The C64 answers
@@ -397,25 +410,25 @@ and it tells the C64 what kind of box it is:</p>
 </table>
 <p><strong>Mixing words and boxes.</strong> The semicolon glues things
 together on one row, and it can glue words in quotes to boxes:</p>
-<pre><code>C = 8
-PRINT &quot;YOU HAVE&quot;;C;&quot;COINS&quot;
-N$ = &quot;ACE&quot;
-PRINT N$;&quot; EARNED&quot;;C;&quot;COINS&quot;</code></pre>
+<pre><code><span class="ln">C = 8</span>
+<span class="ln">PRINT &quot;YOU HAVE&quot;;C;&quot;COINS&quot;</span>
+<span class="ln">N$ = &quot;ACE&quot;</span>
+<span class="ln">PRINT N$;&quot; EARNED&quot;;C;&quot;COINS&quot;</span></code></pre>
 <p>The C64 answers <code>YOU HAVE 8 COINS</code> and
 <code>ACE EARNED 8 COINS</code>. Look closely at the spaces. A number
 brings its own space on each side, but words don’t. That’s why
 <code>" EARNED"</code> starts with a space inside its quotes: without
 it, you’d get ACEEARNED.</p>
 <p><strong>Predict, then try:</strong></p>
-<pre><code>P = &quot;BONUS&quot;</code></pre>
+<pre><code><span class="ln">P = &quot;BONUS&quot;</span></code></pre>
 <p>The C64 answers <code>?TYPE MISMATCH  ERROR</code>. You tried to put
 a note into a number box. “Type mismatch” means the data type of the
 thing doesn’t match the data type of the box.</p>
 <p><strong>Prove it.</strong> A whole-number box is fussy. Try
 these:</p>
-<pre><code>P% = 5.7
-? P%
-P% = 40000</code></pre>
+<pre><code><span class="ln">P% = 5.7</span>
+<span class="ln">? P%</span>
+<span class="ln">P% = 40000</span></code></pre>
 <p>The first answer is <code>5</code>. The whole-number box doesn’t
 round 5.7 up to 6: it simply drops everything after the decimal point.
 And 40000 gives <code>?ILLEGAL QUANTITY  ERROR</code>, because it’s too
@@ -430,9 +443,9 @@ trap</h2>
 <p><strong>Goal:</strong> Learn the C64’s naming rules, including the
 strange ones.</p>
 <p><strong>Try it:</strong></p>
-<pre><code>COINS = 40
-COMBO = 6
-PRINT COINS</code></pre>
+<pre><code><span class="ln">COINS = 40</span>
+<span class="ln">COMBO = 6</span>
+<span class="ln">PRINT COINS</span></code></pre>
 <p><strong>Predict before you run the last line.</strong> Most people
 expect 40.</p>
 <p><strong>Why.</strong> The C64 prints 6. It only reads the
@@ -441,9 +454,9 @@ COINS and COMBO are both just CO: the same box. The second line quietly
 replaced the 40. Nothing warned you. Lesson 1.5 shows how to make sure
 it never happens to you.</p>
 <p><strong>Prove it.</strong> Ask the C64 what’s in all three names:</p>
-<pre><code>? COINS
-? COMBO
-? CO</code></pre>
+<pre><code><span class="ln">? COINS</span>
+<span class="ln">? COMBO</span>
+<span class="ln">? CO</span></code></pre>
 <p>All three answer <code>6</code>. Three names, one box.</p>
 <p>Picture it this way: the C64 makes its labels with a label maker that
 can only print <strong>two letters</strong>. You ask for a label that
@@ -462,7 +475,7 @@ commands and functions, like <code>PRINT</code>, <code>GOTO</code> and
 Appendix E lists every one.</p>
 <p><strong>Predict.</strong> Will this work? Write down yes or no, then
 try it:</p>
-<pre><code>LIFE = 3</code></pre>
+<pre><code><span class="ln">LIFE = 3</span></code></pre>
 <p><strong>Why it fails.</strong> The C64 answers
 <code>?SYNTAX  ERROR</code>. When you press RETURN, the C64 reads your
 line looking for its own words, and it finds them even in the middle of
@@ -684,31 +697,31 @@ doesn’t cook anything. You write the steps down first, then follow them
 when it’s time to cook. A video game level works the same way: the level
 is built in advance, and it plays out when you press Start.</p>
 <p><strong>Try it.</strong> Type this and press RETURN:</p>
-<pre><code>PRINT &quot;LEVEL UP&quot;</code></pre>
+<pre><code><span class="ln">PRINT &quot;LEVEL UP&quot;</span></code></pre>
 <p>The C64 prints <code>LEVEL UP</code> straight away. That’s
 <strong>direct mode</strong>, the way you worked in Chapter 1.</p>
 <p>Now type this, with a number in front, and press RETURN:</p>
-<pre><code>10 PRINT &quot;LEVEL UP&quot;</code></pre>
+<pre><code><span class="ln">10 PRINT &quot;LEVEL UP&quot;</span></code></pre>
 <p><strong>Predict.</strong> Before you look, write down what you think
 happened.</p>
 <p><strong>Why it works.</strong> Nothing was printed. The number at the
 start told the C64: don’t do this now, <em>store</em> it as line 10 of a
 program. That’s <strong>program mode</strong>. To follow the stored
 steps, type:</p>
-<pre><code>RUN</code></pre>
+<pre><code><span class="ln">RUN</span></code></pre>
 <p>Now <code>LEVEL UP</code> appears. To see the stored program,
 type:</p>
-<pre><code>LIST</code></pre>
+<pre><code><span class="ln">LIST</span></code></pre>
 <h2 id="lesson-2.2-lines-know-their-places">Lesson 2.2 — Lines know
 their places</h2>
 <p><strong>Goal:</strong> Understand how line numbers keep a program in
 order.</p>
 <p><strong>Try it.</strong> Type these three lines in this exact
 order:</p>
-<pre><code>NEW
-30 PRINT &quot;GOLD&quot;
-10 PRINT &quot;BRONZE&quot;
-20 PRINT &quot;SILVER&quot;</code></pre>
+<pre><code><span class="ln">NEW</span>
+<span class="ln">30 PRINT &quot;GOLD&quot;</span>
+<span class="ln">10 PRINT &quot;BRONZE&quot;</span>
+<span class="ln">20 PRINT &quot;SILVER&quot;</span></code></pre>
 <p><code>NEW</code> erases any program already stored, so you start
 clean.</p>
 <p><strong>Predict.</strong> You typed 30, then 10, then 20. What order
@@ -725,7 +738,7 @@ a box:</p>
 upward.</p>
 <p>Notice the gaps: 10, 20, 30, not 1, 2, 3. If you later need a step
 between BRONZE and SILVER, there’s room for it:</p>
-<pre><code>15 PRINT &quot;BRONZE STAR&quot;</code></pre>
+<pre><code><span class="ln">15 PRINT &quot;BRONZE STAR&quot;</span></code></pre>
 <p><code>LIST</code> it and see where it went. Line numbers can be
 anything from 0 to 63999, so there’s plenty of room.</p>
 <div class="good-to-know">
@@ -740,13 +753,13 @@ mind</h2>
 program.</p>
 <p><strong>Try it.</strong> With the four-line program from Lesson 2.2
 still stored, type:</p>
-<pre><code>20 PRINT &quot;SILVER, POLISHED&quot;</code></pre>
+<pre><code><span class="ln">20 PRINT &quot;SILVER, POLISHED&quot;</span></code></pre>
 <p><strong>Predict,</strong> then <code>LIST</code> it.</p>
 <p><strong>Why it works.</strong> A line with a number that already
 exists <strong>replaces</strong> the old line. The C64 keeps only one
 line 20.</p>
 <p>Now type just the number, and press RETURN:</p>
-<pre><code>15</code></pre>
+<pre><code><span class="ln">15</span></code></pre>
 <p><code>LIST</code> again. Line 15 is gone. A line number with nothing
 after it <strong>removes</strong> that line.</p>
 <p>When programs get long, you won’t want to see all of it at once.
@@ -790,11 +803,11 @@ line on the screen</h2>
 <p><strong>Goal:</strong> Fix a mistake without retyping the whole
 line.</p>
 <p><strong>Try it.</strong> Type this program, mistake included:</p>
-<pre><code>NEW
-10 PRINT &quot;MY FAVORITE REWARD IS&quot;
-20 PIRNT &quot;A NEW HIGH SCORE&quot;
-30 PRINT &quot;IT FEELS GREAT&quot;
-RUN</code></pre>
+<pre><code><span class="ln">NEW</span>
+<span class="ln">10 PRINT &quot;MY FAVORITE REWARD IS&quot;</span>
+<span class="ln">20 PIRNT &quot;A NEW HIGH SCORE&quot;</span>
+<span class="ln">30 PRINT &quot;IT FEELS GREAT&quot;</span>
+<span class="ln">RUN</span></code></pre>
 <p>The C64 prints the first line, then stops with
 <code>?SYNTAX  ERROR IN 20</code>. Helpfully, it tells you which line
 has the problem. (Yes, the C64 really does print two spaces before the
@@ -832,7 +845,7 @@ have it.)</p>
 <p>Here’s how C64 programmers clear the screen from <em>inside</em> a
 program. Type a line up to the opening quote, then press SHIFT +
 CLR/HOME:</p>
-<pre><code>10 PRINT &quot;{clr}LEVEL 1&quot;</code></pre>
+<pre><code><span class="ln">10 PRINT &quot;{clr}LEVEL 1&quot;</span></code></pre>
 <p>Inside quotes, SHIFT + CLR/HOME doesn’t clear anything. Instead, it
 types the clear-screen code into your text, and the C64 shows it as a
 <strong>reversed heart</strong>. When the program runs, PRINT sends that

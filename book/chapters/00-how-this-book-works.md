@@ -8,6 +8,16 @@ This book teaches you to program the Commodore 64. It also teaches something big
 - A paper notebook and a pencil. This is your **programmer's notebook**. You will draw tables and maps in it before you type.
 - About thirty minutes. Every lesson fits in one sitting.
 
+## Reading the code
+
+Anything shown on a dark blue screen like this is something to type:
+
+```
+PRINT "HELLO"
+```
+
+The little **RETURN** tag at the end of the line means: press RETURN (Enter on a PC keyboard). The C64 does nothing with a line until you do. You don't type the tag itself.
+
 ## How every lesson goes
 
 Every lesson has the same seven steps, so you always know where you are:
