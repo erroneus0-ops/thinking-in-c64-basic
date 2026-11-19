@@ -252,6 +252,9 @@ Conventions in chapter files:
   builds like Tracker v0 to v3, each version a visible milestone). ALWAYS show the finish line
   (where he is, what's next, how far to go): he was patient for years with braces because the end
   was visible. The waiting-period wish list is patience practice in its purest form.
+- **Motto: "A discovery, not a failure."** (editor) Knowing a trap exists turns frustration into
+  "oh, found another one." Every chapter that warns about traps or errors should carry this spirit.
+  (Known gap: Lesson 1.4 points to Appendix E, which isn't written yet; editor chose to leave it.)
 - **Know where to look:** chapters that front-load rules say so (Ch 1 opening): read once, don't
   memorize, come back when something bites. "Good programmers know where to look."
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
