@@ -156,7 +156,10 @@ Conventions in chapter files:
     combined two strings and a number in one PRINT.
   * Two-letter trap still "some of it" confusing despite the ? CO proof -> supports building the
     "Show variables" shelf panel.
-  * Quiz not attempted (maybe missed: it sits between exercises and notes).
+  * Quiz: he DID try it; it failed silently. Bug: in the quiz handler a loop variable `$c` overwrote
+    `$c = client()` (who is signed in), so the attempt had no user and the insert failed. Fixed
+    (loop var renamed) and the page now reports save failures. Lesson: retest every save path after
+    changing shared code.
   * Proposed: lighter notes (one tap per lesson: too slow / about right / too fast, plus one
     optional box), quiz moved up. Awaiting editor's decision.
 

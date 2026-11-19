@@ -84,6 +84,10 @@ async function renderQuiz(ch) {
       const res = await fetch('/api/quiz', { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chapter: ch.n, answers }) });
       const out = await res.json();
+      if (!res.ok || !out.results) {
+        document.getElementById('score').textContent = (out && out.error) ? out.error : 'That quiz couldn’t be saved. Is start.bat still running?';
+        return;
+      }
       for (const r of out.results) {
         const box = document.getElementById(`r${r.n}`);
         box.className = 'result ' + (r.correct ? 'good' : 'bad');
@@ -91,6 +95,8 @@ async function renderQuiz(ch) {
       }
       document.getElementById('score').textContent = `You got ${out.score} out of ${out.total}. Try again any time; every attempt is kept.`;
       await renderHistory(ch);
+    } catch (err) {
+      document.getElementById('score').textContent = 'That quiz couldn’t be saved. Is start.bat still running?';
     } finally { submit.disabled = false; }
   };
   await renderHistory(ch);

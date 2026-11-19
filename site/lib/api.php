@@ -149,7 +149,7 @@ function handle_api(string $route, string $root): void {
             $in = json_decode(file_get_contents('php://input'), true) ?: [];
             $n = (int)($in['chapter'] ?? -1);
             $chapter = null;
-            foreach ($content() as $c) if ($c['n'] === $n) $chapter = $c;
+            foreach ($content() as $one) if ($one['n'] === $n) $chapter = $one;   // not $c: that's who is signed in
             if (!$chapter || !$chapter['quiz']) { json_out(['error' => 'No quiz for that chapter'], 400); return; }
             $answers = $in['answers'] ?? [];
             $results = []; $score = 0;
