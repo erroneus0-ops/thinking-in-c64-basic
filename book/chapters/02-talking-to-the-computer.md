@@ -181,6 +181,8 @@ Now the typing is just copying, and the thinking is already done.
 
 ## Exercises
 
+Second time through? Find a different answer that still works, then compare it with your first.
+
 1. **Predict the order.** Type `NEW`, then these lines in this order: `40 PRINT "FOUR"`, `20 PRINT "TWO"`, `10 PRINT "ONE"`, `30 PRINT "THREE"`. Before typing `LIST` and `RUN`, write down what each will show.
 2. **Fix it two ways.** Type the HIGH SCORE program from Lesson 2.4. Fix line 20 once by retyping the whole line, then break it again and fix it with the screen editor. Which way was faster?
 3. **Build it.** Plan a program on paper that shows three of your best scores or achievements, one per line, using variables from your variable dictionary. Number the lines by tens, type it, and run it. Then add a title line at the top *without* retyping anything else.

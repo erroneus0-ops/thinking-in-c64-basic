@@ -217,6 +217,11 @@ Conventions in chapter files:
   the previous answer shows underneath in grey ("Last time (date): ..."). Every save is a new row;
   empty note boxes are never saved, so they can't wipe earlier notes. Book page loads (/book/) are
   logged in visits too (user may be blank: the book doesn't require sign-in).
+- REMIX ON REPEAT (editor): on a second pass, each exercise that already has an answer shows "You've
+  solved this before. This time, find a different answer that still works." Each chapter's
+  Exercises section says the same in one line. Ways to vary (for writers, NOT spelled out to the
+  student; finding them is the point): names, ? vs PRINT, calculating inside PRINT vs storing first,
+  one PRINT with semicolons vs several, data types (e.g. LB%), order of independent steps.
 - `/review` (Editor's view): everyone's latest notes and answers, every quiz attempt, recent
   programs, each tagged with who / device / IP, plus a "Who and where" visit log.
 - SIGN-IN by name only (editor's decision; family LAN). Cookie `c64user`, case-insensitive names

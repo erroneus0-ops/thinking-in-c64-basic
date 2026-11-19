@@ -55,6 +55,9 @@ function renderExercises(ch) {
     box.append(el('div', { className: 'card' },
       el('h3', { textContent: `${ex.n}. ${ex.title}` }),
       el('p', { textContent: ex.text }),
+      saved['exercise:' + id] && saved['exercise:' + id].text
+        ? el('p', { className: 'again', textContent: 'You’ve solved this before. This time, find a different answer that still works.' })
+        : el('span'),
       el('label', { className: 'small', htmlFor: ta.id, textContent: 'Your answer' }), ta,
       lastTime('exercise:' + id),
       saveRow(() => save(ch.n, 'exercise', id, ta.value))));
