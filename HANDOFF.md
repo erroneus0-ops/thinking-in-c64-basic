@@ -234,7 +234,11 @@ Conventions in chapter files:
   before it. (Beta test caught Ch 1 Ex 3 needing PRINT with words and boxes mixed, which draft 2 had
   dropped; fixed in Lesson 1.2.) Joining strings with + stays in Ch 4.
 - **Short patience is a design constraint** (the student's known trait, per the editor): short steps,
-  fast payoffs, light forms. Never treat it as his problem to fix.
+  fast payoffs, light forms. Never treat it as his problem to fix. But it is UNDERDEVELOPED, so
+  TRAINABLE: early chapters give instant payoffs; later ones slowly stretch the gap (multi-sitting
+  builds like Tracker v0 to v3, each version a visible milestone). ALWAYS show the finish line
+  (where he is, what's next, how far to go): he was patient for years with braces because the end
+  was visible. The waiting-period wish list is patience practice in its purest form.
 - **Know where to look:** chapters that front-load rules say so (Ch 1 opening): read once, don't
   memorize, come back when something bites. "Good programmers know where to look."
 - **Simplify, never falsify:** every rule the book states must be literally true on a real C64.
