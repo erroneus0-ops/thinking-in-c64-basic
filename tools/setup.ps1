@@ -13,6 +13,7 @@ param([string]$ViceDir = '')
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'      # makes downloads much faster
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $Root    = Split-Path -Parent $PSScriptRoot
 $Runtime = Join-Path $Root 'runtime'
@@ -30,10 +31,20 @@ function Fail($text) { Write-Host ''; Write-Host $text -ForegroundColor Red; exi
 # Download with retries, using the system proxy (and its sign-in) like a browser would.
 # If a file of that name was already saved into runtime\ by hand, use it instead.
 # If every attempt fails, explain how to download it in a browser instead.
+# A zip that was cut off mid-download can't be opened; check before trusting one.
+function Test-Zip($Path) {
+    try { [IO.Compression.ZipFile]::OpenRead($Path).Dispose(); return $true } catch { return $false }
+}
+
 function Get-Download($Url, $Out, $What) {
+    $isZip = $Out.EndsWith('.zip')
     if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0)) {
-        Write-Host "Using $What, already saved at $Out"
-        return
+        if (-not $isZip -or (Test-Zip $Out)) {
+            Write-Host "Using $What, already saved at $Out"
+            return
+        }
+        Write-Host "The saved copy of $What is incomplete; downloading it again." -ForegroundColor Yellow
+        Remove-Item $Out
     }
     $agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) thinking-in-c64-basic-setup'
     for ($try = 1; $try -le 3; $try++) {
@@ -42,7 +53,8 @@ function Get-Download($Url, $Out, $What) {
             $proxy.Credentials = [Net.CredentialCache]::DefaultCredentials
             [Net.WebRequest]::DefaultWebProxy = $proxy
             Invoke-WebRequest -Uri $Url -OutFile $Out -UseBasicParsing -UserAgent $agent
-            if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0)) { return }
+            if ((Test-Path $Out) -and ((Get-Item $Out).Length -gt 0) -and (-not $isZip -or (Test-Zip $Out))) { return }
+            throw 'the download arrived incomplete'
         } catch {
             Write-Host "  Attempt $try didn't finish: $($_.Exception.Message)" -ForegroundColor Yellow
             Remove-Item $Out -ErrorAction SilentlyContinue
