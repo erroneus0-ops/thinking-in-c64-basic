@@ -127,11 +127,13 @@ function renderNotes(ch) {
   box.replaceChildren();
   for (const lesson of ch.lessons) {
     const label = /^\d/.test(lesson.id) ? `Lesson ${lesson.id}: ${lesson.title}` : lesson.title;
-    const fields = ['confusing', 'boring', 'fun'].map(kind => {
+    // Short questions that ask for a real answer, not a yes or no (editor's decision).
+    const fields = ['explain', 'reaction'].map(kind => {
       const item = `${lesson.id}:${kind}`;
       const ta = el('textarea', { id: `n-${item}` });
-      ta.style.minHeight = '2.8rem';
-      const prompt = { confusing: 'What was confusing?', boring: 'What was boring?', fun: 'What was fun?' }[kind];
+      ta.style.minHeight = '3.6rem';
+      const prompt = { explain: 'Explain this lesson’s big idea in your own words.',
+                       reaction: 'What surprised you, confused you, or dragged? Tell me why.' }[kind];
       return { item, ta, nodes: [el('label', { className: 'small', htmlFor: ta.id, textContent: prompt }), ta, lastTime('note:' + item)] };
     });
     box.append(el('div', { className: 'card' },

@@ -15,7 +15,16 @@
   .under-screen { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
   #status { flex: 1 1 14rem; }
   #status { margin: 0; color: var(--muted); }
-  .under-buttons { display: flex; gap: 0.5rem; flex: none; }
+  .under-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; flex: none; }
+  #shelf { margin-top: 1rem; }
+  .shelf-title { font-size: 1.05rem; margin: 0 0 0.6rem; }
+  #boxes { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: 0.6rem;
+    padding-bottom: 0.6rem; border-bottom: 4px solid var(--rule); }
+  .box { border: 1.5px solid var(--rule); border-radius: 6px; padding: 0.45rem 0.6rem; background: var(--paper); min-width: 0; }
+  .box .label { font: 700 1.15rem "IBM Plex Mono", Consolas, monospace; color: var(--accent); }
+  .box .value { font: 600 0.95rem "IBM Plex Mono", Consolas, monospace; overflow-wrap: anywhere; }
+  .box .type { font-size: 0.8rem; color: var(--muted); }
+  #boxes .none { color: var(--muted); grid-column: 1 / -1; }
   #status.bad { color: var(--bad); }
   aside h2 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
   aside h2:first-child { margin-top: 0; }
@@ -45,9 +54,14 @@
     <div class="under-screen">
       <p id="status" role="status">Starting the C64…</p>
       <span class="under-buttons">
+        <button id="vars-btn" disabled>Show variables</button>
         <button data-keys="ShiftLeft home" disabled>Clear screen</button>
         <button id="keyboard" disabled>Show keyboard</button>
       </span>
+    </div>
+    <div id="shelf" hidden>
+      <h2 class="shelf-title">Variables, as the C64 knows them</h2>
+      <div id="boxes"></div>
     </div>
   </section>
   <aside>

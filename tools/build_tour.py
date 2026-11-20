@@ -52,8 +52,9 @@ SLIDES = [
      "screen for a real C64 keyboard to tap on.</p>"
      "<p>Reading and running work great on a phone. For writing longer programs, a computer is easier.</p>"),
     ("Chapter work: exercises, quiz, notes", "work",
-     "<p>Each chapter has exercises, a five-question quiz, and space for your notes: what was confusing, "
-     "what was boring, what was fun. Everything is saved as you go.</p>"
+     "<p>Each chapter has exercises, a five-question quiz, and two questions per lesson for your notes: "
+     "explain the big idea in your own words, and say what surprised you, confused you, or dragged. "
+     "Everything is saved as you go.</p>"
      "<p>Take a quiz as many times as you like. Every attempt is kept, so you can watch your scores climb.</p>"),
     ("A discovery, not a failure", None,
      "<p class=\"big\">Every mistake you make on the C64 teaches you something about how it works.</p>"

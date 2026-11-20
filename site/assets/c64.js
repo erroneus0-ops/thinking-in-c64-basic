@@ -153,6 +153,75 @@ async function shiftClick(e) {
   focusC64();
 }
 
+// ---- Variables, as the C64 knows them ---------------------------------------
+// Reads BASIC's own variable list (from the address in 45/46 to the one in 47/48, 7 bytes each)
+// and shows each box with the label the C64 actually stored: two letters plus the type mark.
+// No translation back to the longer names typed: noticing that is the reader's job.
+function c64Number(n) {
+  if (n === 0) return '0';
+  const a = Math.abs(n);
+  if (a >= 1e9 || a < 0.01) {                       // the C64 switches to E notation here
+    let [m, e] = n.toExponential(8).split('e');
+    m = m.replace(/\.?0+$/, '');
+    const ev = parseInt(e, 10);
+    return `${m}E${ev < 0 ? '-' : '+'}${String(Math.abs(ev)).padStart(2, '0')}`;
+  }
+  let t = String(parseFloat(n.toPrecision(9)));
+  return t.replace(/^(-?)0\./, '$1.');                // the C64 writes .5, not 0.5
+}
+function petsciiText(bytes) {
+  return bytes.map(b => (b >= 32 && b < 91) ? String.fromCharCode(b) : (b === 92 ? '£' : b === 94 ? '↑' : '·')).join('');
+}
+function readVariables() {
+  const start = peek16(45), end = peek16(47), out = [];
+  for (let a = start; a + 7 <= end && out.length < 200; a += 7) {
+    const b = [...Array(7)].map((_, i) => peek(a + i));
+    const n1 = b[0] & 127, n2 = b[1] & 127, hi1 = b[0] & 128, hi2 = b[1] & 128;
+    const name = String.fromCharCode(n1) + (n2 ? String.fromCharCode(n2) : '');
+    if (!hi1 && !hi2) {                                  // number: 5-byte floating point
+      let v = 0;
+      if (b[2]) {
+        const mant = ((b[3] | 128) * 2 ** 24 + b[4] * 2 ** 16 + b[5] * 2 ** 8 + b[6]) / 2 ** 32;
+        v = (b[3] & 128 ? -1 : 1) * mant * 2 ** (b[2] - 128);
+      }
+      out.push({ label: name, type: 'number', value: c64Number(v) });
+    } else if (!hi1 && hi2) {                            // string: length + address of the text
+      const len = b[2], ptr = b[3] | (b[4] << 8);
+      out.push({ label: name + '$', type: 'text', value: '"' + petsciiText([...Array(len)].map((_, i) => peek(ptr + i))) + '"' });
+    } else if (hi1 && hi2) {                             // whole number: high byte first
+      let v = (b[2] << 8) | b[3]; if (v > 32767) v -= 65536;
+      out.push({ label: name + '%', type: 'whole number', value: String(v) });
+    } else {
+      out.push({ label: 'FN ' + name, type: 'function', value: '' });
+    }
+  }
+  return out;
+}
+
+// The shelf panel: refreshed twice a second while open, so values change as a program runs.
+const shelf = document.getElementById('shelf'), boxesEl = document.getElementById('boxes');
+const varsBtn = document.getElementById('vars-btn');
+let shelfTimer = null, lastShelf = '';
+function drawShelf() {
+  const vars = readVariables();
+  const key = JSON.stringify(vars);
+  if (key === lastShelf) return;          // only redraw when something changed
+  lastShelf = key;
+  boxesEl.replaceChildren(...(vars.length ? vars.map(v => el('div', { className: 'box' },
+      el('div', { className: 'label', textContent: v.label }),
+      el('div', { className: 'value', textContent: v.value }),
+      el('div', { className: 'type', textContent: v.type })))
+    : [el('p', { className: 'none', textContent: 'No variables yet. RUN, NEW and changing a program line all empty the shelf.' })]));
+}
+function el(tag, props = {}, ...kids) { const e = document.createElement(tag); Object.assign(e, props); e.append(...kids); return e; }
+varsBtn.onclick = () => {
+  shelf.hidden = !shelf.hidden;
+  varsBtn.textContent = shelf.hidden ? 'Show variables' : 'Hide variables';
+  clearInterval(shelfTimer);
+  if (!shelf.hidden) { lastShelf = ''; drawShelf(); shelfTimer = setInterval(drawShelf, 500); }
+  focusC64();
+};
+
 async function boot() {
   const config = { navbar: false, dialog_on_missing_roms: false, dialog_on_disk: false };
   frame.src = '/emu/index.html#' + encodeURIComponent(JSON.stringify(config));
@@ -175,6 +244,7 @@ async function boot() {
   emu.$('#virtual_keyboard').on('shown.bs.collapse hidden.bs.collapse', fitFrame);
   window.addEventListener('resize', () => setTimeout(fitFrame, 200));
   keyboardBtn.disabled = false;
+  varsBtn.disabled = false;
   setStatus('Ready. Click the C64 screen, then type.');
   focusC64();
 }

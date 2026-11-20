@@ -185,8 +185,9 @@ Conventions in chapter files:
   * His model of RETURN: "a text box like a web form". Nearly right; the C64 twist is that the
     whole screen is the form and RETURN submits WHICHEVER line the cursor is on. Candidate opening
     picture for Lesson 2.4 (screen editor), in his own words. DONE: Lesson 2.4 now opens with it.
-  * Proposed: lighter notes (one tap per lesson: too slow / about right / too fast, plus one
-    optional box), quiz moved up. Awaiting editor's decision.
+  * NOTES REFORMATTED (editor's decision): short questions that demand a real answer, not yes/no.
+    Two per lesson: "Explain this lesson's big idea in your own words." and "What surprised you,
+    confused you, or dragged? Tell me why." (item keys LESSON:explain, LESSON:reaction).
 
 - Story-framed lessons (Micro Adventure style): ASKED, beta tester unsure/not interested; editor:
   better suited to younger readers. DECISION: no story frame. He wants real work (job/challenge).
@@ -313,6 +314,16 @@ COLOR (OR), COST (COS), MONEY (ON), TOTAL (TO), SCORE (OR), TIME (TI).
 
 See the last section of `book/plan.md`: example name (placeholder KAITO), second-language
 support, answer keys, paper vs. site notebook, title, reference machine.
+
+## Show variables panel (built; editor-approved design)
+
+"Show variables" under the C64 screen opens a shelf of boxes, one per variable, read live (every
+0.5 s) from BASIC's variable table: label AS THE C64 STORED IT (two letters + $ or %, or "FN XX"),
+value, type. EDITOR'S RULE: never map back to the longer typed name (COINS -> CO is the reader's
+discovery to make). Numbers are decoded from the 5-byte float and formatted like the C64's own
+PRINT (.5, 1E+10, 1E-03, 9 digits): verified identical to PRINT for 11 tricky values. Values change
+live while a program runs, so it doubles as a watch window: the start of a BASIC debugger (planned
+next: line stopped at, highlight what changed, arrays for Ch 13, Detective Work chapter).
 
 ## Variable list helper (tested)
 

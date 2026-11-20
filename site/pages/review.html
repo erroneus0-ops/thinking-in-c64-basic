@@ -18,7 +18,8 @@
   .entry .text { white-space: pre-wrap; }
   .tag { font-weight: 700; }
   .tag.boring { color: var(--bad); }
-  .tag.fun { color: var(--good); }
+  .tag.fun, .tag.explain { color: var(--good); }
+  .tag.reaction { color: var(--accent); }
   table { border-collapse: collapse; width: 100%; }
   th, td { text-align: left; padding: 0.35rem 0.6rem 0.35rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   pre.c64 { margin: 0.4rem 0 1rem; }
@@ -59,7 +60,7 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
     const head = `Chapter ${r.chapter}: ${/^\d/.test(lesson) ? 'Lesson ' + lesson + ', ' : ''}${lessonTitle(r.chapter, lesson)}`;
     if (head !== last) { notes.append(el('h3', { textContent: head })); last = head; }
     notes.append(el('div', { className: 'entry' },
-      el('div', {}, el('span', { className: 'tag ' + kind, textContent: kind[0].toUpperCase() + kind.slice(1) + ': ' }), el('span', { className: 'text', textContent: r.text })),
+      el('div', {}, el('span', { className: 'tag ' + kind, textContent: ({ explain: 'In his own words', reaction: 'Surprised, confused or dragged' }[kind] || (kind[0].toUpperCase() + kind.slice(1))) + ': ' }), el('span', { className: 'text', textContent: r.text })),
       el('div', { className: 'what', textContent: `${r.user} · ${r.device || 'unknown device'} · ${r.ip || 'no address'} · ${r.created_at}` })));
   }
 
