@@ -88,6 +88,8 @@ PRINT P;P$;P%
 | `P$`, `N$` | Text (a **string**) | Letters, digits and symbols, up to 255 of them, in quotes | `P$ = "BONUS POINTS"` |
 | `P%`, `L%` | Whole number | Whole numbers only, from −32768 to 32767 | `P% = 3` |
 
+(Programmers in a wide variety of languages call whole numbers like these **signed integers**. More on that later in this book!)
+
 **Mixing words and boxes.** The semicolon glues things together on one row, and it can glue words in quotes to boxes:
 
 ```

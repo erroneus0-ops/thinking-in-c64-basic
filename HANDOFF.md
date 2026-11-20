@@ -78,6 +78,11 @@ Content ideas from the editor (to place in chapters):
   The editor's own habit, told as a parenthetical anecdote.
 - Reserved words: Ch 1 Lesson 1.4 (editor asked for a briefing so names don't feel like a minefield).
   Key safe rule (tested): any two-letter name is safe except IF ON OR TO GO FN ST TI.
+- INTEGERS AND BINARY (editor's plan): Ch 1 keeps "whole numbers", with one parenthetical naming them
+  "signed integers" (done, Lesson 1.2). Ch 7 teaches boolean logic (AND, OR, NOT; true = -1, tested).
+  The sprite chapter teaches binary AS A PICTURE: rows of pixels on graph paper become numbers (8
+  squares = one byte); then 16 squares = one integer explains the -32768..32767 range in a sentence.
+  Leave the -1 = all sixteen bits on connection (why AND/OR work on bits) as an earned discovery.
 - Ch 3 must teach that RND(1) repeats after every reset (tested); the opener now hints at it.
 - The ↑ (power) key: `^` on a PC keyboard types nothing in the browser emulator. Solve before Ch 3.
 - OPENER (editor's decision): the book's first page is the classic one-line maze,
