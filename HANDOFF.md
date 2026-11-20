@@ -322,6 +322,13 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 
 ## Show variables panel (built; editor-approved design)
 
+ARRAYS cabinet (added after the editor's DIM A(10) test showed arrays were missing): reads the
+array list (47/48 to 49/50). Per array: 2-byte name (type bits as for variables), total size
+(little-endian), dimension count, then each dimension's size (big-endian) stored LAST dimension
+first; elements follow with the FIRST index changing fastest (5 bytes number, 2 bytes integer high
+first, 3 bytes string: length + address). Drawn as a row of numbered boxes (1-D) or a grid with
+row/column numbers (2-D up to 11 x 11); box 0 is shown, since DIM A(10) really makes 11 boxes.
+
 Layout (editor): FOUR CABINETS, one per type (Numbers, Text ($), Whole numbers (%), Functions (FN)),
 always shown, empty ones labelled "Empty"; boxes in creation order inside each.
 

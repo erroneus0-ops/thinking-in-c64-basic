@@ -21,6 +21,17 @@
   #boxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; }
   .cabinet { border: 1.5px solid var(--rule); border-bottom-width: 5px; border-radius: 8px; padding: 0.5rem 0.6rem 0.6rem; }
   .cabinet h3 { font-size: 0.95rem; margin: 0 0 0.45rem; }
+  .cabinet.arrays { grid-column: 1 / -1; }
+  .array { margin: 0 0 0.75rem; }
+  .array .label { font: 700 1.05rem "IBM Plex Mono", Consolas, monospace; color: var(--accent); display: inline; margin-right: 0.6rem; }
+  .array .dims { display: inline; color: var(--muted); font-size: 0.85rem; }
+  .cells { display: grid; grid-template-columns: repeat(auto-fill, minmax(4.2rem, 1fr)); gap: 0.3rem; margin-top: 0.35rem; }
+  .cell { border: 1px solid var(--rule); border-radius: 5px; padding: 0.15rem 0.35rem; font: 600 0.85rem "IBM Plex Mono", Consolas, monospace; overflow-wrap: anywhere; }
+  .cell .idx { display: block; font: 400 0.72rem "Atkinson Hyperlegible", sans-serif; color: var(--muted); }
+  .grid-wrap { overflow-x: auto; margin-top: 0.35rem; }
+  table.grid { border-collapse: collapse; font: 600 0.85rem "IBM Plex Mono", Consolas, monospace; }
+  table.grid th { font: 400 0.75rem "Atkinson Hyperlegible", sans-serif; color: var(--muted); padding: 0.1rem 0.4rem; }
+  table.grid td { border: 1px solid var(--rule); padding: 0.2rem 0.45rem; text-align: right; min-width: 2.6rem; }
   .drawers { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 0.45rem; }
   .box { border: 1.5px solid var(--rule); border-radius: 6px; padding: 0.45rem 0.6rem; background: var(--paper); min-width: 0; }
   .box .label { font: 700 1.15rem "IBM Plex Mono", Consolas, monospace; color: var(--accent); }

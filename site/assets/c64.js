@@ -191,6 +191,46 @@ function formulaAt(addr) {
   return out;
 }
 
+// One stored value, decoded. kind: 'number' (5 bytes), 'whole number' (2 bytes, high first),
+// 'text' (length + address of the characters).
+function decodeValue(kind, a) {
+  if (kind === 'number') {
+    const e = peek(a); if (!e) return '0';
+    const m1 = peek(a + 1);
+    const mant = ((m1 | 128) * 2 ** 24 + peek(a + 2) * 2 ** 16 + peek(a + 3) * 2 ** 8 + peek(a + 4)) / 2 ** 32;
+    return c64Number((m1 & 128 ? -1 : 1) * mant * 2 ** (e - 128));
+  }
+  if (kind === 'whole number') { let v = (peek(a) << 8) | peek(a + 1); if (v > 32767) v -= 65536; return String(v); }
+  const len = peek(a), ptr = peek(a + 1) | (peek(a + 2) << 8);
+  return '"' + petsciiText([...Array(len)].map((_, i) => peek(ptr + i))) + '"';
+}
+
+// Arrays live in their own list after the simple variables (from 47/48 to 49/50). Each starts
+// with its name, its total size, how many dimensions, and each dimension's size, stored LAST
+// dimension first. The boxes follow, with the FIRST index changing fastest.
+function readArrays() {
+  const out = []; let a = peek16(47); const end = peek16(49);
+  while (a + 5 <= end && out.length < 20) {
+    const b0 = peek(a), b1 = peek(a + 1), total = peek(a + 2) | (peek(a + 3) << 8), n = peek(a + 4);
+    if (!total) break;
+    const kind = !(b0 & 128) && !(b1 & 128) ? 'number' : !(b0 & 128) ? 'text' : 'whole number';
+    const size = { number: 5, text: 3, 'whole number': 2 }[kind];
+    const stored = [...Array(n)].map((_, i) => (peek(a + 5 + 2 * i) << 8) | peek(a + 6 + 2 * i));
+    const dims = stored.slice().reverse();                   // as written in DIM: first index first
+    const name = String.fromCharCode(b0 & 127) + ((b1 & 127) ? String.fromCharCode(b1 & 127) : '');
+    const first = a + 5 + 2 * n, count = dims.reduce((x, y) => x * y, 1);
+    const at = (idx) => {                                     // idx = [i, j, ...] -> address
+      let off = 0, mul = 1;
+      for (let k = 0; k < idx.length; k++) { off += idx[k] * mul; mul *= dims[k]; }
+      return first + off * size;
+    };
+    out.push({ label: name + { number: '', text: '$', 'whole number': '%' }[kind] + '()', kind, dims, count,
+               value: (...idx) => decodeValue(kind, at(idx)) });
+    a += total;
+  }
+  return out;
+}
+
 function readVariables() {
   const start = peek16(45), end = peek16(47), out = [];
   for (let a = start; a + 7 <= end && out.length < 200; a += 7) {
@@ -232,9 +272,36 @@ const CABINETS = [
   { type: 'whole number', title: 'Whole numbers (%)' },
   { type: 'function', title: 'Functions (FN)' },
 ];
+function drawArray(arr) {
+  const MAX = 121;   // up to an 11 x 11 grid; bigger arrays show their first boxes
+  const box = el('div', { className: 'array' },
+    el('div', { className: 'label', textContent: arr.label }),
+    el('div', { className: 'dims', textContent: arr.dims.map(d => `0 to ${d - 1}`).join(', ') }));
+  if (arr.dims.length === 2 && arr.dims[0] <= 11 && arr.dims[1] <= 11) {
+    const [rows, cols] = arr.dims;
+    const table = el('table', { className: 'grid' },
+      el('tr', {}, el('th', {}), ...[...Array(cols)].map((_, j) => el('th', { textContent: j }))),
+      ...[...Array(rows)].map((_, i) => el('tr', {}, el('th', { textContent: i }),
+        ...[...Array(cols)].map((_, j) => el('td', { textContent: arr.value(i, j) })))));
+    box.append(el('div', { className: 'grid-wrap' }, table));
+  } else {
+    const cells = el('div', { className: 'cells' });
+    for (let k = 0; k < Math.min(arr.count, MAX); k++) {
+      const idx = []; let r = k;
+      for (const d of arr.dims) { idx.push(r % d); r = Math.floor(r / d); }
+      cells.append(el('div', { className: 'cell' }, el('span', { className: 'idx', textContent: idx.join(',') }),
+                                                    el('span', { textContent: arr.value(...idx) })));
+    }
+    box.append(cells);
+    if (arr.count > MAX) box.append(el('p', { className: 'none', textContent: `…and ${arr.count - MAX} more boxes` }));
+  }
+  return box;
+}
 function drawShelf() {
   const vars = readVariables();
-  const key = JSON.stringify(vars);
+  const arrays = readArrays();
+  const key = JSON.stringify([vars, arrays.map(a => [a.label, a.dims, a.value(...a.dims.map(() => 0)),
+    [...Array(Math.min(a.count, 121))].map((_, k) => { const idx = []; let r = k; for (const d of a.dims) { idx.push(r % d); r = Math.floor(r / d); } return a.value(...idx); })])]);
   if (key === lastShelf) return;          // only redraw when something changed
   lastShelf = key;
   boxesEl.replaceChildren(...CABINETS.map(cab => {
@@ -246,7 +313,9 @@ function drawShelf() {
             el('div', { className: 'label', textContent: v.label }),
             el('div', { className: 'value', textContent: v.value })))
         : [el('p', { className: 'none', textContent: 'Empty' })])));
-  }));
+  }), el('section', { className: 'cabinet arrays' },
+    el('h3', { textContent: 'Arrays' }),
+    ...(arrays.length ? arrays.map(drawArray) : [el('p', { className: 'none', textContent: 'Empty' })])));
 }
 function el(tag, props = {}, ...kids) { const e = document.createElement(tag); Object.assign(e, props); e.append(...kids); return e; }
 varsBtn.onclick = () => {
