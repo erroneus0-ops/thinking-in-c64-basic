@@ -322,7 +322,11 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 value, type. EDITOR'S RULE: never map back to the longer typed name (COINS -> CO is the reader's
 discovery to make). Numbers are decoded from the 5-byte float and formatted like the C64's own
 PRINT (.5, 1E+10, 1E-03, 9 digits): verified identical to PRINT for 11 tricky values. Values change
-live while a program runs, so it doubles as a watch window: the start of a BASIC debugger (planned
+live while a program runs, so it doubles as a watch window. FN boxes are shown too (editor: "they
+exist, they will create questions and curiosity, and they will eventually get an answer"): label
+"FN PR", value "(X) = X*2+1" read from the program text via the entry's formula pointer, parameter
+name via its pointer to the parameter's own box (which DEF FN creates, and which stays 0 after a
+call because BASIC saves and restores it; a future 'why?' moment). It is the start of a BASIC debugger (planned
 next: line stopped at, highlight what changed, arrays for Ch 13, Detective Work chapter).
 
 ## Variable list helper (tested)

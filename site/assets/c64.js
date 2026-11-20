@@ -172,6 +172,25 @@ function c64Number(n) {
 function petsciiText(bytes) {
   return bytes.map(b => (b >= 32 && b < 91) ? String.fromCharCode(b) : (b === 92 ? '£' : b === 94 ? '↑' : '·')).join('');
 }
+// BASIC V2's keywords, in token order from 128 (the same table the C64 uses to store them).
+const TOKENS = ['END','FOR','NEXT','DATA','INPUT#','INPUT','DIM','READ','LET','GOTO','RUN','IF','RESTORE',
+  'GOSUB','RETURN','REM','STOP','ON','WAIT','LOAD','SAVE','VERIFY','DEF','POKE','PRINT#','PRINT','CONT',
+  'LIST','CLR','CMD','SYS','OPEN','CLOSE','GET','NEW','TAB(','TO','FN','SPC(','THEN','NOT','STEP','+','-',
+  '*','/','↑','AND','OR','>','=','<','SGN','INT','ABS','USR','FRE','POS','SQR','RND','LOG','EXP','COS',
+  'SIN','TAN','ATN','PEEK','LEN','STR$','VAL','ASC','CHR$','LEFT$','RIGHT$','MID$','GO'];
+// A function's formula, read from inside the program: from where its box points, up to the
+// end of that statement.
+function formulaAt(addr) {
+  let out = '', quoted = false;
+  for (let i = 0; i < 80; i++) {
+    const t = peek(addr + i);
+    if (t === 0 || (t === 58 && !quoted)) break;
+    if (t === 34) quoted = !quoted;
+    out += (!quoted && t >= 128 && t - 128 < TOKENS.length) ? TOKENS[t - 128] : (t === 255 ? 'π' : petsciiText([t]));
+  }
+  return out;
+}
+
 function readVariables() {
   const start = peek16(45), end = peek16(47), out = [];
   for (let a = start; a + 7 <= end && out.length < 200; a += 7) {
@@ -192,7 +211,10 @@ function readVariables() {
       let v = (b[2] << 8) | b[3]; if (v > 32767) v -= 65536;
       out.push({ label: name + '%', type: 'whole number', value: String(v) });
     } else {
-      out.push({ label: 'FN ' + name, type: 'function', value: '' });
+      // A function box holds where its formula is, and which box is its parameter.
+      const par = b[4] | (b[5] << 8);
+      const pn = String.fromCharCode(peek(par - 2) & 127) + ((peek(par - 1) & 127) ? String.fromCharCode(peek(par - 1) & 127) : '');
+      out.push({ label: 'FN ' + name, type: 'function', value: `(${pn}) = ${formulaAt(b[2] | (b[3] << 8))}` });
     }
   }
   return out;
