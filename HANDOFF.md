@@ -39,7 +39,8 @@ organized, orderly thinking habits."
 
 ## The C64 tour (docs/tour/)
 
-Ten slides introducing the C64 and the course site, linked from the top of the book's HTML editions
+Twelve slides introducing the C64 and the course site (the submission guide is three slides: pick the
+exercise, Submit saves a new version, Run/Load/Listing; expanded at the editor's request), linked from the top of the book's HTML editions
 as "New to the Commodore 64 and the emulator? Take the quick tour" (not in the PDF; editor's choice).
 Slide text lives in `tools/build_tour.py`; real screenshots in `tools/tour_shots/`, captured by
 `tools/capture_tour.py` from the running course site (needs runtime/, Playwright, Pillow). After the

@@ -32,10 +32,21 @@ SLIDES = [
      "<p>Hold <kbd>Shift</kbd> and click anywhere on the C64 screen, and the cursor jumps there. Here it "
      "landed on the I of PIRNT, ready to fix the typo by typing over it.</p>"
      "<p>It works while you’re typing commands. While a program runs, it waits.</p>"),
-    ("Save your work with Submit", "submit",
-     "<p><strong>Submit program</strong> saves the program in the C64’s memory as a new version. "
-     "Earlier versions are kept, so nothing is ever lost.</p>"
-     "<p><strong>Run</strong> brings any version back and runs it. <strong>Listing</strong> shows it as text.</p>"),
+    ("Pick the exercise first", "picker",
+     "<p>Before you submit, choose the exercise you’re working on from the <strong>Exercise</strong> list, "
+     "so your program is filed in the right place. <strong>Free practice</strong> is for anything else.</p>"
+     "<p>Chapter 1 has nothing to submit: you type commands that run right away. Programs to submit start in Chapter 2.</p>"),
+    ("Submit saves a new version", "submit",
+     "<p><strong>Submit program</strong> saves whatever program is in the C64’s memory right now. Each "
+     "submit becomes a new version: 1, 2, 3 and so on. Nothing is ever overwritten.</p>"
+     "<p>Submit before you press <strong>Reset</strong> (which clears the C64’s memory) and before you try "
+     "something risky. It costs nothing.</p>"),
+    ("Run, Load, and Listing", "load",
+     "<p><strong>Run</strong> puts a saved version back into the C64 and runs it.<br>"
+     "<strong>Load</strong> puts it back and lists it, so you can keep working on it. Submit again when "
+     "you’re done, and it becomes the next version.<br>"
+     "<strong>Listing</strong> just shows the program as text. The C64 isn’t touched.</p>"
+     "<p>Careful: Run and Load <em>replace</em> whatever is in the C64 right now. Submit first if you want to keep it.</p>"),
     ("On a phone or tablet", "phone",
      "<p>Phones can’t show their own keyboard for the C64, so tap <strong>Show keyboard</strong> under the "
      "screen for a real C64 keyboard to tap on.</p>"

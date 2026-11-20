@@ -62,11 +62,17 @@ async def main():
         save(await screen.screenshot(), "shiftclick", 900)
         # Submit, versions, listing
         await typing(page, 'ri\n20 print "9000 points"\n')
-        await page.select_option("#exercise", "practice")
+        await page.select_option("#exercise", "ch02-ex3")
         await page.click("#submit"); await page.wait_for_timeout(1200)
         await page.click("#submit"); await page.wait_for_timeout(1200)
-        top = await page.locator("aside").bounding_box(); lb = await page.locator("#listing-box").bounding_box()
-        save(await page.screenshot(clip={"x": top["x"], "y": top["y"], "width": top["width"], "height": lb["y"] + lb["height"] - top["y"] + 8}), "submit", 700)
+        top = await page.locator("aside").bounding_box()
+        hint = await page.locator("#message").bounding_box()
+        save(await page.screenshot(clip={"x": top["x"], "y": top["y"], "width": top["width"], "height": hint["y"] + hint["height"] - top["y"] + 8}), "picker", 700)
+        vh = await page.locator("#versions").bounding_box(); lb = await page.locator("#listing-box").bounding_box()
+        save(await page.screenshot(clip={"x": top["x"], "y": vh["y"] - 6, "width": top["width"], "height": lb["y"] + lb["height"] - vh["y"] + 14}), "submit", 700)
+        # Load: put version 1 back into the C64, which then LISTs it
+        await page.click("#versions li:last-child button:has-text('Load')"); await page.wait_for_timeout(7000)
+        save(await screen.screenshot(), "load", 900)
         # Chapter work: the quiz
         await page.goto(URL + "/work#ch1"); await page.wait_for_selector("#q1a")
         await page.check("#q1c"); await page.wait_for_timeout(300)
