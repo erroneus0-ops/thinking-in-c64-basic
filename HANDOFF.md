@@ -317,6 +317,9 @@ support, answer keys, paper vs. site notebook, title, reference machine.
 
 ## Show variables panel (built; editor-approved design)
 
+Layout (editor): FOUR CABINETS, one per type (Numbers, Text ($), Whole numbers (%), Functions (FN)),
+always shown, empty ones labelled "Empty"; boxes in creation order inside each.
+
 "Show variables" under the C64 screen opens a shelf of boxes, one per variable, read live (every
 0.5 s) from BASIC's variable table: label AS THE C64 STORED IT (two letters + $ or %, or "FN XX"),
 value, type. EDITOR'S RULE: never map back to the longer typed name (COINS -> CO is the reader's

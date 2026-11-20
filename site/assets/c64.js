@@ -224,16 +224,29 @@ function readVariables() {
 const shelf = document.getElementById('shelf'), boxesEl = document.getElementById('boxes');
 const varsBtn = document.getElementById('vars-btn');
 let shelfTimer = null, lastShelf = '';
+// Four cabinets, one per kind of box, always shown (an empty one invites the question
+// "what goes in here?"). Boxes keep the order the C64 created them in.
+const CABINETS = [
+  { type: 'number', title: 'Numbers' },
+  { type: 'text', title: 'Text ($)' },
+  { type: 'whole number', title: 'Whole numbers (%)' },
+  { type: 'function', title: 'Functions (FN)' },
+];
 function drawShelf() {
   const vars = readVariables();
   const key = JSON.stringify(vars);
   if (key === lastShelf) return;          // only redraw when something changed
   lastShelf = key;
-  boxesEl.replaceChildren(...(vars.length ? vars.map(v => el('div', { className: 'box' },
-      el('div', { className: 'label', textContent: v.label }),
-      el('div', { className: 'value', textContent: v.value }),
-      el('div', { className: 'type', textContent: v.type })))
-    : [el('p', { className: 'none', textContent: 'No variables yet. RUN, NEW and changing a program line all empty the shelf.' })]));
+  boxesEl.replaceChildren(...CABINETS.map(cab => {
+    const mine = vars.filter(v => v.type === cab.type);
+    return el('section', { className: 'cabinet' },
+      el('h3', { textContent: cab.title }),
+      el('div', { className: 'drawers' }, ...(mine.length
+        ? mine.map(v => el('div', { className: 'box' },
+            el('div', { className: 'label', textContent: v.label }),
+            el('div', { className: 'value', textContent: v.value })))
+        : [el('p', { className: 'none', textContent: 'Empty' })])));
+  }));
 }
 function el(tag, props = {}, ...kids) { const e = document.createElement(tag); Object.assign(e, props); e.append(...kids); return e; }
 varsBtn.onclick = () => {

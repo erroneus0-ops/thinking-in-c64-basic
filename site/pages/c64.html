@@ -18,13 +18,14 @@
   .under-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; flex: none; }
   #shelf { margin-top: 1rem; }
   .shelf-title { font-size: 1.05rem; margin: 0 0 0.6rem; }
-  #boxes { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: 0.6rem;
-    padding-bottom: 0.6rem; border-bottom: 4px solid var(--rule); }
+  #boxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; }
+  .cabinet { border: 1.5px solid var(--rule); border-bottom-width: 5px; border-radius: 8px; padding: 0.5rem 0.6rem 0.6rem; }
+  .cabinet h3 { font-size: 0.95rem; margin: 0 0 0.45rem; }
+  .drawers { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 0.45rem; }
   .box { border: 1.5px solid var(--rule); border-radius: 6px; padding: 0.45rem 0.6rem; background: var(--paper); min-width: 0; }
   .box .label { font: 700 1.15rem "IBM Plex Mono", Consolas, monospace; color: var(--accent); }
   .box .value { font: 600 0.95rem "IBM Plex Mono", Consolas, monospace; overflow-wrap: anywhere; }
-  .box .type { font-size: 0.8rem; color: var(--muted); }
-  #boxes .none { color: var(--muted); grid-column: 1 / -1; }
+  #boxes .none { color: var(--muted); margin: 0; font-size: 0.9rem; }
   #status.bad { color: var(--bad); }
   aside h2 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
   aside h2:first-child { margin-top: 0; }
