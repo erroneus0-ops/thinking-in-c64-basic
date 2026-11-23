@@ -170,6 +170,16 @@ Conventions in chapter files:
 
 ## Beta test log
 
+- 22 Nov: DRAFT 3 of Chapters 1-2 (editor): same lessons and rules, NEW particulars everywhere
+  (pictures, examples, exercises, quizzes) so each pass has something new to read. Ch 1: lockers,
+  XP (X), G/G$/G% "GEMS FOUND", SHIELD/SHOTS = SH, FORTUNE (FOR) -> LUCK, ARMOR/ENDURANCE fix-it,
+  MAGIC/MANA quiz. Ch 2: GAME ON, START/HALFWAY/FINISH LINE + QUARTER WAY, PRITN fix by typing NT,
+  {clr}ROUND 1, game-over build exercise, LIST 20-40 quiz. All examples verified on the C64.
+  Exercise ids now carry a fingerprint of their wording (ex1-4f27a2), so rewritten exercises start
+  fresh on Chapter work; the Editor's view marks old answers "(earlier draft)".
+  Third name collision of the project, in tools/build.py: a loop variable `text` overwrote the
+  chapter's `text`, and the quizzes vanished. Renamed ex_text. Keep a dictionary, even in Python.
+
 - 18 Nov evening, Chapter 1 draft 2 (second pass), ~1 hour, laptop, notes on all 5 lessons:
   * PATIENCE "running thin" in nearly every "boring" note (he added "it's my own problem, not
     yours"). Likely: second pass is slow for him, AND the notes form is heavy (3 boxes x 5 lessons).

@@ -50,7 +50,7 @@ function renderExercises(ch) {
   box.replaceChildren();
   document.getElementById('exercises-section').hidden = !ch.exercises.length;
   for (const ex of ch.exercises) {
-    const id = `ex${ex.n}`;
+    const id = ex.id || `ex${ex.n}`;   // the id changes when the exercise is rewritten
     const ta = el('textarea', { id: `t-${id}` });
     box.append(el('div', { className: 'card' },
       el('h3', { textContent: `${ex.n}. ${ex.title}` }),

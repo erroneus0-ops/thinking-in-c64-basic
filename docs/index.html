@@ -107,7 +107,7 @@ th { border-bottom: 2px solid var(--ink); }
 </head>
 <body>
 <main>
-<p class="edition">Beta tester’s draft, built Nov 20, 2026</p>
+<p class="edition">Beta tester’s draft, built Nov 23, 2026</p>
 <p class="book-title">Thinking in C64 BASIC</p>
 <p class="tour-link"><a href="tour/">New to the Commodore 64 and the emulator? <span>Take the quick tour →</span></a></p>
 <details class="toc">
@@ -311,51 +311,50 @@ need line numbers until Chapter 2.</p>
 labels</h2>
 <p><strong>Goal:</strong> Put a number into the computer’s memory and
 get it back.</p>
-<p><strong>Picture:</strong> Imagine a shelf in a garage or a storeroom.
-On it sits a row of boxes. Each box has a label stuck on the front, so
-you can find it again without opening every box. Each box holds one
-thing. A labelled box on the shelf is called a
-<strong>variable</strong>. The computer’s memory is a very long shelf
-with thousands of these boxes.</p>
-<p>If you play video games, you already know variables. Your coin
-counter is a box labelled COINS. Every time you pick up a coin, the game
-opens that box, adds one, and puts the new number back.</p>
-<pre class="diagram"><code>     C           B           D          &lt;- labels
+<p><strong>Picture:</strong> Picture a row of lockers in a hallway. Each
+locker has a name tag on the door, so you can find it again without
+opening every one. Each locker holds one thing. A labelled box like this
+is called a <strong>variable</strong>, and the computer’s memory is a
+very long row of them: thousands of boxes, side by side on one
+shelf.</p>
+<p>If you play video games, you already know variables. Your experience
+points are a box labelled XP. Every time you finish a quest, the game
+opens that box, adds your reward, and puts the new total back.</p>
+<pre class="diagram"><code>     X           Y           K          &lt;- labels
   +-----+     +-----+     +-----+
-  |  7  |     |  0  |     |  0  |       &lt;- what is inside
+  | 100 |     |  0  |     |  0  |       &lt;- what is inside
   +-----+     +-----+     +-----+
 =======================================  &lt;- the shelf</code></pre>
 <p><strong>Try it.</strong> Type each line and press RETURN after
 it:</p>
-<pre><code><span class="ln">C = 7</span>
-<span class="ln">PRINT C</span></code></pre>
-<p>The C64 answers <code>7</code>. You put 7 into the box labelled C,
-then asked to see what was inside.</p>
+<pre><code><span class="ln">X = 100</span>
+<span class="ln">PRINT X</span></code></pre>
+<p>The C64 answers <code>100</code>. You put 100 into the box labelled
+X, then asked to see what was inside.</p>
 <p><strong>Predict.</strong> Before typing the next lines, write down
 what you think the C64 will show. Then try it.</p>
-<pre><code><span class="ln">C = C + 1</span>
-<span class="ln">PRINT C</span>
-<span class="ln">PRINT B</span></code></pre>
+<pre><code><span class="ln">X = X + 25</span>
+<span class="ln">PRINT X</span>
+<span class="ln">PRINT Y</span></code></pre>
 <p><strong>Why it works.</strong> The <code>=</code> sign does not mean
-“is equal to” here. It means “put into.” <code>C = C + 1</code> means:
-look in box C, add one, and put the answer back in box C. So C now holds
-8. Box B was never filled, so it holds 0. On the C64, an empty number
+“is equal to” here. It means “put into.” <code>X = X + 25</code> means:
+look in box X, add 25, and put the answer back in box X. So X now holds
+125. Box Y was never filled, so it holds 0. On the C64, an empty number
 box always starts at 0.</p>
-<p>That is exactly the coin counter from a game. <code>C = C + 1</code>
-is picking up one coin.</p>
-<p>You may have noticed a space before each number. The C64 leaves room
-in front of every number for a minus sign, even when there isn’t
-one.</p>
+<p>That is exactly a quest reward: <code>X = X + 25</code> is 25 more
+experience points.</p>
+<p>Notice the space before each number. The C64 leaves room in front of
+every number for a minus sign, even when there isn’t one.</p>
 <div class="good-to-know">
 <p>Want to know a secret? Type <code>?</code> instead of the whole word
 <code>PRINT</code>, and you get the same thing, quicker.</p>
 <p>Think of <code>PRINT</code> as a “what is?” command: you ask, and the
-C64 answers with what it is. So to ask “what is in C?”, you can
+C64 answers with what it is. So to ask “what is in X?”, you can
 type:</p>
-<pre><code><span class="ln">? C</span></code></pre>
+<pre><code><span class="ln">? X</span></code></pre>
 <p>To make the answer more meaningful, add a word after it:</p>
-<pre><code><span class="ln">? C &quot;COINS&quot;</span></code></pre>
-<p>The C64 answers <code>8 COINS</code>. And if you use <code>?</code>
+<pre><code><span class="ln">? X &quot;XP&quot;</span></code></pre>
+<p>The C64 answers <code>125 XP</code>. And if you use <code>?</code>
 inside a program, <code>LIST</code> shows it spelled out as
 <code>PRINT</code>, because to the C64 they’re the same word.</p>
 </div>
@@ -364,22 +363,23 @@ boxes</h2>
 <p><strong>Goal:</strong> Learn the three kinds of boxes, and prove
 they’re different.</p>
 <p><strong>Picture:</strong> Not every box can hold everything. A coin
-box holds amounts you can count and add. A note box holds a piece of
-paper with writing on it. You can’t add two notes together the way you
-add coins, and you can’t stuff a note into a coin box. The kind of thing
-a box can hold is called its <strong>data type</strong>.</p>
+jar holds amounts you can count and add. An envelope holds a written
+message. You can’t add two messages together the way you add coins, and
+you can’t drop a message into a coin jar and expect it to count. The
+kind of thing a box can hold is called its <strong>data
+type</strong>.</p>
 <p><strong>Try it.</strong> The same letter can label three different
 boxes:</p>
-<pre><code><span class="ln">P = 5000</span>
-<span class="ln">P$ = &quot;BONUS POINTS&quot;</span>
-<span class="ln">P% = 3</span>
-<span class="ln">PRINT P;P$;P%</span></code></pre>
+<pre><code><span class="ln">G = 250</span>
+<span class="ln">G$ = &quot;GEMS FOUND&quot;</span>
+<span class="ln">G% = 7</span>
+<span class="ln">PRINT G;G$;G%</span></code></pre>
 <p><strong>Predict</strong> what the last line will show before you
 press RETURN.</p>
 <p><strong>Why it works.</strong> The C64 answers
-<code>5000 BONUS POINTS 3</code>. There are three separate boxes here,
-all labelled P. The symbol at the end of a label is part of the label,
-and it tells the C64 what kind of box it is:</p>
+<code>250 GEMS FOUND 7</code>. There are three separate boxes here, all
+labelled G. The symbol at the end of a label is part of the label, and
+it tells the C64 what kind of box it is:</p>
 <table>
 <colgroup>
 <col style="width: 25%" />
@@ -397,22 +397,22 @@ and it tells the C64 what kind of box it is:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>P</code>, <code>CO</code>, <code>X1</code></td>
+<td><code>G</code>, <code>SC</code>, <code>X1</code></td>
 <td>Number</td>
 <td>Any number, including decimals</td>
-<td><code>P = 49.95</code></td>
+<td><code>G = 12.5</code></td>
 </tr>
 <tr>
-<td><code>P$</code>, <code>N$</code></td>
+<td><code>G$</code>, <code>N$</code></td>
 <td>Text (a <strong>string</strong>)</td>
 <td>Letters, digits and symbols, up to 255 of them, in quotes</td>
-<td><code>P$ = "BONUS POINTS"</code></td>
+<td><code>G$ = "GEMS FOUND"</code></td>
 </tr>
 <tr>
-<td><code>P%</code>, <code>L%</code></td>
+<td><code>G%</code>, <code>L%</code></td>
 <td>Whole number</td>
 <td>Whole numbers only, from −32768 to 32767</td>
-<td><code>P% = 3</code></td>
+<td><code>G% = 7</code></td>
 </tr>
 </tbody>
 </table>
@@ -421,28 +421,28 @@ these <strong>signed integers</strong>. More on that later in this
 book!)</p>
 <p><strong>Mixing words and boxes.</strong> The semicolon glues things
 together on one row, and it can glue words in quotes to boxes:</p>
-<pre><code><span class="ln">C = 8</span>
-<span class="ln">PRINT &quot;YOU HAVE&quot;;C;&quot;COINS&quot;</span>
-<span class="ln">N$ = &quot;ACE&quot;</span>
-<span class="ln">PRINT N$;&quot; EARNED&quot;;C;&quot;COINS&quot;</span></code></pre>
-<p>The C64 answers <code>YOU HAVE 8 COINS</code> and
-<code>ACE EARNED 8 COINS</code>. Look closely at the spaces. A number
+<pre><code><span class="ln">S = 12</span>
+<span class="ln">PRINT &quot;LEVEL&quot;;S;&quot;CLEARED&quot;</span>
+<span class="ln">N$ = &quot;NOVA&quot;</span>
+<span class="ln">PRINT N$;&quot; SCORED&quot;;S;&quot;STARS&quot;</span></code></pre>
+<p>The C64 answers <code>LEVEL 12 CLEARED</code> and
+<code>NOVA SCORED 12 STARS</code>. Look closely at the spaces. A number
 brings its own space on each side, but words don’t. That’s why
-<code>" EARNED"</code> starts with a space inside its quotes: without
-it, you’d get ACEEARNED.</p>
+<code>" SCORED"</code> starts with a space inside its quotes: without
+it, you’d get NOVASCORED.</p>
 <p><strong>Predict, then try:</strong></p>
-<pre><code><span class="ln">P = &quot;BONUS&quot;</span></code></pre>
+<pre><code><span class="ln">G = &quot;GEMS&quot;</span></code></pre>
 <p>The C64 answers <code>?TYPE MISMATCH  ERROR</code>. You tried to put
-a note into a number box. “Type mismatch” means the data type of the
+a message into a number box. “Type mismatch” means the data type of the
 thing doesn’t match the data type of the box.</p>
 <p><strong>Prove it.</strong> A whole-number box is fussy. Try
 these:</p>
-<pre><code><span class="ln">P% = 5.7</span>
-<span class="ln">? P%</span>
-<span class="ln">P% = 40000</span></code></pre>
-<p>The first answer is <code>5</code>. The whole-number box doesn’t
-round 5.7 up to 6: it simply drops everything after the decimal point.
-And 40000 gives <code>?ILLEGAL QUANTITY  ERROR</code>, because it’s too
+<pre><code><span class="ln">G% = 9.99</span>
+<span class="ln">? G%</span>
+<span class="ln">G% = 50000</span></code></pre>
+<p>The first answer is <code>9</code>. The whole-number box doesn’t
+round 9.99 up to 10: it simply drops everything after the decimal point.
+And 50000 gives <code>?ILLEGAL QUANTITY  ERROR</code>, because it’s too
 big to fit.</p>
 <div class="good-to-know">
 <p>If the whole-number box is so fussy, why have it at all? It takes up
@@ -454,25 +454,25 @@ trap</h2>
 <p><strong>Goal:</strong> Learn the C64’s naming rules, including the
 strange ones.</p>
 <p><strong>Try it:</strong></p>
-<pre><code><span class="ln">COINS = 40</span>
-<span class="ln">COMBO = 6</span>
-<span class="ln">PRINT COINS</span></code></pre>
+<pre><code><span class="ln">SHIELD = 80</span>
+<span class="ln">SHOTS = 5</span>
+<span class="ln">PRINT SHIELD</span></code></pre>
 <p><strong>Predict before you run the last line.</strong> Most people
-expect 40.</p>
-<p><strong>Why.</strong> The C64 prints 6. It only reads the
+expect 80.</p>
+<p><strong>Why.</strong> The C64 prints 5. It only reads the
 <strong>first two letters</strong> of a variable name. To the computer,
-COINS and COMBO are both just CO: the same box. The second line quietly
-replaced the 40. Nothing warned you. Lesson 1.5 shows how to make sure
+SHIELD and SHOTS are both just SH: the same box. The second line quietly
+replaced the 80. Nothing warned you. Lesson 1.5 shows how to make sure
 it never happens to you.</p>
 <p><strong>Prove it.</strong> Ask the C64 what’s in all three names:</p>
-<pre><code><span class="ln">? COINS</span>
-<span class="ln">? COMBO</span>
-<span class="ln">? CO</span></code></pre>
-<p>All three answer <code>6</code>. Three names, one box.</p>
+<pre><code><span class="ln">? SHIELD</span>
+<span class="ln">? SHOTS</span>
+<span class="ln">? SH</span></code></pre>
+<p>All three answer <code>5</code>. Three names, one box.</p>
 <p>Picture it this way: the C64 makes its labels with a label maker that
 can only print <strong>two letters</strong>. You ask for a label that
-says COINS, and the machine prints CO. Later you ask for COMBO, and it
-prints CO again. Now the shelf has one box with the label CO, and both
+says SHIELD, and the machine prints SH. Later you ask for SHOTS, and it
+prints SH again. Now the shelf has one box with the label SH, and both
 names lead to it.</p>
 <h2 id="lesson-1.4-words-the-c64-has-already-claimed">Lesson 1.4 — Words
 the C64 has already claimed</h2>
@@ -486,14 +486,14 @@ commands and functions, like <code>PRINT</code>, <code>GOTO</code> and
 Appendix E will list every one.</p>
 <p><strong>Predict.</strong> Will this work? Write down yes or no, then
 try it:</p>
-<pre><code><span class="ln">LIFE = 3</span></code></pre>
+<pre><code><span class="ln">FORTUNE = 7</span></code></pre>
 <p><strong>Why it fails.</strong> The C64 answers
 <code>?SYNTAX  ERROR</code>. When you press RETURN, the C64 reads your
 line looking for its own words, and it finds them even in the middle of
-a name. Hidden inside LIFE is IF, as in <code>IF ... THEN</code>. The
-C64 sees IF and can’t make sense of the rest.</p>
+a name. Hidden inside FORTUNE is FOR, as in <code>FOR ... NEXT</code>.
+The C64 sees FOR and can’t make sense of the rest.</p>
 <p>The fix is easy: pick a name with no hidden word.
-<code>LIVES = 3</code> works, and so does <code>LV = 3</code>.</p>
+<code>LUCK = 7</code> works, and so does <code>LK = 7</code>.</p>
 <p>Plenty of good names have a reserved word hiding inside:</p>
 <table>
 <thead>
@@ -504,7 +504,23 @@ C64 sees IF and can’t make sense of the rest.</p>
 </thead>
 <tbody>
 <tr>
-<td>LIFE</td>
+<td>FORTUNE</td>
+<td>FOR</td>
+</tr>
+<tr>
+<td>DEFENSE</td>
+<td>DEF</td>
+</tr>
+<tr>
+<td>VALUE</td>
+<td>VAL</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>TO</td>
+</tr>
+<tr>
+<td>DIFFICULTY</td>
 <td>IF</td>
 </tr>
 <tr>
@@ -524,28 +540,8 @@ C64 sees IF and can’t make sense of the rest.</p>
 <td>OR</td>
 </tr>
 <tr>
-<td>MONEY</td>
-<td>ON</td>
-</tr>
-<tr>
-<td>TOTAL</td>
-<td>TO</td>
-</tr>
-<tr>
-<td>COST</td>
-<td>COS</td>
-</tr>
-<tr>
 <td>FRIEND</td>
 <td>END</td>
-</tr>
-<tr>
-<td>LENGTH</td>
-<td>LEN</td>
-</tr>
-<tr>
-<td>FORMAT</td>
-<td>FOR</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -561,7 +557,7 @@ C64 sees IF and can’t make sense of the rest.</p>
 facts turn it into a map:</p>
 <ol type="1">
 <li><strong>Inside quotes, nothing is reserved.</strong>
-<code>PRINT "GOLD, POINTS AND BONUS"</code> works perfectly. The C64
+<code>PRINT "FORTUNE, DEFENSE AND VALUE"</code> works perfectly. The C64
 only hunts for its words outside quotes.</li>
 <li><strong>You almost always find out right away.</strong> A name with
 a reserved word inside usually stops with an error the moment you press
@@ -594,8 +590,8 @@ its clock)</td>
 </tr>
 </tbody>
 </table>
-<p>Any other two letters can never contain a reserved word. HP, XP, GD,
-LV, CO: all safe.</p>
+<p>Any other two letters can never contain a reserved word. XP, HP, SH,
+LK, GM: all safe.</p>
 <div class="good-to-know">
 <p>Here’s the sneaky one. A name like <code>TITLE$</code> starts with
 TI, so to the C64 it’s <code>TI$</code>, the clock shown as hours,
@@ -634,22 +630,22 @@ notebook like this:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>C</code></td>
+<td><code>X</code></td>
 <td>Number</td>
-<td>Coins collected</td>
-<td>8</td>
+<td>Experience points earned</td>
+<td>125</td>
 </tr>
 <tr>
-<td><code>P$</code></td>
+<td><code>N$</code></td>
 <td>Text</td>
-<td>Kind of points</td>
-<td>BONUS POINTS</td>
+<td>Player name</td>
+<td>NOVA</td>
 </tr>
 <tr>
-<td><code>CA</code></td>
+<td><code>CS</code></td>
 <td>Number</td>
 <td>Cash, in dollars</td>
-<td>50</td>
+<td>75</td>
 </tr>
 </tbody>
 </table>
@@ -659,7 +655,7 @@ there, or it’s one of the eight taken pairs, pick a different name.
 Short names are fine: the dictionary is where you write down what they
 mean.</p>
 <p>When a box holds an amount, write its <strong>unit</strong> in the
-dictionary too. Is CA the cash in dollars or in cents? The number 50
+dictionary too. Is CS the cash in dollars or in cents? The number 75
 means something very different in each. Later in this book, money is
 always stored in cents, and the dictionary is where you say so.</p>
 <div class="good-to-know">
@@ -672,29 +668,30 @@ number was right. Nobody had written down which units they were in.</p>
 <p>Second time through? Find a different answer that still works, then
 compare it with your first.</p>
 <ol type="1">
-<li><strong>Type and predict.</strong> Put the number of levels you’ve
-beaten in one variable and the number still to go in another. Before
-printing their sum, write down what it will be.</li>
+<li><strong>Type and predict.</strong> Put the points you scored in two
+rounds of a game into two variables. Before printing their total, write
+down what it will be.</li>
 <li><strong>Fix it.</strong> These commands don’t work. Find both
 problems, explain each in one sentence, and fix them:
-<code>SCORE = 40</code>, then <code>TOTAL = SCORE + 10</code>.</li>
-<li><strong>Build it.</strong> Use three variables: your name, a reward
-you’d like to earn, and how many points it costs. Make the C64 print one
-sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add
-all three to your variable dictionary first, with their data types.</li>
+<code>ARMOR = 30</code>, then <code>ENDURANCE = ARMOR * 2</code>.</li>
+<li><strong>Build it.</strong> Use three variables: the name of a place
+in a game you like, how many treasures are hidden there, and the name of
+the best treasure. Make the C64 print one sentence about it, mixing
+words and boxes the way Lesson 1.2 shows. Add all three to your variable
+dictionary first, with their data types.</li>
 </ol>
 <h2 id="quiz">Quiz</h2>
 <ol type="1">
-<li>After <code>C = 6</code> and then <code>C = C * 3</code>, what does
-<code>PRINT C</code> show? (a) 6 (b) 9 (c) 18 (d) An error.</li>
-<li>After <code>P% = 5.7</code>, what does <code>PRINT P%</code> show?
-(a) 5.7 (b) 6 (c) 5 (d) An error.</li>
-<li>Which variable can hold the word GEMS? (a) <code>K</code> (b)
-<code>K%</code> (c) <code>K$</code> (d) Any of them.</li>
-<li>Which of these names is always safe? (a) <code>LIFE</code> (b)
-<code>XP</code> (c) <code>OR</code> (d) <code>TIME$</code>.</li>
-<li>A program uses DAMAGE and DASH. What goes wrong? (a) Nothing (b)
-They share one box, DA (c) DASH is a command (d)
+<li>After <code>X = 4</code> and then <code>X = X * 5</code>, what does
+<code>PRINT X</code> show? (a) 4 (b) 9 (c) 20 (d) An error.</li>
+<li>After <code>G% = 9.99</code>, what does <code>PRINT G%</code> show?
+(a) 9.99 (b) 10 (c) 9 (d) An error.</li>
+<li>Which variable can hold the words GOOD JOB? (a) <code>W</code> (b)
+<code>W%</code> (c) <code>W$</code> (d) Any of them.</li>
+<li>Which of these names is always safe? (a) <code>DEFENSE</code> (b)
+<code>HP</code> (c) <code>TO</code> (d) <code>STARS</code>.</li>
+<li>A program uses MAGIC and MANA. What goes wrong? (a) Nothing (b) They
+share one box, MA (c) MANA is a command (d)
 <code>?TYPE MISMATCH  ERROR</code>.</li>
 </ol>
 <h1 id="chapter-2-talking-to-the-computer">Chapter 2: Talking to the
@@ -710,11 +707,11 @@ doesn’t cook anything. You write the steps down first, then follow them
 when it’s time to cook. A video game level works the same way: the level
 is built in advance, and it plays out when you press Start.</p>
 <p><strong>Try it.</strong> Type this and press RETURN:</p>
-<pre><code><span class="ln">PRINT &quot;LEVEL UP&quot;</span></code></pre>
-<p>The C64 prints <code>LEVEL UP</code> straight away. That’s
+<pre><code><span class="ln">PRINT &quot;GAME ON&quot;</span></code></pre>
+<p>The C64 prints <code>GAME ON</code> straight away. That’s
 <strong>direct mode</strong>, the way you worked in Chapter 1.</p>
 <p>Now type this, with a number in front, and press RETURN:</p>
-<pre><code><span class="ln">10 PRINT &quot;LEVEL UP&quot;</span></code></pre>
+<pre><code><span class="ln">10 PRINT &quot;GAME ON&quot;</span></code></pre>
 <p><strong>Predict.</strong> Before you look, write down what you think
 happened.</p>
 <p><strong>Why it works.</strong> Nothing was printed. The number at the
@@ -722,7 +719,7 @@ start told the C64: don’t do this now, <em>store</em> it as line 10 of a
 program. That’s <strong>program mode</strong>. To follow the stored
 steps, type:</p>
 <pre><code><span class="ln">RUN</span></code></pre>
-<p>Now <code>LEVEL UP</code> appears. To see the stored program,
+<p>Now <code>GAME ON</code> appears. To see the stored program,
 type:</p>
 <pre><code><span class="ln">LIST</span></code></pre>
 <h2 id="lesson-2.2-lines-know-their-places">Lesson 2.2 — Lines know
@@ -732,9 +729,9 @@ order.</p>
 <p><strong>Try it.</strong> Type these three lines in this exact
 order:</p>
 <pre><code><span class="ln">NEW</span>
-<span class="ln">30 PRINT &quot;GOLD&quot;</span>
-<span class="ln">10 PRINT &quot;BRONZE&quot;</span>
-<span class="ln">20 PRINT &quot;SILVER&quot;</span></code></pre>
+<span class="ln">30 PRINT &quot;FINISH LINE&quot;</span>
+<span class="ln">10 PRINT &quot;START&quot;</span>
+<span class="ln">20 PRINT &quot;HALFWAY&quot;</span></code></pre>
 <p><code>NEW</code> erases any program already stored, so you start
 clean.</p>
 <p><strong>Predict.</strong> You typed 30, then 10, then 20. What order
@@ -744,14 +741,14 @@ both down, then try them.</p>
 number, no matter what order you typed it in, like index cards sorted in
 a box:</p>
 <pre class="diagram"><code>  You typed:            The C64 keeps:
-  30 PRINT &quot;GOLD&quot;       10 PRINT &quot;BRONZE&quot;
-  10 PRINT &quot;BRONZE&quot; -&gt;  20 PRINT &quot;SILVER&quot;
-  20 PRINT &quot;SILVER&quot;     30 PRINT &quot;GOLD&quot;</code></pre>
+  30 PRINT &quot;FINISH LINE&quot;      10 PRINT &quot;START&quot;
+  10 PRINT &quot;START&quot;        -&gt;  20 PRINT &quot;HALFWAY&quot;
+  20 PRINT &quot;HALFWAY&quot;          30 PRINT &quot;FINISH LINE&quot;</code></pre>
 <p><code>RUN</code> always starts at the lowest number and works
 upward.</p>
 <p>Notice the gaps: 10, 20, 30, not 1, 2, 3. If you later need a step
-between BRONZE and SILVER, there’s room for it:</p>
-<pre><code><span class="ln">15 PRINT &quot;BRONZE STAR&quot;</span></code></pre>
+between START and HALFWAY, there’s room for it:</p>
+<pre><code><span class="ln">15 PRINT &quot;QUARTER WAY&quot;</span></code></pre>
 <p><code>LIST</code> it and see where it went. Line numbers can be
 anything from 0 to 63999, so there’s plenty of room.</p>
 <div class="good-to-know">
@@ -766,7 +763,7 @@ mind</h2>
 program.</p>
 <p><strong>Try it.</strong> With the four-line program from Lesson 2.2
 still stored, type:</p>
-<pre><code><span class="ln">20 PRINT &quot;SILVER, POLISHED&quot;</span></code></pre>
+<pre><code><span class="ln">20 PRINT &quot;HALFWAY THERE!&quot;</span></code></pre>
 <p><strong>Predict,</strong> then <code>LIST</code> it.</p>
 <p><strong>Why it works.</strong> A line with a number that already
 exists <strong>replaces</strong> the old line. The C64 keeps only one
@@ -822,26 +819,26 @@ invisible Submit button. RETURN submits whichever line the cursor is on,
 not just the one you typed last.</p>
 <p><strong>Try it.</strong> Type this program, mistake included:</p>
 <pre><code><span class="ln">NEW</span>
-<span class="ln">10 PRINT &quot;MY FAVORITE REWARD IS&quot;</span>
-<span class="ln">20 PIRNT &quot;A NEW HIGH SCORE&quot;</span>
-<span class="ln">30 PRINT &quot;IT FEELS GREAT&quot;</span>
+<span class="ln">10 PRINT &quot;TODAY&#39;S TARGET:&quot;</span>
+<span class="ln">20 PRITN &quot;500 POINTS&quot;</span>
+<span class="ln">30 PRINT &quot;LET&#39;S GO&quot;</span>
 <span class="ln">RUN</span></code></pre>
 <p>The C64 prints the first line, then stops with
 <code>?SYNTAX  ERROR IN 20</code>. Helpfully, it tells you which line
 has the problem. (Yes, the C64 really does print two spaces before the
 word ERROR.)</p>
-<p><strong>Why it works.</strong> <code>PIRNT</code> isn’t a word the
-C64 knows: two letters are swapped. You could fix it by retyping all of
-line 20. But there’s a faster way, because the C64 lets you edit
-anything on the screen:</p>
+<p><strong>Why it works.</strong> <code>PRITN</code> isn’t a word the
+C64 knows: the last two letters are swapped. You could fix it by
+retyping all of line 20. But there’s a faster way, because the C64 lets
+you edit anything on the screen:</p>
 <ol type="1">
 <li>Type <code>LIST</code> so line 20 is on the screen.</li>
 <li>Use the <strong>arrow keys</strong> to move the cursor up to line
-20, and right until it’s on the <code>I</code> of
-<code>PIRNT</code>.</li>
-<li>Type <code>RI</code>. Each letter you type replaces the one under
-the cursor, so <code>IR</code> becomes <code>RI</code>, and the line
-reads <code>20 PRINT "A NEW HIGH SCORE"</code>.</li>
+20, and right until it’s on the <code>T</code> of
+<code>PRITN</code>.</li>
+<li>Type <code>NT</code>. Each letter you type replaces the one under
+the cursor, so <code>TN</code> becomes <code>NT</code>, and the line
+reads <code>20 PRINT "500 POINTS"</code>.</li>
 <li>Press RETURN while the cursor is anywhere on that line. That’s the
 line’s Submit button.</li>
 </ol>
@@ -869,11 +866,11 @@ have it.)</p>
 <p>Here’s how C64 programmers clear the screen from <em>inside</em> a
 program. Type a line up to the opening quote, then press SHIFT +
 CLR/HOME:</p>
-<pre><code><span class="ln">10 PRINT &quot;{clr}LEVEL 1&quot;</span></code></pre>
+<pre><code><span class="ln">10 PRINT &quot;{clr}ROUND 1&quot;</span></code></pre>
 <p>Inside quotes, SHIFT + CLR/HOME doesn’t clear anything. Instead, it
 types the clear-screen code into your text, and the C64 shows it as a
 <strong>reversed heart</strong>. When the program runs, PRINT sends that
-code, the screen clears, and then LEVEL 1 appears. This book writes the
+code, the screen clears, and then ROUND 1 appears. This book writes the
 reversed heart as <code>{clr}</code>, because a heart is hard to print
 on paper.</p>
 </div>
@@ -905,11 +902,11 @@ a recipe. Then give each step a line number, counting by tens.</p>
 <td>10</td>
 </tr>
 <tr>
-<td>Show my best score</td>
+<td>Show today’s goal</td>
 <td>20</td>
 </tr>
 <tr>
-<td>Show the reward I’m saving for</td>
+<td>Show a cheer for reaching it</td>
 <td>30</td>
 </tr>
 </tbody>
@@ -923,34 +920,35 @@ later.</p>
 compare it with your first.</p>
 <ol type="1">
 <li><strong>Predict the order.</strong> Type <code>NEW</code>, then
-these lines in this order: <code>40 PRINT "FOUR"</code>,
-<code>20 PRINT "TWO"</code>, <code>10 PRINT "ONE"</code>,
-<code>30 PRINT "THREE"</code>. Before typing <code>LIST</code> and
+these lines in this order: <code>30 PRINT "BLUE"</code>,
+<code>10 PRINT "RED"</code>, <code>40 PRINT "VIOLET"</code>,
+<code>20 PRINT "GREEN"</code>. Before typing <code>LIST</code> and
 <code>RUN</code>, write down what each will show.</li>
-<li><strong>Fix it two ways.</strong> Type the HIGH SCORE program from
-Lesson 2.4. Fix line 20 once by retyping the whole line, then break it
-again and fix it with the screen editor. Which way was faster?</li>
-<li><strong>Build it.</strong> Plan a program on paper that shows three
-of your best scores or achievements, one per line, using variables from
-your variable dictionary. Number the lines by tens, type it, and run it.
-Then add a title line at the top <em>without</em> retyping anything
-else.</li>
+<li><strong>Fix it two ways.</strong> Type the TODAY’S TARGET program
+from Lesson 2.4. Fix line 20 once by retyping the whole line, then break
+it again and fix it with the screen editor. Which way was faster?</li>
+<li><strong>Build it.</strong> Plan a short “game over” screen on paper:
+a title, your final score, and a message, one per line, using variables
+from your variable dictionary. Number the lines by tens, type it, and
+run it. Then add a new line between the score and the message
+<em>without</em> retyping anything else.</li>
 </ol>
 <h2 id="quiz-1">Quiz</h2>
 <ol type="1">
-<li>You type <code>10 PRINT "GO!"</code> and press RETURN. What happens?
-(a) GO! appears (b) The line is stored and nothing is printed (c)
-<code>?SYNTAX  ERROR</code> (d) The program runs.</li>
-<li>You type lines 50, then 20, then 40. What does <code>LIST</code>
-show first? (a) Line 50 (b) Line 40 (c) Whichever you typed last (d)
-Line 20.</li>
-<li>What does typing <code>40</code> by itself and pressing RETURN do?
-(a) Runs line 40 (b) Lists line 40 (c) Removes line 40 (d) Nothing.</li>
-<li>Why number lines 10, 20, 30 instead of 1, 2, 3? (a) The C64 requires
-it (b) It leaves room to add lines in between (c) It runs faster (d) It
-saves memory.</li>
-<li>Which command erases the whole program? (a) <code>NEW</code> (b)
-<code>END</code> (c) <code>CLR</code> (d) <code>LIST</code>.</li>
+<li>You type <code>20 PRINT "SAVED"</code> and press RETURN. What
+happens? (a) SAVED appears (b) The line is stored and nothing is printed
+(c) <code>?SYNTAX  ERROR</code> (d) The program runs.</li>
+<li>You type lines 60, then 30, then 50. What does <code>LIST</code>
+show first? (a) Line 60 (b) Line 50 (c) Whichever you typed last (d)
+Line 30.</li>
+<li>What does typing <code>30</code> by itself and pressing RETURN do?
+(a) Removes line 30 (b) Runs line 30 (c) Lists line 30 (d) Nothing.</li>
+<li>Why number lines 10, 20, 30 instead of 1, 2, 3? (a) It runs faster
+(b) The C64 requires it (c) It leaves room to add lines in between (d)
+It saves memory.</li>
+<li>Which command shows only lines 20 through 40? (a)
+<code>LIST 20-40</code> (b) <code>RUN 20</code> (c) <code>LIST 40</code>
+(d) <code>LIST -20</code>.</li>
 </ol>
 <h1 id="appendices-in-progress">Appendices (in progress)</h1>
 <p>These reference pages will be added as the book grows. When a chapter

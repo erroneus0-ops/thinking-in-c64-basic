@@ -49,7 +49,7 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
   const [chapters, responses, attempts, programs, visits] = await Promise.all(
     ['/api/chapters', '/api/responses?everyone=1', '/api/quiz-history?everyone=1', '/api/submissions', '/api/visits'].map(u => fetch(u).then(r => r.json())));
   const lessonTitle = (n, id) => { const c = chapters.find(c => c.n === n); const l = c && c.lessons.find(l => l.id === id); return l ? l.title : id; };
-  const exTitle = (n, id) => { const c = chapters.find(c => c.n === n); const e = c && c.exercises.find(e => 'ex' + e.n === id); return e ? `${e.n}. ${e.title}` : id; };
+  const exTitle = (n, id) => { const c = chapters.find(c => c.n === n); const e = c && c.exercises.find(e => e.id === id || 'ex' + e.n === id); return e ? `${e.n}. ${e.title}` + (e.id === id ? '' : ' (earlier draft)') : id; };
 
   const notes = document.getElementById('notes');
   const ns = responses.filter(r => r.kind === 'note' && r.text);

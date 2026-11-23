@@ -7,7 +7,7 @@ Usage:
 
 Output goes to build/. Needs: pip install pypandoc_binary weasyprint
 """
-import argparse, datetime, json, pathlib, re
+import argparse, datetime, hashlib, json, pathlib, re
 import pypandoc
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -44,8 +44,12 @@ def extract_content(chapters):
         if ex:
             for num, body in re.findall(r"^(\d+)\. (.+?)(?=^\d+\. |\Z)", ex.group(1), re.M | re.S):
                 t = re.match(r"\*\*(.+?)\*\*\s*(.*)", body.strip(), re.S)
-                ch["exercises"].append({"n": int(num), "title": plain(t.group(1)).rstrip(".") if t else "",
-                                        "text": plain(t.group(2) if t else body)})
+                title = plain(t.group(1)).rstrip(".") if t else ""
+                ex_text = plain(t.group(2) if t else body)   # not `text`: that's the whole chapter
+                # The id carries a fingerprint of the wording: rewrite an exercise and it starts
+                # fresh on the course site, instead of showing answers to a different question.
+                fp = hashlib.sha1((title + "|" + ex_text).encode("utf-8")).hexdigest()[:6]
+                ch["exercises"].append({"n": int(num), "id": f"ex{num}-{fp}", "title": title, "text": ex_text})
         qz = re.search(r"^## Quiz\n(.*?)(?=^## |\Z)", text, re.M | re.S)
         if qz:
             for num, body in re.findall(r"^(\d+)\. (.+?)(?=^\d+\. |\Z)", qz.group(1), re.M | re.S):

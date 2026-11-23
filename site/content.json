@@ -43,28 +43,31 @@
   "exercises": [
    {
     "n": 1,
+    "id": "ex1-4f27a2",
     "title": "Type and predict",
-    "text": "Put the number of levels you've beaten in one variable and the number still to go in another. Before printing their sum, write down what it will be."
+    "text": "Put the points you scored in two rounds of a game into two variables. Before printing their total, write down what it will be."
    },
    {
     "n": 2,
+    "id": "ex2-06c778",
     "title": "Fix it",
-    "text": "These commands don't work. Find both problems, explain each in one sentence, and fix them: SCORE = 40, then TOTAL = SCORE + 10."
+    "text": "These commands don't work. Find both problems, explain each in one sentence, and fix them: ARMOR = 30, then ENDURANCE = ARMOR * 2."
    },
    {
     "n": 3,
+    "id": "ex3-9d876a",
     "title": "Build it",
-    "text": "Use three variables: your name, a reward you'd like to earn, and how many points it costs. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types."
+    "text": "Use three variables: the name of a place in a game you like, how many treasures are hidden there, and the name of the best treasure. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types."
    }
   ],
   "quiz": [
    {
     "n": 1,
-    "question": "After C = 6 and then C = C * 3, what does PRINT C show?",
+    "question": "After X = 4 and then X = X * 5, what does PRINT X show?",
     "options": [
      {
       "letter": "a",
-      "text": "6"
+      "text": "4"
      },
      {
       "letter": "b",
@@ -72,7 +75,7 @@
      },
      {
       "letter": "c",
-      "text": "18"
+      "text": "20"
      },
      {
       "letter": "d",
@@ -83,19 +86,19 @@
    },
    {
     "n": 2,
-    "question": "After P% = 5.7, what does PRINT P% show?",
+    "question": "After G% = 9.99, what does PRINT G% show?",
     "options": [
      {
       "letter": "a",
-      "text": "5.7"
+      "text": "9.99"
      },
      {
       "letter": "b",
-      "text": "6"
+      "text": "10"
      },
      {
       "letter": "c",
-      "text": "5"
+      "text": "9"
      },
      {
       "letter": "d",
@@ -106,19 +109,19 @@
    },
    {
     "n": 3,
-    "question": "Which variable can hold the word GEMS?",
+    "question": "Which variable can hold the words GOOD JOB?",
     "options": [
      {
       "letter": "a",
-      "text": "K"
+      "text": "W"
      },
      {
       "letter": "b",
-      "text": "K%"
+      "text": "W%"
      },
      {
       "letter": "c",
-      "text": "K$"
+      "text": "W$"
      },
      {
       "letter": "d",
@@ -133,26 +136,26 @@
     "options": [
      {
       "letter": "a",
-      "text": "LIFE"
+      "text": "DEFENSE"
      },
      {
       "letter": "b",
-      "text": "XP"
+      "text": "HP"
      },
      {
       "letter": "c",
-      "text": "OR"
+      "text": "TO"
      },
      {
       "letter": "d",
-      "text": "TIME$"
+      "text": "STARS"
      }
     ],
     "answer": "b"
    },
    {
     "n": 5,
-    "question": "A program uses DAMAGE and DASH. What goes wrong?",
+    "question": "A program uses MAGIC and MANA. What goes wrong?",
     "options": [
      {
       "letter": "a",
@@ -160,11 +163,11 @@
      },
      {
       "letter": "b",
-      "text": "They share one box, DA"
+      "text": "They share one box, MA"
      },
      {
       "letter": "c",
-      "text": "DASH is a command"
+      "text": "MANA is a command"
      },
      {
       "letter": "d",
@@ -203,28 +206,31 @@
   "exercises": [
    {
     "n": 1,
+    "id": "ex1-16ffbb",
     "title": "Predict the order",
-    "text": "Type NEW, then these lines in this order: 40 PRINT \"FOUR\", 20 PRINT \"TWO\", 10 PRINT \"ONE\", 30 PRINT \"THREE\". Before typing LIST and RUN, write down what each will show."
+    "text": "Type NEW, then these lines in this order: 30 PRINT \"BLUE\", 10 PRINT \"RED\", 40 PRINT \"VIOLET\", 20 PRINT \"GREEN\". Before typing LIST and RUN, write down what each will show."
    },
    {
     "n": 2,
+    "id": "ex2-7a779f",
     "title": "Fix it two ways",
-    "text": "Type the HIGH SCORE program from Lesson 2.4. Fix line 20 once by retyping the whole line, then break it again and fix it with the screen editor. Which way was faster?"
+    "text": "Type the TODAY'S TARGET program from Lesson 2.4. Fix line 20 once by retyping the whole line, then break it again and fix it with the screen editor. Which way was faster?"
    },
    {
     "n": 3,
+    "id": "ex3-afe91c",
     "title": "Build it",
-    "text": "Plan a program on paper that shows three of your best scores or achievements, one per line, using variables from your variable dictionary. Number the lines by tens, type it, and run it. Then add a title line at the top *without* retyping anything else."
+    "text": "Plan a short \"game over\" screen on paper: a title, your final score, and a message, one per line, using variables from your variable dictionary. Number the lines by tens, type it, and run it. Then add a new line between the score and the message *without* retyping anything else."
    }
   ],
   "quiz": [
    {
     "n": 1,
-    "question": "You type 10 PRINT \"GO!\" and press RETURN. What happens?",
+    "question": "You type 20 PRINT \"SAVED\" and press RETURN. What happens?",
     "options": [
      {
       "letter": "a",
-      "text": "GO! appears"
+      "text": "SAVED appears"
      },
      {
       "letter": "b",
@@ -243,15 +249,15 @@
    },
    {
     "n": 2,
-    "question": "You type lines 50, then 20, then 40. What does LIST show first?",
+    "question": "You type lines 60, then 30, then 50. What does LIST show first?",
     "options": [
      {
       "letter": "a",
-      "text": "Line 50"
+      "text": "Line 60"
      },
      {
       "letter": "b",
-      "text": "Line 40"
+      "text": "Line 50"
      },
      {
       "letter": "c",
@@ -259,33 +265,33 @@
      },
      {
       "letter": "d",
-      "text": "Line 20"
+      "text": "Line 30"
      }
     ],
     "answer": "d"
    },
    {
     "n": 3,
-    "question": "What does typing 40 by itself and pressing RETURN do?",
+    "question": "What does typing 30 by itself and pressing RETURN do?",
     "options": [
      {
       "letter": "a",
-      "text": "Runs line 40"
+      "text": "Removes line 30"
      },
      {
       "letter": "b",
-      "text": "Lists line 40"
+      "text": "Runs line 30"
      },
      {
       "letter": "c",
-      "text": "Removes line 40"
+      "text": "Lists line 30"
      },
      {
       "letter": "d",
       "text": "Nothing"
      }
     ],
-    "answer": "c"
+    "answer": "a"
    },
    {
     "n": 4,
@@ -293,42 +299,42 @@
     "options": [
      {
       "letter": "a",
-      "text": "The C64 requires it"
+      "text": "It runs faster"
      },
      {
       "letter": "b",
-      "text": "It leaves room to add lines in between"
+      "text": "The C64 requires it"
      },
      {
       "letter": "c",
-      "text": "It runs faster"
+      "text": "It leaves room to add lines in between"
      },
      {
       "letter": "d",
       "text": "It saves memory"
      }
     ],
-    "answer": "b"
+    "answer": "c"
    },
    {
     "n": 5,
-    "question": "Which command erases the whole program?",
+    "question": "Which command shows only lines 20 through 40?",
     "options": [
      {
       "letter": "a",
-      "text": "NEW"
+      "text": "LIST 20-40"
      },
      {
       "letter": "b",
-      "text": "END"
+      "text": "RUN 20"
      },
      {
       "letter": "c",
-      "text": "CLR"
+      "text": "LIST 40"
      },
      {
       "letter": "d",
-      "text": "LIST"
+      "text": "LIST -20"
      }
     ],
     "answer": "a"
