@@ -93,6 +93,13 @@ Content ideas from the editor (to place in chapters):
 - Wish list with a waiting period; Spending Tracker flags purchases above the maker's price.
 - Variable dictionary gets units in "What it holds" (e.g. "in cents"); Mars Climate Orbiter story.
 - Arrays: the Roman calendar off-by-two (September = 7th month, now 9th).
+- RECORD TABLES (editor's idea): a 2-D integer array as an in-memory database table. Rows = records,
+  column 0 = ID, columns 1..N = properties stored as CODES into string lookup arrays (e.g. CL$(3) =
+  "BLUE"). Name the columns with variables (HT=1:WD=2:WT=3, then T%(R,WT)) and document the layout
+  in the variable dictionary. Whole-number arrays pay off here (2 bytes vs 5 per box). The array
+  is a WINDOW onto a relative file: load a page of records, page through. Bridge from Ch 13-14
+  arrays to Ch 20-21 (Tracker v3a/v3b: relative files + lookup tables). The Show variables panel
+  displays T%() as a grid, i.e. a live view of the in-memory table.
 - Sorting (Ch 14): box 0 is the "parking space" for swaps (A(0)=A(I):A(I)=A(I+1):A(I+1)=A(0)).
   This is box 0's first "special job", promised in Ch 13.
 - Box 0's second special job: tables whose numbers naturally start at 0 (hex digits 0-F, the 16
