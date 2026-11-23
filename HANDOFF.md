@@ -93,6 +93,10 @@ Content ideas from the editor (to place in chapters):
 - Wish list with a waiting period; Spending Tracker flags purchases above the maker's price.
 - Variable dictionary gets units in "What it holds" (e.g. "in cents"); Mars Climate Orbiter story.
 - Arrays: the Roman calendar off-by-two (September = 7th month, now 9th).
+- FOREWORD (book/chapters/00-0-foreword.md, the first page): why a 1982 machine; plan, organize, then
+  code; modern languages are easier and more powerful but overwhelming without a foundation; where
+  the book leads (the tracker, a future port to a phone app); the motto. Ends by sending the reader
+  to the maze, which stays the first thing he DOES.
 - THE LONG ARC (editor): the concepts carry forward; a future SECOND BOOK ports the Spending Tracker
   from C64 BASIC to a modern language (likely a web app, so it runs on his phone), with the C64
   version as the specification. In THIS book: write programs so they port cleanly (blocks as future

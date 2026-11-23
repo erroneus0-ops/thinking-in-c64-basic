@@ -4,6 +4,10 @@
   "title": "Before you begin",
   "lessons": [
    {
+    "id": "00-0-foreword",
+    "title": "Foreword"
+   },
+   {
     "id": "00-a-maze-in-two-lines",
     "title": "A Maze in Two Lines"
    },
