@@ -20,7 +20,7 @@ organized, orderly thinking habits."
 
 - **Repo owner** (`erroneus0-ops`): editor. Decides platform and content questions.
 - **Claude**: C64 subject expert and author. Works through the machine account
-  `C64BookDev`, scoped to this one private repo
+  `C64BookDev`, scoped to this one repo
   (see the owner's `MACHINE_ACCOUNT_SETUP_GUIDE.md` in `erroneus0-ops/WebUI-debug-dev`).
 
 ## Where things are
@@ -344,8 +344,13 @@ COLOR (OR), COST (COS), MONEY (ON), TOTAL (TO), SCORE (OR), TIME (TI).
 
 ## Open questions (waiting on the editor)
 
-See the last section of `book/plan.md`: example name (placeholder KAITO), second-language
-support, answer keys, paper vs. site notebook, title, reference machine.
+- Second-language support: English only, or Japanese key terms and short bilingual summaries?
+- Final title (working title: *Thinking in C64 BASIC*).
+
+Settled along the way: example names are varied invented names, never the student's; quiz answers
+live in the public chapter sources (honor system) and the answer edition is password-locked; the
+programmer's notebook is paper; the voice is plain and never childish; the reference machine is
+VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
 ## Show variables panel (built; editor-approved design)
 
@@ -390,12 +395,10 @@ stored: the cursor wraps and RETURN enters the empty row). Chapter 2 and the pla
 
 ## Next steps
 
-0. IMPROVEMENT CHART (editor request): quiz score per attempt over time, from quiz_attempts.
-   On /work under each quiz (his own attempts) and on /review (all chapters, all names). Name
-   sign-in also lets him start fresh under a new name for a second pass; retakes under the same
-   name show the climb. Present both as features ("proof of accomplishment").
-
-1. The editor reviews the plan doc and answers the open questions.
-2. Chapter 2 drafted (and the maze opener); editor to review. Next: Chapter 3.
-3. Test from the son's laptop over the LAN (start.bat 80 on the editor's machine).
-4. Milestone 4: quizzes. Then 5: login, review page, Copy for Claude, progress page.
+1. The beta tester works through draft 3 of Chapters 1-2; read his notes in the Editor's view and
+   adjust. Then Chapter 3, Working Things Out (arithmetic, order of operations, INT, RND, including
+   the discovery that RND repeats after every reset).
+2. Improvement chart: quiz score per attempt over time, on /work and /review.
+3. Autosave on Chapter work, plus a warning before leaving with unsaved text (awaiting go-ahead).
+4. Later, each with its chapter: debugger additions (current line, change log, error explainer),
+   the block-aware Renumber tool (Ch 11), Appendix E and the other appendices.
