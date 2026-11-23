@@ -93,6 +93,12 @@ Content ideas from the editor (to place in chapters):
 - Wish list with a waiting period; Spending Tracker flags purchases above the maker's price.
 - Variable dictionary gets units in "What it holds" (e.g. "in cents"); Mars Climate Orbiter story.
 - Arrays: the Roman calendar off-by-two (September = 7th month, now 9th).
+- THE LONG ARC (editor): the concepts carry forward; a future SECOND BOOK ports the Spending Tracker
+  from C64 BASIC to a modern language (likely a web app, so it runs on his phone), with the C64
+  version as the specification. In THIS book: write programs so they port cleanly (blocks as future
+  functions, named record columns), and end the capstone with a short "Where next?" page mapping
+  C64 ideas to modern ones (GOSUB -> functions, record rows -> structs/objects, code numbers +
+  lookup arrays -> enums/dictionaries, relative files -> database tables, array windows -> paging).
 - RECORD TABLES (editor's idea): a 2-D integer array as an in-memory database table. Rows = records,
   column 0 = ID, columns 1..N = properties stored as CODES into string lookup arrays (e.g. CL$(3) =
   "BLUE"). Name the columns with variables (HT=1:WD=2:WT=3, then T%(R,WT)) and document the layout
