@@ -373,9 +373,9 @@
   "exercises": [
    {
     "n": 1,
-    "id": "ex1-5dc2e3",
-    "title": "Predict, then check",
-    "text": "Work out these three on paper first, then check each on the C64: (6+4)/2, 6+4/2, and 2↑3*2. For any you got wrong, explain which part should have gone first."
+    "id": "ex1-2a1d3e",
+    "title": "Rate a creature",
+    "text": "In creature-collecting games like Pokémon GO, each creature has three hidden stats, attack, defense and HP, each from 0 to 15. Its rating is the total out of 45, as a percentage. Put 13, 14 and 15 into AT, DF and HP. First predict what ? AT+DF+HP/45*100 shows, then type it, and explain why it's wrong. Fix it with parentheses, then use INT to round the rating to the nearest whole percent."
    },
    {
     "n": 2,

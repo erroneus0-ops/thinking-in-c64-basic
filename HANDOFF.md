@@ -412,7 +412,8 @@ stored: the cursor wraps and RETURN enters the empty row). Chapter 2 and the pla
 
 ## Next steps
 
-1. DONE: Chapter 3 drafted (5 lessons; every example verified on the C64; the course site maps ^ to
+1. DONE: Chapter 3 drafted (Exercise 1 is the editor's Pokemon GO IV idea: (AT+DF+HP)/45*100, which
+   needs parentheses and INT(x+.5); verified: 60.3333334 wrong vs 93.3333334, rounds to 93) (5 lessons; every example verified on the C64; the course site maps ^ to
    the C64's up-arrow). Next: the beta tester's one pass through it. Then Chapter 4, Words as Data.
 2. Improvement chart: quiz score per attempt over time, on /work and /review.
 3. Autosave on Chapter work, plus a warning before leaving with unsaved text (awaiting go-ahead).

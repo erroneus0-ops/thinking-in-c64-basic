@@ -174,7 +174,7 @@ Repeatable "random" numbers aren't a flaw: game makers sometimes use them on pur
 
 ## Exercises
 
-1. **Predict, then check.** Work out these three on paper first, then check each on the C64: `(6+4)/2`, `6+4/2`, and `2↑3*2`. For any you got wrong, explain which part should have gone first.
+1. **Rate a creature.** In creature-collecting games like Pokémon GO, each creature has three hidden stats, attack, defense and HP, each from 0 to 15. Its rating is the total out of 45, as a percentage. Put 13, 14 and 15 into `AT`, `DF` and `HP`. First predict what `? AT+DF+HP/45*100` shows, then type it, and explain why it's wrong. Fix it with parentheses, then use `INT` to round the rating to the nearest whole percent.
 2. **Split the loot.** 250 gems, 4 players. Use variables and `INT` to print how many gems each player gets, and how many are left in the chest.
 3. **Build it.** Write a program that rolls two dice and prints both rolls and their total, mixing words and boxes. Make sure it rolls differently after every reset. Submit it on the C64 page.
 
