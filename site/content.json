@@ -344,5 +344,168 @@
     "answer": "a"
    }
   ]
+ },
+ {
+  "n": 3,
+  "title": "Working Things Out",
+  "lessons": [
+   {
+    "id": "3.1",
+    "title": "The C64 as a calculator"
+   },
+   {
+    "id": "3.2",
+    "title": "Which part goes first"
+   },
+   {
+    "id": "3.3",
+    "title": "Keeping the whole part"
+   },
+   {
+    "id": "3.4",
+    "title": "Rolling dice"
+   },
+   {
+    "id": "3.5",
+    "title": "The secret of random"
+   }
+  ],
+  "exercises": [
+   {
+    "n": 1,
+    "id": "ex1-5dc2e3",
+    "title": "Predict, then check",
+    "text": "Work out these three on paper first, then check each on the C64: (6+4)/2, 6+4/2, and 2↑3*2. For any you got wrong, explain which part should have gone first."
+   },
+   {
+    "n": 2,
+    "id": "ex2-0d9c25",
+    "title": "Split the loot",
+    "text": "250 gems, 4 players. Use variables and INT to print how many gems each player gets, and how many are left in the chest."
+   },
+   {
+    "n": 3,
+    "id": "ex3-572dd3",
+    "title": "Build it",
+    "text": "Write a program that rolls two dice and prints both rolls and their total, mixing words and boxes. Make sure it rolls differently after every reset. Submit it on the C64 page."
+   }
+  ],
+  "quiz": [
+   {
+    "n": 1,
+    "question": "What does ? 2+3*4 show?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "20"
+     },
+     {
+      "letter": "b",
+      "text": "14"
+     },
+     {
+      "letter": "c",
+      "text": "24"
+     },
+     {
+      "letter": "d",
+      "text": "9"
+     }
+    ],
+    "answer": "b"
+   },
+   {
+    "n": 2,
+    "question": "What does ? INT(9.99) show?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "10"
+     },
+     {
+      "letter": "b",
+      "text": "9.99"
+     },
+     {
+      "letter": "c",
+      "text": "9"
+     },
+     {
+      "letter": "d",
+      "text": "An error"
+     }
+    ],
+    "answer": "c"
+   },
+   {
+    "n": 3,
+    "question": "Which gives a whole number from 1 to 6?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "RND(6)"
+     },
+     {
+      "letter": "b",
+      "text": "INT(RND(1)*6)"
+     },
+     {
+      "letter": "c",
+      "text": "RND(1)*6+1"
+     },
+     {
+      "letter": "d",
+      "text": "INT(RND(1)*6)+1"
+     }
+    ],
+    "answer": "d"
+   },
+   {
+    "n": 4,
+    "question": "What happens with ? 10/0?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "It shows 0"
+     },
+     {
+      "letter": "b",
+      "text": "It shows 10"
+     },
+     {
+      "letter": "c",
+      "text": "?DIVISION BY ZERO  ERROR"
+     },
+     {
+      "letter": "d",
+      "text": "The C64 resets"
+     }
+    ],
+    "answer": "c"
+   },
+   {
+    "n": 5,
+    "question": "Right after a reset, ? RND(1) gives…",
+    "options": [
+     {
+      "letter": "a",
+      "text": "the same number every time"
+     },
+     {
+      "letter": "b",
+      "text": "a different number every time"
+     },
+     {
+      "letter": "c",
+      "text": "always 0"
+     },
+     {
+      "letter": "d",
+      "text": "an error"
+     }
+    ],
+    "answer": "a"
+   }
+  ]
  }
 ]

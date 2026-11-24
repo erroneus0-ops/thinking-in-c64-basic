@@ -174,6 +174,26 @@ it: plan, then number</a></li>
 <li><a href="#exercises-1" id="toc-exercises-1">Exercises</a></li>
 <li><a href="#quiz-1" id="toc-quiz-1">Quiz</a></li>
 </ul></li>
+<li><a href="#chapter-3-working-things-out"
+id="toc-chapter-3-working-things-out">Chapter 3: Working Things Out</a>
+<ul>
+<li><a href="#lesson-3.1-the-c64-as-a-calculator"
+id="toc-lesson-3.1-the-c64-as-a-calculator">Lesson 3.1 — The C64 as a
+calculator</a></li>
+<li><a href="#lesson-3.2-which-part-goes-first"
+id="toc-lesson-3.2-which-part-goes-first">Lesson 3.2 — Which part goes
+first</a></li>
+<li><a href="#lesson-3.3-keeping-the-whole-part"
+id="toc-lesson-3.3-keeping-the-whole-part">Lesson 3.3 — Keeping the
+whole part</a></li>
+<li><a href="#lesson-3.4-rolling-dice"
+id="toc-lesson-3.4-rolling-dice">Lesson 3.4 — Rolling dice</a></li>
+<li><a href="#lesson-3.5-the-secret-of-random"
+id="toc-lesson-3.5-the-secret-of-random">Lesson 3.5 — The secret of
+random</a></li>
+<li><a href="#exercises-2" id="toc-exercises-2">Exercises</a></li>
+<li><a href="#quiz-2" id="toc-quiz-2">Quiz</a></li>
+</ul></li>
 <li><a href="#appendices-in-progress"
 id="toc-appendices-in-progress">Appendices (in progress)</a></li>
 </ul>
@@ -1029,6 +1049,262 @@ It saves memory.</li>
 <li>Which command shows only lines 20 through 40? (a)
 <code>LIST 20-40</code> (b) <code>RUN 20</code> (c) <code>LIST 40</code>
 (d) <code>LIST -20</code>.</li>
+</ol>
+<h1 id="chapter-3-working-things-out">Chapter 3: Working Things Out</h1>
+<p>In this chapter the C64 becomes a calculator, then a dice roller.
+You’ll learn how it does arithmetic, which part of a calculation it
+works out first, how to keep only the whole part of a number, and how to
+make it pick numbers at random. The chapter ends with a surprise about
+“random” that most people never notice.</p>
+<h2 id="lesson-3.1-the-c64-as-a-calculator">Lesson 3.1 — The C64 as a
+calculator</h2>
+<p><strong>Goal:</strong> Do arithmetic with the C64, and meet its five
+arithmetic signs.</p>
+<p><strong>Picture:</strong> A game is always calculating behind the
+scenes: damage, bonuses, how much gold is left after you buy something.
+The C64 can do the same sums, and it shows you every one.</p>
+<p><strong>Try it.</strong> <code>?</code> works as a calculator. Type
+each line:</p>
+<pre><code><span class="ln">? 7+5</span>
+<span class="ln">? 7-5</span>
+<span class="ln">? 7*5</span></code></pre>
+<p>The C64 answers <code>12</code>, <code>2</code> and <code>35</code>.
+On a computer, <strong>*</strong> means times, because the letter X
+would be confused with a variable called X.</p>
+<p><strong>Predict.</strong> What will these show? Write your answers
+down first.</p>
+<pre><code><span class="ln">? 7/2</span>
+<span class="ln">? 2↑3</span></code></pre>
+<p><strong>Why it works.</strong> The C64 answers <code>3.5</code> and
+<code>8</code>. The <strong>/</strong> sign means divided by, and the
+C64 keeps the decimal part. The <strong>↑</strong> sign means “to the
+power of”: 2↑3 is 2 × 2 × 2, which is 8. On the course site’s C64, type
+↑ with the <strong>^</strong> key (Shift + 6 on most keyboards).</p>
+<table>
+<thead>
+<tr>
+<th>Sign</th>
+<th>Means</th>
+<th>Example</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>plus</td>
+<td><code>7+5</code></td>
+<td>12</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>minus</td>
+<td><code>7-5</code></td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>times</td>
+<td><code>7*5</code></td>
+<td>35</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>divided by</td>
+<td><code>7/2</code></td>
+<td>3.5</td>
+</tr>
+<tr>
+<td><code>↑</code></td>
+<td>to the power of</td>
+<td><code>2↑3</code></td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>One more, on purpose:</strong></p>
+<pre><code><span class="ln">? 10/0</span></code></pre>
+<p>The C64 answers <code>?DIVISION BY ZERO  ERROR</code>. Nobody can
+split something into zero parts, not even a computer, so it stops and
+tells you.</p>
+<h2 id="lesson-3.2-which-part-goes-first">Lesson 3.2 — Which part goes
+first</h2>
+<p><strong>Goal:</strong> Know the order in which the C64 works out a
+calculation, and control it.</p>
+<p><strong>Picture:</strong> A damage formula in a game: base damage,
+plus a bonus times a multiplier. Whether the bonus gets multiplied
+before or after it’s added changes the result completely. The C64 always
+follows the same order, so you can predict it.</p>
+<p><strong>Predict.</strong> Write down your answer before you type
+it:</p>
+<pre><code><span class="ln">? 2+3*4</span></code></pre>
+<p><strong>Why it works.</strong> The C64 answers <code>14</code>, not
+20. It does the multiplying <em>first</em>: 3 times 4 is 12, then 2 plus
+12 is 14. The order is always:</p>
+<ol type="1">
+<li>Anything in <strong>parentheses</strong> <code>( )</code>.</li>
+<li><strong>Powers</strong> (↑).</li>
+<li><strong>Times and divided by</strong> (<code>*</code> and
+<code>/</code>), from left to right.</li>
+<li><strong>Plus and minus</strong> (<code>+</code> and <code>-</code>),
+from left to right.</li>
+</ol>
+<p>Parentheses let you choose:</p>
+<pre><code><span class="ln">? (2+3)*4</span></code></pre>
+<p>That’s <code>20</code>: now the adding happens first. When in doubt,
+add parentheses. They never hurt, and they make your intention clear to
+anyone reading the line, including you, later.</p>
+<p><strong>Prove it.</strong> Try these, predicting each one first:</p>
+<pre><code><span class="ln">? 12/2*3</span>
+<span class="ln">? 2+3↑2</span></code></pre>
+<p>The answers are <code>18</code> (12 divided by 2 is 6, then times 3,
+working left to right) and <code>11</code> (3↑2 is 9, then plus 2).</p>
+<p><strong>Organize it.</strong> Before you type a calculation, work it
+out on paper, following the order above. Then compare your answer with
+the C64’s.</p>
+<p><strong>Notebook rule 3:</strong> Work it out on paper first. If your
+answer and the C64’s disagree, one of you is wrong, and finding out
+which teaches you something either way.</p>
+<h2 id="lesson-3.3-keeping-the-whole-part">Lesson 3.3 — Keeping the
+whole part</h2>
+<p><strong>Goal:</strong> Use <code>INT</code> to keep only the
+whole-number part of a number.</p>
+<p><strong>Picture:</strong> Splitting a treasure chest between players.
+Gems can’t be cut in half, so everyone gets a whole number of gems, and
+whatever’s left over stays in the chest.</p>
+<p><strong>Try it:</strong></p>
+<pre><code><span class="ln">? INT(7.9)</span></code></pre>
+<p>The C64 answers <code>7</code>. <code>INT</code> keeps the whole part
+and throws away everything after the decimal point. It doesn’t round 7.9
+up to 8.</p>
+<p><strong>Predict.</strong> 100 gems, 3 players. How many does each
+player get, and how many are left over? Work it out on paper, then try
+it:</p>
+<pre><code><span class="ln">G = 100</span>
+<span class="ln">P = 3</span>
+<span class="ln">? INT(G/P)</span>
+<span class="ln">? G-INT(G/P)*P</span></code></pre>
+<p><strong>Why it works.</strong> The C64 answers <code>33</code> and
+<code>1</code>. <code>G/P</code> is 33.333…, and <code>INT</code> keeps
+33: each player’s share. Then <code>INT(G/P)*P</code> is the 99 gems
+handed out, so <code>G</code> minus that leaves 1 gem in the chest. That
+second line is the <strong>remainder</strong>, what’s left over after an
+even split.</p>
+<div class="good-to-know">
+<p><code>INT</code> always goes <em>down</em> to the next whole number,
+and for a negative number, down means further from zero. So
+<code>INT(-2.5)</code> is −3, not −2. And to round to the
+<em>nearest</em> whole number instead, add a half first:
+<code>INT(2.5 + .5)</code> gives 3.</p>
+</div>
+<h2 id="lesson-3.4-rolling-dice">Lesson 3.4 — Rolling dice</h2>
+<p><strong>Goal:</strong> Make the C64 pick random numbers, and turn
+them into dice rolls.</p>
+<p><strong>Picture:</strong> Every game with loot drops, critical hits
+or dice has a random number generator inside. The C64 has one too,
+called <code>RND</code>.</p>
+<p><strong>Try it.</strong> Type this a few times:</p>
+<pre><code><span class="ln">? RND(1)</span></code></pre>
+<p>Each time, you get a different number between 0 and 1, like
+<code>.185564016</code>. It’s never quite 1.</p>
+<p><strong>Building a die.</strong> A die needs a whole number from 1 to
+6. Build it one step at a time, and work out each step’s range on
+paper:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Gives a number from</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RND(1)</code></td>
+<td>0 up to (but not) 1</td>
+<td>that’s what RND gives</td>
+</tr>
+<tr>
+<td><code>RND(1)*6</code></td>
+<td>0 up to (but not) 6</td>
+<td>six times bigger</td>
+</tr>
+<tr>
+<td><code>INT(RND(1)*6)</code></td>
+<td>0 to 5, whole</td>
+<td>INT drops the decimal part</td>
+</tr>
+<tr>
+<td><code>INT(RND(1)*6)+1</code></td>
+<td>1 to 6, whole</td>
+<td>one more, so it starts at 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Predict,</strong> then roll the die a few times:</p>
+<pre><code><span class="ln">? INT(RND(1)*6)+1</span></code></pre>
+<p>Every answer is a whole number from 1 to 6. Change the 6 to 20, and
+you’ve built the 20-sided die from tabletop games.</p>
+<h2 id="lesson-3.5-the-secret-of-random">Lesson 3.5 — The secret of
+random</h2>
+<p><strong>Goal:</strong> Find out what “random” really means on the
+C64.</p>
+<p><strong>Predict.</strong> Press <strong>Reset the C64</strong> on the
+course site (or turn your C64 off and on). Then type:</p>
+<pre><code><span class="ln">? RND(1)</span></code></pre>
+<p>Write down the number. Now reset again and type the same line. Before
+you press RETURN, predict: will the number be different this time?</p>
+<p><strong>Why it happens.</strong> It’s exactly the same number, every
+time. The C64’s random numbers aren’t truly random. They come from a
+recipe: each number is worked out from the one before it. After a reset,
+the recipe always starts in the same place, so the “random” numbers
+always come out in the same order.</p>
+<p>Remember the maze from the very first pages? Stop it and run it
+again, and you get a different maze, because the recipe carries on from
+where it was. But right after a reset, the first maze is always the same
+one.</p>
+<p><strong>The fix.</strong> To start the recipe somewhere different
+each time, mix in the C64’s clock. <code>TI</code> counts time since the
+C64 was switched on, and it’s almost never the same twice:</p>
+<pre><code><span class="ln">X = RND(-TI)</span>
+<span class="ln">? RND(1)</span></code></pre>
+<p>A negative number inside <code>RND</code> tells it to restart the
+recipe from that number. Since <code>TI</code> is different every time,
+so is the starting point. Put <code>X = RND(-TI)</code> at the top of
+any program that should be different every run.</p>
+<div class="good-to-know">
+<p>Repeatable “random” numbers aren’t a flaw: game makers sometimes use
+them on purpose. When a game lets you type in a “seed” to get the same
+world as a friend, that’s this same idea: the same starting point gives
+the same “random” world.</p>
+</div>
+<h2 id="exercises-2">Exercises</h2>
+<ol type="1">
+<li><strong>Predict, then check.</strong> Work out these three on paper
+first, then check each on the C64: <code>(6+4)/2</code>,
+<code>6+4/2</code>, and <code>2↑3*2</code>. For any you got wrong,
+explain which part should have gone first.</li>
+<li><strong>Split the loot.</strong> 250 gems, 4 players. Use variables
+and <code>INT</code> to print how many gems each player gets, and how
+many are left in the chest.</li>
+<li><strong>Build it.</strong> Write a program that rolls two dice and
+prints both rolls and their total, mixing words and boxes. Make sure it
+rolls differently after every reset. Submit it on the C64 page.</li>
+</ol>
+<h2 id="quiz-2">Quiz</h2>
+<ol type="1">
+<li>What does <code>? 2+3*4</code> show? (a) 20 (b) 14 (c) 24 (d)
+9.</li>
+<li>What does <code>? INT(9.99)</code> show? (a) 10 (b) 9.99 (c) 9 (d)
+An error.</li>
+<li>Which gives a whole number from 1 to 6? (a) <code>RND(6)</code> (b)
+<code>INT(RND(1)*6)</code> (c) <code>RND(1)*6+1</code> (d)
+<code>INT(RND(1)*6)+1</code>.</li>
+<li>What happens with <code>? 10/0</code>? (a) It shows 0 (b) It shows
+10 (c) <code>?DIVISION BY ZERO  ERROR</code> (d) The C64 resets.</li>
+<li>Right after a reset, <code>? RND(1)</code> gives… (a) the same
+number every time (b) a different number every time (c) always 0 (d) an
+error.</li>
 </ol>
 <h1 id="appendices-in-progress">Appendices (in progress)</h1>
 <p>These reference pages will be added as the book grows. When a chapter

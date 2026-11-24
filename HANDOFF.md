@@ -410,8 +410,8 @@ stored: the cursor wraps and RETURN enters the empty row). Chapter 2 and the pla
 
 ## Next steps
 
-1. Chapter 3, Working Things Out (arithmetic, order of operations, INT, RND, including
-   the discovery that RND repeats after every reset).
+1. DONE: Chapter 3 drafted (5 lessons; every example verified on the C64; the course site maps ^ to
+   the C64's up-arrow). Next: the beta tester's one pass through it. Then Chapter 4, Words as Data.
 2. Improvement chart: quiz score per attempt over time, on /work and /review.
 3. Autosave on Chapter work, plus a warning before leaving with unsaved text (awaiting go-ahead).
 4. Later, each with its chapter: debugger additions (current line, change log, error explainer),
