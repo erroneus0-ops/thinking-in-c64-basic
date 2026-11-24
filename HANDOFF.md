@@ -103,6 +103,18 @@ Content ideas from the editor (to place in chapters):
   functions, named record columns), and end the capstone with a short "Where next?" page mapping
   C64 ideas to modern ones (GOSUB -> functions, record rows -> structs/objects, code numbers +
   lookup arrays -> enums/dictionaries, relative files -> database tables, array windows -> paging).
+- SIDE QUEST, a third recurring project (editor): a "creature lab" for Pokemon GO, designed by the
+  student. Path: Ch 3-4 the CP formula as ONE LONG LINE of gobbledygook, then broken into named
+  steps (one idea per line, each in the variable dictionary; the Show variables panel shows every
+  step's value). Then: prompts for base stats and IVs (Ch 5), his own screen layout (Ch 15),
+  multiplier and power-up cost tables (stardust, candy, candy XL) as DATA and arrays (Ch 12-13),
+  his creature inventory saved to disk (Ch 19-20), and late on, converting main-series stats to GO's
+  three (published formula; verify when written). Like the tracker, his inventory data stays out of
+  the repo. Breaking formulas down is also forced by the C64: 80-character lines, and BASIC V2 has a
+  ?FORMULA TOO COMPLEX error.
+- ESTIMATE FIRST (design principle): before any calculation, the reader writes down roughly what
+  the answer should be and asks "does this feel right?". The C64 does the arithmetic; the reader
+  judges it. Many bugs are caught by a number that just looks wrong.
 - CP CALCULATOR (editor's idea; for Ch 12-13): Pokemon GO combat power, verified against the main
   reference sites: CP = INT((baseAtk+ivAtk) * SQR(baseDef+ivDef) * SQR(baseSta+ivSta) * CPM^2 / 10).
   CPM (CP multiplier) has no formula: it's a LOOKUP TABLE by level, with half levels (1, 1.5 ... 50;
