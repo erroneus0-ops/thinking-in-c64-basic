@@ -112,6 +112,21 @@ Content ideas from the editor (to place in chapters):
   three (published formula; verify when written). Like the tracker, his inventory data stays out of
   the repo. Breaking formulas down is also forced by the C64: 80-character lines, and BASIC V2 has a
   ?FORMULA TOO COMPLEX error.
+- IV APPRAISAL BARS (editor's idea; tested prototype): three rows of 15 cells in segments of 5, filled
+  to each IV (reversed spaces, CHR$(18)/CHR$(146)), empty cells CHR$(166) (checkered), blank line
+  between rows, rating below. 12/13/11 draws correctly with "RATING 80 %". Uses FOR/NEXT, IF and
+  GOSUB, so Ch 8-10; colors in Ch 15. Prototype:
+      10 AT=12:DF=13:HP=11
+      20 PRINT "ATTACK  ";:V=AT:GOSUB 100
+      30 PRINT "DEFENSE ";:V=DF:GOSUB 100
+      40 PRINT "HP      ";:V=HP:GOSUB 100
+      50 PRINT:PRINT "RATING";INT((AT+DF+HP)/45*100+.5);"%"
+      60 END
+      100 FOR I=1 TO 15
+      110 IF I<=V THEN PRINT CHR$(18);" ";CHR$(146);
+      120 IF I>V THEN PRINT CHR$(166);
+      130 IF I=5 OR I=10 THEN PRINT " ";
+      140 NEXT:PRINT:PRINT:RETURN
 - ESTIMATE FIRST (design principle): before any calculation, the reader writes down roughly what
   the answer should be and asks "does this feel right?". The C64 does the arithmetic; the reader
   judges it. Many bugs are caught by a number that just looks wrong.
