@@ -34,14 +34,14 @@ Getting a prediction wrong is not a failure. It's how you find out what the comp
 
 ## Working through a chapter
 
-You work through each chapter **once**, in this order:
+Each chapter only needs to be worked through **once**, in this order:
 
 1. **Read each lesson and try every example** on the C64. Many people keep the book and the C64 side by side on the screen.
 2. **After each lesson, write your notes** on the Chapter work page: explain the big idea in your own words, and say what surprised you, confused you, or dragged.
 3. **Do the exercises.** When an exercise asks for a program, choose it in the Exercise list on the C64 page and press **Submit program**, so it's saved.
 4. **Take the quiz last.**
 
-That's the whole chapter. If something in it is fixed or improved later, you'll be told what changed, but you won't be asked to work through it again.
+That's the whole chapter. If something in it is fixed or improved later, you'll be told what changed, but you won't be asked to work through it again. You can always come back on your own, though: retake a quiz to raise your score, or play with the examples to see what else they do. Every attempt is kept. Coming back is never required, and always welcome.
 
 ## Tools that help
 
