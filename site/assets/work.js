@@ -154,6 +154,11 @@ async function show() {
   history.replaceState(null, '', '#ch' + ch.n);
 }
 
+// Inside the study view the C64 is already on screen beside the workbook: links to it become plain text.
+if (document.documentElement.classList.contains('embed')) {
+  for (const a of document.querySelectorAll('a[href="/c64"]')) a.replaceWith(document.createTextNode(a.textContent));
+}
+
 (async () => {
   chapters = await (await fetch('/api/chapters')).json();
   for (const c of chapters) chapterEl.append(new Option(c.n === 0 ? c.title : `Chapter ${c.n}: ${c.title}`, c.n));

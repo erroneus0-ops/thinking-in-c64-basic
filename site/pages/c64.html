@@ -6,10 +6,13 @@
 <title>C64 — Thinking in C64 BASIC</title>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+<script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed');</script>
+
 <style>
   main { display: grid; grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr); gap: 1.5rem;
     padding: 1.25rem; max-width: 84rem; margin: 0 auto; align-items: start; }
   @media (max-width: 52rem) { main { grid-template-columns: 1fr; } }
+  html.embed main { grid-template-columns: 1fr; padding-top: 0.75rem; }
   .screen { background: #000; border-radius: 6px; overflow: hidden; aspect-ratio: 4 / 3; }
   .screen iframe { width: 100%; height: 100%; border: 0; display: block; }
   .under-screen { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
@@ -58,6 +61,7 @@
 <header class="bar">
   <a class="home" href="/">Thinking in C64 BASIC</a>
   <a href="/book/">Book</a>
+  <a href="/study">Study view</a>
   <span class="who"></span>
 </header>
 <main>

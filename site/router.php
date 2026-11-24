@@ -68,10 +68,10 @@ if (str_starts_with($path, '/book/')) {
 }
 if (str_starts_with($path, '/assets/')) { serve_from(__DIR__ . '/assets', substr($path, 8)); return true; }
 
-$pages = ['/' => 'index.html', '/c64' => 'c64.html', '/work' => 'work.html', '/review' => 'review.html', '/login' => 'login.html'];
+$pages = ['/' => 'index.html', '/c64' => 'c64.html', '/work' => 'work.html', '/review' => 'review.html', '/login' => 'login.html', '/study' => 'study.html'];
 if (isset($pages[$path])) {
     // The C64 and Chapter work pages need a name; their visits are logged with IP and device.
-    if (in_array($path, ['/c64', '/work'], true)) {
+    if (in_array($path, ['/c64', '/work', '/study'], true)) {
         require_once __DIR__ . '/lib/db.php';
         require_once __DIR__ . '/lib/who.php';
         if (!current_user()) { header('Location: /login?next=' . rawurlencode($path)); return true; }

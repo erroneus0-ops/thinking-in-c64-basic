@@ -2,6 +2,10 @@
 
 This book teaches you to program the Commodore 64. It also teaches something bigger: how to plan, how to keep things in order, and how to break a big job into small ones. Programmers call that *organized thinking*. The C64 is a good place to learn it, because its BASIC gives you almost no help. Any order in your program has to come from you.
 
+## Your pace
+
+This book is **self-paced**. There's no deadline and no hurry. Go back, re-read, and practice any lesson as often as you like, for as long as you like, until it feels comfortable. Then move on when you're ready.
+
 ## What you need
 
 - **The course site:** the book, the C64 page, and Chapter work. (VICE on your computer works too.)
@@ -45,6 +49,7 @@ That's the whole chapter. If something in it is fixed or improved later, you'll 
 
 ## Tools that help
 
+- **Study view**, on the course site's home page, puts the C64 and the book side by side on one screen, with the workbook (exercises, quiz and notes) sliding in from the right when you need it.
 - **Show variables**, under the C64 screen, shows every box the C64 knows about, sorted into cabinets.
 - **Shift-click** on the C64 screen moves the cursor there.
 - **Insert** (or **Shift + Backspace**) makes room for a missing letter.

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Study view — Thinking in C64 BASIC</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  html, body { height: 100%; }
+  body { display: flex; flex-direction: column; overflow: hidden; }
+  header.bar { flex: none; }
+  #drawer-btn { font: inherit; font-weight: 700; }
+  .panes { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .panes iframe { width: 100%; height: 100%; border: 0; display: block; background: var(--paper); }
+  .panes .c64 { border-right: 1px solid var(--rule); }
+  /* The workbook slides in over the right side */
+  #drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(36rem, 46vw); z-index: 20;
+    background: var(--paper); border-left: 1px solid var(--rule); box-shadow: -8px 0 24px rgb(0 0 0 / 0.18);
+    transform: translateX(100%); transition: transform 0.25s ease; display: flex; flex-direction: column;
+    padding-top: env(safe-area-inset-top, 0px); }
+  #drawer.open { transform: translateX(0); }
+  #drawer .top { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule); }
+  #drawer iframe { flex: 1; width: 100%; border: 0; }
+  @media (max-width: 60rem) {
+    body { overflow: auto; }
+    .panes { grid-template-columns: 1fr; grid-auto-rows: 85vh; }
+    #drawer { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="home" href="/">Thinking in C64 BASIC</a>
+  <span class="who"></span>
+  <button id="drawer-btn" type="button" aria-expanded="false" aria-controls="drawer">Workbook ◂</button>
+</header>
+<div class="panes">
+  <iframe class="c64" src="/c64?embed=1" title="The C64" allow="autoplay; fullscreen"></iframe>
+  <iframe class="book" src="/book/" title="The book"></iframe>
+</div>
+<div id="drawer" aria-hidden="true">
+  <div class="top"><strong>Workbook</strong><button id="drawer-close" type="button">Close ▸</button></div>
+  <iframe id="work" title="Workbook" data-src="/work?embed=1"></iframe>
+</div>
+<script>
+const drawer = document.getElementById('drawer'), btn = document.getElementById('drawer-btn'), work = document.getElementById('work');
+function setDrawer(open) {
+  if (open && !work.src) work.src = work.dataset.src;     // load the workbook the first time it opens
+  drawer.classList.toggle('open', open);
+  drawer.setAttribute('aria-hidden', String(!open));
+  btn.setAttribute('aria-expanded', String(open));
+  btn.textContent = open ? 'Workbook ▸' : 'Workbook ◂';
+}
+btn.onclick = () => setDrawer(!drawer.classList.contains('open'));
+document.getElementById('drawer-close').onclick = () => setDrawer(false);
+</script>
+<script src="/assets/who.js"></script>
+</body>
+</html>

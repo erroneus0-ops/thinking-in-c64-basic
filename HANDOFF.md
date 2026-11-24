@@ -402,6 +402,15 @@ live in the public chapter sources (honor system) and the answer edition is pass
 programmer's notebook is paper; the voice is plain and never childish; the reference machine is
 VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
+## Study view (/study)
+
+The beta tester's own habit, built in: on a wide (16:9) screen the C64 sits on the LEFT (3/5 of the
+width) and the book on the RIGHT (2/5), each scrolling independently; the workbook (/work) slides in
+from the right over the book side via "Workbook" and closes again. Pages load in frames with
+?embed=1, which hides their header bar and stacks the C64 page in one column; inside the drawer,
+links to /c64 become plain text. Requires sign-in like /c64 and /work. Below 60rem wide the panes
+stack. Linked from the home page and the C64 page header.
+
 ## Show variables panel (built; editor-approved design)
 
 ARRAYS cabinet (added after the editor's DIM A(10) test showed arrays were missing): reads the
