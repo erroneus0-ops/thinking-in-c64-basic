@@ -193,8 +193,7 @@ Conventions in chapter files:
   game you already know"; dotted-out answers on 2.4/2.5). DECISION: each chapter is REQUIRED only
   once; the editor promised no more required repeats. Fixes later are announced, never re-run. But
   coming back by choice (retaking quizzes to raise a score, playing with examples) is always open
-  and welcome (editor's clarification). Note: a hard week outside the book may have colored his
-  frustration in these notes; weigh mood-words accordingly.
+  and welcome (editor's clarification).
   "How This Book Works" now says so, and describes the once-through flow and the tools. Next: Ch 3.
   Evidence of learning: avoided ROUND1/ROUND2 (RO) on his own by using R1/R2; fixed ARMOR -> ARMR and
   ENDURANCE -> DURANCE with reasons; Ch 1 quiz 4/5 -> 5/5, Ch 2 quiz 5/5 first try; used the {clr}
