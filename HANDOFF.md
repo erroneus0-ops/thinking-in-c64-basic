@@ -103,6 +103,12 @@ Content ideas from the editor (to place in chapters):
   functions, named record columns), and end the capstone with a short "Where next?" page mapping
   C64 ideas to modern ones (GOSUB -> functions, record rows -> structs/objects, code numbers +
   lookup arrays -> enums/dictionaries, relative files -> database tables, array windows -> paging).
+- CP CALCULATOR (editor's idea; for Ch 12-13): Pokemon GO combat power, verified against the main
+  reference sites: CP = INT((baseAtk+ivAtk) * SQR(baseDef+ivDef) * SQR(baseSta+ivSta) * CPM^2 / 10).
+  CPM (CP multiplier) has no formula: it's a LOOKUP TABLE by level, with half levels (1, 1.5 ... 50;
+  e.g. level 50 = 0.84029999), so: CPM values in DATA (Ch 12), read into an array indexed by
+  level*2-1 (Ch 13). Uses INT (floor) and SQR, both built in. Bonus lesson: several web sources
+  give wrong CP formulas -> check your sources (and test everything).
 - RECORD TABLES (editor's idea): a 2-D integer array as an in-memory database table. Rows = records,
   column 0 = ID, columns 1..N = properties stored as CODES into string lookup arrays (e.g. CL$(3) =
   "BLUE"). Name the columns with variables (HT=1:WD=2:WT=3, then T%(R,WT)) and document the layout
