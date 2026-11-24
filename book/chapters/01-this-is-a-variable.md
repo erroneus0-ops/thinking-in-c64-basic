@@ -212,7 +212,7 @@ The rules for names, all in one place:
 
 **Goal:** Start the habit that keeps every program in this book under control.
 
-Because the C64 will not warn you when two names collide, you need a written list of every variable a program uses. This is your **variable dictionary**. Start a page in your programmer's notebook like this:
+Because the C64 will not warn you when two names collide, you need a written list of every variable a program uses. This is your **variable dictionary**. Start a page in your programmer's notebook like this (any paper notebook works, and until you have one, a sheet of paper will do):
 
 | Name | Data type | What it holds | Example |
 | --- | --- | --- | --- |

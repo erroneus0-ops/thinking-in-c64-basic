@@ -64,6 +64,10 @@ NEW
 
 `RUN` always starts at the lowest number and works upward.
 
+::: good-to-know
+`PRINT` on its own, with nothing after it, prints an empty line. It's the easy way to put a gap between lines of output, so a screen doesn't look crowded.
+:::
+
 Notice the gaps: 10, 20, 30, not 1, 2, 3. If you later need a step between START and HALFWAY, there's room for it:
 
 ```
@@ -138,6 +142,10 @@ The C64 prints the first line, then stops with `?SYNTAX  ERROR IN 20`. Helpfully
 4. Press RETURN while the cursor is anywhere on that line. That's the line's Submit button.
 
 When you press RETURN, the C64 reads the whole line from the screen and stores it, exactly as if you had typed it fresh. `LIST` and `RUN` to check.
+
+**Making room.** Typing over only replaces letters. When a letter is *missing*, you need room for it. Put the cursor where the missing letter belongs and press SHIFT + INST/DEL. That's **INSERT**: everything from the cursor onward slides one place to the right, leaving a space. Type the missing letter into the gap, then press RETURN. On a PC keyboard, use the **Insert** key, or **Shift + Backspace**.
+
+For example, if line 20 said `20 PRIT "500 POINTS"`, you'd put the cursor on the `T`, press INSERT once, and type `N`.
 
 ::: good-to-know
 On the course site's C64 page, holding **Shift** and clicking on the C64 screen moves the cursor straight to where you clicked, instead of using the arrow keys.

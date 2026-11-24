@@ -107,7 +107,7 @@ th { border-bottom: 2px solid var(--ink); }
 </head>
 <body>
 <main>
-<p class="edition">Beta tester’s draft, built Nov 23, 2026</p>
+<p class="edition">Beta tester’s draft, built Nov 24, 2026</p>
 <p class="book-title">Thinking in C64 BASIC</p>
 <p class="tour-link"><a href="tour/">New to the Commodore 64 and the emulator? <span>Take the quick tour →</span></a></p>
 <details class="toc">
@@ -655,7 +655,8 @@ this book under control.</p>
 <p>Because the C64 will not warn you when two names collide, you need a
 written list of every variable a program uses. This is your
 <strong>variable dictionary</strong>. Start a page in your programmer’s
-notebook like this:</p>
+notebook like this (any paper notebook works, and until you have one, a
+sheet of paper will do):</p>
 <table>
 <thead>
 <tr>
@@ -783,6 +784,11 @@ a box:</p>
   20 PRINT &quot;HALFWAY&quot;          30 PRINT &quot;FINISH LINE&quot;</code></pre>
 <p><code>RUN</code> always starts at the lowest number and works
 upward.</p>
+<div class="good-to-know">
+<p><code>PRINT</code> on its own, with nothing after it, prints an empty
+line. It’s the easy way to put a gap between lines of output, so a
+screen doesn’t look crowded.</p>
+</div>
 <p>Notice the gaps: 10, 20, 30, not 1, 2, 3. If you later need a step
 between START and HALFWAY, there’s room for it:</p>
 <pre><code><span class="ln">15 PRINT &quot;QUARTER WAY&quot;</span></code></pre>
@@ -882,6 +888,16 @@ line’s Submit button.</li>
 <p>When you press RETURN, the C64 reads the whole line from the screen
 and stores it, exactly as if you had typed it fresh. <code>LIST</code>
 and <code>RUN</code> to check.</p>
+<p><strong>Making room.</strong> Typing over only replaces letters. When
+a letter is <em>missing</em>, you need room for it. Put the cursor where
+the missing letter belongs and press SHIFT + INST/DEL. That’s
+<strong>INSERT</strong>: everything from the cursor onward slides one
+place to the right, leaving a space. Type the missing letter into the
+gap, then press RETURN. On a PC keyboard, use the
+<strong>Insert</strong> key, or <strong>Shift + Backspace</strong>.</p>
+<p>For example, if line 20 said <code>20 PRIT "500 POINTS"</code>, you’d
+put the cursor on the <code>T</code>, press INSERT once, and type
+<code>N</code>.</p>
 <div class="good-to-know">
 <p>On the course site’s C64 page, holding <strong>Shift</strong> and
 clicking on the C64 screen moves the cursor straight to where you

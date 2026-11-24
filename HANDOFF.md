@@ -187,6 +187,20 @@ Conventions in chapter files:
 
 ## Beta test log
 
+- 23 Nov, draft 3 of Ch 1-2 (a long day: morning, afternoon, evening). The two open note questions
+  WORKED: real explanations instead of "maybe". VERDICT FROM THE TESTER: NO MORE FULL RE-RUNS ("going
+  back again with everything rebooted... it's just not the same anymore"; "like repeating a video
+  game you already know"; dotted-out answers on 2.4/2.5). DECISION: one pass per chapter from now
+  on; repeats only for targeted fixes. Next: Chapter 3.
+  Evidence of learning: avoided ROUND1/ROUND2 (RO) on his own by using R1/R2; fixed ARMOR -> ARMR and
+  ENDURANCE -> DURANCE with reasons; Ch 1 quiz 4/5 -> 5/5, Ch 2 quiz 5/5 first try; used the {clr}
+  heart (calls it "CLS"); enjoyed the developer getting caught by name collisions.
+  Gaps he found (fixed): (1) INSERT: asked twice; also a real BUG: vc64web ignores Shift on
+  Backspace (it deletes) and maps no Insert key. Now Insert and Shift+Backspace send SHIFT+INST/DEL;
+  Lesson 2.4 teaches "making room". (2) Blank lines: "PRINT" alone prints an empty line; now a Good
+  to know in Lesson 2.2. (3) The variable dictionary had no home (no notebook): Lesson 1.5 now says
+  any paper notebook or sheet of paper works. Still self-blaming on traps ("I blame my head").
+
 - 22 Nov: DRAFT 3 of Chapters 1-2 (editor): same lessons and rules, NEW particulars everywhere
   (pictures, examples, exercises, quizzes) so each pass has something new to read. Ch 1: lockers,
   XP (X), G/G$/G% "GEMS FOUND", SHIELD/SHOTS = SH, FORTUNE (FOR) -> LUCK, ARMOR/ENDURANCE fix-it,
@@ -395,8 +409,7 @@ stored: the cursor wraps and RETURN enters the empty row). Chapter 2 and the pla
 
 ## Next steps
 
-1. The beta tester works through draft 3 of Chapters 1-2; read his notes in the Editor's view and
-   adjust. Then Chapter 3, Working Things Out (arithmetic, order of operations, INT, RND, including
+1. Chapter 3, Working Things Out (arithmetic, order of operations, INT, RND, including
    the discovery that RND repeats after every reset).
 2. Improvement chart: quiz score per attempt over time, on /work and /review.
 3. Autosave on Chapter work, plus a warning before leaving with unsaved text (awaiting go-ahead).
