@@ -230,8 +230,6 @@ In 1999, a spacecraft called the Mars Climate Orbiter was lost at Mars. One team
 
 ## Exercises
 
-Second time through? Find a different answer that still works, then compare it with your first.
-
 1. **Type and predict.** Put the points you scored in two rounds of a game into two variables. Before printing their total, write down what it will be.
 2. **Fix it.** These commands don't work. Find both problems, explain each in one sentence, and fix them: `ARMOR = 30`, then `ENDURANCE = ARMOR * 2`.
 3. **Build it.** Use three variables: the name of a place in a game you like, how many treasures are hidden there, and the name of the best treasure. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types.

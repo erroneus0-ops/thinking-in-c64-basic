@@ -191,7 +191,8 @@ Conventions in chapter files:
   WORKED: real explanations instead of "maybe". VERDICT FROM THE TESTER: NO MORE FULL RE-RUNS ("going
   back again with everything rebooted... it's just not the same anymore"; "like repeating a video
   game you already know"; dotted-out answers on 2.4/2.5). DECISION: one pass per chapter from now
-  on; repeats only for targeted fixes. Next: Chapter 3.
+  on; the editor PROMISED him no more repeated chapters. Fixes later are announced, never re-run.
+  "How This Book Works" now says so, and describes the once-through flow and the tools. Next: Ch 3.
   Evidence of learning: avoided ROUND1/ROUND2 (RO) on his own by using R1/R2; fixed ARMOR -> ARMR and
   ENDURANCE -> DURANCE with reasons; Ch 1 quiz 4/5 -> 5/5, Ch 2 quiz 5/5 first try; used the {clr}
   heart (calls it "CLS"); enjoyed the developer getting caught by name collisions.

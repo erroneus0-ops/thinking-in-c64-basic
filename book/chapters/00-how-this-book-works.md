@@ -4,9 +4,9 @@ This book teaches you to program the Commodore 64. It also teaches something big
 
 ## What you need
 
-- An emulated C64. This book uses VICE, either on your computer or in the browser.
-- A paper notebook and a pencil. This is your **programmer's notebook**. You will draw tables and maps in it before you type.
-- About thirty minutes. Every lesson fits in one sitting.
+- **The course site:** the book, the C64 page, and Chapter work. (VICE on your computer works too.)
+- **A paper notebook and a pencil.** This is your **programmer's notebook**, where you'll draw tables and maps before you type. Any notebook works, and until you have one, a sheet of paper will do.
+- **About thirty minutes.** Every lesson fits in one sitting.
 
 ## Reading the code
 
@@ -32,8 +32,25 @@ Every lesson has the same seven steps, so you always know where you are:
 
 Getting a prediction wrong is not a failure. It's how you find out what the computer really does. Error messages are normal too. Every chapter makes at least one on purpose.
 
+## Working through a chapter
+
+You work through each chapter **once**, in this order:
+
+1. **Read each lesson and try every example** on the C64. Many people keep the book and the C64 side by side on the screen.
+2. **After each lesson, write your notes** on the Chapter work page: explain the big idea in your own words, and say what surprised you, confused you, or dragged.
+3. **Do the exercises.** When an exercise asks for a program, choose it in the Exercise list on the C64 page and press **Submit program**, so it's saved.
+4. **Take the quiz last.**
+
+That's the whole chapter. If something in it is fixed or improved later, you'll be told what changed, but you won't be asked to work through it again.
+
+## Tools that help
+
+- **Show variables**, under the C64 screen, shows every box the C64 knows about, sorted into cabinets.
+- **Shift-click** on the C64 screen moves the cursor there.
+- **Insert** (or **Shift + Backspace**) makes room for a missing letter.
+- **Clear screen**, under the C64 screen, wipes the screen without touching your program.
+- **The quick tour**, linked at the top of the book's web page, shows all of this in a few slides.
+
 ## A note for the beta tester
 
-This book is a **draft**, and you're its **beta tester**. Like a beta tester for a game, your job is to find the problems before anyone else does.
-
-If something confuses you, that's the book's fault, not yours, and you've just found something to fix. After each lesson, open **My notes** on the course site and answer two questions in a few sentences: explain the lesson's big idea in your own words, and say what surprised you, confused you, or dragged, and why. Each chapter's exercises and quiz are on the course site too, so your work is saved as you go.
+This book is a **draft**, and you're its **beta tester**. Like a beta tester for a game, your job is to find the problems before anyone else does. If something confuses you, that's the book's fault, not yours, and you've just found something to fix. Several of the tools above exist because a beta tester asked for them.
