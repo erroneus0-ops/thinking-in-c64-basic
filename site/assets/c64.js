@@ -77,6 +77,9 @@ function specialKeys(e) {
   if (e.code === 'Escape') { e.preventDefault(); e.stopPropagation(); pressKeys(['runStop']); }
   else if (e.code === 'PageUp') { e.preventDefault(); e.stopPropagation(); pressKeys(['restore']); }
   else if (e.code === 'Home') { e.preventDefault(); e.stopPropagation(); pressKeys(e.shiftKey ? ['ShiftLeft', 'home'] : ['home']); }
+  // The C64's up-arrow key (the power sign, as in 2↑3): vc64web has no PC key for it, so the
+  // ^ character (Shift + 6 on most keyboards) presses it.
+  else if (e.key === '^') { e.preventDefault(); e.stopPropagation(); pressKeys(['upArrow']); }
   // INSERT: on a C64 it's SHIFT + INST/DEL. vc64web ignores Shift on Backspace (it deletes), so
   // send the real key pair ourselves, for the Insert key and for Shift + Backspace.
   else if (e.code === 'Insert' || (e.code === 'Backspace' && e.shiftKey)) { e.preventDefault(); e.stopPropagation(); pressKeys(['ShiftLeft', 'Backspace']); }
