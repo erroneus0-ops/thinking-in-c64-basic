@@ -411,6 +411,20 @@ live in the public chapter sources (honor system) and the answer edition is pass
 programmer's notebook is paper; the voice is plain and never childish; the reference machine is
 VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
+## Possible public version (idea only; editor: "we'll see")
+
+GitHub Pages serves only docs/ (the book, tours, locked editor edition). The C64, workbook, save
+slots and Editor's view need the local PHP server. A public version would need:
+- ROMs: NEVER served by the site (copyrighted; embedding them in the .wasm or fetching them from a
+  third party is still distribution). Design agreed with the editor: on first visit the page finds
+  no ROMs in its browser storage and asks the visitor to choose their VICE folder (folder picker);
+  it verifies the four ROMs by checksum (standard chargen, not the Japanese one), keeps the bytes in
+  IndexedDB, and hands them to the emulator. Later visits boot directly. A web page cannot detect
+  VICE or read the disk on its own. Private windows and "clear site data" mean asking again: say
+  why in the prompt. Request persistent storage (navigator.storage.persist()).
+- Save slots and notes in browser storage (per device; no Editor's view).
+- Not Open ROMs: not byte-identical, so the book's verified examples could quietly differ.
+
 ## Chapter status: final or in testing (editor's process)
 
 Each chapter file starts with `<!-- status: final -->` or `<!-- status: testing -->` (a chapter with
