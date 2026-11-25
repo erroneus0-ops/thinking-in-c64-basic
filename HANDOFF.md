@@ -402,6 +402,22 @@ live in the public chapter sources (honor system) and the answer edition is pass
 programmer's notebook is paper; the voice is plain and never childish; the reference machine is
 VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
+## Pending (editor's decisions, not yet built; do together, then retake tour screenshots once)
+
+- RENAME "Submit program" to SAVE SLOTS (editor's choice: game language he knows). Button: "Save to a
+  new slot"; list: "Save slots" with Slot 1, 2, 3 (never overwritten: each save takes the next empty
+  slot); per slot: Run, Load, Listing. Keeps Ch 6's C64 SAVE (to disk) distinct. Update the C64 page,
+  the tour and the book together.
+- LAYOUT: he has never used Submit. With the book and C64 side by side, the C64 page goes one-column
+  and Submit falls below the fold; the study view's C64 pane has the same weakness. Directions to
+  weigh: size the screen to the window HEIGHT, move the save button under the screen beside Show
+  variables / Clear screen, or a small fixed toolbar. Wait for the editor to try the study view.
+- QUIZ: show only right/wrong after an attempt, not the correct letter (a 4/5 became 5/5 in eight
+  seconds by copying), so a retake means rethinking.
+- Ch 3: break the two-dice exercise into smaller steps (the die-building table didn't carry over).
+- Editor's view: answers to earlier-draft exercises with fingerprint ids show the raw id; match on
+  the number and label "(earlier draft)".
+
 ## Study view (/study)
 
 The beta tester's own habit, built in: on a wide (16:9) screen the C64 sits on the LEFT (3/5 of the
