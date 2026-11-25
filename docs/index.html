@@ -87,6 +87,17 @@ pre code { font: inherit; background: none; padding: 0; color: inherit; }
 code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
 
 /* "Good to know" boxes: optional clarifying details, safe to skip on a first read */
+/* Chapters still in testing: amber, so it's obvious they may change */
+:root { --testing: #b45309; --testing-tint: #fff4e0; }
+@media (prefers-color-scheme: dark) { :root { --testing: #f0b35a; --testing-tint: #2e2414; } }
+div.testing { border-left: 5px solid var(--testing); padding-left: 1.25rem; }
+div.testing-banner { background: var(--testing-tint); border: 1.5px solid var(--testing); border-radius: 8px;
+  padding: 0.75rem 1rem; margin: 0 0 1.5rem; }
+div.testing-banner::before { content: "In testing"; display: block; font-weight: 700; color: var(--testing); margin-bottom: 0.25rem; }
+div.testing-banner > :last-child { margin-bottom: 0; }
+.badge { display: inline-block; font-size: 0.5em; font-weight: 700; vertical-align: middle; letter-spacing: 0.02em;
+  padding: 0.15em 0.6em; border-radius: 999px; background: var(--testing); color: #fff; }
+@media (prefers-color-scheme: dark) { .badge { color: #2e2414; } }
 div.good-to-know { border-left: 4px solid var(--accent); background: var(--tint);
   padding: 0.75rem 1rem; margin: 0 0 1.25rem; border-radius: 0 6px 6px 0; }
 div.good-to-know::before { content: "Good to know"; display: block; font-weight: 700;
@@ -107,7 +118,7 @@ th { border-bottom: 2px solid var(--ink); }
 </head>
 <body>
 <main>
-<p class="edition">Beta tester’s draft, built Nov 24, 2026</p>
+<p class="edition">Beta tester’s draft, built Nov 25, 2026</p>
 <p class="book-title">Thinking in C64 BASIC</p>
 <p class="tour-link"><a href="tour/">New to the Commodore 64 and the emulator? <span>Take the quick tour →</span></a></p>
 <details class="toc">
@@ -195,10 +206,30 @@ random</a></li>
 <li><a href="#exercises-2" id="toc-exercises-2">Exercises</a></li>
 <li><a href="#quiz-2" id="toc-quiz-2">Quiz</a></li>
 </ul></li>
+<li><a href="#chapter-4-words-as-data"
+id="toc-chapter-4-words-as-data">Chapter 4: Words as Data <span
+class="badge">In testing</span></a>
+<ul>
+<li><a href="#lesson-4.1-joining-words"
+id="toc-lesson-4.1-joining-words">Lesson 4.1 — Joining words</a></li>
+<li><a href="#lesson-4.2-how-long-is-a-word"
+id="toc-lesson-4.2-how-long-is-a-word">Lesson 4.2 — How long is a
+word?</a></li>
+<li><a href="#lesson-4.3-taking-pieces"
+id="toc-lesson-4.3-taking-pieces">Lesson 4.3 — Taking pieces</a></li>
+<li><a href="#lesson-4.4-numbers-and-words"
+id="toc-lesson-4.4-numbers-and-words">Lesson 4.4 — Numbers and
+words</a></li>
+<li><a href="#lesson-4.5-fusion-names"
+id="toc-lesson-4.5-fusion-names">Lesson 4.5 — Fusion names</a></li>
+<li><a href="#exercises-3" id="toc-exercises-3">Exercises</a></li>
+<li><a href="#quiz-3" id="toc-quiz-3">Quiz</a></li>
+</ul></li>
 <li><a href="#appendices-in-progress"
 id="toc-appendices-in-progress">Appendices (in progress)</a></li>
 </ul>
 </details>
+<!-- status: final -->
 <h1 id="foreword">Foreword</h1>
 <p>This book teaches you to program a computer from 1982: the Commodore
 64. That might seem like a strange choice. The phone in your pocket is
@@ -235,6 +266,7 @@ programmer does. In this book, a mistake is <strong>a discovery, not a
 failure</strong>. Each one teaches you something about how the machine
 works, and about how you think.</p>
 <p>Let’s begin with something worth seeing.</p>
+<!-- status: final -->
 <h1 id="a-maze-in-two-lines">A Maze in Two Lines</h1>
 <p>Before anything else, let’s make the C64 do something worth
 seeing.</p>
@@ -303,6 +335,7 @@ short line, as a kind of puzzle. It works, but it’s hard to read. This
 book always writes programs to be read, because a program you can read
 is a program you can fix.</p>
 </div>
+<!-- status: final -->
 <h1 id="how-this-book-works">How This Book Works</h1>
 <p>This book teaches you to program the Commodore 64. It also teaches
 something bigger: how to plan, how to keep things in order, and how to
@@ -362,7 +395,8 @@ work page: explain the big idea in your own words, and say what
 surprised you, confused you, or dragged.</li>
 <li><strong>Do the exercises.</strong> When an exercise asks for a
 program, choose it in the Exercise list on the C64 page and press
-<strong>Submit program</strong>, so it’s saved.</li>
+<strong>Save to a new slot</strong>, so it’s kept. Every save goes into
+a new slot, and nothing is ever overwritten.</li>
 <li><strong>Take the quiz last.</strong></li>
 </ol>
 <p>That’s the whole chapter. If something in it is fixed or improved
@@ -394,6 +428,7 @@ tester</strong>. Like a beta tester for a game, your job is to find the
 problems before anyone else does. If something confuses you, that’s the
 book’s fault, not yours, and you’ve just found something to fix. Several
 of the tools above exist because a beta tester asked for them.</p>
+<!-- status: final -->
 <h1 id="chapter-1-this-is-a-variable">Chapter 1: This Is a Variable</h1>
 <p>This chapter teaches two things. The first is the
 <strong>variable</strong>: how the C64 remembers numbers and words. The
@@ -794,6 +829,7 @@ dictionary first, with their data types.</li>
 share one box, MA (c) MANA is a command (d)
 <code>?TYPE MISMATCH  ERROR</code>.</li>
 </ol>
+<!-- status: final -->
 <h1 id="chapter-2-talking-to-the-computer">Chapter 2: Talking to the
 Computer</h1>
 <p>In Chapter 1, the C64 did each thing the moment you pressed RETURN.
@@ -1063,6 +1099,7 @@ It saves memory.</li>
 <code>LIST 20-40</code> (b) <code>RUN 20</code> (c) <code>LIST 40</code>
 (d) <code>LIST -20</code>.</li>
 </ol>
+<!-- status: final -->
 <h1 id="chapter-3-working-things-out">Chapter 3: Working Things Out</h1>
 <p>In this chapter the C64 becomes a calculator, then a dice roller.
 You’ll learn how it does arithmetic, which part of a calculation it
@@ -1304,9 +1341,13 @@ nearest whole percent.</li>
 <li><strong>Split the loot.</strong> 250 gems, 4 players. Use variables
 and <code>INT</code> to print how many gems each player gets, and how
 many are left in the chest.</li>
-<li><strong>Build it.</strong> Write a program that rolls two dice and
-prints both rolls and their total, mixing words and boxes. Make sure it
-rolls differently after every reset. Submit it on the C64 page.</li>
+<li><strong>Build it, one step at a time.</strong> First, type
+<code>? INT(RND(1)*6)+1</code> a few times: that’s one die. Next, write
+a program that puts one roll into <code>D1</code> and another into
+<code>D2</code>, then prints both rolls and their total, mixing words
+and boxes. Last, add <code>X = RND(-TI)</code> as the program’s first
+line, so it rolls differently after every reset. Save it to a slot on
+the C64 page.</li>
 </ol>
 <h2 id="quiz-2">Quiz</h2>
 <ol type="1">
@@ -1323,6 +1364,208 @@ An error.</li>
 number every time (b) a different number every time (c) always 0 (d) an
 error.</li>
 </ol>
+<!-- status: testing -->
+<div class="testing"><h1 class="testing-chapter" id="chapter-4-words-as-data">Chapter 4:
+Words as Data <span class="badge">In testing</span></h1>
+<div class="testing-banner">
+<p>It’s still being tried out, and it may change based on your feedback.
+Tell us what works and what doesn’t in your notes.</p>
+</div>
+<p>Numbers aren’t the only thing a program works with. Names, titles,
+messages and codes are information too, and the C64 can join them
+together, measure them and cut them into pieces. In this chapter you’ll
+learn how, and you’ll finish by inventing new creature names.</p>
+<h2 id="lesson-4.1-joining-words">Lesson 4.1 — Joining words</h2>
+<p><strong>Goal:</strong> Join pieces of text together into one.</p>
+<p><strong>Picture:</strong> Snapping building blocks together. Two
+blocks become one longer block, and you can keep adding more.</p>
+<p><strong>Try it:</strong></p>
+<pre><code><span class="ln">A$ = &quot;GOLD&quot;</span>
+<span class="ln">B$ = &quot;EN&quot;</span>
+<span class="ln">? A$+B$</span></code></pre>
+<p>The C64 answers <code>GOLDEN</code>. With text, the
+<strong>+</strong> sign doesn’t add: it joins. Programmers call joining
+text <strong>concatenation</strong>, a long word for snapping blocks
+together.</p>
+<p>You can join as many pieces as you like, including text in
+quotes:</p>
+<pre><code><span class="ln">? &quot;SKY&quot;+&quot; &quot;+&quot;KNIGHT&quot;</span></code></pre>
+<p>That’s <code>SKY KNIGHT</code>. The space in the middle is a piece of
+text too, so it gets joined like any other.</p>
+<p><strong>Predict, then try:</strong></p>
+<pre><code><span class="ln">? &quot;SCORE: &quot;+5</span></code></pre>
+<p><strong>Why it fails.</strong> The C64 answers
+<code>?TYPE MISMATCH  ERROR</code>. You can join text to text, and add
+numbers to numbers, but <code>+</code> can’t mix the two: it doesn’t
+know whether you mean “join” or “add”. (Lesson 4.4 shows how to turn a
+number into text, so it can be joined.)</p>
+<h2 id="lesson-4.2-how-long-is-a-word">Lesson 4.2 — How long is a
+word?</h2>
+<p><strong>Goal:</strong> Measure text with <code>LEN</code>, and use it
+to center a title.</p>
+<p><strong>Picture:</strong> Counting the tiles in a word game. Every
+letter is a tile, and so is every space.</p>
+<p><strong>Try it:</strong></p>
+<pre><code><span class="ln">? LEN(&quot;DRAGON&quot;)</span>
+<span class="ln">? LEN(&quot;GAME ON&quot;)</span></code></pre>
+<p>The C64 answers <code>6</code> and <code>7</code>. <code>LEN</code>
+counts the characters, and the space in GAME ON counts as one.</p>
+<p><strong>Centering a title.</strong> The C64’s screen is 40 characters
+wide. To put a title in the middle, push it right by half of the space
+that’s left over. <code>SPC(n)</code> prints n spaces:</p>
+<pre><code><span class="ln">T$ = &quot;GAME OVER&quot;</span>
+<span class="ln">PRINT SPC(INT((40-LEN(T$))/2));T$</span></code></pre>
+<p><strong>Predict</strong> how many spaces it will push the title
+along: GAME OVER is 9 characters, so 40 − 9 = 31 spaces are left, and
+half of that, rounded down with <code>INT</code>, is 15. The title lands
+in the middle of the screen, and it works for any title you put in
+<code>T$</code>.</p>
+<h2 id="lesson-4.3-taking-pieces">Lesson 4.3 — Taking pieces</h2>
+<p><strong>Goal:</strong> Cut pieces out of text with
+<code>LEFT$</code>, <code>RIGHT$</code> and <code>MID$</code>.</p>
+<p><strong>Picture:</strong> A strip of letter tiles. You can take some
+tiles from the left end, some from the right end, or some from the
+middle.</p>
+<p><strong>Try it:</strong></p>
+<pre><code><span class="ln">? LEFT$(&quot;DRAGONFIRE&quot;,6)</span>
+<span class="ln">? RIGHT$(&quot;DRAGONFIRE&quot;,4)</span></code></pre>
+<p>The C64 answers <code>DRAGON</code> and <code>FIRE</code>.
+<code>LEFT$(text, n)</code> takes n characters from the left;
+<code>RIGHT$(text, n)</code> takes n from the right.</p>
+<p><strong>Predict.</strong> <code>MID$(text, start, n)</code> takes n
+characters starting at position <code>start</code>. What will this
+show?</p>
+<pre><code><span class="ln">? MID$(&quot;DRAGONFIRE&quot;,4,3)</span></code></pre>
+<p><strong>Why it works.</strong> The answer is <code>GON</code>:
+starting at the 4th letter, the G, it takes 3 letters. Leave the last
+number out, and <code>MID$</code> takes everything to the end:
+<code>MID$("DRAGONFIRE",7)</code> gives <code>FIRE</code>.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Function</th>
+<th>Takes</th>
+<th>Example</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LEFT$(T$,n)</code></td>
+<td>n characters from the left</td>
+<td><code>LEFT$("DRAGONFIRE",6)</code></td>
+<td>DRAGON</td>
+</tr>
+<tr>
+<td><code>RIGHT$(T$,n)</code></td>
+<td>n characters from the right</td>
+<td><code>RIGHT$("DRAGONFIRE",4)</code></td>
+<td>FIRE</td>
+</tr>
+<tr>
+<td><code>MID$(T$,s,n)</code></td>
+<td>n characters, starting at position s</td>
+<td><code>MID$("DRAGONFIRE",4,3)</code></td>
+<td>GON</td>
+</tr>
+</tbody>
+</table>
+<p>All three end in <code>$</code>, because what they give back is
+text.</p>
+<h2 id="lesson-4.4-numbers-and-words">Lesson 4.4 — Numbers and
+words</h2>
+<p><strong>Goal:</strong> Turn numbers into text and text into numbers,
+and learn to see exactly what’s inside a piece of text.</p>
+<p><strong>Try it.</strong> <code>STR$</code> turns a number into text,
+so it can be joined:</p>
+<pre><code><span class="ln">L = 5</span>
+<span class="ln">? &quot;LEVEL &quot;+STR$(L)</span></code></pre>
+<p><strong>Predict</strong> exactly what will appear, including the
+spaces.</p>
+<p><strong>Why it looks odd.</strong> The C64 answers
+<code>LEVEL  5</code>, with two spaces. One came from
+<code>"LEVEL "</code>, but where did the other come from? Look
+inside:</p>
+<pre><code><span class="ln">? &quot;[&quot;;STR$(42);&quot;]&quot;</span>
+<span class="ln">? LEN(STR$(42))</span></code></pre>
+<p>The answers are <code>[ 42]</code> and <code>3</code>.
+<code>STR$</code> keeps the space the C64 always leaves in front of a
+positive number, for a minus sign. So <code>"LEVEL"+STR$(L)</code>,
+without the space after LEVEL, gives <code>LEVEL 5</code>.</p>
+<p><strong>Organize it.</strong> Text can hide things you can’t see,
+like spaces at the start or end. When text looks wrong, wrap it in
+brackets to see exactly what’s there, as above.</p>
+<p><strong>Notebook rule 4:</strong> When text looks wrong, print it
+between brackets. What’s inside the brackets is exactly what’s in the
+box.</p>
+<p><strong>The other direction.</strong> <code>VAL</code> turns text
+into a number:</p>
+<pre><code><span class="ln">? VAL(&quot;123&quot;)+1</span>
+<span class="ln">? VAL(&quot;42 GEMS&quot;)</span>
+<span class="ln">? VAL(&quot;GEMS&quot;)</span></code></pre>
+<p>The C64 answers <code>124</code>, <code>42</code> and <code>0</code>.
+<code>VAL</code> reads digits from the start of the text and stops at
+the first thing that isn’t part of a number. If there are no digits at
+the start, it gives 0.</p>
+<h2 id="lesson-4.5-fusion-names">Lesson 4.5 — Fusion names</h2>
+<p><strong>Goal:</strong> Combine everything in this chapter to invent
+new creature names.</p>
+<p><strong>Picture:</strong> Fusing two creatures into one: the front
+half of one, the back half of the other.</p>
+<p><strong>Try it.</strong> Take the first half of one name and the last
+half of another:</p>
+<pre><code><span class="ln">A$ = &quot;DRAGON&quot;</span>
+<span class="ln">B$ = &quot;KITTEN&quot;</span>
+<span class="ln">? LEFT$(A$,INT(LEN(A$)/2))+RIGHT$(B$,INT(LEN(B$)/2))</span></code></pre>
+<p><strong>Predict</strong> the fused name before you press RETURN.
+DRAGON has 6 letters, so its first half is 3 letters; KITTEN’s last half
+is 3 letters too.</p>
+<p><strong>Why it works.</strong> The C64 answers <code>DRATEN</code>.
+<code>LEN</code> measures each name, dividing by 2 finds the half,
+<code>INT</code> keeps it a whole number, <code>LEFT$</code> and
+<code>RIGHT$</code> cut the pieces, and <code>+</code> snaps them
+together. Every tool from this chapter, in one line.</p>
+<p>Now try your own. <code>A$ = "PHOENIX"</code> and
+<code>B$ = "TIGER"</code> make <code>PHOER</code>. Odd-length names work
+too, because <code>INT</code> rounds each half down. Swap the two names
+around, and you get a completely different creature.</p>
+<h2 id="exercises-3">Exercises</h2>
+<ol type="1">
+<li><strong>Join it.</strong> Put two words into two text boxes, such as
+SKY and KNIGHT. Join them with a space in between, and print the result.
+Then print its <code>LEN</code>, and check that it counted the
+space.</li>
+<li><strong>Fix it two ways.</strong> <code>L = 5</code>, then
+<code>PRINT "LEVEL: "+L</code> gives an error. Explain why, then fix it
+once using a semicolon and once using <code>STR$</code>. Use brackets to
+check the spaces in your second fix.</li>
+<li><strong>Build it: a clock.</strong> In direct mode, set the C64’s
+clock once with <code>TI$ = "093000"</code>. Then write a one-line
+program that prints <code>TI$</code> as hours, minutes and seconds with
+colons between them, like <code>09:30:00</code>, using <code>MID$</code>
+and <code>RIGHT$</code>. Run it, wait a minute, and run it again. Save
+it to a slot on the C64 page.</li>
+</ol>
+<h2 id="quiz-3">Quiz</h2>
+<ol type="1">
+<li>What does <code>? LEN("GAME ON")</code> show? (a) 6 (b) 7 (c) 2 (d)
+An error.</li>
+<li>What does <code>? LEFT$("FIREBALL",4)</code> show? (a) BALL (b)
+FIREB (c) FIRE (d) EBAL.</li>
+<li>What happens with <code>? "HP: "+20</code>? (a) HP: 20 (b)
+<code>?TYPE MISMATCH  ERROR</code> (c) HP: (d) 20.</li>
+<li>What is inside <code>STR$(5)</code>? (a) A space, then 5 (b) Just 5
+(c) 05 (d) Nothing.</li>
+<li>What does <code>? VAL("42 GEMS")</code> show? (a) 0 (b) 42 GEMS (c)
+An error (d) 42.</li>
+</ol>
+</div>
 <h1 id="appendices-in-progress">Appendices (in progress)</h1>
 <p>These reference pages will be added as the book grows. When a chapter
 needs one, it points here.</p>

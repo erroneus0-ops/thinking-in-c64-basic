@@ -1,3 +1,4 @@
+<!-- status: final -->
 # Foreword
 
 This book teaches you to program a computer from 1982: the Commodore 64. That might seem like a strange choice. The phone in your pocket is many thousands of times more powerful, and today's programming languages can do far more, far more easily. So why start here?

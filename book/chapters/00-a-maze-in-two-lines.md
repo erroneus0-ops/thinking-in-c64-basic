@@ -1,3 +1,4 @@
+<!-- status: final -->
 # A Maze in Two Lines
 
 Before anything else, let's make the C64 do something worth seeing.

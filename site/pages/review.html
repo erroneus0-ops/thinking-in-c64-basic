@@ -49,7 +49,7 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
   const [chapters, responses, attempts, programs, visits] = await Promise.all(
     ['/api/chapters', '/api/responses?everyone=1', '/api/quiz-history?everyone=1', '/api/submissions', '/api/visits'].map(u => fetch(u).then(r => r.json())));
   const lessonTitle = (n, id) => { const c = chapters.find(c => c.n === n); const l = c && c.lessons.find(l => l.id === id); return l ? l.title : id; };
-  const exTitle = (n, id) => { const c = chapters.find(c => c.n === n); const e = c && c.exercises.find(e => e.id === id || 'ex' + e.n === id); return e ? `${e.n}. ${e.title}` + (e.id === id ? '' : ' (earlier draft)') : id; };
+  const exTitle = (n, id) => { const c = chapters.find(c => c.n === n); const e = c && c.exercises.find(e => e.id === id || 'ex' + e.n === id.split('-')[0]); return e ? `${e.n}. ${e.title}` + (e.id === id ? '' : ' (earlier draft)') : id; };
 
   const notes = document.getElementById('notes');
   const ns = responses.filter(r => r.kind === 'note' && r.text);
@@ -80,7 +80,7 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
   const progs = document.getElementById('programs');
   if (!programs.length) none(progs, 'programs');
   for (const p of programs) progs.append(
-    el('div', { className: 'what quiet', textContent: `${p.user} · ${p.exercise}, version ${p.version} · ${p.device || 'unknown device'} · ${p.created_at}` }),
+    el('div', { className: 'what quiet', textContent: `${p.user} · ${p.exercise}, slot ${p.version} · ${p.device || 'unknown device'} · ${p.created_at}` }),
     el('pre', { className: 'c64', textContent: p.listing }));
   const vbox = document.getElementById('visits');
   if (!visits.length) none(vbox, 'visits');

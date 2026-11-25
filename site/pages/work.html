@@ -23,6 +23,12 @@
   label.small { display: block; font-weight: 700; font-size: 0.92rem; margin: 0.6rem 0 0.25rem; }
   .save-row { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.6rem; }
   .saved { color: var(--good); font-size: 0.92rem; }
+  :root { --testing: #b45309; --testing-tint: #fff4e0; }
+  @media (prefers-color-scheme: dark) { :root { --testing: #f0b35a; --testing-tint: #2e2414; } }
+  #testing-note { background: var(--testing-tint); border: 1.5px solid var(--testing); border-radius: 8px; padding: 0.7rem 1rem; margin: 1rem 0 0; }
+  #testing-note strong { color: var(--testing); }
+  body.testing h2 { border-top-color: var(--testing); }
+  body.testing .card { border-left: 4px solid var(--testing); }
   .again { font-weight: 700; color: var(--accent); margin: 0 0 0.4rem; }
   .last { color: var(--muted); font-size: 0.92rem; margin: 0.4rem 0 0; white-space: pre-wrap; }
   .bad { color: var(--bad); }
@@ -49,10 +55,11 @@
     <label for="chapter"><strong>Chapter</strong></label>
     <select id="chapter"></select>
   </div>
+  <p id="testing-note" hidden><strong>In testing.</strong> This chapter is still being tried out. Your notes on it decide what changes before it’s final.</p>
 
   <section id="exercises-section">
     <h2>Exercises</h2>
-    <p class="quiet">Each time through, the boxes start empty. Your answer from last time is shown underneath, so you can compare. Write your answer, or what happened when you tried it. If an exercise asks for a program, also submit the program on the <a href="/c64">C64 page</a>.</p>
+    <p class="quiet">Each time through, the boxes start empty. Your answer from last time is shown underneath, so you can compare. Write your answer, or what happened when you tried it. If an exercise asks for a program, also save it to a slot on the <a href="/c64">C64 page</a>.</p>
     <div id="exercises"></div>
   </section>
 

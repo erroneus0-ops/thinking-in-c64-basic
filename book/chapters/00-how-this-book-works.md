@@ -1,3 +1,4 @@
+<!-- status: final -->
 # How This Book Works
 
 This book teaches you to program the Commodore 64. It also teaches something bigger: how to plan, how to keep things in order, and how to break a big job into small ones. Programmers call that *organized thinking*. The C64 is a good place to learn it, because its BASIC gives you almost no help. Any order in your program has to come from you.
@@ -42,7 +43,7 @@ Each chapter only needs to be worked through **once**, in this order:
 
 1. **Read each lesson and try every example** on the C64. Many people keep the book and the C64 side by side on the screen.
 2. **After each lesson, write your notes** on the Chapter work page: explain the big idea in your own words, and say what surprised you, confused you, or dragged.
-3. **Do the exercises.** When an exercise asks for a program, choose it in the Exercise list on the C64 page and press **Submit program**, so it's saved.
+3. **Do the exercises.** When an exercise asks for a program, choose it in the Exercise list on the C64 page and press **Save to a new slot**, so it's kept. Every save goes into a new slot, and nothing is ever overwritten.
 4. **Take the quiz last.**
 
 That's the whole chapter. If something in it is fixed or improved later, you'll be told what changed, but you won't be asked to work through it again. You can always come back on your own, though: retake a quiz to raise your score, or play with the examples to see what else they do. Every attempt is kept. Coming back is never required, and always welcome.

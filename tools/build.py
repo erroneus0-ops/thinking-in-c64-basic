@@ -37,7 +37,7 @@ def extract_content(chapters):
             lessons = [{"id": path.stem, "title": h.group(1).strip()}] if h else []
         ch = next((c for c in out if c["n"] == n), None)
         if not ch:
-            ch = {"n": n, "title": title, "lessons": [], "exercises": [], "quiz": []}
+            ch = {"n": n, "title": title, "status": chapter_status(text), "lessons": [], "exercises": [], "quiz": []}
             out.append(ch)
         ch["lessons"] += lessons
         ex = re.search(r"^## Exercises\n(.*?)(?=^## |\Z)", text, re.M | re.S)
@@ -69,6 +69,41 @@ def extract_content(chapters):
         for c in out if c["n"] >= 2 for e in c["exercises"]]
     (ROOT / "site" / "exercises.json").write_text(json.dumps(picker, indent=1, ensure_ascii=False), encoding="utf-8")
 
+def chapter_status(text):
+    """A chapter's status, from the marker on its first line: <!-- status: final --> or testing.
+    A chapter without a marker counts as in testing; other pages without one count as final."""
+    m = re.search(r"<!--\s*status:\s*(\w+)\s*-->", text)
+    if m:
+        return m.group(1).lower()
+    return "testing" if re.search(r"^# Chapter \d+", text, re.M) else "final"
+
+def with_testing_theme(text):
+    """Chapters in testing get an "In testing" badge on their title (shown in the contents too),
+    a banner under the title, and a section the template styles in the testing colors."""
+    if chapter_status(text) != "testing":
+        return text
+    # Keep the heading's link anchor the same as it will be once the chapter is final.
+    def badge(m):
+        slug = re.sub(r"\s+", "-", re.sub(r"[^\w\s-]", "", m.group(1).lower()).strip())
+        return f"{m.group(0)} [In testing]{{.badge}} {{#{slug} .testing-chapter}}"
+    text = re.sub(r"^# (Chapter \d+: .+)$", badge, text, count=1, flags=re.M)
+    text = re.sub(r"^(# Chapter \d+: .+\n)", r"\1\n::: testing-banner\nIt's still being tried out, and it may change based on your feedback. "
+                  r"Tell us what works and what doesn't in your notes.\n:::\n", text, count=1, flags=re.M)
+    return text   # the amber border is drawn around the finished chapter by wrap_testing_chapters()
+
+def wrap_testing_chapters(html):
+    """Wrap each testing chapter, from its title to the next top-level heading, in a div the template
+    draws in amber. Done on the finished HTML: wrapping the Markdown would hide the chapter's
+    headings from the table of contents."""
+    out, pos = [], 0
+    for m in re.finditer(r'<h1 [^>]*class="testing-chapter"[^>]*>', html):
+        nxt = html.find("<h1 ", m.end())
+        end = nxt if nxt != -1 else html.find("</main>", m.end())
+        if end == -1: end = len(html)
+        out += [html[pos:m.start()], '<div class="testing">', html[m.start():end], "</div>\n"]
+        pos = end
+    return "".join(out) + html[pos:]
+
 def mark_return_keys(html):
     """Every line in a typed code block gets a RETURN keycap at its end (drawn by CSS, so it is
     never part of the text). Diagram blocks are left alone."""
@@ -86,7 +121,7 @@ def main():
 
     chapters = sorted((ROOT / "book" / "chapters").glob("*.md"))
     extract_content(chapters)
-    text = "\n\n".join(p.read_text(encoding="utf-8") for p in chapters)
+    text = "\n\n".join(with_testing_theme(p.read_text(encoding="utf-8")) for p in chapters)
     if args.student:
         text = re.sub(r"\s*\*\*Answer: [a-d]\*\*", "", text)
 
@@ -109,6 +144,7 @@ def main():
         ],
     )
     html = mark_return_keys(html)
+    html = wrap_testing_chapters(html)
     html_path = out / ("index.html" if args.pages else f"book-{suffix}.html")
     html_path.write_text(html, encoding="utf-8")
     print("wrote", html_path)

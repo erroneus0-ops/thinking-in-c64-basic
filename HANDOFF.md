@@ -402,21 +402,20 @@ live in the public chapter sources (honor system) and the answer edition is pass
 programmer's notebook is paper; the voice is plain and never childish; the reference machine is
 VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
-## Pending (editor's decisions, not yet built; do together, then retake tour screenshots once)
+## Chapter status: final or in testing (editor's process)
 
-- RENAME "Submit program" to SAVE SLOTS (editor's choice: game language he knows). Button: "Save to a
-  new slot"; list: "Save slots" with Slot 1, 2, 3 (never overwritten: each save takes the next empty
-  slot); per slot: Run, Load, Listing. Keeps Ch 6's C64 SAVE (to disk) distinct. Update the C64 page,
-  the tour and the book together.
-- LAYOUT: he has never used Submit. With the book and C64 side by side, the C64 page goes one-column
-  and Submit falls below the fold; the study view's C64 pane has the same weakness. Directions to
-  weigh: size the screen to the window HEIGHT, move the save button under the screen beside Show
-  variables / Clear screen, or a small fixed toolbar. Wait for the editor to try the study view.
-- QUIZ: show only right/wrong after an attempt, not the correct letter (a 4/5 became 5/5 in eight
-  seconds by copying), so a retake means rethinking.
-- Ch 3: break the two-dice exercise into smaller steps (the die-building table didn't carry over).
-- Editor's view: answers to earlier-draft exercises with fingerprint ids show the raw id; match on
-  the number and label "(earlier draft)".
+Each chapter file starts with `<!-- status: final -->` or `<!-- status: testing -->` (a chapter with
+no marker counts as testing). Testing chapters get an "In testing" badge on the title (also in the
+contents), a banner, and an amber border down the chapter, drawn by wrap_testing_chapters() on the
+finished HTML (wrapping the Markdown would hide the headings from the contents). Their anchors are
+pinned to the final form, so links survive the switch. The workbook shows "(in testing)" and the
+same amber theme. PROCESS: a new chapter is born in testing; if the beta tester's feedback is good
+and the editor has no new ideas, flip the marker to final, rebuild, and draft the next chapter.
+Status now: opening pages and Ch 1-3 final; Ch 4 in testing.
+
+Done from the old pending list: save slots ("Save to a new slot", "Save slots", Slot 1, 2, 3); quiz
+shows only right or wrong; Ch 3's dice exercise in three small steps; the earlier-draft label fix.
+The layout stays: the editor could see the save button without scrolling.
 
 ## Study view (/study)
 
@@ -472,7 +471,7 @@ stored: the cursor wraps and RETURN enters the empty row). Chapter 2 and the pla
 
 1. DONE: Chapter 3 drafted (Exercise 1 is the editor's Pokemon GO IV idea: (AT+DF+HP)/45*100, which
    needs parentheses and INT(x+.5); verified: 60.3333334 wrong vs 93.3333334, rounds to 93) (5 lessons; every example verified on the C64; the course site maps ^ to
-   the C64's up-arrow). Next: the beta tester's one pass through it. Then Chapter 4, Words as Data.
+   the C64's up-arrow). Chapter 4, Words as Data, drafted in testing (verified on the C64).
 2. Improvement chart: quiz score per attempt over time, on /work and /review.
 3. Autosave on Chapter work, plus a warning before leaving with unsaved text (awaiting go-ahead).
 4. Later, each with its chapter: debugger additions (current line, change log, error explainer),

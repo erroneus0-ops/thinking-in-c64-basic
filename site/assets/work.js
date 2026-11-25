@@ -102,7 +102,7 @@ async function renderQuiz(ch) {
       for (const r of out.results) {
         const box = document.getElementById(`r${r.n}`);
         box.className = 'result ' + (r.correct ? 'good' : 'bad');
-        box.textContent = r.correct ? 'Right.' : (r.choice ? `Not quite. The answer is (${r.answer}).` : `Skipped. The answer is (${r.answer}).`);
+        box.textContent = r.correct ? 'Right.' : (r.choice ? 'Not quite. Think it through, and try again any time.' : 'Skipped.');
       }
       document.getElementById('score').textContent = `You got ${out.score} out of ${out.total}. Try again any time; every attempt is kept.`;
       await renderHistory(ch);
@@ -148,6 +148,8 @@ async function show() {
   const rows = await (await fetch('/api/responses?chapter=' + ch.n)).json();
   saved = {};
   for (const r of rows) saved[r.kind + ':' + r.item] = { text: r.text, at: r.created_at };
+  document.body.classList.toggle('testing', ch.status === 'testing');
+  document.getElementById('testing-note').hidden = ch.status !== 'testing';
   renderExercises(ch);
   await renderQuiz(ch);
   renderNotes(ch);
@@ -161,7 +163,7 @@ if (document.documentElement.classList.contains('embed')) {
 
 (async () => {
   chapters = await (await fetch('/api/chapters')).json();
-  for (const c of chapters) chapterEl.append(new Option(c.n === 0 ? c.title : `Chapter ${c.n}: ${c.title}`, c.n));
+  for (const c of chapters) chapterEl.append(new Option((c.n === 0 ? c.title : `Chapter ${c.n}: ${c.title}`) + (c.status === 'testing' ? ' (in testing)' : ''), c.n));
   const fromHash = (location.hash.match(/^#ch(\d+)$/) || [])[1];
   chapterEl.value = fromHash ?? (chapters.find(c => c.n === 1) ? '1' : String(chapters[0].n));
   chapterEl.onchange = show;

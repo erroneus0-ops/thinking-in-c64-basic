@@ -1,3 +1,4 @@
+<!-- status: final -->
 # Chapter 1: This Is a Variable
 
 This chapter teaches two things. The first is the **variable**: how the C64 remembers numbers and words. The second is the C64's **rules** about variables. Some of those rules are strange, and sooner or later one of them will trip you up. That happens to every C64 programmer.

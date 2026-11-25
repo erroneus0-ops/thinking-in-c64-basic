@@ -392,8 +392,8 @@ async function submit() {
       body: JSON.stringify({ exercise: exerciseEl.value, prg: toBase64(prg), capture: 'memory' }),
     });
     const out = await res.json();
-    if (!res.ok) { setMessage(out.error || 'Submit failed.', 'bad'); return; }
-    setMessage(`Saved as version ${out.version} (${out.lines} ${out.lines === 1 ? 'line' : 'lines'}).`, 'good');
+    if (!res.ok) { setMessage(out.error || 'That couldn’t be saved.', 'bad'); return; }
+    setMessage(`Saved to slot ${out.version} (${out.lines} ${out.lines === 1 ? 'line' : 'lines'}).`, 'good');
     await showVersions();
     showListing(out.id, out.version);
   } catch (e) {
@@ -404,7 +404,7 @@ async function submit() {
 // Put a saved version into a freshly reset C64, then type RUN or LIST.
 async function putBack(id, command) {
   const res = await fetch('/api/prg/' + id);
-  if (!res.ok) { setMessage('That version couldn’t be loaded.', 'bad'); return; }
+  if (!res.ok) { setMessage('That slot couldn’t be loaded.', 'bad'); return; }
   const prg = new Uint8Array(await res.arrayBuffer());
   setMessage('Resetting the C64…');
   if (!(await resetAndWait())) return;
@@ -421,7 +421,7 @@ async function putBack(id, command) {
 async function showListing(id, version) {
   const res = await fetch('/api/listing/' + id);
   listingEl.textContent = await res.text();
-  listingTitle.textContent = `Listing of version ${version}`;
+  listingTitle.textContent = `Listing of slot ${version}`;
   listingBox.hidden = false;
 }
 
@@ -434,7 +434,7 @@ async function showVersions() {
     const li = document.createElement('li');
     const what = document.createElement('span');
     what.className = 'what';
-    what.textContent = `Version ${r.version}`;
+    what.textContent = `Slot ${r.version}`;
     const small = document.createElement('small');
     small.textContent = `${r.lines} ${r.lines === 1 ? 'line' : 'lines'}, ${r.created_at}`;
     what.append(small);

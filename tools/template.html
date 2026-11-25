@@ -87,6 +87,17 @@ pre code { font: inherit; background: none; padding: 0; color: inherit; }
 code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
 
 /* "Good to know" boxes: optional clarifying details, safe to skip on a first read */
+/* Chapters still in testing: amber, so it's obvious they may change */
+:root { --testing: #b45309; --testing-tint: #fff4e0; }
+@media (prefers-color-scheme: dark) { :root { --testing: #f0b35a; --testing-tint: #2e2414; } }
+div.testing { border-left: 5px solid var(--testing); padding-left: 1.25rem; }
+div.testing-banner { background: var(--testing-tint); border: 1.5px solid var(--testing); border-radius: 8px;
+  padding: 0.75rem 1rem; margin: 0 0 1.5rem; }
+div.testing-banner::before { content: "In testing"; display: block; font-weight: 700; color: var(--testing); margin-bottom: 0.25rem; }
+div.testing-banner > :last-child { margin-bottom: 0; }
+.badge { display: inline-block; font-size: 0.5em; font-weight: 700; vertical-align: middle; letter-spacing: 0.02em;
+  padding: 0.15em 0.6em; border-radius: 999px; background: var(--testing); color: #fff; }
+@media (prefers-color-scheme: dark) { .badge { color: #2e2414; } }
 div.good-to-know { border-left: 4px solid var(--accent); background: var(--tint);
   padding: 0.75rem 1rem; margin: 0 0 1.25rem; border-radius: 0 6px 6px 0; }
 div.good-to-know::before { content: "Good to know"; display: block; font-weight: 700;

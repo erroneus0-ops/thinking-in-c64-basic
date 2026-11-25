@@ -157,7 +157,7 @@ function handle_api(string $route, string $root): void {
                 $choice = strtolower((string)($answers[(string)$q['n']] ?? ''));
                 $ok = $choice !== '' && $choice === $q['answer'];
                 if ($ok) $score++;
-                $results[] = ['n' => $q['n'], 'choice' => $choice, 'correct' => $ok, 'answer' => $q['answer']];
+                $results[] = ['n' => $q['n'], 'choice' => $choice, 'correct' => $ok];   // never the right letter: a retake means rethinking
             }
             $pdo = db($root);
             $pdo->beginTransaction();

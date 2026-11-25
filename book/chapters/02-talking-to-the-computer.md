@@ -1,3 +1,4 @@
+<!-- status: final -->
 # Chapter 2: Talking to the Computer
 
 In Chapter 1, the C64 did each thing the moment you pressed RETURN. Now you'll learn to give it a list of steps to do later, in order, as many times as you like. That list is a **program**.

@@ -84,16 +84,16 @@
     <h2><label for="exercise">Exercise</label></h2>
     <select id="exercise"></select>
 
-    <h2>Submit</h2>
+    <h2>Save</h2>
     <div class="row">
-      <button id="submit" class="primary" disabled>Submit program</button>
+      <button id="submit" class="primary" disabled>Save to a new slot</button>
     </div>
-    <p class="quiet">Saves the program now in the C64’s memory as a new version. Earlier versions are kept.</p>
+    <p class="quiet">Copies the program in the C64’s memory into the next empty save slot. Nothing is ever overwritten.</p>
     <p id="message" role="status"></p>
 
-    <h2>Saved versions</h2>
-    <p class="quiet"><strong>Run</strong> puts a version back and runs it. <strong>Load</strong> puts it back so you can keep editing, then Submit again. <strong>Listing</strong> just shows it. Run and Load replace what’s in the C64 now, so submit first if you want to keep it.</p>
-    <p id="empty">Nothing saved for this exercise yet.</p>
+    <h2>Save slots</h2>
+    <p class="quiet"><strong>Run</strong> puts a slot’s program back and runs it. <strong>Load</strong> puts it back so you can keep editing, then save to a new slot. <strong>Listing</strong> just shows it. Run and Load replace what’s in the C64 now, so save it to a slot first if you want to keep it.</p>
+    <p id="empty">No save slots used for this exercise yet.</p>
     <ol id="versions"></ol>
     <div id="listing-box" hidden>
       <h2 id="listing-title">Listing</h2>
@@ -110,7 +110,7 @@
 
     <h2>The C64 itself</h2>
     <div class="row"><button id="reset" disabled>Reset the C64</button></div>
-    <p class="quiet">Click the C64 screen before typing, and keep Caps Lock off. <strong>Shift-click</strong> on the screen moves the cursor there while you type commands. Reset clears the program from memory, so submit first.</p>
+    <p class="quiet">Click the C64 screen before typing, and keep Caps Lock off. <strong>Shift-click</strong> on the screen moves the cursor there while you type commands. Reset clears the program from memory, so save it to a slot first.</p>
   </aside>
 </main>
 <script src="/assets/c64.js"></script>

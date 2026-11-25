@@ -2,6 +2,7 @@
  {
   "n": 0,
   "title": "Before you begin",
+  "status": "final",
   "lessons": [
    {
     "id": "00-0-foreword",
@@ -22,6 +23,7 @@
  {
   "n": 1,
   "title": "This Is a Variable",
+  "status": "final",
   "lessons": [
    {
     "id": "1.1",
@@ -185,6 +187,7 @@
  {
   "n": 2,
   "title": "Talking to the Computer",
+  "status": "final",
   "lessons": [
    {
     "id": "2.1",
@@ -348,6 +351,7 @@
  {
   "n": 3,
   "title": "Working Things Out",
+  "status": "final",
   "lessons": [
    {
     "id": "3.1",
@@ -385,9 +389,9 @@
    },
    {
     "n": 3,
-    "id": "ex3-572dd3",
-    "title": "Build it",
-    "text": "Write a program that rolls two dice and prints both rolls and their total, mixing words and boxes. Make sure it rolls differently after every reset. Submit it on the C64 page."
+    "id": "ex3-4d4653",
+    "title": "Build it, one step at a time",
+    "text": "First, type ? INT(RND(1)*6)+1 a few times: that's one die. Next, write a program that puts one roll into D1 and another into D2, then prints both rolls and their total, mixing words and boxes. Last, add X = RND(-TI) as the program's first line, so it rolls differently after every reset. Save it to a slot on the C64 page."
    }
   ],
   "quiz": [
@@ -505,6 +509,170 @@
      }
     ],
     "answer": "a"
+   }
+  ]
+ },
+ {
+  "n": 4,
+  "title": "Words as Data",
+  "status": "testing",
+  "lessons": [
+   {
+    "id": "4.1",
+    "title": "Joining words"
+   },
+   {
+    "id": "4.2",
+    "title": "How long is a word?"
+   },
+   {
+    "id": "4.3",
+    "title": "Taking pieces"
+   },
+   {
+    "id": "4.4",
+    "title": "Numbers and words"
+   },
+   {
+    "id": "4.5",
+    "title": "Fusion names"
+   }
+  ],
+  "exercises": [
+   {
+    "n": 1,
+    "id": "ex1-82ec77",
+    "title": "Join it",
+    "text": "Put two words into two text boxes, such as SKY and KNIGHT. Join them with a space in between, and print the result. Then print its LEN, and check that it counted the space."
+   },
+   {
+    "n": 2,
+    "id": "ex2-431729",
+    "title": "Fix it two ways",
+    "text": "L = 5, then PRINT \"LEVEL: \"+L gives an error. Explain why, then fix it once using a semicolon and once using STR$. Use brackets to check the spaces in your second fix."
+   },
+   {
+    "n": 3,
+    "id": "ex3-edc77b",
+    "title": "Build it: a clock",
+    "text": "In direct mode, set the C64's clock once with TI$ = \"093000\". Then write a one-line program that prints TI$ as hours, minutes and seconds with colons between them, like 09:30:00, using MID$ and RIGHT$. Run it, wait a minute, and run it again. Save it to a slot on the C64 page."
+   }
+  ],
+  "quiz": [
+   {
+    "n": 1,
+    "question": "What does ? LEN(\"GAME ON\") show?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "6"
+     },
+     {
+      "letter": "b",
+      "text": "7"
+     },
+     {
+      "letter": "c",
+      "text": "2"
+     },
+     {
+      "letter": "d",
+      "text": "An error"
+     }
+    ],
+    "answer": "b"
+   },
+   {
+    "n": 2,
+    "question": "What does ? LEFT$(\"FIREBALL\",4) show?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "BALL"
+     },
+     {
+      "letter": "b",
+      "text": "FIREB"
+     },
+     {
+      "letter": "c",
+      "text": "FIRE"
+     },
+     {
+      "letter": "d",
+      "text": "EBAL"
+     }
+    ],
+    "answer": "c"
+   },
+   {
+    "n": 3,
+    "question": "What happens with ? \"HP: \"+20?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "HP: 20"
+     },
+     {
+      "letter": "b",
+      "text": "?TYPE MISMATCH  ERROR"
+     },
+     {
+      "letter": "c",
+      "text": "HP:"
+     },
+     {
+      "letter": "d",
+      "text": "20"
+     }
+    ],
+    "answer": "b"
+   },
+   {
+    "n": 4,
+    "question": "What is inside STR$(5)?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "A space, then 5"
+     },
+     {
+      "letter": "b",
+      "text": "Just 5"
+     },
+     {
+      "letter": "c",
+      "text": "05"
+     },
+     {
+      "letter": "d",
+      "text": "Nothing"
+     }
+    ],
+    "answer": "a"
+   },
+   {
+    "n": 5,
+    "question": "What does ? VAL(\"42 GEMS\") show?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "0"
+     },
+     {
+      "letter": "b",
+      "text": "42 GEMS"
+     },
+     {
+      "letter": "c",
+      "text": "An error"
+     },
+     {
+      "letter": "d",
+      "text": "42"
+     }
+    ],
+    "answer": "d"
    }
   ]
  }
