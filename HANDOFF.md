@@ -37,6 +37,15 @@ organized, orderly thinking habits."
   The password is NEVER in the repo; ask the editor for it in each new session. (The old claude.ai
   preview link is retired.)
 
+## The save slots guide (docs/saving/)
+
+A second slide tour (editor's request), nine slides told as one real story on the C64 page: the Ch 3
+dice exercise saved to slot 1, listed, loaded, improved, saved to slot 2, run; then the one danger
+("Save before you Reset, Run or Load") and slots following your name. Built by tools/build_tour.py
+(the TOURS list holds both tours); screenshots from the second half of tools/capture_tour.py.
+Linked next to the save button (opens in a new tab, so the C64 isn't replaced), from the main
+tour's Run/Load/Listing slide, and from "Tools that help" in the book.
+
 ## The C64 tour (docs/tour/)
 
 Twelve slides introducing the C64 and the course site (the submission guide is three slides: pick the

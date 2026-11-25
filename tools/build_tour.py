@@ -3,7 +3,6 @@ Run after tools/capture_tour.py whenever the course site's look changes."""
 import html, pathlib, shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = ROOT / "docs" / "tour"
 
 # (title, image or None, body as HTML)
 SLIDES = [
@@ -47,7 +46,8 @@ SLIDES = [
      "<strong>Load</strong> puts it back and lists it, so you can keep working on it. Save again when "
      "you’re done, and it goes into the next slot.<br>"
      "<strong>Listing</strong> just shows the program as text. The C64 isn’t touched.</p>"
-     "<p>Careful: Run and Load <em>replace</em> whatever is in the C64 right now. Save it to a slot first if you want to keep it.</p>"),
+     "<p>Careful: Run and Load <em>replace</em> whatever is in the C64 right now. Save it to a slot first if you want to keep it.</p>"
+     "<p><a href=\"../saving/\">The save slots guide</a> walks through all of this, step by step.</p>"),
     ("On a phone or tablet", "phone",
      "<p>Phones can’t show their own keyboard for the C64, so tap <strong>Show keyboard</strong> under the "
      "screen for a real C64 keyboard to tap on.</p>"
@@ -63,21 +63,68 @@ SLIDES = [
      "<p><a class=\"btn\" href=\"../\">Back to the book</a></p>"),
 ]
 
+SAVE_SLIDES = [
+    ("Save slots keep your programs", "save2",
+     "<p>The C64 forgets everything when you press <strong>Reset</strong> or close the page. Save slots keep "
+     "copies of your programs on the course site, so nothing you write is ever lost.</p>"
+     "<p>Every save goes into a <strong>new</strong> slot. Nothing is ever overwritten, so you can always go "
+     "back to an older version.</p>"),
+    ("First, pick the exercise", "picker",
+     "<p>Choose the exercise you’re working on from the <strong>Exercise</strong> list before you save. Each "
+     "exercise has its own save slots, so your programs stay sorted.</p>"
+     "<p>Just experimenting? Choose <strong>Free practice</strong>.</p>"),
+    ("Save to a new slot", "save1",
+     "<p>When your program is ready, press <strong>Save to a new slot</strong>. The message tells you which slot "
+     "it went into and how many lines it has. Check that the number of lines is what you expect.</p>"
+     "<p>Slot 1 now appears in the <strong>Save slots</strong> list.</p>"),
+    ("Look without touching: Listing", "listing",
+     "<p><strong>Listing</strong> shows a slot’s program as text, right below the list. The C64 isn’t touched, "
+     "so it’s always safe: use it to check what you saved.</p>"),
+    ("Keep working: Load", "load",
+     "<p><strong>Load</strong> puts a slot’s program back into the C64 and lists it, ready to change. Add "
+     "lines, fix lines, try ideas.</p>"
+     "<p>When you’re happy with it, save again. Your changes go into the <strong>next</strong> slot.</p>"),
+    ("Your history grows", "save2",
+     "<p>Here, the improved program went into slot 2. Slot 1 is still there, exactly as it was. The newest "
+     "slot is always at the top.</p>"
+     "<p>If a change goes wrong, load an earlier slot and carry on from there.</p>"),
+    ("Run a slot", "run",
+     "<p><strong>Run</strong> puts a slot’s program back into the C64 and runs it straight away, so you can "
+     "see it work without typing anything.</p>"),
+    ("The one danger", "reset",
+     "<p><strong>Run</strong>, <strong>Load</strong> and <strong>Reset</strong> all replace whatever is in the "
+     "C64 right now. If you’ve typed something you want to keep, save it to a slot first.</p>"
+     "<p class=\"big\">Save before you Reset, Run or Load.</p>"),
+    ("Your slots follow your name", None,
+     "<p class=\"big\">Sign in with the same name on any computer or phone, and your save slots are there.</p>"
+     "<p>Saving costs nothing, so save often: whenever a program works, and before you try something risky.</p>"
+     "<p><a class=\"btn\" href=\"../\">Back to the book</a></p>"),
+]
+
+TOURS = [
+    # (folder under docs/, slides, page title, header)
+    ("tour", SLIDES, "New to the Commodore 64? A quick tour", "C64 quick tour"),
+    ("saving", SAVE_SLIDES, "Save slots: a step-by-step guide", "Save slots guide"),
+]
+
 def build():
-    OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "img").mkdir(exist_ok=True)
-    sections = []
-    for i, (title, img, body) in enumerate(SLIDES, 1):
-        picture = ""
-        if img:
-            shutil.copy(ROOT / "tools" / "tour_shots" / f"{img}.webp", OUT / "img" / f"{img}.webp")
-            picture = f'<figure><img src="img/{img}.webp" alt="" loading="{"eager" if i < 3 else "lazy"}"></figure>'
-        sections.append(f'<section class="slide{"" if img else " closing"}" id="slide-{i}" aria-label="Slide {i} of {len(SLIDES)}">'
-                        f'<div class="text"><h1>{html.escape(title)}</h1>{body}</div>{picture}</section>')
-    page = (ROOT / "tools" / "tour_template.html").read_text(encoding="utf-8")
-    page = page.replace("<!--SLIDES-->", "\n".join(sections)).replace("/*COUNT*/0", str(len(SLIDES)))
-    (OUT / "index.html").write_text(page, encoding="utf-8")
-    print("wrote", OUT / "index.html", f"({len(SLIDES)} slides)")
+    for folder, slides, page_title, header in TOURS:
+        out = ROOT / "docs" / folder
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "img").mkdir(exist_ok=True)
+        sections = []
+        for i, (title, img, body) in enumerate(slides, 1):
+            picture = ""
+            if img:
+                shutil.copy(ROOT / "tools" / "tour_shots" / f"{img}.webp", out / "img" / f"{img}.webp")
+                picture = f'<figure><img src="img/{img}.webp" alt="" loading="{"eager" if i < 3 else "lazy"}"></figure>'
+            sections.append(f'<section class="slide{"" if img else " closing"}" id="slide-{i}" aria-label="Slide {i} of {len(slides)}">'
+                            f'<div class="text"><h1>{html.escape(title)}</h1>{body}</div>{picture}</section>')
+        page = (ROOT / "tools" / "tour_template.html").read_text(encoding="utf-8")
+        page = (page.replace("<!--SLIDES-->", "\n".join(sections)).replace("/*COUNT*/0", str(len(slides)))
+                    .replace("<!--PAGETITLE-->", html.escape(page_title)).replace("<!--HEADER-->", html.escape(header)))
+        (out / "index.html").write_text(page, encoding="utf-8")
+        print("wrote", out / "index.html", f"({len(slides)} slides)")
 
 if __name__ == "__main__":
     build()

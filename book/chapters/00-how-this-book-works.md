@@ -56,6 +56,7 @@ That's the whole chapter. If something in it is fixed or improved later, you'll 
 - **Insert** (or **Shift + Backspace**) makes room for a missing letter.
 - **Clear screen**, under the C64 screen, wipes the screen without touching your program.
 - **The quick tour**, linked at the top of the book's web page, shows all of this in a few slides.
+- **The save slots guide** walks through saving, loading and running your programs, step by step. It's linked next to the save button on the C64 page.
 
 ## A note for the beta tester
 
