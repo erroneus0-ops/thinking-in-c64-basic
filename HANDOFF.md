@@ -471,8 +471,10 @@ section from the book and PDF and puts the questions in content.json; the workbo
 amber card "Questions for you, from the editor" above the lesson notes; answers save as notes with
 ids `ask:N-<fingerprint>` (a reworded question starts fresh); the Editor's view groups them under
 "Chapter N: your questions" with "His answer:". First use, Ch 4: where would HE place Lesson 4.0
-(commands vs functions) for a new reader, Ch 1-4, and why? (My read, kept from him: Ch 3, where INT
-and RND first appear; his reasoning matters more.)
+(commands vs functions) for a new reader, Ch 1-4, and why? The question LEADS (editor's choice): it
+points out that commands appear from Ch 1 but the first functions (INT, RND) only in Ch 3.
+PLAN BY ANSWER: Ch 3 -> move the lesson to Ch 3 (before INT); Ch 1 or 2 -> a short foreshadowing
+there, full lesson in Ch 3; Ch 4 -> keep as is.
 
 ## Study view (/study)
 

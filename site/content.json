@@ -710,8 +710,8 @@
   "questions": [
    {
     "n": 1,
-    "id": "ask:1-c057c5",
-    "text": "We made a mistake: the book never explained the difference between commands and functions, so we added Lesson 4.0 to this chapter. You've already met everything in it, which makes you the best judge. If you were placing that lesson for a brand-new reader, where would you put it: Chapter 1, 2, 3 or 4? Tell us why you'd put it there."
+    "id": "ask:1-055999",
+    "text": "We made a mistake: the book never explained the difference between commands and functions, so we added Lesson 4.0 to this chapter. You've already met everything in it, which makes you the best judge. Here's a clue: commands like PRINT and ? show up from Chapter 1 onward, but the first functions, INT and RND, don't appear until Chapter 3. If you were placing Lesson 4.0 for a brand-new reader, where would you put it: Chapter 1, 2, 3 or 4? Tell us why you'd put it there."
    }
   ]
  }
