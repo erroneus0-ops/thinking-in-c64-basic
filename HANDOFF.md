@@ -474,6 +474,12 @@ quiz. They appear in the workbook under "Before you begin"; exercise 2 has a slo
 ch00-ex2. Insert is described everywhere as "like the text editing you're used to" (he still
 overtypes out of habit: an expectation problem, per the editor).
 
+## Quiz answers are checkboxes that act like radio buttons
+
+He scrolls with the arrow keys, and arrow keys move a focused radio button's selection, silently
+changing answers. So quiz options are checkboxes (immune to arrows) with JS keeping one tick per
+question; clicking a ticked answer clears it. Never switch back to radio buttons.
+
 ## Beta tester questions (editor -> tester)
 
 A chapter file may end with `## Beta tester questions` and a numbered list. The build strips that

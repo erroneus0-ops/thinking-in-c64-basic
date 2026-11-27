@@ -92,9 +92,13 @@ async function renderQuiz(ch) {
     const fs = el('fieldset', { className: 'card' }, el('legend', { textContent: `${q.n}. ${q.question}` }));
     for (const o of q.options) {
       const id = `q${q.n}${o.letter}`;
-      fs.append(el('div', { className: 'opt' },
-        el('input', { type: 'radio', name: `q${q.n}`, id, value: o.letter }),
-        el('label', { htmlFor: id, textContent: `(${o.letter}) ${o.text}` })));
+      // Checkboxes that act like radio buttons: one answer per question, and unlike radio
+      // buttons they ignore the arrow keys, so scrolling with the keyboard can't change an answer.
+      const box = el('input', { type: 'checkbox', name: `q${q.n}`, id, value: o.letter });
+      box.addEventListener('change', () => {
+        if (box.checked) for (const other of fs.querySelectorAll(`input[name="q${q.n}"]`)) if (other !== box) other.checked = false;
+      });
+      fs.append(el('div', { className: 'opt' }, box, el('label', { htmlFor: id, textContent: `(${o.letter}) ${o.text}` })));
     }
     fs.append(el('div', { className: 'result', id: `r${q.n}` }));
     form.append(fs);
