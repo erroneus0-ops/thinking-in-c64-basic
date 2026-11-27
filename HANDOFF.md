@@ -480,6 +480,19 @@ He scrolls with the arrow keys, and arrow keys move a focused radio button's sel
 changing answers. So quiz options are checkboxes (immune to arrows) with JS keeping one tick per
 question; clicking a ticked answer clears it. Never switch back to radio buttons.
 
+## Plan for Ch 8, Repetition (editor: cover more than FOR/NEXT)
+
+BASIC V2 has NO WHILE/REPEAT/DO: FOR...NEXT is the only built-in loop; every "until" loop is built by
+hand from IF...THEN <line> plus a jump back (modern names while/until go in the "Where next?" page).
+Deciding question for the reader: do you know how many times? -> FOR; until something happens -> IF.
+Verified on the C64: FOR I=10 TO 1 STEP -1 counts 10..1 and leaves I=0; FOR I=10 TO 1 WITHOUT
+STEP -1 still runs ONCE (I=10), then I=11 (the runs-at-least-once trap; modern languages skip it);
+dice until 20: 10 G=0 / 20 G=G+INT(RND(1)*6)+1 / 30 ?G; / 40 IF G<20 THEN 20 / 50 ... gave
+2 3 8 12 18 22, REACHED 22. Also: GET K$ until a key arrives; endless loops and RUN/STOP (the maze
+was one all along); habit: draw each loop on the program map with its stopping condition. Use only
+IF...THEN <line> in Ch 8; GOTO and its dangers stay in Ch 9. The editor already showed him a FOR
+countdown with STEP -1 (it made an impression; that version wasn't saved).
+
 ## Beta tester questions (editor -> tester)
 
 A chapter file may end with `## Beta tester questions` and a numbered list. The build strips that
