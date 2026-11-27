@@ -1554,6 +1554,17 @@ number out, and <code>MID$</code> takes everything to the end:
 </table>
 <p>All three end in <code>$</code>, because what they give back is
 text.</p>
+<div class="good-to-know">
+<p><code>MID$</code> can do the jobs of the other two.
+<code>MID$("DRAGONFIRE",1,6)</code> gives DRAGON, just like
+<code>LEFT$("DRAGONFIRE",6)</code>, and
+<code>MID$("DRAGONFIRE",7,4)</code> gives FIRE, just like
+<code>RIGHT$("DRAGONFIRE",4)</code>. So why have three?
+<code>LEFT$</code> and <code>RIGHT$</code> say what you mean: “the first
+six,” “the last four.” Using <code>MID$</code> everywhere is more
+uniform; using all three is easier to read. Both are correct, and
+choosing between correct answers is part of programming.</p>
+</div>
 <h2 id="lesson-4.4-numbers-and-words">Lesson 4.4 — Numbers and
 words</h2>
 <p><strong>Goal:</strong> Turn numbers into text and text into numbers,

@@ -124,6 +124,10 @@ The C64 answers `DRAGON` and `FIRE`. `LEFT$(text, n)` takes n characters from th
 
 All three end in `$`, because what they give back is text.
 
+::: good-to-know
+`MID$` can do the jobs of the other two. `MID$("DRAGONFIRE",1,6)` gives DRAGON, just like `LEFT$("DRAGONFIRE",6)`, and `MID$("DRAGONFIRE",7,4)` gives FIRE, just like `RIGHT$("DRAGONFIRE",4)`. So why have three? `LEFT$` and `RIGHT$` say what you mean: "the first six," "the last four." Using `MID$` everywhere is more uniform; using all three is easier to read. Both are correct, and choosing between correct answers is part of programming.
+:::
+
 ## Lesson 4.4 — Numbers and words
 
 **Goal:** Turn numbers into text and text into numbers, and learn to see exactly what's inside a piece of text.
