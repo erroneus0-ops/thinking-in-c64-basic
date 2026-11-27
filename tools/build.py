@@ -76,8 +76,9 @@ def extract_content(chapters):
     # The C64 page's exercise picker: free practice, then every exercise from Chapter 2 on
     # (Chapter 1 works in direct mode, so it has no programs to submit).
     picker = [{"id": "practice", "title": "Free practice"}] + [
-        {"id": f"ch{c['n']:02d}-ex{e['n']}", "title": f"Chapter {c['n']}, exercise {e['n']}: {e['title']}"}
-        for c in out if c["n"] >= 2 for e in c["exercises"]]
+        {"id": f"ch{c['n']:02d}-ex{e['n']}",
+         "title": (f"Before you begin, exercise {e['n']}" if c["n"] == 0 else f"Chapter {c['n']}, exercise {e['n']}") + f": {e['title']}"}
+        for c in out for e in c["exercises"] if c["n"] >= 2 or e.get("program")]
     (ROOT / "site" / "exercises.json").write_text(json.dumps(picker, indent=1, ensure_ascii=False), encoding="utf-8")
 
 def chapter_status(text):

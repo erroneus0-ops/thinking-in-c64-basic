@@ -142,8 +142,12 @@ every lesson goes</a></li>
 id="toc-working-through-a-chapter">Working through a chapter</a></li>
 <li><a href="#tools-that-help" id="toc-tools-that-help">Tools that
 help</a></li>
+<li><a href="#getting-unstuck" id="toc-getting-unstuck">Getting
+unstuck</a></li>
 <li><a href="#a-note-for-the-beta-tester"
 id="toc-a-note-for-the-beta-tester">A note for the beta tester</a></li>
+<li><a href="#exercises" id="toc-exercises">Exercises</a></li>
+<li><a href="#quiz" id="toc-quiz">Quiz</a></li>
 </ul></li>
 <li><a href="#chapter-1-this-is-a-variable"
 id="toc-chapter-1-this-is-a-variable">Chapter 1: This Is a Variable</a>
@@ -163,8 +167,8 @@ the C64 has already claimed</a></li>
 <li><a href="#lesson-1.5-organize-it-the-variable-dictionary"
 id="toc-lesson-1.5-organize-it-the-variable-dictionary">Lesson 1.5 —
 Organize it: the variable dictionary</a></li>
-<li><a href="#exercises" id="toc-exercises">Exercises</a></li>
-<li><a href="#quiz" id="toc-quiz">Quiz</a></li>
+<li><a href="#exercises-1" id="toc-exercises-1">Exercises</a></li>
+<li><a href="#quiz-1" id="toc-quiz-1">Quiz</a></li>
 </ul></li>
 <li><a href="#chapter-2-talking-to-the-computer"
 id="toc-chapter-2-talking-to-the-computer">Chapter 2: Talking to the
@@ -184,8 +188,8 @@ line on the screen</a></li>
 <li><a href="#lesson-2.5-organize-it-plan-then-number"
 id="toc-lesson-2.5-organize-it-plan-then-number">Lesson 2.5 — Organize
 it: plan, then number</a></li>
-<li><a href="#exercises-1" id="toc-exercises-1">Exercises</a></li>
-<li><a href="#quiz-1" id="toc-quiz-1">Quiz</a></li>
+<li><a href="#exercises-2" id="toc-exercises-2">Exercises</a></li>
+<li><a href="#quiz-2" id="toc-quiz-2">Quiz</a></li>
 </ul></li>
 <li><a href="#chapter-3-working-things-out"
 id="toc-chapter-3-working-things-out">Chapter 3: Working Things Out</a>
@@ -204,8 +208,8 @@ id="toc-lesson-3.4-rolling-dice">Lesson 3.4 — Rolling dice</a></li>
 <li><a href="#lesson-3.5-the-secret-of-random"
 id="toc-lesson-3.5-the-secret-of-random">Lesson 3.5 — The secret of
 random</a></li>
-<li><a href="#exercises-2" id="toc-exercises-2">Exercises</a></li>
-<li><a href="#quiz-2" id="toc-quiz-2">Quiz</a></li>
+<li><a href="#exercises-3" id="toc-exercises-3">Exercises</a></li>
+<li><a href="#quiz-3" id="toc-quiz-3">Quiz</a></li>
 </ul></li>
 <li><a href="#chapter-4-words-as-data"
 id="toc-chapter-4-words-as-data">Chapter 4: Words as Data <span
@@ -226,8 +230,8 @@ id="toc-lesson-4.4-numbers-and-words">Lesson 4.4 — Numbers and
 words</a></li>
 <li><a href="#lesson-4.5-fusion-names"
 id="toc-lesson-4.5-fusion-names">Lesson 4.5 — Fusion names</a></li>
-<li><a href="#exercises-3" id="toc-exercises-3">Exercises</a></li>
-<li><a href="#quiz-3" id="toc-quiz-3">Quiz</a></li>
+<li><a href="#exercises-4" id="toc-exercises-4">Exercises</a></li>
+<li><a href="#quiz-4" id="toc-quiz-4">Quiz</a></li>
 </ul></li>
 <li><a href="#appendices-in-progress"
 id="toc-appendices-in-progress">Appendices (in progress)</a></li>
@@ -420,7 +424,8 @@ box the C64 knows about, sorted into cabinets.</li>
 <li><strong>Shift-click</strong> on the C64 screen moves the cursor
 there.</li>
 <li><strong>Insert</strong> (or <strong>Shift + Backspace</strong>)
-makes room for a missing letter.</li>
+makes room for a missing letter. It works like the text editing you’re
+used to on a PC or phone: it makes room instead of typing over.</li>
 <li><strong>Clear screen</strong>, under the C64 screen, wipes the
 screen without touching your program.</li>
 <li><strong>The quick tour</strong>, linked at the top of the book’s web
@@ -429,12 +434,69 @@ page, shows all of this in a few slides.</li>
 and running your programs, step by step. It’s linked next to the save
 button on the C64 page.</li>
 </ul>
+<h2 id="getting-unstuck">Getting unstuck</h2>
+<p>Everyone gets stuck. When you do, try these in order:</p>
+<ol type="1">
+<li><strong>Look back.</strong> Re-read the lesson you’re on, and check
+Chapter 1’s rules about names. Good programmers don’t know everything;
+they know where to look.</li>
+<li><strong>Ask an AI, the right way.</strong> A free AI chatbot can
+usually help, if you ask well:
+<ul>
+<li><strong>Name the machine every time.</strong> Start with “In
+Commodore 64 BASIC V2,” because other versions of BASIC work
+differently.</li>
+<li><strong>Give the exact line and the exact error,</strong> not a
+description. For example: <em>In Commodore 64 BASIC V2, I typed
+<code>PRINT "LEVEL: "+L</code> and got
+<code>?TYPE MISMATCH  ERROR</code>. Why?</em></li>
+<li><strong>Ask for a hint first:</strong> “Don’t fix it for me, just
+tell me what’s wrong.” Then the discovery is still yours.</li>
+<li><strong>Check every answer on the C64.</strong> AIs often get C64
+BASIC wrong. They may suggest <code>ELSE</code>, for example, which the
+C64 doesn’t have. The C64 is always the final judge, and catching an
+AI’s mistake counts as a discovery too.</li>
+</ul></li>
+</ol>
 <h2 id="a-note-for-the-beta-tester">A note for the beta tester</h2>
 <p>This book is a <strong>draft</strong>, and you’re its <strong>beta
 tester</strong>. Like a beta tester for a game, your job is to find the
 problems before anyone else does. If something confuses you, that’s the
 book’s fault, not yours, and you’ve just found something to fix. Several
 of the tools above exist because a beta tester asked for them.</p>
+<h2 id="exercises">Exercises</h2>
+<ol type="1">
+<li><strong>Make room.</strong> Type <code>10 PRNT "READY"</code> and
+press RETURN. Now fix the missing letter <em>without</em> retyping the
+line: move the cursor onto the <code>N</code>, press
+<strong>Insert</strong>, type <code>I</code>, then press RETURN.
+<code>LIST</code> and <code>RUN</code> to check.</li>
+<li><strong>Save, reset, load.</strong> Save your program from exercise
+1 to a slot (choose “Before you begin, exercise 2” in the Exercise
+list). Press <strong>Reset the C64</strong>, then use your slot’s
+<strong>Load</strong> button to bring it back, and run it.</li>
+<li><strong>Ask well.</strong> Ask a free AI one question about
+something in this book, following the four steps in “Getting unstuck.”
+Write down the question you asked, the hint you got, and whether the C64
+agreed.</li>
+</ol>
+<h2 id="quiz">Quiz</h2>
+<ol type="1">
+<li>What does the ↵ at the end of a line of code mean? (a) Type the ↵
+symbol (b) Press RETURN (c) The line continues on the next row (d)
+Nothing.</li>
+<li>You’ve typed a program you want to keep. What should you do before
+pressing Reset? (a) Type NEW (b) Clear the screen (c) Save it to a new
+slot (d) Nothing.</li>
+<li>A word in a line is missing a letter. What’s the quickest fix? (a)
+Put the cursor where it belongs, press Insert, type the letter (b)
+Retype the whole line (c) Clear the screen (d) Type LIST.</li>
+<li>An AI tells you to use <code>ELSE</code>, and the C64 answers
+<code>?SYNTAX  ERROR</code>. Who’s right? (a) The AI (b) Both (c)
+Neither (d) The C64.</li>
+<li>Where do your notes about each lesson go? (a) On the C64’s screen
+(b) On the Chapter work page (c) In a save slot (d) In the book.</li>
+</ol>
 <!-- status: final -->
 <h1 id="chapter-1-this-is-a-variable">Chapter 1: This Is a Variable</h1>
 <p>This chapter teaches two things. The first is the
@@ -808,7 +870,7 @@ Mars. One team’s program measured thruster force in one unit, and
 another team’s program read those numbers as a different unit. Every
 number was right. Nobody had written down which units they were in.</p>
 </div>
-<h2 id="exercises">Exercises</h2>
+<h2 id="exercises-1">Exercises</h2>
 <ol type="1">
 <li><strong>Type and predict.</strong> Put the points you scored in two
 rounds of a game into two variables. Before printing their total, write
@@ -822,7 +884,7 @@ the best treasure. Make the C64 print one sentence about it, mixing
 words and boxes the way Lesson 1.2 shows. Add all three to your variable
 dictionary first, with their data types.</li>
 </ol>
-<h2 id="quiz">Quiz</h2>
+<h2 id="quiz-1">Quiz</h2>
 <ol type="1">
 <li>After <code>X = 4</code> and then <code>X = X * 5</code>, what does
 <code>PRINT X</code> show? (a) 4 (b) 9 (c) 20 (d) An error.</li>
@@ -997,9 +1059,11 @@ and <code>RUN</code> to check.</p>
 a letter is <em>missing</em>, you need room for it. Put the cursor where
 the missing letter belongs and press SHIFT + INST/DEL. That’s
 <strong>INSERT</strong>: everything from the cursor onward slides one
-place to the right, leaving a space. Type the missing letter into the
-gap, then press RETURN. On a PC keyboard, use the
-<strong>Insert</strong> key, or <strong>Shift + Backspace</strong>.</p>
+place to the right, leaving a space. Insert works like the text editing
+you’re used to on a PC or phone; the C64’s habit of typing over is the
+unusual one. Type the missing letter into the gap, then press RETURN. On
+a PC keyboard, use the <strong>Insert</strong> key, or <strong>Shift +
+Backspace</strong>.</p>
 <p>For example, if line 20 said <code>20 PRIT "500 POINTS"</code>, you’d
 put the cursor on the <code>T</code>, press INSERT once, and type
 <code>N</code>.</p>
@@ -1073,7 +1137,7 @@ a recipe. Then give each step a line number, counting by tens.</p>
 <p><strong>Notebook rule 2:</strong> Plan the steps on paper first, in
 order. Number the lines by tens, so there’s always room to add a step
 later.</p>
-<h2 id="exercises-1">Exercises</h2>
+<h2 id="exercises-2">Exercises</h2>
 <ol type="1">
 <li><strong>Predict the order.</strong> Type <code>NEW</code>, then
 these lines in this order: <code>30 PRINT "BLUE"</code>,
@@ -1089,7 +1153,7 @@ from your variable dictionary. Number the lines by tens, type it, and
 run it. Then add a new line between the score and the message
 <em>without</em> retyping anything else.</li>
 </ol>
-<h2 id="quiz-1">Quiz</h2>
+<h2 id="quiz-2">Quiz</h2>
 <ol type="1">
 <li>You type <code>20 PRINT "SAVED"</code> and press RETURN. What
 happens? (a) SAVED appears (b) The line is stored and nothing is printed
@@ -1335,7 +1399,7 @@ them on purpose. When a game lets you type in a “seed” to get the same
 world as a friend, that’s this same idea: the same starting point gives
 the same “random” world.</p>
 </div>
-<h2 id="exercises-2">Exercises</h2>
+<h2 id="exercises-3">Exercises</h2>
 <ol type="1">
 <li><strong>Rate a creature.</strong> In creature-collecting games like
 Pokémon GO, each creature has three hidden stats, attack, defense and
@@ -1356,7 +1420,7 @@ and boxes. Last, add <code>X = RND(-TI)</code> as the program’s first
 line, so it rolls differently after every reset. Save it to a slot on
 the C64 page.</li>
 </ol>
-<h2 id="quiz-2">Quiz</h2>
+<h2 id="quiz-3">Quiz</h2>
 <ol type="1">
 <li>What does <code>? 2+3*4</code> show? (a) 20 (b) 14 (c) 24 (d)
 9.</li>
@@ -1622,7 +1686,7 @@ together. Every tool from this chapter, in one line.</p>
 <code>B$ = "TIGER"</code> make <code>PHOER</code>. Odd-length names work
 too, because <code>INT</code> rounds each half down. Swap the two names
 around, and you get a completely different creature.</p>
-<h2 id="exercises-3">Exercises</h2>
+<h2 id="exercises-4">Exercises</h2>
 <ol type="1">
 <li><strong>Join it.</strong> Put two words into two text boxes, such as
 SKY and KNIGHT. Join them with a space in between, and print the result.
@@ -1640,7 +1704,7 @@ Lesson 4.3 (<code>LEFT$</code>, <code>MID$</code> and
 <code>RIGHT$</code>, in whatever combination you like). Run it, wait a
 minute, and run it again. Save it to a slot on the C64 page.</li>
 </ol>
-<h2 id="quiz-3">Quiz</h2>
+<h2 id="quiz-4">Quiz</h2>
 <ol type="1">
 <li>What does <code>? LEN("GAME ON")</code> show? (a) 6 (b) 7 (c) 2 (d)
 An error.</li>

@@ -52,7 +52,7 @@ function slotStatus(ch, ex) {
   fetch('/api/versions?exercise=' + encodeURIComponent(ex.slot_id)).then(r => r.json()).then(rows => {
     if (!rows.length) {
       box.className = 'slot-status missing';
-      box.textContent = `No program saved for this exercise yet. On the C64, choose “Chapter ${ch.n}, exercise ${ex.n}” in the Exercise list, then press Save to a new slot.`;
+      box.textContent = `No program saved for this exercise yet. On the C64, choose “${ch.n === 0 ? 'Before you begin' : 'Chapter ' + ch.n}, exercise ${ex.n}” in the Exercise list, then press Save to a new slot.`;
       return;
     }
     const newest = rows[0], first = newest.first || '';

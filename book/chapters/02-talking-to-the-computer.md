@@ -144,7 +144,7 @@ The C64 prints the first line, then stops with `?SYNTAX  ERROR IN 20`. Helpfully
 
 When you press RETURN, the C64 reads the whole line from the screen and stores it, exactly as if you had typed it fresh. `LIST` and `RUN` to check.
 
-**Making room.** Typing over only replaces letters. When a letter is *missing*, you need room for it. Put the cursor where the missing letter belongs and press SHIFT + INST/DEL. That's **INSERT**: everything from the cursor onward slides one place to the right, leaving a space. Type the missing letter into the gap, then press RETURN. On a PC keyboard, use the **Insert** key, or **Shift + Backspace**.
+**Making room.** Typing over only replaces letters. When a letter is *missing*, you need room for it. Put the cursor where the missing letter belongs and press SHIFT + INST/DEL. That's **INSERT**: everything from the cursor onward slides one place to the right, leaving a space. Insert works like the text editing you're used to on a PC or phone; the C64's habit of typing over is the unusual one. Type the missing letter into the gap, then press RETURN. On a PC keyboard, use the **Insert** key, or **Shift + Backspace**.
 
 For example, if line 20 said `20 PRIT "500 POINTS"`, you'd put the cursor on the `T`, press INSERT once, and type `N`.
 

@@ -26,7 +26,8 @@ SLIDES = [
      "<p><kbd>Esc</kbd> is <strong>RUN/STOP</strong>: it stops a running program.<br>"
      "<kbd>Shift</kbd> + <kbd>Home</kbd> clears the screen (on many laptops, Home is <kbd>Fn</kbd> + <kbd>←</kbd>).<br>"
      "<kbd>Page Up</kbd> is <strong>RESTORE</strong>.<br>"
-     "<kbd>Insert</kbd> (or <kbd>Shift</kbd> + <kbd>Backspace</kbd>) makes room for a missing letter.</p>"
+     "<kbd>Insert</kbd> (or <kbd>Shift</kbd> + <kbd>Backspace</kbd>) makes room for a missing letter, like the "
+     "text editing you’re used to.</p>"
      "<p>Prefer clicking? The same keys are buttons beside the C64.</p>"),
     ("Shift-click to move the cursor", "shiftclick",
      "<p>Hold <kbd>Shift</kbd> and click anywhere on the C64 screen, and the cursor jumps there. Here it "

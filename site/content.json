@@ -17,8 +17,149 @@
     "title": "How This Book Works"
    }
   ],
-  "exercises": [],
-  "quiz": [],
+  "exercises": [
+   {
+    "n": 1,
+    "id": "ex1-d00d0b",
+    "title": "Make room",
+    "text": "Type 10 PRNT \"READY\" and press RETURN. Now fix the missing letter *without* retyping the line: move the cursor onto the N, press Insert, type I, then press RETURN. LIST and RUN to check.",
+    "program": false,
+    "slot_id": "ch00-ex1"
+   },
+   {
+    "n": 2,
+    "id": "ex2-2ecbe4",
+    "title": "Save, reset, load",
+    "text": "Save your program from exercise 1 to a slot (choose \"Before you begin, exercise 2\" in the Exercise list). Press Reset the C64, then use your slot's Load button to bring it back, and run it.",
+    "program": true,
+    "slot_id": "ch00-ex2"
+   },
+   {
+    "n": 3,
+    "id": "ex3-6473ea",
+    "title": "Ask well",
+    "text": "Ask a free AI one question about something in this book, following the four steps in \"Getting unstuck.\" Write down the question you asked, the hint you got, and whether the C64 agreed.",
+    "program": false,
+    "slot_id": "ch00-ex3"
+   }
+  ],
+  "quiz": [
+   {
+    "n": 1,
+    "question": "What does the ↵ at the end of a line of code mean?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "Type the ↵ symbol"
+     },
+     {
+      "letter": "b",
+      "text": "Press RETURN"
+     },
+     {
+      "letter": "c",
+      "text": "The line continues on the next row"
+     },
+     {
+      "letter": "d",
+      "text": "Nothing"
+     }
+    ],
+    "answer": "b"
+   },
+   {
+    "n": 2,
+    "question": "You've typed a program you want to keep. What should you do before pressing Reset?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "Type NEW"
+     },
+     {
+      "letter": "b",
+      "text": "Clear the screen"
+     },
+     {
+      "letter": "c",
+      "text": "Save it to a new slot"
+     },
+     {
+      "letter": "d",
+      "text": "Nothing"
+     }
+    ],
+    "answer": "c"
+   },
+   {
+    "n": 3,
+    "question": "A word in a line is missing a letter. What's the quickest fix?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "Put the cursor where it belongs, press Insert, type the letter"
+     },
+     {
+      "letter": "b",
+      "text": "Retype the whole line"
+     },
+     {
+      "letter": "c",
+      "text": "Clear the screen"
+     },
+     {
+      "letter": "d",
+      "text": "Type LIST"
+     }
+    ],
+    "answer": "a"
+   },
+   {
+    "n": 4,
+    "question": "An AI tells you to use ELSE, and the C64 answers ?SYNTAX  ERROR. Who's right?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "The AI"
+     },
+     {
+      "letter": "b",
+      "text": "Both"
+     },
+     {
+      "letter": "c",
+      "text": "Neither"
+     },
+     {
+      "letter": "d",
+      "text": "The C64"
+     }
+    ],
+    "answer": "d"
+   },
+   {
+    "n": 5,
+    "question": "Where do your notes about each lesson go?",
+    "options": [
+     {
+      "letter": "a",
+      "text": "On the C64's screen"
+     },
+     {
+      "letter": "b",
+      "text": "On the Chapter work page"
+     },
+     {
+      "letter": "c",
+      "text": "In a save slot"
+     },
+     {
+      "letter": "d",
+      "text": "In the book"
+     }
+    ],
+    "answer": "b"
+   }
+  ],
   "questions": []
  },
  {

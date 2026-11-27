@@ -464,6 +464,16 @@ Done from the old pending list: save slots ("Save to a new slot", "Save slots", 
 shows only right or wrong; Ch 3's dice exercise in three small steps; the earlier-draft label fix.
 The layout stays: the editor could see the save button without scrolling.
 
+## "How This Book Works" is testable (editor)
+
+It now has "Getting unstuck" (look back first; then ask a free AI the right way: name the machine,
+"In Commodore 64 BASIC V2"; exact line and error; ask for a hint; CHECK ON THE C64, which is the final
+judge, since AIs suggest things like ELSE), three exercises that make him USE the tools (fix PRNT with
+Insert; save to a slot, reset, load and run; ask an AI one well-formed question and check it), and a
+quiz. They appear in the workbook under "Before you begin"; exercise 2 has a slot check, picker id
+ch00-ex2. Insert is described everywhere as "like the text editing you're used to" (he still
+overtypes out of habit: an expectation problem, per the editor).
+
 ## Beta tester questions (editor -> tester)
 
 A chapter file may end with `## Beta tester questions` and a numbered list. The build strips that
