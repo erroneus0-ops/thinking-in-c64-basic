@@ -56,6 +56,16 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
   if (!ns.length) none(notes, 'notes');
   let last = '';
   for (const r of ns) {
+    if (r.item.startsWith('ask:')) {
+      const c = chapters.find(c => c.n === r.chapter); const q = c && (c.questions || []).find(q => q.id === r.item);
+      const head = `Chapter ${r.chapter}: your questions`;
+      if (head !== last) { notes.append(el('h3', { textContent: head })); last = head; }
+      notes.append(el('div', { className: 'entry' },
+        el('div', { className: 'what', textContent: q ? q.text : '(an earlier question)' }),
+        el('div', {}, el('span', { className: 'tag reaction', textContent: 'His answer: ' }), el('span', { className: 'text', textContent: r.text })),
+        el('div', { className: 'what', textContent: `${r.user} · ${r.device || 'unknown device'} · ${r.created_at}` })));
+      continue;
+    }
     const [lesson, kind] = r.item.split(':');
     const head = `Chapter ${r.chapter}: ${/^\d/.test(lesson) ? 'Lesson ' + lesson + ', ' : ''}${lessonTitle(r.chapter, lesson)}`;
     if (head !== last) { notes.append(el('h3', { textContent: head })); last = head; }

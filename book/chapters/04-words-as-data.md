@@ -193,3 +193,7 @@ Now try your own. `A$ = "PHOENIX"` and `B$ = "TIGER"` make `PHOER`. Odd-length n
 3. What happens with `? "HP: "+20`? (a) HP: 20 (b) `?TYPE MISMATCH  ERROR` (c) HP: (d) 20. **Answer: b**
 4. What is inside `STR$(5)`? (a) A space, then 5 (b) Just 5 (c) 05 (d) Nothing. **Answer: a**
 5. What does `? VAL("42 GEMS")` show? (a) 0 (b) 42 GEMS (c) An error (d) 42. **Answer: d**
+
+## Beta tester questions
+
+1. We made a mistake: the book never explained the difference between commands and functions, so we added Lesson 4.0 to this chapter. You've already met everything in it, which makes you the best judge. If you were placing that lesson for a brand-new reader, where would you put it: Chapter 1, 2, 3 or 4? Tell us why you'd put it there.

@@ -143,6 +143,16 @@ async function renderHistory(ch) {
 function renderNotes(ch) {
   const box = document.getElementById('notes');
   box.replaceChildren();
+  if ((ch.questions || []).length) {
+    const card = el('div', { className: 'card asks' }, el('h3', { textContent: 'Questions for you, from the editor' }));
+    const fields = ch.questions.map(q => {
+      const ta = el('textarea', { id: `n-${q.id}` });
+      return { q, ta, nodes: [el('p', { textContent: `${q.n}. ${q.text}` }), ta, lastTime('note:' + q.id)] };
+    });
+    fields.forEach(f => card.append(...f.nodes));
+    card.append(saveRow(async () => { for (const f of fields) if (f.ta.value.trim()) await save(ch.n, 'note', f.q.id, f.ta.value); }));
+    box.append(card);
+  }
   for (const lesson of ch.lessons) {
     const label = /^\d/.test(lesson.id) ? `Lesson ${lesson.id}: ${lesson.title}` : lesson.title;
     // Short questions that ask for a real answer, not a yes or no (editor's decision).

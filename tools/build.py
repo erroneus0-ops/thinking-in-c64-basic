@@ -53,6 +53,14 @@ def extract_content(chapters):
                 program = bool(re.search(r"\bslot\b|lines by tens", ex_text, re.I))
                 ch["exercises"].append({"n": int(num), "id": f"ex{num}-{fp}", "title": title, "text": ex_text,
                                         "program": program, "slot_id": f"ch{n:02d}-ex{num}"})
+        # Questions from the editor to the beta tester: shown in the workbook only, never in the book.
+        bq = re.search(r"^## Beta tester questions\n(.*?)(?=^## |\Z)", text, re.M | re.S)
+        ch.setdefault("questions", [])
+        if bq:
+            for num, body in re.findall(r"^(\d+)\. (.+?)(?=^\d+\. |\Z)", bq.group(1), re.M | re.S):
+                q_text = plain(body.strip())
+                fp = hashlib.sha1(q_text.encode("utf-8")).hexdigest()[:6]
+                ch["questions"].append({"n": int(num), "id": f"ask:{num}-{fp}", "text": q_text})
         qz = re.search(r"^## Quiz\n(.*?)(?=^## |\Z)", text, re.M | re.S)
         if qz:
             for num, body in re.findall(r"^(\d+)\. (.+?)(?=^\d+\. |\Z)", qz.group(1), re.M | re.S):
@@ -79,6 +87,10 @@ def chapter_status(text):
     if m:
         return m.group(1).lower()
     return "testing" if re.search(r"^# Chapter \d+", text, re.M) else "final"
+
+def without_tester_questions(text):
+    """The beta tester questions live in the chapter file but belong to the workbook, not the book."""
+    return re.sub(r"^## Beta tester questions\n.*?(?=^## |\Z)", "", text, flags=re.M | re.S)
 
 def with_testing_theme(text):
     """Chapters in testing get an "In testing" badge on their title (shown in the contents too),
@@ -124,7 +136,7 @@ def main():
 
     chapters = sorted((ROOT / "book" / "chapters").glob("*.md"))
     extract_content(chapters)
-    text = "\n\n".join(with_testing_theme(p.read_text(encoding="utf-8")) for p in chapters)
+    text = "\n\n".join(with_testing_theme(without_tester_questions(p.read_text(encoding="utf-8"))) for p in chapters)
     if args.student:
         text = re.sub(r"\s*\*\*Answer: [a-d]\*\*", "", text)
 

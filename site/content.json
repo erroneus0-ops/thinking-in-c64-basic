@@ -18,7 +18,8 @@
    }
   ],
   "exercises": [],
-  "quiz": []
+  "quiz": [],
+  "questions": []
  },
  {
   "n": 1,
@@ -188,7 +189,8 @@
     ],
     "answer": "b"
    }
-  ]
+  ],
+  "questions": []
  },
  {
   "n": 2,
@@ -358,7 +360,8 @@
     ],
     "answer": "a"
    }
-  ]
+  ],
+  "questions": []
  },
  {
   "n": 3,
@@ -528,7 +531,8 @@
     ],
     "answer": "a"
    }
-  ]
+  ],
+  "questions": []
  },
  {
   "n": 4,
@@ -701,6 +705,13 @@
      }
     ],
     "answer": "d"
+   }
+  ],
+  "questions": [
+   {
+    "n": 1,
+    "id": "ask:1-c057c5",
+    "text": "We made a mistake: the book never explained the difference between commands and functions, so we added Lesson 4.0 to this chapter. You've already met everything in it, which makes you the best judge. If you were placing that lesson for a brand-new reader, where would you put it: Chapter 1, 2, 3 or 4? Tell us why you'd put it there."
    }
   ]
  }
