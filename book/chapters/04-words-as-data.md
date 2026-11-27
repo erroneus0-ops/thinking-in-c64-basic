@@ -184,7 +184,7 @@ Now try your own. `A$ = "PHOENIX"` and `B$ = "TIGER"` make `PHOER`. Odd-length n
 
 1. **Join it.** Put two words into two text boxes, such as SKY and KNIGHT. Join them with a space in between, and print the result. Then print its `LEN`, and check that it counted the space.
 2. **Fix it two ways.** `L = 5`, then `PRINT "LEVEL: "+L` gives an error. Explain why, then fix it once using a semicolon and once using `STR$`. Use brackets to check the spaces in your second fix.
-3. **Build it: a clock.** In direct mode, set the C64's clock once with `TI$ = "093000"`. Then write a one-line program that prints `TI$` as hours, minutes and seconds with colons between them, like `09:30:00`, using `MID$` and `RIGHT$`. Run it, wait a minute, and run it again. Save it to a slot on the C64 page.
+3. **Build it: a clock.** In direct mode, set the C64's clock once with `TI$ = "093000"`. Then write a one-line program that prints `TI$` as hours, minutes and seconds with colons between them, like `09:30:00`, using the tools from Lesson 4.3 (`LEFT$`, `MID$` and `RIGHT$`, in whatever combination you like). Run it, wait a minute, and run it again. Save it to a slot on the C64 page.
 
 ## Quiz
 

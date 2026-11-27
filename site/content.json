@@ -583,9 +583,9 @@
    },
    {
     "n": 3,
-    "id": "ex3-edc77b",
+    "id": "ex3-058a00",
     "title": "Build it: a clock",
-    "text": "In direct mode, set the C64's clock once with TI$ = \"093000\". Then write a one-line program that prints TI$ as hours, minutes and seconds with colons between them, like 09:30:00, using MID$ and RIGHT$. Run it, wait a minute, and run it again. Save it to a slot on the C64 page.",
+    "text": "In direct mode, set the C64's clock once with TI$ = \"093000\". Then write a one-line program that prints TI$ as hours, minutes and seconds with colons between them, like 09:30:00, using the tools from Lesson 4.3 (LEFT$, MID$ and RIGHT$, in whatever combination you like). Run it, wait a minute, and run it again. Save it to a slot on the C64 page.",
     "program": true,
     "slot_id": "ch04-ex3"
    }
