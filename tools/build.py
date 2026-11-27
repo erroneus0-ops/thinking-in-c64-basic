@@ -49,7 +49,10 @@ def extract_content(chapters):
                 # The id carries a fingerprint of the wording: rewrite an exercise and it starts
                 # fresh on the course site, instead of showing answers to a different question.
                 fp = hashlib.sha1((title + "|" + ex_text).encode("utf-8")).hexdigest()[:6]
-                ch["exercises"].append({"n": int(num), "id": f"ex{num}-{fp}", "title": title, "text": ex_text})
+                # Exercises that ask for a program get a save-slot check on the workbook page.
+                program = bool(re.search(r"\bslot\b|lines by tens", ex_text, re.I))
+                ch["exercises"].append({"n": int(num), "id": f"ex{num}-{fp}", "title": title, "text": ex_text,
+                                        "program": program, "slot_id": f"ch{n:02d}-ex{num}"})
         qz = re.search(r"^## Quiz\n(.*?)(?=^## |\Z)", text, re.M | re.S)
         if qz:
             for num, body in re.findall(r"^(\d+)\. (.+?)(?=^\d+\. |\Z)", qz.group(1), re.M | re.S):

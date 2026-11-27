@@ -3,6 +3,40 @@
 
 Numbers aren't the only thing a program works with. Names, titles, messages and codes are information too, and the C64 can join them together, measure them and cut them into pieces. In this chapter you'll learn how, and you'll finish by inventing new creature names.
 
+## Lesson 4.0 — Commands and functions
+
+**Goal:** Know the difference between a command and a function, and why a function's answer always needs somewhere to go.
+
+**Picture:** Asking a question versus doing something. A **function** answers a question: `LEN("DRAGON")` asks "how long is DRAGON?" and the answer is 6. A **command** does something: `PRINT` shows things on the screen. An answer on its own doesn't do anything. Someone has to *use* it.
+
+**Predict, then try:**
+
+```
+LEN("DRAGON")
+```
+
+**Why it fails.** The C64 answers `?SYNTAX  ERROR`. It worked out the answer, 6, and then had nothing to do with it. Every line you type has to *start* by telling the C64 what to do. There are two ways to give a function's answer somewhere to go:
+
+```
+? LEN("DRAGON")
+N = LEN("DRAGON")
+? N
+```
+
+The first line **shows** the answer: ` 6`. The second line **keeps** it in a box called N (the C64 prints nothing, it just fills the box), and the third shows what's in the box: ` 6` again.
+
+| Kind | What it does | Examples |
+| --- | --- | --- |
+| **Command** | Does something | `PRINT`, `?`, `LIST`, `RUN`, `NEW` |
+| **Function** | Answers a question with a value | `INT`, `RND`, `LEN`, `LEFT$`, `STR$`, `VAL` |
+| **Operator** | Combines values into a new value | `+`, `-`, `*`, `/`, `↑` |
+
+**How the C64 reads a line.** In `? INT(LEN("DRAGON")/2)`, the C64 works from the inside out: first `LEN("DRAGON")` is 6, then 6/2 is 3, then `INT(3)` is 3. Only when everything after the `?` has become one single value does `?` do its job and show it. The command always goes last, with the finished answer.
+
+::: good-to-know
+Functions that end in `$`, like `STR$` and `LEFT$`, answer with text. The others answer with a number. Either way, the answer needs a command, or a box to go into.
+:::
+
 ## Lesson 4.1 — Joining words
 
 **Goal:** Join pieces of text together into one.

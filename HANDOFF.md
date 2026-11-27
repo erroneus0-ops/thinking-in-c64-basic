@@ -229,6 +229,30 @@ Conventions in chapter files:
 
 ## Beta test log
 
+- 26-27 Nov, Ch 4 (in testing), editor's observations while the tester works:
+  * WORD WRAP BUG: code blocks inherited inline code's pre-wrap, so a long line wrapped and "?" sat
+    alone on a row. Fixed: pre code { white-space: pre } (blocks scroll sideways); smaller block font
+    in the PDF so long lines fit.
+  * GAP: commands vs functions was never taught. New Lesson 4.0 (numbered 0 so his in-progress notes
+    for 4.1-4.5 keep their ids): a function answers, a command does; STR$(5) or LEN("DRAGON") alone
+    gives ?SYNTAX  ERROR (verified); ? shows the answer, N = keeps it; the C64 evaluates inside-out
+    and the command acts last. Table of commands, functions, operators.
+  * MISSING SAVES: he didn't save the clock exercise (a preview program got saved instead). Exercises
+    that ask for a program (text mentions a slot, or lines by tens) now show a save-slot status on
+    the workbook: "Saved: slot N, <time>. It starts: <first line>" or a dashed reminder of how to
+    save. /api/versions now returns each slot's first line.
+  * EXERCISE TYPE (editor's idea): show the output of a run; the reader writes a program that
+    reproduces it. Editor's sample, corrected for the C64 (verified): no ELSE in BASIC V2 (two IFs),
+    INPUT needs ";" after its prompt ("," = ?SYNTAX  ERROR), and INPUT adds its own "?" (a prompt
+    ending in "?" shows "??"):
+        10 INPUT "WHAT'S YOUR NAME";NA$
+        20 INPUT "ARE YOU A BOY OR A GIRL (B/G)";BG$
+        30 PRINT "HELLO THERE ";
+        40 IF BG$="B" THEN PRINT "MR. ";
+        50 IF BG$="G" THEN PRINT "MS. ";
+        60 PRINT NA$;"!"
+    Fits Ch 5 (INPUT) and Ch 7 (IF); teach "no ELSE" and the INPUT prompt rules there.
+
 - 23 Nov, draft 3 of Ch 1-2 (a long day: morning, afternoon, evening). The two open note questions
   WORKED: real explanations instead of "maybe". VERDICT FROM THE TESTER: NO MORE FULL RE-RUNS ("going
   back again with everything rebooted... it's just not the same anymore"; "like repeating a video

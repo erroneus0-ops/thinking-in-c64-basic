@@ -83,7 +83,7 @@ pre code .ln::after { content: "\21B5"; display: inline-block; margin-left: 0.6e
   border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.05em; }
 /* Diagrams are pictures, not something to type */
 pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
-pre code { font: inherit; background: none; padding: 0; color: inherit; }
+pre code { font: inherit; background: none; padding: 0; color: inherit; white-space: pre; }  /* never wrap a line of code: it would look like two lines */
 code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
 
 /* "Good to know" boxes: optional clarifying details, safe to skip on a first read */
@@ -112,13 +112,14 @@ th { border-bottom: 2px solid var(--ink); }
   details.toc, .tour-link { display: none; }
   h1 { break-before: page; margin-top: 0; }
   pre, table { break-inside: avoid; }
+  pre { font-size: 0.78rem; }   /* the page can't scroll, so make long lines fit */
 }
 @page { size: letter; margin: 2cm 2cm 2.2cm; }
 </style>
 </head>
 <body>
 <main>
-<p class="edition">Beta tester’s draft, built Nov 25, 2026</p>
+<p class="edition">Beta tester’s draft, built Nov 27, 2026</p>
 <p class="book-title">Thinking in C64 BASIC</p>
 <p class="tour-link"><a href="tour/">New to the Commodore 64 and the emulator? <span>Take the quick tour →</span></a></p>
 <details class="toc">
@@ -210,6 +211,9 @@ random</a></li>
 id="toc-chapter-4-words-as-data">Chapter 4: Words as Data <span
 class="badge">In testing</span></a>
 <ul>
+<li><a href="#lesson-4.0-commands-and-functions"
+id="toc-lesson-4.0-commands-and-functions">Lesson 4.0 — Commands and
+functions</a></li>
 <li><a href="#lesson-4.1-joining-words"
 id="toc-lesson-4.1-joining-words">Lesson 4.1 — Joining words</a></li>
 <li><a href="#lesson-4.2-how-long-is-a-word"
@@ -1378,6 +1382,75 @@ Tell us what works and what doesn’t in your notes.</p>
 messages and codes are information too, and the C64 can join them
 together, measure them and cut them into pieces. In this chapter you’ll
 learn how, and you’ll finish by inventing new creature names.</p>
+<h2 id="lesson-4.0-commands-and-functions">Lesson 4.0 — Commands and
+functions</h2>
+<p><strong>Goal:</strong> Know the difference between a command and a
+function, and why a function’s answer always needs somewhere to go.</p>
+<p><strong>Picture:</strong> Asking a question versus doing something. A
+<strong>function</strong> answers a question: <code>LEN("DRAGON")</code>
+asks “how long is DRAGON?” and the answer is 6. A
+<strong>command</strong> does something: <code>PRINT</code> shows things
+on the screen. An answer on its own doesn’t do anything. Someone has to
+<em>use</em> it.</p>
+<p><strong>Predict, then try:</strong></p>
+<pre><code><span class="ln">LEN(&quot;DRAGON&quot;)</span></code></pre>
+<p><strong>Why it fails.</strong> The C64 answers
+<code>?SYNTAX  ERROR</code>. It worked out the answer, 6, and then had
+nothing to do with it. Every line you type has to <em>start</em> by
+telling the C64 what to do. There are two ways to give a function’s
+answer somewhere to go:</p>
+<pre><code><span class="ln">? LEN(&quot;DRAGON&quot;)</span>
+<span class="ln">N = LEN(&quot;DRAGON&quot;)</span>
+<span class="ln">? N</span></code></pre>
+<p>The first line <strong>shows</strong> the answer: <code>6</code>. The
+second line <strong>keeps</strong> it in a box called N (the C64 prints
+nothing, it just fills the box), and the third shows what’s in the box:
+<code>6</code> again.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Kind</th>
+<th>What it does</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Command</strong></td>
+<td>Does something</td>
+<td><code>PRINT</code>, <code>?</code>, <code>LIST</code>,
+<code>RUN</code>, <code>NEW</code></td>
+</tr>
+<tr>
+<td><strong>Function</strong></td>
+<td>Answers a question with a value</td>
+<td><code>INT</code>, <code>RND</code>, <code>LEN</code>,
+<code>LEFT$</code>, <code>STR$</code>, <code>VAL</code></td>
+</tr>
+<tr>
+<td><strong>Operator</strong></td>
+<td>Combines values into a new value</td>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>,
+<code>↑</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>How the C64 reads a line.</strong> In
+<code>? INT(LEN("DRAGON")/2)</code>, the C64 works from the inside out:
+first <code>LEN("DRAGON")</code> is 6, then 6/2 is 3, then
+<code>INT(3)</code> is 3. Only when everything after the <code>?</code>
+has become one single value does <code>?</code> do its job and show it.
+The command always goes last, with the finished answer.</p>
+<div class="good-to-know">
+<p>Functions that end in <code>$</code>, like <code>STR$</code> and
+<code>LEFT$</code>, answer with text. The others answer with a number.
+Either way, the answer needs a command, or a box to go into.</p>
+</div>
 <h2 id="lesson-4.1-joining-words">Lesson 4.1 — Joining words</h2>
 <p><strong>Goal:</strong> Join pieces of text together into one.</p>
 <p><strong>Picture:</strong> Snapping building blocks together. Two

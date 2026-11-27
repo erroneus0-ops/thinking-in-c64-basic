@@ -51,19 +51,25 @@
     "n": 1,
     "id": "ex1-4f27a2",
     "title": "Type and predict",
-    "text": "Put the points you scored in two rounds of a game into two variables. Before printing their total, write down what it will be."
+    "text": "Put the points you scored in two rounds of a game into two variables. Before printing their total, write down what it will be.",
+    "program": false,
+    "slot_id": "ch01-ex1"
    },
    {
     "n": 2,
     "id": "ex2-06c778",
     "title": "Fix it",
-    "text": "These commands don't work. Find both problems, explain each in one sentence, and fix them: ARMOR = 30, then ENDURANCE = ARMOR * 2."
+    "text": "These commands don't work. Find both problems, explain each in one sentence, and fix them: ARMOR = 30, then ENDURANCE = ARMOR * 2.",
+    "program": false,
+    "slot_id": "ch01-ex2"
    },
    {
     "n": 3,
     "id": "ex3-9d876a",
     "title": "Build it",
-    "text": "Use three variables: the name of a place in a game you like, how many treasures are hidden there, and the name of the best treasure. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types."
+    "text": "Use three variables: the name of a place in a game you like, how many treasures are hidden there, and the name of the best treasure. Make the C64 print one sentence about it, mixing words and boxes the way Lesson 1.2 shows. Add all three to your variable dictionary first, with their data types.",
+    "program": false,
+    "slot_id": "ch01-ex3"
    }
   ],
   "quiz": [
@@ -215,19 +221,25 @@
     "n": 1,
     "id": "ex1-16ffbb",
     "title": "Predict the order",
-    "text": "Type NEW, then these lines in this order: 30 PRINT \"BLUE\", 10 PRINT \"RED\", 40 PRINT \"VIOLET\", 20 PRINT \"GREEN\". Before typing LIST and RUN, write down what each will show."
+    "text": "Type NEW, then these lines in this order: 30 PRINT \"BLUE\", 10 PRINT \"RED\", 40 PRINT \"VIOLET\", 20 PRINT \"GREEN\". Before typing LIST and RUN, write down what each will show.",
+    "program": false,
+    "slot_id": "ch02-ex1"
    },
    {
     "n": 2,
     "id": "ex2-7a779f",
     "title": "Fix it two ways",
-    "text": "Type the TODAY'S TARGET program from Lesson 2.4. Fix line 20 once by retyping the whole line, then break it again and fix it with the screen editor. Which way was faster?"
+    "text": "Type the TODAY'S TARGET program from Lesson 2.4. Fix line 20 once by retyping the whole line, then break it again and fix it with the screen editor. Which way was faster?",
+    "program": false,
+    "slot_id": "ch02-ex2"
    },
    {
     "n": 3,
     "id": "ex3-afe91c",
     "title": "Build it",
-    "text": "Plan a short \"game over\" screen on paper: a title, your final score, and a message, one per line, using variables from your variable dictionary. Number the lines by tens, type it, and run it. Then add a new line between the score and the message *without* retyping anything else."
+    "text": "Plan a short \"game over\" screen on paper: a title, your final score, and a message, one per line, using variables from your variable dictionary. Number the lines by tens, type it, and run it. Then add a new line between the score and the message *without* retyping anything else.",
+    "program": true,
+    "slot_id": "ch02-ex3"
    }
   ],
   "quiz": [
@@ -379,19 +391,25 @@
     "n": 1,
     "id": "ex1-2a1d3e",
     "title": "Rate a creature",
-    "text": "In creature-collecting games like Pokémon GO, each creature has three hidden stats, attack, defense and HP, each from 0 to 15. Its rating is the total out of 45, as a percentage. Put 13, 14 and 15 into AT, DF and HP. First predict what ? AT+DF+HP/45*100 shows, then type it, and explain why it's wrong. Fix it with parentheses, then use INT to round the rating to the nearest whole percent."
+    "text": "In creature-collecting games like Pokémon GO, each creature has three hidden stats, attack, defense and HP, each from 0 to 15. Its rating is the total out of 45, as a percentage. Put 13, 14 and 15 into AT, DF and HP. First predict what ? AT+DF+HP/45*100 shows, then type it, and explain why it's wrong. Fix it with parentheses, then use INT to round the rating to the nearest whole percent.",
+    "program": false,
+    "slot_id": "ch03-ex1"
    },
    {
     "n": 2,
     "id": "ex2-0d9c25",
     "title": "Split the loot",
-    "text": "250 gems, 4 players. Use variables and INT to print how many gems each player gets, and how many are left in the chest."
+    "text": "250 gems, 4 players. Use variables and INT to print how many gems each player gets, and how many are left in the chest.",
+    "program": false,
+    "slot_id": "ch03-ex2"
    },
    {
     "n": 3,
     "id": "ex3-4d4653",
     "title": "Build it, one step at a time",
-    "text": "First, type ? INT(RND(1)*6)+1 a few times: that's one die. Next, write a program that puts one roll into D1 and another into D2, then prints both rolls and their total, mixing words and boxes. Last, add X = RND(-TI) as the program's first line, so it rolls differently after every reset. Save it to a slot on the C64 page."
+    "text": "First, type ? INT(RND(1)*6)+1 a few times: that's one die. Next, write a program that puts one roll into D1 and another into D2, then prints both rolls and their total, mixing words and boxes. Last, add X = RND(-TI) as the program's first line, so it rolls differently after every reset. Save it to a slot on the C64 page.",
+    "program": true,
+    "slot_id": "ch03-ex3"
    }
   ],
   "quiz": [
@@ -518,6 +536,10 @@
   "status": "testing",
   "lessons": [
    {
+    "id": "4.0",
+    "title": "Commands and functions"
+   },
+   {
     "id": "4.1",
     "title": "Joining words"
    },
@@ -543,19 +565,25 @@
     "n": 1,
     "id": "ex1-82ec77",
     "title": "Join it",
-    "text": "Put two words into two text boxes, such as SKY and KNIGHT. Join them with a space in between, and print the result. Then print its LEN, and check that it counted the space."
+    "text": "Put two words into two text boxes, such as SKY and KNIGHT. Join them with a space in between, and print the result. Then print its LEN, and check that it counted the space.",
+    "program": false,
+    "slot_id": "ch04-ex1"
    },
    {
     "n": 2,
     "id": "ex2-431729",
     "title": "Fix it two ways",
-    "text": "L = 5, then PRINT \"LEVEL: \"+L gives an error. Explain why, then fix it once using a semicolon and once using STR$. Use brackets to check the spaces in your second fix."
+    "text": "L = 5, then PRINT \"LEVEL: \"+L gives an error. Explain why, then fix it once using a semicolon and once using STR$. Use brackets to check the spaces in your second fix.",
+    "program": false,
+    "slot_id": "ch04-ex2"
    },
    {
     "n": 3,
     "id": "ex3-edc77b",
     "title": "Build it: a clock",
-    "text": "In direct mode, set the C64's clock once with TI$ = \"093000\". Then write a one-line program that prints TI$ as hours, minutes and seconds with colons between them, like 09:30:00, using MID$ and RIGHT$. Run it, wait a minute, and run it again. Save it to a slot on the C64 page."
+    "text": "In direct mode, set the C64's clock once with TI$ = \"093000\". Then write a one-line program that prints TI$ as hours, minutes and seconds with colons between them, like 09:30:00, using MID$ and RIGHT$. Run it, wait a minute, and run it again. Save it to a slot on the C64 page.",
+    "program": true,
+    "slot_id": "ch04-ex3"
    }
   ],
   "quiz": [

@@ -45,6 +45,23 @@ function saveRow(onSave) {
   return el('div', { className: 'save-row' }, btn, msg);
 }
 
+// For an exercise that asks for a program: has one been saved to a slot? Shows the newest slot and
+// its first line (so a wrong program stands out), or a reminder of how to save one.
+function slotStatus(ch, ex) {
+  const box = el('p', { className: 'slot-status' }, 'Checking your save slots…');
+  fetch('/api/versions?exercise=' + encodeURIComponent(ex.slot_id)).then(r => r.json()).then(rows => {
+    if (!rows.length) {
+      box.className = 'slot-status missing';
+      box.textContent = `No program saved for this exercise yet. On the C64, choose “Chapter ${ch.n}, exercise ${ex.n}” in the Exercise list, then press Save to a new slot.`;
+      return;
+    }
+    const newest = rows[0], first = newest.first || '';
+    box.className = 'slot-status saved';
+    box.textContent = `Saved: slot ${newest.version}, ${newest.created_at}. It starts: ${first}`;
+  }).catch(() => { box.textContent = ''; });
+  return box;
+}
+
 function renderExercises(ch) {
   const box = document.getElementById('exercises');
   box.replaceChildren();
@@ -60,7 +77,8 @@ function renderExercises(ch) {
         : el('span'),
       el('label', { className: 'small', htmlFor: ta.id, textContent: 'Your answer' }), ta,
       lastTime('exercise:' + id),
-      saveRow(() => save(ch.n, 'exercise', id, ta.value))));
+      saveRow(() => save(ch.n, 'exercise', id, ta.value)),
+      ex.program ? slotStatus(ch, ex) : el('span')));
   }
 }
 

@@ -110,6 +110,7 @@ function handle_api(string $route, string $root): void {
             $rows = array_map(fn($r) => [
                 'id' => (int)$r['id'], 'version' => (int)$r['version'], 'created_at' => $r['created_at'],
                 'lines' => $r['listing'] === '' ? 0 : substr_count($r['listing'], "\n") + 1,
+                'first' => strtok($r['listing'], "\n") ?: '',   // first line, so the workbook can show what was saved
             ], $q->fetchAll());
             json_out($rows);
             return;
