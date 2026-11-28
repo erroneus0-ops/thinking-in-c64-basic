@@ -488,6 +488,14 @@ and precedence, ST/TI/TI$, every error message.
   Regenerate: python tools/make_petscii.py runtime/roms/kernal.rom reference/data/petscii_probe.json.
   OPEN DECISION (editor): glyph images for graphics characters (from the character ROM: publish,
   course-site only, or Unicode legacy symbols). Until then graphics show as *graphic* + key combo.
+- PROJECT IDEA (from the editor's own maze screen saver): "MAKE THE MAZE FASTER". Start from the
+  opener's two-line maze; MEASURE each version with TI (jiffies); improve step by step as he did:
+  character-by-character -> building line strings -> random SEGMENTS prepared in DATA and chosen at
+  run time (a lookup table used for speed) -> stop one short of the last cell and POKE it (screen
+  2023, screen codes 77/78 for the diagonals, color RAM 56295) so the screen never scrolls -> random
+  background/foreground colors per cycle. Each version in a save slot with a note ("v3: segments from
+  DATA, 4x faster"). Lesson: measure first, then change the unit of work. Fits after Ch 8 / Ch 12.
+  Verify every step (and the timing figures) with the harness when written.
 - PLANNED REFERENCE SECTION: "Not in BASIC V2, and what to use instead" (for readers from other
   BASICs, e.g. the editor's CoCo): CLS -> PRINT CHR$(147); STRING$ -> LEFT$ of a filled string or a
   loop (STRING$ gives a misleading ?TYPE MISMATCH); clear line -> 40-space SS$ + CHR$(145) (bottom
