@@ -1,0 +1,55 @@
+# Rebuild the published book, PDF and reference whenever their sources change, and commit the
+# results to docs/ (GitHub Pages serves /docs). Commits made with GITHUB_TOKEN don't trigger new runs.
+name: Build book and reference
+
+on:
+  push:
+    branches: [main]
+    paths: ["book/**", "reference/**", "tools/**", ".github/workflows/build.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Libraries for WeasyPrint (PDF)
+        run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b
+
+      - name: Python packages
+        run: pip install -r tools/requirements.txt
+
+      - name: Public book (HTML + PDF) and the course site's workbook data
+        run: python tools/build.py --student --pages
+
+      - name: Reference (HTML + PDF)
+        run: python tools/build_reference.py
+
+      - name: Editor's edition, locked (only if the password secret is set)
+        env:
+          C64BOOK_PASSWORD: ${{ secrets.C64BOOK_PASSWORD }}
+        if: env.C64BOOK_PASSWORD != ''
+        run: |
+          python tools/build.py --no-pdf
+          python tools/lock_editor.py
+
+      - name: Commit the results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add docs site/content.json site/exercises.json
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          git commit -m "Build: book, PDF and reference from ${GITHUB_SHA::7}"
+          git push
