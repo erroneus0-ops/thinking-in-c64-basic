@@ -82,6 +82,9 @@ function upgrade_tables(PDO $pdo): void {
             $pdo->exec("ALTER TABLE $t ADD COLUMN device TEXT NOT NULL DEFAULT ''");
         }
     }
+    if (!has_column($pdo, 'submissions', 'note')) {
+        $pdo->exec("ALTER TABLE submissions ADD COLUMN note TEXT NOT NULL DEFAULT ''");
+    }
     if (!has_column($pdo, 'submissions', 'user')) {
         $pdo->beginTransaction();
         $pdo->exec('ALTER TABLE submissions RENAME TO submissions_old');

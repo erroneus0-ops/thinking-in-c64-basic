@@ -255,6 +255,16 @@ Conventions in chapter files:
         50 IF BG$="G" THEN PRINT "MS. ";
         60 PRINT NA$;"!"
     Fits Ch 5 (INPUT) and Ch 7 (IF); teach "no ELSE" and the INPUT prompt rules there.
+  * NO-ELSE PATTERNS for Ch 7 (from the editor's own AI conversation): (1) jump over the else branch
+    (IF S>=60 THEN 50 / PRINT "FAIL" / GOTO 60 / 50 PRINT "PASS" / 60 ...), with the GOTO read as the
+    branch's terminator; (2) invert the condition; (3) two opposite IFs for single statements. The
+    editor likes REM markers for symmetry (35 REM END ELSE, 55 REM END IF). Subroutines later.
+  * Editor tested Ch 0 (28 Nov): asked for NOTES ON SAVE SLOTS (built: "What's new in this version?"),
+    and found PRINT leaves old characters (READY over READY! shows READY!): now a Good to know in 2.4,
+    with his named-control-code idea (CS$="{clr}"). SPC(n) only MOVES the cursor (verified), so
+    Lesson 4.2 was corrected. Editor's view has COPY FOR CLAUDE (since last copy/today/7 days/all;
+    grouped by person; visits condensed per day; copies through a hidden textarea, since plain-HTTP
+    LAN pages can't use the clipboard API).
 
 - 23 Nov, draft 3 of Ch 1-2 (a long day: morning, afternoon, evening). The two open note questions
   WORKED: real explanations instead of "maybe". VERDICT FROM THE TESTER: NO MORE FULL RE-RUNS ("going

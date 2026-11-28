@@ -169,6 +169,21 @@ Inside quotes, SHIFT + CLR/HOME doesn't clear anything. Instead, it types the cl
 :::
 
 ::: good-to-know
+`PRINT` writes over whatever is already on the screen, one character at a time, and never erases the rest of the row. Print READY on top of READY! and you'll see READY! because the "!" was never touched. To get rid of old text, clear the screen first, or print spaces over it: spaces inside quotes really do overwrite. There's no code that clears just one line.
+:::
+
+::: good-to-know
+Many C64 programmers give the control codes they use a name at the top of the program, so the rest of it reads clearly:
+
+```
+10 CS$="{clr}"
+20 PRINT CS$;"LEVEL 1"
+```
+
+Others type the code straight into the quotes every time, and with practice they recognize the reversed heart on sight. Both work; a named code is easier to read later.
+:::
+
+::: good-to-know
 A program line can fill two rows of the screen, but keep it **shorter than 80 characters**. When you type the 80th character, the cursor jumps down to a fresh row, and pressing RETURN then enters that empty row instead of your line, so your line is never stored. Long lines are also hard to read, so this book keeps them short.
 :::
 

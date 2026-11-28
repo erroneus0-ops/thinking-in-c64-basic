@@ -389,11 +389,12 @@ async function submit() {
   try {
     const res = await fetch('/api/submit', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ exercise: exerciseEl.value, prg: toBase64(prg), capture: 'memory' }),
+      body: JSON.stringify({ exercise: exerciseEl.value, prg: toBase64(prg), capture: 'memory', note: document.getElementById('slot-note').value }),
     });
     const out = await res.json();
     if (!res.ok) { setMessage(out.error || 'That couldn’t be saved.', 'bad'); return; }
     setMessage(`Saved to slot ${out.version} (${out.lines} ${out.lines === 1 ? 'line' : 'lines'}).`, 'good');
+    document.getElementById('slot-note').value = '';
     await showVersions();
     showListing(out.id, out.version);
   } catch (e) {
@@ -438,6 +439,10 @@ async function showVersions() {
     const small = document.createElement('small');
     small.textContent = `${r.lines} ${r.lines === 1 ? 'line' : 'lines'}, ${r.created_at}`;
     what.append(small);
+    if (r.note) {   // what's new in this version, as written when it was saved
+      const n = document.createElement('small'); n.className = 'slot-note-text'; n.textContent = r.note;
+      what.append(document.createElement('br'), n);
+    }
     const mk = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.onclick = fn; return b; };
     li.append(what,
       mk('Run', () => putBack(r.id, 'RUN')),

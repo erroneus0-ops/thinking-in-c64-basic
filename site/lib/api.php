@@ -87,7 +87,7 @@ function handle_api(string $route, string $root): void {
             $q = $pdo->prepare('SELECT COALESCE(MAX(version), 0) + 1 FROM submissions WHERE user = ? AND exercise = ?');
             $q->execute([$c['user'], $exercise]);
             $version = (int)$q->fetchColumn();
-            $ins = $pdo->prepare('INSERT INTO submissions (exercise, version, prg, listing, capture, user, ip, device) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            $ins = $pdo->prepare('INSERT INTO submissions (exercise, version, prg, listing, capture, user, ip, device, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $ins->bindValue(1, $exercise);
             $ins->bindValue(2, $version, PDO::PARAM_INT);
             $ins->bindValue(3, $prg, PDO::PARAM_LOB);
@@ -96,6 +96,8 @@ function handle_api(string $route, string $root): void {
             $ins->bindValue(6, $c['user']);
             $ins->bindValue(7, $c['ip']);
             $ins->bindValue(8, $c['device']);
+            preg_match('/^.{0,300}/us', trim((string)($in['note'] ?? '')), $nm);   // at most 300 characters; no mbstring needed
+            $ins->bindValue(9, $nm[0] ?? '');   // what's new in this version
             $ins->execute();
             $id = (int)$pdo->lastInsertId();
             $pdo->commit();
@@ -105,12 +107,13 @@ function handle_api(string $route, string $root): void {
         }
 
         if ($route === 'versions' && $method === 'GET') {
-            $q = db($root)->prepare('SELECT id, version, created_at, listing FROM submissions WHERE user = ? AND exercise = ? ORDER BY version DESC');
+            $q = db($root)->prepare('SELECT id, version, created_at, listing, note FROM submissions WHERE user = ? AND exercise = ? ORDER BY version DESC');
             $q->execute([$c['user'], (string)($_GET['exercise'] ?? '')]);
             $rows = array_map(fn($r) => [
                 'id' => (int)$r['id'], 'version' => (int)$r['version'], 'created_at' => $r['created_at'],
                 'lines' => $r['listing'] === '' ? 0 : substr_count($r['listing'], "\n") + 1,
                 'first' => strtok($r['listing'], "\n") ?: '',   // first line, so the workbook can show what was saved
+                'note' => $r['note'],
             ], $q->fetchAll());
             json_out($rows);
             return;
@@ -214,7 +217,7 @@ function handle_api(string $route, string $root): void {
         }
 
         if ($route === 'submissions' && $method === 'GET') {
-            $q = db($root)->query('SELECT id, user, ip, device, exercise, version, listing, created_at FROM submissions ORDER BY id DESC LIMIT 50');
+            $q = db($root)->query('SELECT id, user, ip, device, exercise, version, listing, note, created_at FROM submissions ORDER BY id DESC LIMIT 50');
             json_out($q->fetchAll());
             return;
         }

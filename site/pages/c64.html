@@ -18,6 +18,9 @@
   .under-screen { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; }
   #status { flex: 1 1 14rem; }
   #status { margin: 0; color: var(--muted); }
+  #slot-note { font: inherit; width: 100%; margin: 0 0 0.5rem; padding: 0.45rem 0.6rem; border-radius: 6px;
+    border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); }
+  .slot-note-text { font-style: italic; }
   .under-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; flex: none; }
   #shelf { margin-top: 1rem; }
   .shelf-title { font-size: 1.05rem; margin: 0 0 0.6rem; }
@@ -86,6 +89,7 @@
 
     <h2>Save</h2>
     <div class="row">
+      <input id="slot-note" type="text" maxlength="200" placeholder="What’s new in this version? (optional)" aria-label="Note for this save">
       <button id="submit" class="primary" disabled>Save to a new slot</button>
     </div>
     <p class="quiet">Copies the program in the C64’s memory into the next empty save slot. Nothing is ever overwritten.</p>

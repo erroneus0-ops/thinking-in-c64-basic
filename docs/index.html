@@ -1109,6 +1109,23 @@ reversed heart as <code>{clr}</code>, because a heart is hard to print
 on paper.</p>
 </div>
 <div class="good-to-know">
+<p><code>PRINT</code> writes over whatever is already on the screen, one
+character at a time, and never erases the rest of the row. Print READY
+on top of READY! and you’ll see READY! because the “!” was never
+touched. To get rid of old text, clear the screen first, or print spaces
+over it: spaces inside quotes really do overwrite. There’s no code that
+clears just one line.</p>
+</div>
+<div class="good-to-know">
+<p>Many C64 programmers give the control codes they use a name at the
+top of the program, so the rest of it reads clearly:</p>
+<pre><code><span class="ln">10 CS$=&quot;{clr}&quot;</span>
+<span class="ln">20 PRINT CS$;&quot;LEVEL 1&quot;</span></code></pre>
+<p>Others type the code straight into the quotes every time, and with
+practice they recognize the reversed heart on sight. Both work; a named
+code is easier to read later.</p>
+</div>
+<div class="good-to-know">
 <p>A program line can fill two rows of the screen, but keep it
 <strong>shorter than 80 characters</strong>. When you type the 80th
 character, the cursor jumps down to a fresh row, and pressing RETURN
@@ -1564,7 +1581,9 @@ letter is a tile, and so is every space.</p>
 counts the characters, and the space in GAME ON counts as one.</p>
 <p><strong>Centering a title.</strong> The C64’s screen is 40 characters
 wide. To put a title in the middle, push it right by half of the space
-that’s left over. <code>SPC(n)</code> prints n spaces:</p>
+that’s left over. <code>SPC(n)</code> moves the cursor n places to the
+right (it skips over whatever is there rather than erasing it, so this
+works best on a clear row):</p>
 <pre><code><span class="ln">T$ = &quot;GAME OVER&quot;</span>
 <span class="ln">PRINT SPC(INT((40-LEN(T$))/2));T$</span></code></pre>
 <p><strong>Predict</strong> how many spaces it will push the title

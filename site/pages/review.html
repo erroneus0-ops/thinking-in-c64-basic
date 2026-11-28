@@ -23,6 +23,10 @@
   table { border-collapse: collapse; width: 100%; }
   th, td { text-align: left; padding: 0.35rem 0.6rem 0.35rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
   pre.c64 { margin: 0.4rem 0 1rem; }
+  .export { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0.75rem 0 0.5rem; }
+  .export select { font: inherit; padding: 0.35rem; border-radius: 6px; }
+  #copied { color: var(--good); }
+  #export-text { position: absolute; left: -9999px; width: 1px; height: 1px; }
 </style>
 </head>
 <body>
@@ -34,6 +38,18 @@
 </header>
 <main>
   <h1>Editor’s view</h1>
+  <div class="export">
+    <label for="since"><strong>Copy for Claude:</strong></label>
+    <select id="since">
+      <option value="last">Since my last copy</option>
+      <option value="today">Today</option>
+      <option value="week">Last 7 days</option>
+      <option value="all">Everything</option>
+    </select>
+    <button id="copy" type="button" class="primary">Copy</button>
+    <span id="copied" role="status"></span>
+    <textarea id="export-text" aria-hidden="true" tabindex="-1"></textarea>
+  </div>
   <p class="quiet">Everyone’s saved work, newest version of each note and answer, every quiz attempt, recent programs, and who used the site from which device.</p>
   <h2>Beta tester notes</h2><div id="notes"></div>
   <h2>Exercise answers</h2><div id="answers"></div>
@@ -90,8 +106,59 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
   const progs = document.getElementById('programs');
   if (!programs.length) none(progs, 'programs');
   for (const p of programs) progs.append(
-    el('div', { className: 'what quiet', textContent: `${p.user} · ${p.exercise}, slot ${p.version} · ${p.device || 'unknown device'} · ${p.created_at}` }),
+    el('div', { className: 'what quiet', textContent: `${p.user} · ${p.exercise}, slot ${p.version} · ${p.device || 'unknown device'} · ${p.created_at}` + (p.note ? ` · “${p.note}”` : '') }),
     el('pre', { className: 'c64', textContent: p.listing }));
+  // ---- Copy for Claude: everything new since a chosen time, grouped by person, visits condensed ----
+  const pad = n => String(n).padStart(2, '0');
+  const stamp = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  const KIND = { explain: 'own words', reaction: 'surprised/confused/dragged', confusing: 'confusing', boring: 'boring', fun: 'fun' };
+  function exportText(since) {
+    const after = r => !since || r.created_at >= since;
+    const people = [...new Set([...responses, ...attempts, ...programs, ...visits].filter(after).map(r => r.user || '(not signed in)'))];
+    const out = [`# Course site export`, `Made ${stamp(new Date())}; ${since ? 'items since ' + since : 'everything'}.`];
+    for (const who of people) {
+      const mine = r => (r.user || '(not signed in)') === who && after(r);
+      out.push('', `## ${who}`);
+      const q = attempts.filter(mine);
+      if (q.length) out.push('Quizzes: ' + q.map(a => `Ch ${a.chapter} ${a.score}/${a.total} (${a.created_at.slice(5,16)})`).join('; '));
+      const notes = responses.filter(r => mine(r) && r.kind === 'note' && r.text);
+      if (notes.length) out.push('Notes:', ...notes.map(r => {
+        if (r.item.startsWith('ask:')) return `- Ch ${r.chapter} editor's question: ${r.text}`;
+        const [lesson, kind] = r.item.split(':');
+        return `- Ch ${r.chapter} ${/^\d/.test(lesson) ? 'lesson ' + lesson : lessonTitle(r.chapter, lesson)}, ${KIND[kind] || kind}: ${r.text}`;
+      }));
+      const ex = responses.filter(r => mine(r) && r.kind === 'exercise' && r.text);
+      if (ex.length) out.push('Exercises:', ...ex.map(r => `- Ch ${r.chapter} exercise ${exTitle(r.chapter, r.item)}: ${r.text}`));
+      const pr = programs.filter(mine);
+      if (pr.length) out.push('Programs:', ...pr.flatMap(p => [`- ${p.exercise}, slot ${p.version} (${p.created_at.slice(5,16)})${p.note ? ': ' + p.note : ''}`, '```', p.listing.trimEnd(), '```']));
+      const days = {};
+      for (const v of visits.filter(mine)) {
+        const d = v.created_at.slice(0, 10), t = v.created_at.slice(11, 16);
+        const e = days[d] || (days[d] = { from: t, to: t, pages: new Set(), devices: new Set() });
+        if (t < e.from) e.from = t; if (t > e.to) e.to = t; e.pages.add(v.page); e.devices.add(v.device);
+      }
+      const dl = Object.keys(days).sort();
+      if (dl.length) out.push('Visits:', ...dl.map(d => `- ${d} ${days[d].from}–${days[d].to}: ${[...days[d].pages].join(', ')} (${[...days[d].devices].join(', ')})`));
+    }
+    if (!people.length) out.push('', 'Nothing new in this range.');
+    return out.join('\n');
+  }
+  document.getElementById('copy').onclick = () => {
+    const choice = document.getElementById('since').value, now = new Date();
+    let since = null;
+    try { if (choice === 'last') since = localStorage.getItem('c64-last-copy'); } catch (e) {}
+    if (choice === 'today') since = stamp(now).slice(0, 10) + ' 00:00:00';
+    if (choice === 'week') since = stamp(new Date(now - 7 * 86400000));
+    const text = exportText(since);
+    const ta = document.getElementById('export-text');
+    ta.value = text; ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    if (!ok && navigator.clipboard) navigator.clipboard.writeText(text).then(() => {}, () => {});
+    try { localStorage.setItem('c64-last-copy', stamp(now)); } catch (e) {}
+    document.getElementById('copied').textContent = `Copied (${text.split('\n').length} lines). Paste it into the chat.`;
+  };
+
   const vbox = document.getElementById('visits');
   if (!visits.length) none(vbox, 'visits');
   else vbox.append(el('table', {},

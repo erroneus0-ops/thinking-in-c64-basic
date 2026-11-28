@@ -84,7 +84,7 @@ That's `SKY KNIGHT`. The space in the middle is a piece of text too, so it gets 
 
 The C64 answers ` 6` and ` 7`. `LEN` counts the characters, and the space in GAME ON counts as one.
 
-**Centering a title.** The C64's screen is 40 characters wide. To put a title in the middle, push it right by half of the space that's left over. `SPC(n)` prints n spaces:
+**Centering a title.** The C64's screen is 40 characters wide. To put a title in the middle, push it right by half of the space that's left over. `SPC(n)` moves the cursor n places to the right (it skips over whatever is there rather than erasing it, so this works best on a clear row):
 
 ```
 T$ = "GAME OVER"

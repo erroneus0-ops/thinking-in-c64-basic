@@ -56,6 +56,7 @@ Always rebuild both book editions, re-lock, then commit `docs/` with the source.
 - After sign-in, wait for the exact URL (`.../c64`), not a glob: `login?next=/c64` also ends in `/c64`.
 - A clip screenshot outside the viewport fails: scroll the element into view first.
 - Name collisions in our own code happened three times (`$c`, `text`): one name, one meaning.
+- The editor's portable PHP has no mbstring: never use `mb_*` functions (a save failed with 500). Use `preg_*` with `/u`.
 - `pandoc` treats `$80...$CB` as math: the reference build disables `tex_math_dollars`.
 - `docs/` paths differ per edition: book links to the reference use `%REF%` (build swaps it).
 

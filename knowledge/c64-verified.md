@@ -43,7 +43,9 @@ as they are verified. String-function edge cases live in `reference/entries/20-s
 | STOP / CONT | STOP → BREAK IN n; CONT resumes |
 | FOR | Always runs at least once: `FOR I=10 TO 1` runs once, then I=11. After `FOR I=0 TO 10`, I=11; after `FOR I=10 TO 1 STEP -1`, I=0 |
 | INPUT | Prompt needs `;` (`INPUT "NAME",N$` → ?SYNTAX  ERROR IN 10); INPUT adds "? " (prompt ending in ? shows ??); INPUT can't be used in direct mode |
-| PRINT | Commas → 10-column zones; `PRINT` alone prints an empty line; items side by side act like `;` |
+| PRINT | Commas → 10-column zones; `PRINT` alone prints an empty line; items side by side act like `;`. PRINT never erases the rest of a row (READY over READY! leaves READY!); spaces in quotes do overwrite |
+| SPC(n) on screen | Moves the cursor right WITHOUT erasing: SPC(3);"Y" over XXXXXXXX gives XXXYXXXX. No control code clears a line |
+| Control code in a variable | CS$=CHR$(147) then PRINT CS$;"LEVEL 1" clears and prints |
 | DEF FN | Program mode only; creates the parameter variable; parameter is restored after the call |
 
 ## Screen editor and memory (used by the course site)
