@@ -1,6 +1,6 @@
 # About this reference
 
-This volume documents Commodore 64 BASIC V2 completely: every keyword, operator, reserved variable and error message. It is a companion to *Thinking in C64 BASIC*, which teaches; this volume does not teach. It states facts in standard terminology, for looking things up.
+This volume documents Commodore 64 BASIC V2 completely, in standard terminology: every keyword, operator, reserved variable and error message. It is a companion to *Thinking in C64 BASIC*.
 
 **Verification.** Every example and every stated output in this volume was produced on an emulated C64 running the original Commodore ROMs (BASIC V2, KERNAL 901227-03), and is reproduced exactly as the C64 displays it, including the two spaces before `ERROR` in error messages.
 

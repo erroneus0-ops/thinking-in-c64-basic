@@ -1,6 +1,6 @@
 # Emulation notes
 
-This chapter collects facts about running BASIC V2 under emulation. It cannot be complete: emulators change and new ones appear. It records what has been verified, and where it came from, so that differences in other or later emulators can be recognized and worked out.
+This chapter records verified facts about running BASIC V2 under emulation, with their sources, as a basis for comparing other and later emulators.
 
 ## The course site (vc64web)
 

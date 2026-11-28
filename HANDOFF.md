@@ -438,6 +438,7 @@ VICE or the browser C64, with TheC64 notes planned for Appendix F.
 ## The Reference volume (reference/, docs/reference/)
 
 A separate volume (editor's decision: references outlive lessons), "Thinking in C64 BASIC: Reference".
+Tone (editor): state what it IS (purpose; companion to the book); no "what it's not" language.
 EXACT terminology, not the book's pictures (keyword, token, statement, function, operator, expression,
 floating point, signed 16-bit integer, logical line...). Every entry has the same shape: name and
 abbreviation; kind; syntax; what it does; an example with its EXACT output verified on the C64;
