@@ -488,6 +488,14 @@ and precedence, ST/TI/TI$, every error message.
   Regenerate: python tools/make_petscii.py runtime/roms/kernal.rom reference/data/petscii_probe.json.
   OPEN DECISION (editor): glyph images for graphics characters (from the character ROM: publish,
   course-site only, or Unicode legacy symbols). Until then graphics show as *graphic* + key combo.
+- CH 10 EXAMPLE (editor's idea, verified): a "print at" subroutine. Ready-made strings at the top,
+  SS$ = 40 spaces and DN$ = 24 cursor-down codes; then
+      1000 REM ===== PRINT T$ AT ROW R, COLUMN C, ON A CLEARED LINE =====
+      1010 PRINT CHR$(19);LEFT$(DN$,R);SS$;CHR$(145);SPC(C);T$;
+      1020 RETURN
+  Callers: R=5:C=10:T$="HELLO":GOSUB 1000. Centering: C=INT((40-LEN(T$))/2). Not on row 24 (SS$
+  scrolls the screen there). Shows WHY subroutines exist; a natural "pinned" block for Renumber.
+  Also the reference's LOCATE / PRINT @ substitute.
 - PROJECT IDEA (from the editor's own maze screen saver): "MAKE THE MAZE FASTER". Start from the
   opener's two-line maze; MEASURE each version with TI (jiffies); improve step by step as he did:
   character-by-character -> building line strings -> random SEGMENTS prepared in DATA and chosen at

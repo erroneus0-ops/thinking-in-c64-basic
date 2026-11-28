@@ -47,6 +47,7 @@ as they are verified. String-function edge cases live in `reference/entries/20-s
 | SPC(n) on screen | Moves the cursor right WITHOUT erasing: SPC(3);"Y" over XXXXXXXX gives XXXYXXXX. No control code clears a line |
 | No STRING$ | `PRINT STRING$(5,"*")` → ?TYPE MISMATCH  ERROR (read as array element ST$(5,"*"): misleading for CoCo users). Substitutes: loop `B$=B$+"*"`, or LEFT$ of a long ready-made string |
 | Clear a line (editor's idiom) | `SS$` = 40 spaces; `PRINT SS$;CHR$(145);` blanks the row and returns to its start. On the BOTTOM row it works but scrolls the whole screen up one row first. Partial: `PRINT "READY";LEFT$(SP$,1)` overwrote a leftover "!" |
+| Print at row, column (LOCATE / PRINT @ substitute) | Columns 0-39, rows 0-24. With SS$ = 40 spaces and DN$ = 24 x CHR$(17): `PRINT CHR$(19);LEFT$(DN$,R);SS$;CHR$(145);SPC(C);T$;` clears row R and prints T$ at column C; other rows untouched (verified rows 2 and 5, centering via C=INT((40-LEN(T$))/2)) |
 | Control code in a variable | CS$=CHR$(147) then PRINT CS$;"LEVEL 1" clears and prints |
 | DEF FN | Program mode only; creates the parameter variable; parameter is restored after the call |
 
