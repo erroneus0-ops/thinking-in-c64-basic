@@ -435,6 +435,20 @@ live in the public chapter sources (honor system) and the answer edition is pass
 programmer's notebook is paper; the voice is plain and never childish; the reference machine is
 VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
+## Idea shelf (editor's ideas, not planned work)
+
+- "CVM": a lightweight emulator runtime per platform, with a program GLUED ONTO ITS END to make one
+  runnable file with its own icon (runtime reads its own tail; a small "linker" does runtime +
+  payload -> MYGAME.EXE). Payload = .prg, or disk/tape/cartridge images (.d64/.g64/.tap/.crt),
+  several disks with swapping. Saves go beside the bundle or in app data (an exe can't rewrite
+  itself). Text programs: cbmbasic (Michael Steil's static recompilation of C64 BASIC to native C;
+  console only, no X/Wayland needed). Graphics: an emulator core + SDL (covers Win32, X11 AND
+  Wayland, macOS in one codebase; old 32-bit Windows means an older SDL; macOS needs signing and a
+  universal binary; Linux single file = AppImage). ROMs inside = personal use only (Open ROMs for
+  shareable builds, with compatibility caveats). Fits a second book / capstone.
+- Save slots: "Download as .prg" (to run on the family's real C64 hardware) and the reverse import;
+  a plain-text export for cbmbasic.
+
 ## Possible public version (idea only; editor: "we'll see")
 
 GitHub Pages serves only docs/ (the book, tours, locked editor edition). The C64, workbook, save
