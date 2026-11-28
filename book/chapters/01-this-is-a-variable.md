@@ -156,7 +156,7 @@ Picture it this way: the C64 makes its labels with a label maker that can only p
 
 **Goal:** Know which names are taken, so you can pick names without worrying.
 
-**Picture:** Usernames in an online game. When you sign up, some names are already taken, and the game won't let you have them. The C64 has about seventy words it has already claimed for itself: its commands and functions, like `PRINT`, `GOTO` and `RUN`. Programmers call them **reserved words**. Appendix E will list every one.
+**Picture:** Usernames in an online game. When you sign up, some names are already taken, and the game won't let you have them. The C64 has about seventy words it has already claimed for itself: its commands and functions, like `PRINT`, `GOTO` and `RUN`. Programmers call them **reserved words**. The [Reference](%REF%#keyword-index) lists every one.
 
 **Predict.** Will this work? Write down yes or no, then try it:
 

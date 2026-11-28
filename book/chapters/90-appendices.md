@@ -8,6 +8,6 @@ These reference pages will be added as the book grows. When a chapter needs one,
 | B | Using the cassette (the datasette) in VICE |
 | C | Every error message, and what usually causes it |
 | D | Memory map and POKE reference |
-| E | Every reserved word, with its abbreviation |
+| E | Every reserved word, with its abbreviation: now in the separate [Reference](%REF%) volume |
 | F | Notes for TheC64 |
 | G | Secrets and shortcuts |

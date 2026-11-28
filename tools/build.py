@@ -140,6 +140,8 @@ def main():
     text = "\n\n".join(with_testing_theme(without_tester_questions(p.read_text(encoding="utf-8"))) for p in chapters)
     if args.student:
         text = re.sub(r"\s*\*\*Answer: [a-d]\*\*", "", text)
+    # Links to the reference volume work from the public book (site root) and the locked editor's page.
+    text = text.replace("%REF%", "reference/" if args.pages else "../reference/")
 
     edition = "Beta tester’s draft" if args.student else "Editor’s draft, with answers"
     suffix = "student" if args.student else "editor"

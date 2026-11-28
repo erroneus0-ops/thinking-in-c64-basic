@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thinking in C64 BASIC: Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --paper: #f7f8fb;
+  --ink: #1d2142;
+  --muted: #5a5f80;
+  --rule: #d7d9e6;
+  --accent: #40318d;        /* C64 blue */
+  --tint: #ebe9f8;
+  --screen: #40318d;        /* C64 screen blue */
+  --screen-text: #c4bdf7;   /* brightened C64 light blue, for legibility */
+  --screen-frame: #7869c4;  /* C64 light blue border */
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+    --accent: #a99ff0; --tint: #26244a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #17162a; --ink: #e6e4f6; --muted: #a9a6c9; --rule: #34325a;
+  --accent: #a99ff0; --tint: #26244a;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.125rem/1.6 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+main { max-width: 38rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+
+.edition { color: var(--muted); font-size: 0.875rem; margin: 0 0 2.5rem; }
+.book-title { font-weight: 700; font-size: 2.6rem; line-height: 1.05; margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+
+.tour-link { margin: 0.75rem 0 1.75rem; }
+.tour-link a { display: block; padding: 0.7rem 0.9rem; border-radius: 8px; background: var(--tint);
+  color: var(--ink); text-decoration: none; border-left: 4px solid var(--accent); }
+.tour-link span { color: var(--accent); font-weight: 700; white-space: nowrap; }
+details.toc { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.6rem 0; margin-bottom: 3rem; }
+details.toc summary { cursor: pointer; font-weight: 700; }
+details.toc ul { padding-left: 1.1rem; margin: 0.5rem 0 0; }
+details.toc li { margin: 0.2rem 0; }
+details.toc ul ul { font-size: 0.95rem; }
+
+h1 { font-size: 2rem; line-height: 1.15; margin: 4rem 0 1rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.35rem; line-height: 1.25; margin: 2.75rem 0 0.75rem; padding-top: 1rem; border-top: 3px solid var(--accent); }
+p, ul, ol { margin: 0 0 1rem; }
+li { margin: 0.25rem 0; }
+a { color: var(--accent); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+strong { font-weight: 700; }
+
+/* Code typed into the C64 looks like the C64 screen */
+pre {
+  background: var(--screen);
+  color: var(--screen-text);
+  border: 0.75rem solid var(--screen-frame);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  margin: 0 0 1.25rem;
+  overflow-x: auto;
+  font: 600 0.95rem/1.45 "IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+/* A RETURN keycap after each line to type: press RETURN (Enter) at the end of every line */
+pre code .ln::after { content: "\21B5"; display: inline-block; margin-left: 0.6em; padding: 0 0.3em;
+  font: 400 0.9em/1.15 "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols", "Arial Unicode MS", sans-serif;
+  border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.05em; }
+/* Diagrams are pictures, not something to type */
+pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
+pre code { font: inherit; background: none; padding: 0; color: inherit; white-space: pre; }  /* never wrap a line of code: it would look like two lines */
+code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
+
+/* "Good to know" boxes: optional clarifying details, safe to skip on a first read */
+/* Chapters still in testing: amber, so it's obvious they may change */
+:root { --testing: #b45309; --testing-tint: #fff4e0; }
+@media (prefers-color-scheme: dark) { :root { --testing: #f0b35a; --testing-tint: #2e2414; } }
+div.testing { border-left: 5px solid var(--testing); padding-left: 1.25rem; }
+div.testing-banner { background: var(--testing-tint); border: 1.5px solid var(--testing); border-radius: 8px;
+  padding: 0.75rem 1rem; margin: 0 0 1.5rem; }
+div.testing-banner::before { content: "In testing"; display: block; font-weight: 700; color: var(--testing); margin-bottom: 0.25rem; }
+div.testing-banner > :last-child { margin-bottom: 0; }
+.badge { display: inline-block; font-size: 0.5em; font-weight: 700; vertical-align: middle; letter-spacing: 0.02em;
+  padding: 0.15em 0.6em; border-radius: 999px; background: var(--testing); color: #fff; }
+@media (prefers-color-scheme: dark) { .badge { color: #2e2414; } }
+div.good-to-know { border-left: 4px solid var(--accent); background: var(--tint);
+  padding: 0.75rem 1rem; margin: 0 0 1.25rem; border-radius: 0 6px 6px 0; }
+div.good-to-know::before { content: "Good to know"; display: block; font-weight: 700;
+  color: var(--accent); margin-bottom: 0.25rem; }
+div.good-to-know > :last-child { margin-bottom: 0; }
+table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.25rem; font-size: 1rem; max-width: 100%; }
+th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.75rem 0.45rem 0; border-bottom: 1px solid var(--rule); }
+th { border-bottom: 2px solid var(--ink); }
+
+@media print {
+  :root { --paper: #fff; --ink: #000; --muted: #444; --rule: #bbb; --accent: #40318d; --tint: #eee; }
+  details.toc, .tour-link { display: none; }
+  h1 { break-before: page; margin-top: 0; }
+  pre, table { break-inside: avoid; }
+  pre { font-size: 0.78rem; }   /* the page can't scroll, so make long lines fit */
+}
+@page { size: letter; margin: 2cm 2cm 2.2cm; }
+</style>
+</head>
+<body>
+<main>
+<p class="edition">Reference volume, built Nov 28, 2026</p>
+<p class="book-title">Thinking in C64 BASIC: Reference</p>
+<details class="toc">
+<summary>Contents</summary>
+<ul>
+<li><a href="#about-this-reference" id="toc-about-this-reference">About
+this reference</a>
+<ul>
+<li><a href="#conventions" id="toc-conventions">Conventions</a></li>
+<li><a href="#terminology" id="toc-terminology">Terminology</a></li>
+</ul></li>
+<li><a href="#keyword-index" id="toc-keyword-index">Keyword index</a>
+<ul>
+<li><a href="#abbreviations"
+id="toc-abbreviations">Abbreviations</a></li>
+<li><a href="#reserved-variables-and-constants"
+id="toc-reserved-variables-and-constants">Reserved variables and
+constants</a></li>
+</ul></li>
+<li><a href="#emulation-notes" id="toc-emulation-notes">Emulation
+notes</a>
+<ul>
+<li><a href="#the-course-site-vc64web"
+id="toc-the-course-site-vc64web">The course site (vc64web)</a></li>
+<li><a href="#rom-files" id="toc-rom-files">ROM files</a></li>
+<li><a href="#to-be-collected" id="toc-to-be-collected">To be
+collected</a></li>
+</ul></li>
+</ul>
+</details>
+<h1 id="about-this-reference">About this reference</h1>
+<p>This volume documents Commodore 64 BASIC V2 completely: every
+keyword, operator, reserved variable and error message. It is a
+companion to <em>Thinking in C64 BASIC</em>, which teaches; this volume
+does not teach. It states facts in standard terminology, for looking
+things up.</p>
+<p><strong>Verification.</strong> Every example and every stated output
+in this volume was produced on an emulated C64 running the original
+Commodore ROMs (BASIC V2, KERNAL 901227-03), and is reproduced exactly
+as the C64 displays it, including the two spaces before
+<code>ERROR</code> in error messages.</p>
+<p><strong>Coverage.</strong> The keyword index lists all 76 tokens of
+BASIC V2 plus π. Entries for individual keywords are added in families;
+the index shows the full scope from the start.</p>
+<h2 id="conventions">Conventions</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Notation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KEYWORD</code></td>
+<td>Typed exactly as shown (on the C64 keyboard, unshifted letters
+appear as capitals).</td>
+</tr>
+<tr>
+<td><em>expression</em></td>
+<td>Any valid expression of the stated type: <em>numeric
+expression</em>, <em>string expression</em>.</td>
+</tr>
+<tr>
+<td><code>[ ... ]</code></td>
+<td>Optional part.</td>
+</tr>
+<tr>
+<td>{ A | B }</td>
+<td>Exactly one of the alternatives.</td>
+</tr>
+<tr>
+<td><code>...</code></td>
+<td>The preceding item may be repeated.</td>
+</tr>
+<tr>
+<td>L ⇧I</td>
+<td>An abbreviation: type <code>L</code>, then hold SHIFT and type
+<code>I</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terminology">Terminology</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning in this volume</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keyword</td>
+<td>A word reserved by BASIC V2. The interpreter recognizes keywords
+anywhere outside quotation marks, including inside variable names.</td>
+</tr>
+<tr>
+<td>Token</td>
+<td>The single byte ($80–$CB, and $FF for π) that replaces a keyword
+when a line is stored. <code>LIST</code> converts tokens back into
+keywords.</td>
+</tr>
+<tr>
+<td>Statement</td>
+<td>An instruction that performs an action, such as <code>PRINT</code>
+or <code>GOTO</code>. A line contains one or more statements separated
+by colons.</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>A keyword that returns a value computed from its argument(s), such
+as <code>LEN</code> or <code>MID$</code>. A function cannot stand alone
+as a statement.</td>
+</tr>
+<tr>
+<td>Operator</td>
+<td>A symbol or keyword that combines values: arithmetic, relational or
+logical.</td>
+</tr>
+<tr>
+<td>Expression</td>
+<td>A combination of constants, variables, functions and operators that
+evaluates to a single value.</td>
+</tr>
+<tr>
+<td>Numeric variable</td>
+<td>Floating point: 5 bytes per value, about 9 significant digits. Name
+has no suffix.</td>
+</tr>
+<tr>
+<td>Integer variable</td>
+<td>Signed 16-bit integer, −32768 to 32767. Name ends in <code>%</code>.
+Arithmetic on integers is performed in floating point.</td>
+</tr>
+<tr>
+<td>String variable</td>
+<td>Up to 255 characters. Name ends in <code>$</code>.</td>
+</tr>
+<tr>
+<td>Variable name</td>
+<td>Begins with a letter; may contain letters and digits; only the first
+two characters are significant.</td>
+</tr>
+<tr>
+<td>Direct mode</td>
+<td>A line entered without a line number is executed immediately.</td>
+</tr>
+<tr>
+<td>Program mode</td>
+<td>A line entered with a line number (0–63999) is stored as part of the
+program.</td>
+</tr>
+<tr>
+<td>Logical line</td>
+<td>Up to two physical screen rows (80 characters) that the screen
+editor treats as one line. A line is entered by pressing RETURN with the
+cursor anywhere on it.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="keyword-index">Keyword index</h1>
+<p>All 76 keywords of BASIC V2 in token order, plus π. “Taught in”
+refers to <em>Thinking in C64 BASIC</em>.</p>
+<table>
+<thead>
+<tr>
+<th>Hex</th>
+<th>Dec</th>
+<th>Keyword</th>
+<th>Kind</th>
+<th>Abbreviation</th>
+<th>Taught in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$80</td>
+<td>128</td>
+<td><code>END</code></td>
+<td>Statement</td>
+<td>E ⇧N</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$81</td>
+<td>129</td>
+<td><code>FOR</code></td>
+<td>Statement</td>
+<td>F ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$82</td>
+<td>130</td>
+<td><code>NEXT</code></td>
+<td>Statement</td>
+<td>N ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$83</td>
+<td>131</td>
+<td><code>DATA</code></td>
+<td>Statement</td>
+<td>D ⇧A</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$84</td>
+<td>132</td>
+<td><code>INPUT#</code></td>
+<td>Statement</td>
+<td>I ⇧N</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$85</td>
+<td>133</td>
+<td><code>INPUT</code></td>
+<td>Statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$86</td>
+<td>134</td>
+<td><code>DIM</code></td>
+<td>Statement</td>
+<td>D ⇧I</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$87</td>
+<td>135</td>
+<td><code>READ</code></td>
+<td>Statement</td>
+<td>R ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$88</td>
+<td>136</td>
+<td><code>LET</code></td>
+<td>Statement</td>
+<td>L ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$89</td>
+<td>137</td>
+<td><code>GOTO</code></td>
+<td>Statement</td>
+<td>G ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$8A</td>
+<td>138</td>
+<td><code>RUN</code></td>
+<td>Statement</td>
+<td>R ⇧U</td>
+<td>Ch. 2</td>
+</tr>
+<tr>
+<td>$8B</td>
+<td>139</td>
+<td><code>IF</code></td>
+<td>Statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$8C</td>
+<td>140</td>
+<td><code>RESTORE</code></td>
+<td>Statement</td>
+<td>RE ⇧S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$8D</td>
+<td>141</td>
+<td><code>GOSUB</code></td>
+<td>Statement</td>
+<td>GO ⇧S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$8E</td>
+<td>142</td>
+<td><code>RETURN</code></td>
+<td>Statement</td>
+<td>RE ⇧T</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$8F</td>
+<td>143</td>
+<td><code>REM</code></td>
+<td>Statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$90</td>
+<td>144</td>
+<td><code>STOP</code></td>
+<td>Statement</td>
+<td>S ⇧T</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$91</td>
+<td>145</td>
+<td><code>ON</code></td>
+<td>Statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$92</td>
+<td>146</td>
+<td><code>WAIT</code></td>
+<td>Statement</td>
+<td>W ⇧A</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$93</td>
+<td>147</td>
+<td><code>LOAD</code></td>
+<td>Statement</td>
+<td>L ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$94</td>
+<td>148</td>
+<td><code>SAVE</code></td>
+<td>Statement</td>
+<td>S ⇧A</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$95</td>
+<td>149</td>
+<td><code>VERIFY</code></td>
+<td>Statement</td>
+<td>V ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$96</td>
+<td>150</td>
+<td><code>DEF</code></td>
+<td>Statement</td>
+<td>D ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$97</td>
+<td>151</td>
+<td><code>POKE</code></td>
+<td>Statement</td>
+<td>P ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$98</td>
+<td>152</td>
+<td><code>PRINT#</code></td>
+<td>Statement</td>
+<td>P ⇧R</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$99</td>
+<td>153</td>
+<td><code>PRINT</code></td>
+<td>Statement</td>
+<td>—</td>
+<td>Ch. 1</td>
+</tr>
+<tr>
+<td>$9A</td>
+<td>154</td>
+<td><code>CONT</code></td>
+<td>Statement</td>
+<td>C ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$9B</td>
+<td>155</td>
+<td><code>LIST</code></td>
+<td>Statement</td>
+<td>L ⇧I</td>
+<td>Ch. 2</td>
+</tr>
+<tr>
+<td>$9C</td>
+<td>156</td>
+<td><code>CLR</code></td>
+<td>Statement</td>
+<td>C ⇧L</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$9D</td>
+<td>157</td>
+<td><code>CMD</code></td>
+<td>Statement</td>
+<td>C ⇧M</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$9E</td>
+<td>158</td>
+<td><code>SYS</code></td>
+<td>Statement</td>
+<td>S ⇧Y</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$9F</td>
+<td>159</td>
+<td><code>OPEN</code></td>
+<td>Statement</td>
+<td>O ⇧P</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A0</td>
+<td>160</td>
+<td><code>CLOSE</code></td>
+<td>Statement</td>
+<td>CL ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A1</td>
+<td>161</td>
+<td><code>GET</code></td>
+<td>Statement</td>
+<td>G ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A2</td>
+<td>162</td>
+<td><code>NEW</code></td>
+<td>Statement</td>
+<td>—</td>
+<td>Ch. 2</td>
+</tr>
+<tr>
+<td>$A3</td>
+<td>163</td>
+<td><code>TAB(</code></td>
+<td>Output function (PRINT only)</td>
+<td>T ⇧A</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A4</td>
+<td>164</td>
+<td><code>TO</code></td>
+<td>Keyword within a statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A5</td>
+<td>165</td>
+<td><code>FN</code></td>
+<td>Keyword within a statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A6</td>
+<td>166</td>
+<td><code>SPC(</code></td>
+<td>Output function (PRINT only)</td>
+<td>S ⇧P</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$A7</td>
+<td>167</td>
+<td><code>THEN</code></td>
+<td>Keyword within a statement</td>
+<td>T ⇧H</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A8</td>
+<td>168</td>
+<td><code>NOT</code></td>
+<td>Operator</td>
+<td>N ⇧O</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$A9</td>
+<td>169</td>
+<td><code>STEP</code></td>
+<td>Keyword within a statement</td>
+<td>ST ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$AA</td>
+<td>170</td>
+<td><code>+</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$AB</td>
+<td>171</td>
+<td><code>-</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$AC</td>
+<td>172</td>
+<td><code>*</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$AD</td>
+<td>173</td>
+<td><code>/</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$AE</td>
+<td>174</td>
+<td><code>↑</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$AF</td>
+<td>175</td>
+<td><code>AND</code></td>
+<td>Operator</td>
+<td>A ⇧N</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B0</td>
+<td>176</td>
+<td><code>OR</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B1</td>
+<td>177</td>
+<td><code>&gt;</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B2</td>
+<td>178</td>
+<td><code>=</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B3</td>
+<td>179</td>
+<td><code>&lt;</code></td>
+<td>Operator</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B4</td>
+<td>180</td>
+<td><code>SGN</code></td>
+<td>Numeric function</td>
+<td>S ⇧G</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B5</td>
+<td>181</td>
+<td><code>INT</code></td>
+<td>Numeric function</td>
+<td>—</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$B6</td>
+<td>182</td>
+<td><code>ABS</code></td>
+<td>Numeric function</td>
+<td>A ⇧B</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B7</td>
+<td>183</td>
+<td><code>USR</code></td>
+<td>Numeric function</td>
+<td>U ⇧S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B8</td>
+<td>184</td>
+<td><code>FRE</code></td>
+<td>Numeric function</td>
+<td>F ⇧R</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$B9</td>
+<td>185</td>
+<td><code>POS</code></td>
+<td>Numeric function</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$BA</td>
+<td>186</td>
+<td><code>SQR</code></td>
+<td>Numeric function</td>
+<td>S ⇧Q</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$BB</td>
+<td>187</td>
+<td><code>RND</code></td>
+<td>Numeric function</td>
+<td>R ⇧N</td>
+<td>Ch. 3</td>
+</tr>
+<tr>
+<td>$BC</td>
+<td>188</td>
+<td><code>LOG</code></td>
+<td>Numeric function</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$BD</td>
+<td>189</td>
+<td><code>EXP</code></td>
+<td>Numeric function</td>
+<td>E ⇧X</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$BE</td>
+<td>190</td>
+<td><code>COS</code></td>
+<td>Numeric function</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$BF</td>
+<td>191</td>
+<td><code>SIN</code></td>
+<td>Numeric function</td>
+<td>S ⇧I</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$C0</td>
+<td>192</td>
+<td><code>TAN</code></td>
+<td>Numeric function</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$C1</td>
+<td>193</td>
+<td><code>ATN</code></td>
+<td>Numeric function</td>
+<td>A ⇧T</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$C2</td>
+<td>194</td>
+<td><code>PEEK</code></td>
+<td>Numeric function</td>
+<td>P ⇧E</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$C3</td>
+<td>195</td>
+<td><code>LEN</code></td>
+<td>Numeric function</td>
+<td>—</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$C4</td>
+<td>196</td>
+<td><code>STR$</code></td>
+<td>String function</td>
+<td>ST ⇧R</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$C5</td>
+<td>197</td>
+<td><code>VAL</code></td>
+<td>Numeric function</td>
+<td>V ⇧A</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$C6</td>
+<td>198</td>
+<td><code>ASC</code></td>
+<td>Numeric function</td>
+<td>A ⇧S</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$C7</td>
+<td>199</td>
+<td><code>CHR$</code></td>
+<td>String function</td>
+<td>C ⇧H</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$C8</td>
+<td>200</td>
+<td><code>LEFT$</code></td>
+<td>String function</td>
+<td>LE ⇧F</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$C9</td>
+<td>201</td>
+<td><code>RIGHT$</code></td>
+<td>String function</td>
+<td>R ⇧I</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$CA</td>
+<td>202</td>
+<td><code>MID$</code></td>
+<td>String function</td>
+<td>M ⇧I</td>
+<td>Ch. 4</td>
+</tr>
+<tr>
+<td>$CB</td>
+<td>203</td>
+<td><code>GO</code></td>
+<td>Keyword within a statement</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$FF</td>
+<td>255</td>
+<td>π</td>
+<td>Constant</td>
+<td>SHIFT + ↑</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="abbreviations">Abbreviations</h2>
+<p>Most keywords can be entered in an abbreviated form: one or more
+leading letters typed normally, followed by the next letter typed with
+SHIFT. The interpreter stores the abbreviation as the full keyword’s
+token, so it saves typing but not memory, and <code>LIST</code> always
+shows the keyword in full.</p>
+<p>The rules, verified by entering each abbreviation:</p>
+<ul>
+<li>The shifted letter can never be a keyword’s <strong>last</strong>
+character. In the keyword table, the final character of each keyword has
+its high bit set, as a shifted letter does, so a shifted final letter
+matches as an ordinary character and the keyword is not recognized. This
+is why <code>IF</code>, <code>ON</code>, <code>OR</code>,
+<code>TO</code>, <code>FN</code>, <code>REM</code>, <code>NEW</code> and
+<code>INT</code> have no abbreviation.</li>
+<li>Keywords are tried in token order, and the first match wins. A
+shorter abbreviation may already belong to an earlier keyword: L ⇧E is
+<code>LET</code> (token $88), so <code>LEN</code> (token $C3) cannot use
+it; C ⇧O is <code>CONT</code>, not <code>COS</code>; L ⇧O is
+<code>LOAD</code>, not <code>LOG</code>; P ⇧O is <code>POKE</code>, not
+<code>POS</code>; T ⇧A is <code>TAB(</code>, not <code>TAN</code>.</li>
+<li><code>PRINT</code> has no abbreviation in this sense; instead,
+<code>?</code> is accepted in place of the whole word and stored as the
+<code>PRINT</code> token.</li>
+<li><code>INPUT</code> and <code>GO</code> have none.</li>
+</ul>
+<p>Of the 76 keywords, 52 have an abbreviation; each is listed in the
+index above.</p>
+<p>An abbreviated line that would <code>LIST</code> longer than 80
+characters can be stored but cannot be edited after listing, because the
+screen editor reads at most one 80-character logical line.</p>
+<h2 id="reserved-variables-and-constants">Reserved variables and
+constants</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ST</code></td>
+<td>Status byte of the last input/output operation</td>
+<td>Read-only. <code>ST = 1</code> gives <code>?SYNTAX  ERROR</code>.
+Any variable name beginning with ST refers to it.</td>
+</tr>
+<tr>
+<td><code>TI</code></td>
+<td>Jiffy clock: 1/60 seconds since power-on or the last setting of
+<code>TI$</code></td>
+<td>Read-only. <code>TI = 1</code> gives <code>?SYNTAX  ERROR</code>.
+Any name beginning with TI refers to it.</td>
+</tr>
+<tr>
+<td><code>TI$</code></td>
+<td>The jiffy clock as a six-digit string <code>HHMMSS</code></td>
+<td>Assignable with a six-digit string (<code>TI$ = "093000"</code>).
+Other strings give <code>?ILLEGAL QUANTITY  ERROR</code>. Any string
+name beginning with TI, such as <code>TITLE$</code>, refers to it.</td>
+</tr>
+<tr>
+<td>π</td>
+<td>3.14159265</td>
+<td>Entered with SHIFT + ↑. Stored as token $FF.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="emulation-notes">Emulation notes</h1>
+<p>This chapter collects facts about running BASIC V2 under emulation.
+It cannot be complete: emulators change and new ones appear. It records
+what has been verified, and where it came from, so that differences in
+other or later emulators can be recognized and worked out.</p>
+<h2 id="the-course-site-vc64web">The course site (vc64web)</h2>
+<p>The course site embeds vc64web, a browser build of the VirtualC64
+emulator, pinned to a fixed version. vc64web maps no PC key to several
+C64 keys; the course site adds these mappings:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>C64 key</th>
+<th>PC key on the course site</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RUN/STOP</td>
+<td>Esc</td>
+</tr>
+<tr>
+<td>RESTORE</td>
+<td>Page Up</td>
+</tr>
+<tr>
+<td>CLR/HOME</td>
+<td>Home (often Fn + Left Arrow on laptops)</td>
+</tr>
+<tr>
+<td>SHIFT + CLR/HOME (clear screen)</td>
+<td>Shift + Home</td>
+</tr>
+<tr>
+<td>SHIFT + INST/DEL (insert)</td>
+<td>Insert, or Shift + Backspace (vc64web otherwise ignores Shift on
+Backspace and deletes)</td>
+</tr>
+<tr>
+<td>↑ (power)</td>
+<td>^ (Shift + 6 on most layouts)</td>
+</tr>
+</tbody>
+</table>
+<p>Shift-click on the C64 screen moves the cursor by feeding cursor-key
+codes through the KERNAL keyboard buffer, only while BASIC is in direct
+mode, waiting for input, and not in quote or insert mode. This is a
+feature of the course site, not of the C64.</p>
+<h2 id="rom-files">ROM files</h2>
+<p>An emulated C64 requires copies of the original ROMs, which remain
+under copyright and are not distributed with the course site. The course
+site’s setup copies them from a local VICE installation.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>File</th>
+<th>Size</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>basic.rom</code></td>
+<td>8192 bytes</td>
+<td>BASIC V2 interpreter</td>
+</tr>
+<tr>
+<td><code>kernal.rom</code></td>
+<td>8192 bytes</td>
+<td>KERNAL operating system</td>
+</tr>
+<tr>
+<td><code>chargen.rom</code></td>
+<td>4096 bytes</td>
+<td>Character generator (the C64’s font). The standard ROM (901225-01)
+begins with the bytes 3C 66 6E; a Japanese character ROM (906143-02)
+differs and must not be used.</td>
+</tr>
+<tr>
+<td><code>dos1541.rom</code></td>
+<td>16384 bytes</td>
+<td>1541 disk drive firmware, required for disk images</td>
+</tr>
+</tbody>
+</table>
+<h2 id="to-be-collected">To be collected</h2>
+<p>VICE keyboard mappings (positional and symbolic), disk image formats
+(.d64, .g64), tape images (.tap, .t64), cartridge images (.crt), and
+differences between emulators, each with its source.</p>
+</main>
+</body>
+</html>

@@ -8,6 +8,8 @@ that keeps programs (and thoughts) in order.
 
 - **The book** is published on GitHub Pages: <https://erroneus0-ops.github.io/thinking-in-c64-basic/>,
   together with a quick tour of the course site and a step-by-step guide to save slots.
+- **The Reference** is a separate volume for looking things up: every keyword, abbreviation and
+  error message of BASIC V2, in exact terminology: <https://erroneus0-ops.github.io/thinking-in-c64-basic/reference/>.
 - **The course site** runs on your own computer. Everything it needs is in this repo, except the
   C64's ROMs: they're copyrighted, so they can't be published here. Setup copies them from your own
   [VICE](https://vice-emu.sourceforge.io/) installation. The site gives you a C64 in the browser

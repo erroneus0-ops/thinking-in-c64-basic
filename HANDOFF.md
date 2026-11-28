@@ -435,6 +435,30 @@ live in the public chapter sources (honor system) and the answer edition is pass
 programmer's notebook is paper; the voice is plain and never childish; the reference machine is
 VICE or the browser C64, with TheC64 notes planned for Appendix F.
 
+## The Reference volume (reference/, docs/reference/)
+
+A separate volume (editor's decision: references outlive lessons), "Thinking in C64 BASIC: Reference".
+EXACT terminology, not the book's pictures (keyword, token, statement, function, operator, expression,
+floating point, signed 16-bit integer, logical line...). Every entry has the same shape: name and
+abbreviation; kind; syntax; what it does; an example with its EXACT output verified on the C64;
+traps; related entries; chapter that teaches it. Must become COMPLETE: all 76 tokens + pi, operators
+and precedence, ST/TI/TI$, every error message.
+- Source: reference/*.md in name order; reference/keywords.json is the single source of truth for
+  token, kind, abbreviation and chapter, and generates the keyword index. Build:
+  `python tools/build_reference.py` (pandoc with tex_math_dollars OFF: $80 is a token number).
+- ABBREVIATIONS, all 52 verified on the C64 (tools/compute_abbreviations.py, then
+  tools/verify_abbreviations.py). Rules found: the shifted letter can never be the keyword's LAST
+  character (last chars carry bit 7 in the ROM table); keywords are tried in token order, first match
+  wins (L-shift-E is LET, so LEN has none; C-shift-O CONT not COS; L-shift-O LOAD not LOG; P-shift-O
+  POKE not POS; T-shift-A TAB( not TAN). None: INPUT, IF, REM, ON, PRINT (? instead), NEW, TO, FN,
+  OR, INT, POS, LOG, COS, TAN, LEN, GO.
+- 90-emulation.md collects verifiable emulation facts with sources (course-site key mappings, ROM
+  files and sizes, chargen check bytes); VICE mappings and image formats still to collect.
+- Book links use the placeholder %REF% (build.py swaps in reference/ or ../reference/ per edition).
+  Lesson 1.4, the appendices page (E) and "Tools that help" point to it.
+- NEXT: entries by family (output/input, numbers, strings, flow, files/devices, memory/system),
+  then the error message list, each example verified.
+
 ## Idea shelf (editor's ideas, not planned work)
 
 - "CVM": a lightweight emulator runtime per platform, with a program GLUED ONTO ITS END to make one

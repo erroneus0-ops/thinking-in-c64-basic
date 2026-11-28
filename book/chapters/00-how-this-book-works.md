@@ -56,6 +56,7 @@ That's the whole chapter. If something in it is fixed or improved later, you'll 
 - **Insert** (or **Shift + Backspace**) makes room for a missing letter. It works like the text editing you're used to on a PC or phone: it makes room instead of typing over.
 - **Clear screen**, under the C64 screen, wipes the screen without touching your program.
 - **The quick tour**, linked at the top of the book's web page, shows all of this in a few slides.
+- **The [Reference](%REF%)** is a separate volume for looking things up: every keyword, abbreviation and error message of C64 BASIC, in plain, exact terms.
 - **The save slots guide** walks through saving, loading and running your programs, step by step. It's linked next to the save button on the C64 page.
 
 ## Getting unstuck

@@ -1,0 +1,541 @@
+{
+ "keywords": [
+  {
+   "token": 128,
+   "keyword": "END",
+   "kind": "Statement",
+   "abbreviation": "eN",
+   "chapter": null
+  },
+  {
+   "token": 129,
+   "keyword": "FOR",
+   "kind": "Statement",
+   "abbreviation": "fO",
+   "chapter": null
+  },
+  {
+   "token": 130,
+   "keyword": "NEXT",
+   "kind": "Statement",
+   "abbreviation": "nE",
+   "chapter": null
+  },
+  {
+   "token": 131,
+   "keyword": "DATA",
+   "kind": "Statement",
+   "abbreviation": "dA",
+   "chapter": null
+  },
+  {
+   "token": 132,
+   "keyword": "INPUT#",
+   "kind": "Statement",
+   "abbreviation": "iN",
+   "chapter": null
+  },
+  {
+   "token": 133,
+   "keyword": "INPUT",
+   "kind": "Statement",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 134,
+   "keyword": "DIM",
+   "kind": "Statement",
+   "abbreviation": "dI",
+   "chapter": null
+  },
+  {
+   "token": 135,
+   "keyword": "READ",
+   "kind": "Statement",
+   "abbreviation": "rE",
+   "chapter": null
+  },
+  {
+   "token": 136,
+   "keyword": "LET",
+   "kind": "Statement",
+   "abbreviation": "lE",
+   "chapter": null
+  },
+  {
+   "token": 137,
+   "keyword": "GOTO",
+   "kind": "Statement",
+   "abbreviation": "gO",
+   "chapter": null
+  },
+  {
+   "token": 138,
+   "keyword": "RUN",
+   "kind": "Statement",
+   "abbreviation": "rU",
+   "chapter": "2"
+  },
+  {
+   "token": 139,
+   "keyword": "IF",
+   "kind": "Statement",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 140,
+   "keyword": "RESTORE",
+   "kind": "Statement",
+   "abbreviation": "reS",
+   "chapter": null
+  },
+  {
+   "token": 141,
+   "keyword": "GOSUB",
+   "kind": "Statement",
+   "abbreviation": "goS",
+   "chapter": null
+  },
+  {
+   "token": 142,
+   "keyword": "RETURN",
+   "kind": "Statement",
+   "abbreviation": "reT",
+   "chapter": null
+  },
+  {
+   "token": 143,
+   "keyword": "REM",
+   "kind": "Statement",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 144,
+   "keyword": "STOP",
+   "kind": "Statement",
+   "abbreviation": "sT",
+   "chapter": null
+  },
+  {
+   "token": 145,
+   "keyword": "ON",
+   "kind": "Statement",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 146,
+   "keyword": "WAIT",
+   "kind": "Statement",
+   "abbreviation": "wA",
+   "chapter": null
+  },
+  {
+   "token": 147,
+   "keyword": "LOAD",
+   "kind": "Statement",
+   "abbreviation": "lO",
+   "chapter": null
+  },
+  {
+   "token": 148,
+   "keyword": "SAVE",
+   "kind": "Statement",
+   "abbreviation": "sA",
+   "chapter": null
+  },
+  {
+   "token": 149,
+   "keyword": "VERIFY",
+   "kind": "Statement",
+   "abbreviation": "vE",
+   "chapter": null
+  },
+  {
+   "token": 150,
+   "keyword": "DEF",
+   "kind": "Statement",
+   "abbreviation": "dE",
+   "chapter": null
+  },
+  {
+   "token": 151,
+   "keyword": "POKE",
+   "kind": "Statement",
+   "abbreviation": "pO",
+   "chapter": null
+  },
+  {
+   "token": 152,
+   "keyword": "PRINT#",
+   "kind": "Statement",
+   "abbreviation": "pR",
+   "chapter": null
+  },
+  {
+   "token": 153,
+   "keyword": "PRINT",
+   "kind": "Statement",
+   "abbreviation": null,
+   "chapter": "1"
+  },
+  {
+   "token": 154,
+   "keyword": "CONT",
+   "kind": "Statement",
+   "abbreviation": "cO",
+   "chapter": null
+  },
+  {
+   "token": 155,
+   "keyword": "LIST",
+   "kind": "Statement",
+   "abbreviation": "lI",
+   "chapter": "2"
+  },
+  {
+   "token": 156,
+   "keyword": "CLR",
+   "kind": "Statement",
+   "abbreviation": "cL",
+   "chapter": null
+  },
+  {
+   "token": 157,
+   "keyword": "CMD",
+   "kind": "Statement",
+   "abbreviation": "cM",
+   "chapter": null
+  },
+  {
+   "token": 158,
+   "keyword": "SYS",
+   "kind": "Statement",
+   "abbreviation": "sY",
+   "chapter": null
+  },
+  {
+   "token": 159,
+   "keyword": "OPEN",
+   "kind": "Statement",
+   "abbreviation": "oP",
+   "chapter": null
+  },
+  {
+   "token": 160,
+   "keyword": "CLOSE",
+   "kind": "Statement",
+   "abbreviation": "clO",
+   "chapter": null
+  },
+  {
+   "token": 161,
+   "keyword": "GET",
+   "kind": "Statement",
+   "abbreviation": "gE",
+   "chapter": null
+  },
+  {
+   "token": 162,
+   "keyword": "NEW",
+   "kind": "Statement",
+   "abbreviation": null,
+   "chapter": "2"
+  },
+  {
+   "token": 163,
+   "keyword": "TAB(",
+   "kind": "Output function (PRINT only)",
+   "abbreviation": "tA",
+   "chapter": null
+  },
+  {
+   "token": 164,
+   "keyword": "TO",
+   "kind": "Keyword within a statement",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 165,
+   "keyword": "FN",
+   "kind": "Keyword within a statement",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 166,
+   "keyword": "SPC(",
+   "kind": "Output function (PRINT only)",
+   "abbreviation": "sP",
+   "chapter": "4"
+  },
+  {
+   "token": 167,
+   "keyword": "THEN",
+   "kind": "Keyword within a statement",
+   "abbreviation": "tH",
+   "chapter": null
+  },
+  {
+   "token": 168,
+   "keyword": "NOT",
+   "kind": "Operator",
+   "abbreviation": "nO",
+   "chapter": null
+  },
+  {
+   "token": 169,
+   "keyword": "STEP",
+   "kind": "Keyword within a statement",
+   "abbreviation": "stE",
+   "chapter": null
+  },
+  {
+   "token": 170,
+   "keyword": "+",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": "3"
+  },
+  {
+   "token": 171,
+   "keyword": "-",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": "3"
+  },
+  {
+   "token": 172,
+   "keyword": "*",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": "3"
+  },
+  {
+   "token": 173,
+   "keyword": "/",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": "3"
+  },
+  {
+   "token": 174,
+   "keyword": "↑",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": "3"
+  },
+  {
+   "token": 175,
+   "keyword": "AND",
+   "kind": "Operator",
+   "abbreviation": "aN",
+   "chapter": null
+  },
+  {
+   "token": 176,
+   "keyword": "OR",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 177,
+   "keyword": ">",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 178,
+   "keyword": "=",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 179,
+   "keyword": "<",
+   "kind": "Operator",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 180,
+   "keyword": "SGN",
+   "kind": "Numeric function",
+   "abbreviation": "sG",
+   "chapter": null
+  },
+  {
+   "token": 181,
+   "keyword": "INT",
+   "kind": "Numeric function",
+   "abbreviation": null,
+   "chapter": "3"
+  },
+  {
+   "token": 182,
+   "keyword": "ABS",
+   "kind": "Numeric function",
+   "abbreviation": "aB",
+   "chapter": null
+  },
+  {
+   "token": 183,
+   "keyword": "USR",
+   "kind": "Numeric function",
+   "abbreviation": "uS",
+   "chapter": null
+  },
+  {
+   "token": 184,
+   "keyword": "FRE",
+   "kind": "Numeric function",
+   "abbreviation": "fR",
+   "chapter": null
+  },
+  {
+   "token": 185,
+   "keyword": "POS",
+   "kind": "Numeric function",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 186,
+   "keyword": "SQR",
+   "kind": "Numeric function",
+   "abbreviation": "sQ",
+   "chapter": null
+  },
+  {
+   "token": 187,
+   "keyword": "RND",
+   "kind": "Numeric function",
+   "abbreviation": "rN",
+   "chapter": "3"
+  },
+  {
+   "token": 188,
+   "keyword": "LOG",
+   "kind": "Numeric function",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 189,
+   "keyword": "EXP",
+   "kind": "Numeric function",
+   "abbreviation": "eX",
+   "chapter": null
+  },
+  {
+   "token": 190,
+   "keyword": "COS",
+   "kind": "Numeric function",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 191,
+   "keyword": "SIN",
+   "kind": "Numeric function",
+   "abbreviation": "sI",
+   "chapter": null
+  },
+  {
+   "token": 192,
+   "keyword": "TAN",
+   "kind": "Numeric function",
+   "abbreviation": null,
+   "chapter": null
+  },
+  {
+   "token": 193,
+   "keyword": "ATN",
+   "kind": "Numeric function",
+   "abbreviation": "aT",
+   "chapter": null
+  },
+  {
+   "token": 194,
+   "keyword": "PEEK",
+   "kind": "Numeric function",
+   "abbreviation": "pE",
+   "chapter": null
+  },
+  {
+   "token": 195,
+   "keyword": "LEN",
+   "kind": "Numeric function",
+   "abbreviation": null,
+   "chapter": "4"
+  },
+  {
+   "token": 196,
+   "keyword": "STR$",
+   "kind": "String function",
+   "abbreviation": "stR",
+   "chapter": "4"
+  },
+  {
+   "token": 197,
+   "keyword": "VAL",
+   "kind": "Numeric function",
+   "abbreviation": "vA",
+   "chapter": "4"
+  },
+  {
+   "token": 198,
+   "keyword": "ASC",
+   "kind": "Numeric function",
+   "abbreviation": "aS",
+   "chapter": null
+  },
+  {
+   "token": 199,
+   "keyword": "CHR$",
+   "kind": "String function",
+   "abbreviation": "cH",
+   "chapter": null
+  },
+  {
+   "token": 200,
+   "keyword": "LEFT$",
+   "kind": "String function",
+   "abbreviation": "leF",
+   "chapter": "4"
+  },
+  {
+   "token": 201,
+   "keyword": "RIGHT$",
+   "kind": "String function",
+   "abbreviation": "rI",
+   "chapter": "4"
+  },
+  {
+   "token": 202,
+   "keyword": "MID$",
+   "kind": "String function",
+   "abbreviation": "mI",
+   "chapter": "4"
+  },
+  {
+   "token": 203,
+   "keyword": "GO",
+   "kind": "Keyword within a statement",
+   "abbreviation": null,
+   "chapter": null
+  }
+ ],
+ "pi": {
+  "token": 255,
+  "keyword": "π",
+  "kind": "Constant"
+ }
+}
