@@ -42,6 +42,9 @@ Always rebuild both book editions, re-lock, then commit `docs/` with the source.
 files and reasoning, and say which it is ("I believe...", "from the reference..."). Run the emulator
 ONLY (a) to verify something before it goes into the book or the reference, or (b) when the editor
 asks ("validate that"). A question like "does X exist?" is a lookup, not a test run.
+Other economies: screenshots only when structure checks can't answer; batch edits into one build
+and one push; use --no-pdf and skip tour recaptures until a change is final; grep files instead of
+printing them; keep replies short when the answer is simple.
 
 1. **Read** `knowledge/c64-verified.md`, the reference JSON, and `HANDOFF.md` (search it). If the fact is there, no test.
 2. **Read the ROM's logic**, not the whole ROM: download once to /tmp and search, e.g.
