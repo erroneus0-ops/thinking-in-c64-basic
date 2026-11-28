@@ -82,6 +82,14 @@ pre code .ln::after { content: "\21B5"; display: inline-block; margin-left: 0.6e
   font: 400 0.9em/1.15 "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols", "Arial Unicode MS", sans-serif;
   border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.05em; }
 /* Diagrams are pictures, not something to type */
+/* Code must never be reshaped: no ligatures (an IJ ligature once made "GHIJKL" read as "GHUKL"). */
+pre, code { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0, "dlig" 0; }
+/* Reference blocks that are read, not typed: syntax, variables used, and the C64's output */
+pre.syntax, pre.vars { background: var(--tint); color: var(--ink); border: 1.5px solid var(--rule); font-weight: 500; }
+pre.vars { border-style: dashed; }
+pre.output { border-color: var(--screen); border-width: 0.4rem; position: relative; padding-top: 1.6rem; }
+pre.output::before { content: "Output"; position: absolute; top: 0.35rem; left: 0.9rem; font: 700 0.7rem "Atkinson Hyperlegible", sans-serif;
+  letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
 pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
 pre code { font: inherit; background: none; padding: 0; color: inherit; white-space: pre; }  /* never wrap a line of code: it would look like two lines */
 code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }

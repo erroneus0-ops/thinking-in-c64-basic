@@ -457,8 +457,20 @@ and precedence, ST/TI/TI$, every error message.
   files and sizes, chargen check bytes); VICE mappings and image formats still to collect.
 - Book links use the placeholder %REF% (build.py swaps in reference/ or ../reference/ per edition).
   Lesson 1.4, the appendices page (E) and "Tools that help" point to it.
-- NEXT: entries by family (output/input, numbers, strings, flow, files/devices, memory/system),
-  then the error message list, each example verified.
+- ENTRIES are JSON, one file per family: reference/entries/NN-family.json ("family", "intro",
+  "setup" lines for the edge cases, "entries"). Each entry: keyword, syntax, returns, arguments
+  [name, type/range, meaning], description, example {vars [[name, role]] (the editor's "variables
+  used" block), code (typed lines), output (exact rows)}, cases [[expression, result, note]] where
+  result is "quoted string", a number, or an error message, errors, related. tools/build_reference.py
+  renders every entry in the same shape; index rows link to entries (#kw-mids, #kw-printhash).
+- VERIFICATION: tools/verify_reference.py runs every example and case on the course site's C64 via
+  tools/c64_harness.py, which TOKENIZES lines in Python (the C64's rules: table order, first match;
+  nothing after DATA/REM; ? = PRINT) and pokes the program into memory, typing only RUN. (Typing long
+  lines through vc64web's auto-type or key events garbles shifted characters; don't verify that way.)
+  Must say "N of N checks passed" before any family is published. Strings family: 8 entries, 53/53.
+- Code font: ligatures off everywhere (the editor's phone font merged I+J, so "GHIJKL" read "GHUKL").
+- NEXT families: output/input, numbers, program flow, files/devices, memory/system; then the error
+  message list, each verified.
 
 ## Idea shelf (editor's ideas, not planned work)
 

@@ -82,6 +82,14 @@ pre code .ln::after { content: "\21B5"; display: inline-block; margin-left: 0.6e
   font: 400 0.9em/1.15 "Segoe UI Symbol", "DejaVu Sans", "Noto Sans Symbols", "Arial Unicode MS", sans-serif;
   border: 1px solid currentColor; border-radius: 3px; opacity: 0.75; vertical-align: 0.05em; }
 /* Diagrams are pictures, not something to type */
+/* Code must never be reshaped: no ligatures (an IJ ligature once made "GHIJKL" read as "GHUKL"). */
+pre, code { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0, "dlig" 0; }
+/* Reference blocks that are read, not typed: syntax, variables used, and the C64's output */
+pre.syntax, pre.vars { background: var(--tint); color: var(--ink); border: 1.5px solid var(--rule); font-weight: 500; }
+pre.vars { border-style: dashed; }
+pre.output { border-color: var(--screen); border-width: 0.4rem; position: relative; padding-top: 1.6rem; }
+pre.output::before { content: "Output"; position: absolute; top: 0.35rem; left: 0.9rem; font: 700 0.7rem "Atkinson Hyperlegible", sans-serif;
+  letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
 pre.diagram { background: var(--tint); color: var(--ink); border: 2px dashed var(--rule); font-weight: 500; }
 pre code { font: inherit; background: none; padding: 0; color: inherit; white-space: pre; }  /* never wrap a line of code: it would look like two lines */
 code { white-space: pre-wrap; font: 500 0.92em "IBM Plex Mono", Consolas, monospace; background: var(--tint); padding: 0.05em 0.3em; border-radius: 3px; }
@@ -137,6 +145,17 @@ id="toc-abbreviations">Abbreviations</a></li>
 <li><a href="#reserved-variables-and-constants"
 id="toc-reserved-variables-and-constants">Reserved variables and
 constants</a></li>
+</ul></li>
+<li><a href="#strings" id="toc-strings">Strings</a>
+<ul>
+<li><a href="#kw-len" id="toc-kw-len">LEN</a></li>
+<li><a href="#kw-lefts" id="toc-kw-lefts">LEFT$</a></li>
+<li><a href="#kw-rights" id="toc-kw-rights">RIGHT$</a></li>
+<li><a href="#kw-mids" id="toc-kw-mids">MID$</a></li>
+<li><a href="#kw-strs" id="toc-kw-strs">STR$</a></li>
+<li><a href="#kw-val" id="toc-kw-val">VAL</a></li>
+<li><a href="#kw-chrs" id="toc-kw-chrs">CHR$</a></li>
+<li><a href="#kw-asc" id="toc-kw-asc">ASC</a></li>
 </ul></li>
 <li><a href="#emulation-notes" id="toc-emulation-notes">Emulation
 notes</a>
@@ -839,7 +858,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C3</td>
 <td>195</td>
-<td><code>LEN</code></td>
+<td><a href="#kw-len"><code>LEN</code></a></td>
 <td>Numeric function</td>
 <td>—</td>
 <td>Ch. 4</td>
@@ -847,7 +866,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C4</td>
 <td>196</td>
-<td><code>STR$</code></td>
+<td><a href="#kw-strs"><code>STR$</code></a></td>
 <td>String function</td>
 <td>ST ⇧R</td>
 <td>Ch. 4</td>
@@ -855,7 +874,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C5</td>
 <td>197</td>
-<td><code>VAL</code></td>
+<td><a href="#kw-val"><code>VAL</code></a></td>
 <td>Numeric function</td>
 <td>V ⇧A</td>
 <td>Ch. 4</td>
@@ -863,7 +882,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C6</td>
 <td>198</td>
-<td><code>ASC</code></td>
+<td><a href="#kw-asc"><code>ASC</code></a></td>
 <td>Numeric function</td>
 <td>A ⇧S</td>
 <td>—</td>
@@ -871,7 +890,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C7</td>
 <td>199</td>
-<td><code>CHR$</code></td>
+<td><a href="#kw-chrs"><code>CHR$</code></a></td>
 <td>String function</td>
 <td>C ⇧H</td>
 <td>—</td>
@@ -879,7 +898,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C8</td>
 <td>200</td>
-<td><code>LEFT$</code></td>
+<td><a href="#kw-lefts"><code>LEFT$</code></a></td>
 <td>String function</td>
 <td>LE ⇧F</td>
 <td>Ch. 4</td>
@@ -887,7 +906,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$C9</td>
 <td>201</td>
-<td><code>RIGHT$</code></td>
+<td><a href="#kw-rights"><code>RIGHT$</code></a></td>
 <td>String function</td>
 <td>R ⇧I</td>
 <td>Ch. 4</td>
@@ -895,7 +914,7 @@ refers to <em>Thinking in C64 BASIC</em>.</p>
 <tr>
 <td>$CA</td>
 <td>202</td>
-<td><code>MID$</code></td>
+<td><a href="#kw-mids"><code>MID$</code></a></td>
 <td>String function</td>
 <td>M ⇧I</td>
 <td>Ch. 4</td>
@@ -992,6 +1011,683 @@ name beginning with TI, such as <code>TITLE$</code>, refers to it.</td>
 </tr>
 </tbody>
 </table>
+<h1 id="strings">Strings</h1>
+<p>Functions that measure, extract, convert and build strings. Positions
+within a string are numbered from 1. Numeric arguments are truncated to
+whole numbers before use (2.9 is used as 2).</p>
+<h2 id="kw-len">LEN</h2>
+<p><strong>Token</strong> $C3 (195) · <strong>Kind</strong> Numeric
+function · <strong>Abbreviation</strong> none · <strong>Taught
+in</strong> Chapter 4</p>
+<pre class="syntax"><code>LEN(string)</code></pre>
+<p><strong>Returns</strong> a number.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>string</em></td>
+<td>string expression</td>
+<td>The string to measure.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the number of characters in the string, from 0 (empty string)
+to 255. Spaces and control characters count.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>N$ : sample source string (26 letters)
+L  : receives the length</code></pre>
+<pre><code><span class="ln">N$ = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
+<span class="ln">L = LEN(N$)</span>
+<span class="ln">PRINT L</span></code></pre>
+<pre class="output"><code> 26</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LEN(N$)</code></td>
+<td><code>26</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>LEN("")</code></td>
+<td><code>0</code></td>
+<td>The empty string.</td>
+</tr>
+<tr>
+<td><code>LEN(STR$(42))</code></td>
+<td><code>3</code></td>
+<td>STR$ includes a leading space for positive numbers.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Related</strong> <a href="#kw-lefts"><code>LEFT$</code></a>,
+<a href="#kw-rights"><code>RIGHT$</code></a>, <a
+href="#kw-mids"><code>MID$</code></a>, <a
+href="#kw-strs"><code>STR$</code></a></p>
+<h2 id="kw-lefts">LEFT$</h2>
+<p><strong>Token</strong> $C8 (200) · <strong>Kind</strong> String
+function · <strong>Abbreviation</strong> LE ⇧F · <strong>Taught
+in</strong> Chapter 4</p>
+<pre class="syntax"><code>LEFT$(string, count)</code></pre>
+<p><strong>Returns</strong> a string.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>string</em></td>
+<td>string expression</td>
+<td>The source string.</td>
+</tr>
+<tr>
+<td><em>count</em></td>
+<td>numeric expression, 0–255</td>
+<td>Number of characters to take from the left end.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the leftmost count characters of the string. If count is
+greater than the string’s length, the whole string is returned.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>N$ : sample source string (26 letters)
+A$ : receives the result</code></pre>
+<pre><code><span class="ln">N$ = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
+<span class="ln">A$ = LEFT$(N$,3)</span>
+<span class="ln">PRINT A$</span></code></pre>
+<pre class="output"><code>ABC</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LEFT$(N$,3)</code></td>
+<td><code>"ABC"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>LEFT$(N$,0)</code></td>
+<td><code>""</code></td>
+<td>Empty string.</td>
+</tr>
+<tr>
+<td><code>LEFT$(N$,30)</code></td>
+<td><code>"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</code></td>
+<td>More than the length: the whole string, no error.</td>
+</tr>
+<tr>
+<td><code>LEFT$(N$,2.9)</code></td>
+<td><code>"AB"</code></td>
+<td>Count is truncated.</td>
+</tr>
+<tr>
+<td><code>LEFT$(N$,-1)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td></td>
+</tr>
+<tr>
+<td><code>LEFT$(N$,256)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Errors</strong> ?ILLEGAL QUANTITY ERROR: count less than 0 or
+greater than 255.</p>
+<p><strong>Related</strong> <a
+href="#kw-rights"><code>RIGHT$</code></a>, <a
+href="#kw-mids"><code>MID$</code></a>, <a
+href="#kw-len"><code>LEN</code></a></p>
+<h2 id="kw-rights">RIGHT$</h2>
+<p><strong>Token</strong> $C9 (201) · <strong>Kind</strong> String
+function · <strong>Abbreviation</strong> R ⇧I · <strong>Taught
+in</strong> Chapter 4</p>
+<pre class="syntax"><code>RIGHT$(string, count)</code></pre>
+<p><strong>Returns</strong> a string.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>string</em></td>
+<td>string expression</td>
+<td>The source string.</td>
+</tr>
+<tr>
+<td><em>count</em></td>
+<td>numeric expression, 0–255</td>
+<td>Number of characters to take from the right end.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the rightmost count characters of the string. If count is
+greater than the string’s length, the whole string is returned.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>N$ : sample source string (26 letters)
+A$ : receives the result</code></pre>
+<pre><code><span class="ln">N$ = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
+<span class="ln">A$ = RIGHT$(N$,3)</span>
+<span class="ln">PRINT A$</span></code></pre>
+<pre class="output"><code>XYZ</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RIGHT$(N$,3)</code></td>
+<td><code>"XYZ"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>RIGHT$(N$,0)</code></td>
+<td><code>""</code></td>
+<td>Empty string.</td>
+</tr>
+<tr>
+<td><code>RIGHT$(N$,30)</code></td>
+<td><code>"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</code></td>
+<td>More than the length: the whole string, no error.</td>
+</tr>
+<tr>
+<td><code>RIGHT$("",3)</code></td>
+<td><code>""</code></td>
+<td>From an empty string: empty string.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Errors</strong> ?ILLEGAL QUANTITY ERROR: count less than 0 or
+greater than 255.</p>
+<p><strong>Related</strong> <a href="#kw-lefts"><code>LEFT$</code></a>,
+<a href="#kw-mids"><code>MID$</code></a>, <a
+href="#kw-len"><code>LEN</code></a></p>
+<h2 id="kw-mids">MID$</h2>
+<p><strong>Token</strong> $CA (202) · <strong>Kind</strong> String
+function · <strong>Abbreviation</strong> M ⇧I · <strong>Taught
+in</strong> Chapter 4</p>
+<pre class="syntax"><code>MID$(string, start[, length])</code></pre>
+<p><strong>Returns</strong> a string.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>string</em></td>
+<td>string expression</td>
+<td>The source string.</td>
+</tr>
+<tr>
+<td><em>start</em></td>
+<td>numeric expression, 1–255</td>
+<td>Position of the first character to take; the first character is
+position 1.</td>
+</tr>
+<tr>
+<td><em>length</em></td>
+<td>numeric expression, 0–255 (optional)</td>
+<td>Number of characters to take. If omitted, all characters from start
+to the end.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns length characters of the string, beginning at position start.
+If fewer characters remain than requested, returns those that remain; if
+start is beyond the end, returns an empty string. Can replace LEFT$
+(start 1) and RIGHT$, though those state the intent more directly.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>N$ : sample source string (26 letters)
+A$ : receives the result</code></pre>
+<pre><code><span class="ln">N$ = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
+<span class="ln">A$ = MID$(N$,3,4)</span>
+<span class="ln">PRINT A$</span></code></pre>
+<pre class="output"><code>CDEF</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MID$(N$,3,4)</code></td>
+<td><code>"CDEF"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>MID$(N$,24)</code></td>
+<td><code>"XYZ"</code></td>
+<td>Length omitted: to the end.</td>
+</tr>
+<tr>
+<td><code>MID$(N$,25,10)</code></td>
+<td><code>"YZ"</code></td>
+<td>Fewer remain than requested: those that remain.</td>
+</tr>
+<tr>
+<td><code>MID$(N$,27)</code></td>
+<td><code>""</code></td>
+<td>Start beyond the end: empty string, no error.</td>
+</tr>
+<tr>
+<td><code>MID$(N$,3,0)</code></td>
+<td><code>""</code></td>
+<td>Length 0: empty string.</td>
+</tr>
+<tr>
+<td><code>MID$(N$,2.9,2)</code></td>
+<td><code>"BC"</code></td>
+<td>Start is truncated to 2.</td>
+</tr>
+<tr>
+<td><code>MID$(N$,0,1)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td>Positions start at 1.</td>
+</tr>
+<tr>
+<td><code>MID$(N$,256)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td></td>
+</tr>
+<tr>
+<td><code>MID$(N$,3,256)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Errors</strong> ?ILLEGAL QUANTITY ERROR: start less than 1 or
+greater than 255, or length less than 0 or greater than 255.</p>
+<p><strong>Related</strong> <a href="#kw-lefts"><code>LEFT$</code></a>,
+<a href="#kw-rights"><code>RIGHT$</code></a>, <a
+href="#kw-len"><code>LEN</code></a></p>
+<h2 id="kw-strs">STR$</h2>
+<p><strong>Token</strong> $C4 (196) · <strong>Kind</strong> String
+function · <strong>Abbreviation</strong> ST ⇧R · <strong>Taught
+in</strong> Chapter 4</p>
+<pre class="syntax"><code>STR$(number)</code></pre>
+<p><strong>Returns</strong> a string.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>number</em></td>
+<td>numeric expression</td>
+<td>The value to convert.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the number as a string, formatted exactly as PRINT would
+display it, including the leading space that PRINT reserves for the sign
+of a positive number (or the minus sign of a negative one). No trailing
+space is added.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>S  : a numeric value
+A$ : receives the result</code></pre>
+<pre><code><span class="ln">S = 42</span>
+<span class="ln">A$ = &quot;SCORE:&quot; + STR$(S)</span>
+<span class="ln">PRINT A$</span></code></pre>
+<pre class="output"><code>SCORE: 42</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>STR$(5)</code></td>
+<td><code>" 5"</code></td>
+<td>Leading space for a positive number.</td>
+</tr>
+<tr>
+<td><code>STR$(-5)</code></td>
+<td><code>"-5"</code></td>
+<td>The minus sign takes that position.</td>
+</tr>
+<tr>
+<td><code>STR$(0)</code></td>
+<td><code>" 0"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>STR$(.5)</code></td>
+<td><code>" .5"</code></td>
+<td>No leading zero before the decimal point.</td>
+</tr>
+<tr>
+<td><code>STR$(1/3)</code></td>
+<td><code>" .333333333"</code></td>
+<td>Nine significant digits.</td>
+</tr>
+<tr>
+<td><code>STR$(1E10)</code></td>
+<td><code>" 1E+10"</code></td>
+<td>Large values in exponent form.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Related</strong> <a href="#kw-val"><code>VAL</code></a>, <a
+href="#kw-len"><code>LEN</code></a></p>
+<h2 id="kw-val">VAL</h2>
+<p><strong>Token</strong> $C5 (197) · <strong>Kind</strong> Numeric
+function · <strong>Abbreviation</strong> V ⇧A · <strong>Taught
+in</strong> Chapter 4</p>
+<pre class="syntax"><code>VAL(string)</code></pre>
+<p><strong>Returns</strong> a number.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>string</em></td>
+<td>string expression</td>
+<td>Text to read as a number.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the numeric value of the leading part of the string. Leading
+spaces are skipped; reading stops at the first character that cannot
+continue a number. A string with no leading number gives 0, without an
+error. Exponent notation (1E3) is accepted.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>A$ : text containing digits
+V  : receives the value</code></pre>
+<pre><code><span class="ln">A$ = &quot;123&quot;</span>
+<span class="ln">V = VAL(A$) + 1</span>
+<span class="ln">PRINT V</span></code></pre>
+<pre class="output"><code> 124</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VAL("12ABC")</code></td>
+<td><code>12</code></td>
+<td>Stops at the first non-numeric character.</td>
+</tr>
+<tr>
+<td><code>VAL(" 12")</code></td>
+<td><code>12</code></td>
+<td>Leading spaces are skipped.</td>
+</tr>
+<tr>
+<td><code>VAL("-3.5")</code></td>
+<td><code>-3.5</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>VAL("+5")</code></td>
+<td><code>5</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>VAL("1E3")</code></td>
+<td><code>1000</code></td>
+<td>Exponent notation.</td>
+</tr>
+<tr>
+<td><code>VAL("1,000")</code></td>
+<td><code>1</code></td>
+<td>A comma ends the number.</td>
+</tr>
+<tr>
+<td><code>VAL("ABC")</code></td>
+<td><code>0</code></td>
+<td>No leading number: 0, no error.</td>
+</tr>
+<tr>
+<td><code>VAL("")</code></td>
+<td><code>0</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Related</strong> <a href="#kw-strs"><code>STR$</code></a>, <a
+href="#kw-asc"><code>ASC</code></a></p>
+<h2 id="kw-chrs">CHR$</h2>
+<p><strong>Token</strong> $C7 (199) · <strong>Kind</strong> String
+function · <strong>Abbreviation</strong> C ⇧H · <strong>Taught
+in</strong> —</p>
+<pre class="syntax"><code>CHR$(code)</code></pre>
+<p><strong>Returns</strong> a string.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>code</em></td>
+<td>numeric expression, 0–255</td>
+<td>A PETSCII character code.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a one-character string containing the character with the
+given PETSCII code. Codes include printable characters and control
+codes; for example, CHR$(147) clears the screen when printed, and
+CHR$(13) is RETURN.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>A$ : receives the character</code></pre>
+<pre><code><span class="ln">A$ = CHR$(65)</span>
+<span class="ln">PRINT A$</span></code></pre>
+<pre class="output"><code>A</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CHR$(65)</code></td>
+<td><code>"A"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CHR$(65.9)</code></td>
+<td><code>"A"</code></td>
+<td>Code is truncated.</td>
+</tr>
+<tr>
+<td><code>ASC(CHR$(13))</code></td>
+<td><code>13</code></td>
+<td>CHR$ and ASC are inverses.</td>
+</tr>
+<tr>
+<td><code>CHR$(256)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td></td>
+</tr>
+<tr>
+<td><code>CHR$(-1)</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Errors</strong> ?ILLEGAL QUANTITY ERROR: code less than 0 or
+greater than 255.</p>
+<p><strong>Related</strong> <a href="#kw-asc"><code>ASC</code></a></p>
+<h2 id="kw-asc">ASC</h2>
+<p><strong>Token</strong> $C6 (198) · <strong>Kind</strong> Numeric
+function · <strong>Abbreviation</strong> A ⇧S · <strong>Taught
+in</strong> —</p>
+<pre class="syntax"><code>ASC(string)</code></pre>
+<p><strong>Returns</strong> a number.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>string</em></td>
+<td>string expression, at least one character</td>
+<td>Only the first character is used.</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the PETSCII code (0–255) of the first character of the
+string.</p>
+<p><strong>Example</strong></p>
+<pre class="vars"><code>A$ : a one-character string
+C  : receives the code</code></pre>
+<pre><code><span class="ln">A$ = &quot;A&quot;</span>
+<span class="ln">C = ASC(A$)</span>
+<span class="ln">PRINT C</span></code></pre>
+<pre class="output"><code> 65</code></pre>
+<p><strong>Edge cases</strong></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Expression</th>
+<th>Result</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ASC("A")</code></td>
+<td><code>65</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ASC("ABC")</code></td>
+<td><code>65</code></td>
+<td>Only the first character counts.</td>
+</tr>
+<tr>
+<td><code>ASC(" ")</code></td>
+<td><code>32</code></td>
+<td>Space.</td>
+</tr>
+<tr>
+<td><code>ASC("")</code></td>
+<td>?ILLEGAL QUANTITY ERROR</td>
+<td>The empty string has no first character.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Errors</strong> ?ILLEGAL QUANTITY ERROR: the string is
+empty.</p>
+<p><strong>Related</strong> <a href="#kw-chrs"><code>CHR$</code></a>, <a
+href="#kw-val"><code>VAL</code></a></p>
 <h1 id="emulation-notes">Emulation notes</h1>
 <p>This chapter records verified facts about running BASIC V2 under
 emulation, with their sources, as a basis for comparing other and later
