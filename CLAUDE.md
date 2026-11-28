@@ -34,7 +34,13 @@ personal circumstances out of every file.
 | Tours | `python tools/capture_tour.py <chrome>` (needs the site), then `python tools/build_tour.py` |
 | Site, in the sandbox | `php -S 127.0.0.1:8064 -t site site/router.php &` (needs `runtime/`) |
 
-Always rebuild both book editions, re-lock, then commit `docs/` with the source.
+**GitHub builds it.** `.github/workflows/build.yml` runs on every push that touches `book/`, `reference/`
+or `tools/`: it builds the public book (HTML + PDF, with the real web fonts, which the offline sandbox
+lacks), the reference, and `site/content.json` / `site/exercises.json`, then commits them as
+github-actions[bot], and Pages publishes. So push SOURCES ONLY and `git pull` before the next commit.
+The locked editor's edition is built there only once the owner adds the `C64BOOK_PASSWORD` secret;
+until then, build and lock it locally. Tour screenshots stay local (they need the emulator and ROMs).
+The machine account's token now includes `workflow` scope (granted deliberately by the editor).
 
 ## Cost ladder: cheapest first
 

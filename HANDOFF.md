@@ -2,6 +2,7 @@
 
 > New sessions: start with `CLAUDE.md` (orientation, commands, cost ladder, pitfalls) and
 > `knowledge/c64-verified.md` (every verified C64 fact). This file is the full history.
+> Builds run on GitHub (`.github/workflows/build.yml`, first run 28 Nov: success): push sources only.
 
 Read this first in every new session. Update it at the end of each session.
 
