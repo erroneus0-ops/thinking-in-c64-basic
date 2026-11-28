@@ -446,6 +446,14 @@ VICE or the browser C64, with TheC64 notes planned for Appendix F.
   Wayland, macOS in one codebase; old 32-bit Windows means an older SDL; macOS needs signing and a
   universal binary; Linux single file = AppImage). ROMs inside = personal use only (Open ROMs for
   shareable builds, with compatibility caveats). Fits a second book / capstone.
+  WRITABLE DISKS (editor): copy-on-write. The base image stays sealed (compressed) in the bundle;
+  read-only or writable is the default the packager picks, with a command-line option for the other.
+  In writable mode the base is cloned on first use and the clone is used from then on (beside the
+  bundle = portable, or in app data = installed). Store the base's fingerprint with the clone, so
+  an updated bundle is detected instead of mixing old data with a new program; --reset discards the
+  clone. Refinement: SEPARATE PROGRAM AND DATA DISKS (as C64 users did): replace the program disk on
+  update, keep the data disk. Teach the Spending Tracker that way in Ch 18-20. A .d64 is a fixed
+  170 KB, so compression matters more than thin provisioning.
 - Save slots: "Download as .prg" (to run on the family's real C64 hardware) and the reverse import;
   a plain-text export for cbmbasic.
 
