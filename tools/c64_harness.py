@@ -68,5 +68,10 @@ class C64:
         await self.page.wait_for_timeout(wait)
         return [r for r in await self.page.evaluate(SCREEN) if r and r != 'READY.']
 
+    async def peek(self, start, count):
+        """Read count bytes of C64 memory from start."""
+        return await self.page.evaluate("""([s, n]) => { const w=document.getElementById('c64').contentWindow;
+            return Array.from({length: n}, (_, i) => w.wasm_peek(s + i)); }""", [start, count])
+
     async def close(self):
         await self.b.close(); await self.pw.stop()

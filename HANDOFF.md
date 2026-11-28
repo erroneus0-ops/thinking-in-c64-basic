@@ -471,6 +471,13 @@ and precedence, ST/TI/TI$, every error message.
   nothing after DATA/REM; ? = PRINT) and pokes the program into memory, typing only RUN. (Typing long
   lines through vc64web's auto-type or key events garbles shifted characters; don't verify that way.)
   Must say "N of N checks passed" before any family is published. Strings family: 8 entries, 53/53.
+- PETSCII CHART (reference/30-petscii.json, rendered by render_petscii): editor's format rule:
+  READABLE TABLES, elaborations as numbered notes after them. Control codes table (40 assigned codes),
+  printable table (code, character or *graphic*, how to type it, screen code, "same as" duplicate).
+  Typing combos from the KERNAL decode tables; screen codes and effects verified on the C64.
+  Regenerate: python tools/make_petscii.py runtime/roms/kernal.rom reference/data/petscii_probe.json.
+  OPEN DECISION (editor): glyph images for graphics characters (from the character ROM: publish,
+  course-site only, or Unicode legacy symbols). Until then graphics show as *graphic* + key combo.
 - Code font: ligatures off everywhere (the editor's phone font merged I+J, so "GHIJKL" read "GHUKL").
 - NEXT families: output/input, numbers, program flow, files/devices, memory/system; then the error
   message list, each verified.

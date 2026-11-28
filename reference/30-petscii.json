@@ -1,0 +1,2226 @@
+{
+ "kind": "petscii",
+ "rows": [
+  {
+   "code": 5,
+   "control": true,
+   "char": "WHITE",
+   "type": [
+    "CTRL+E",
+    "CTRL+2"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 8,
+   "control": true,
+   "char": "LOCK CASE",
+   "type": [
+    "CTRL+H"
+   ],
+   "screen": null,
+   "note": 4
+  },
+  {
+   "code": 9,
+   "control": true,
+   "char": "UNLOCK CASE",
+   "type": [
+    "CTRL+I"
+   ],
+   "screen": null,
+   "note": 4
+  },
+  {
+   "code": 13,
+   "control": true,
+   "char": "RETURN",
+   "type": [
+    "RETURN",
+    "CTRL+M"
+   ],
+   "screen": null,
+   "note": 7
+  },
+  {
+   "code": 14,
+   "control": true,
+   "char": "LOWER CASE",
+   "type": [
+    "CTRL+N"
+   ],
+   "screen": null,
+   "note": 3
+  },
+  {
+   "code": 17,
+   "control": true,
+   "char": "CURSOR DOWN",
+   "type": [
+    "CRSR ↓",
+    "CTRL+Q"
+   ],
+   "screen": null,
+   "note": 5
+  },
+  {
+   "code": 18,
+   "control": true,
+   "char": "REVERSE ON",
+   "type": [
+    "CTRL+R",
+    "CTRL+9"
+   ],
+   "screen": null,
+   "note": 2
+  },
+  {
+   "code": 19,
+   "control": true,
+   "char": "HOME",
+   "type": [
+    "CLR/HOME",
+    "CTRL+S"
+   ],
+   "screen": null,
+   "note": 5
+  },
+  {
+   "code": 20,
+   "control": true,
+   "char": "DELETE",
+   "type": [
+    "INST/DEL",
+    "CTRL+T"
+   ],
+   "screen": null,
+   "note": 6
+  },
+  {
+   "code": 28,
+   "control": true,
+   "char": "RED",
+   "type": [
+    "CTRL+3",
+    "CTRL+£"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 29,
+   "control": true,
+   "char": "CURSOR RIGHT",
+   "type": [
+    "CRSR →",
+    "CTRL+;"
+   ],
+   "screen": null,
+   "note": 5
+  },
+  {
+   "code": 30,
+   "control": true,
+   "char": "GREEN",
+   "type": [
+    "CTRL+6",
+    "CTRL+↑"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 31,
+   "control": true,
+   "char": "BLUE",
+   "type": [
+    "CTRL+7",
+    "CTRL+="
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 32,
+   "control": false,
+   "char": " ",
+   "type": [
+    "SPACE"
+   ],
+   "screen": 32,
+   "note": null
+  },
+  {
+   "code": 33,
+   "control": false,
+   "char": "!",
+   "type": [
+    "SHIFT+1"
+   ],
+   "screen": 33,
+   "note": null
+  },
+  {
+   "code": 34,
+   "control": false,
+   "char": "\"",
+   "type": [
+    "SHIFT+2"
+   ],
+   "screen": 34,
+   "note": null
+  },
+  {
+   "code": 35,
+   "control": false,
+   "char": "#",
+   "type": [
+    "SHIFT+3"
+   ],
+   "screen": 35,
+   "note": null
+  },
+  {
+   "code": 36,
+   "control": false,
+   "char": "$",
+   "type": [
+    "SHIFT+4"
+   ],
+   "screen": 36,
+   "note": null
+  },
+  {
+   "code": 37,
+   "control": false,
+   "char": "%",
+   "type": [
+    "SHIFT+5"
+   ],
+   "screen": 37,
+   "note": null
+  },
+  {
+   "code": 38,
+   "control": false,
+   "char": "&",
+   "type": [
+    "SHIFT+6"
+   ],
+   "screen": 38,
+   "note": null
+  },
+  {
+   "code": 39,
+   "control": false,
+   "char": "'",
+   "type": [
+    "SHIFT+7"
+   ],
+   "screen": 39,
+   "note": null
+  },
+  {
+   "code": 40,
+   "control": false,
+   "char": "(",
+   "type": [
+    "SHIFT+8"
+   ],
+   "screen": 40,
+   "note": null
+  },
+  {
+   "code": 41,
+   "control": false,
+   "char": ")",
+   "type": [
+    "SHIFT+9",
+    "C=+9"
+   ],
+   "screen": 41,
+   "note": null
+  },
+  {
+   "code": 42,
+   "control": false,
+   "char": "*",
+   "type": [
+    "*"
+   ],
+   "screen": 42,
+   "note": null
+  },
+  {
+   "code": 43,
+   "control": false,
+   "char": "+",
+   "type": [
+    "+"
+   ],
+   "screen": 43,
+   "note": null
+  },
+  {
+   "code": 44,
+   "control": false,
+   "char": ",",
+   "type": [
+    ","
+   ],
+   "screen": 44,
+   "note": null
+  },
+  {
+   "code": 45,
+   "control": false,
+   "char": "-",
+   "type": [
+    "-"
+   ],
+   "screen": 45,
+   "note": null
+  },
+  {
+   "code": 46,
+   "control": false,
+   "char": ".",
+   "type": [
+    "."
+   ],
+   "screen": 46,
+   "note": null
+  },
+  {
+   "code": 47,
+   "control": false,
+   "char": "/",
+   "type": [
+    "/"
+   ],
+   "screen": 47,
+   "note": null
+  },
+  {
+   "code": 48,
+   "control": false,
+   "char": "0",
+   "type": [
+    "0",
+    "SHIFT+0"
+   ],
+   "screen": 48,
+   "note": null
+  },
+  {
+   "code": 49,
+   "control": false,
+   "char": "1",
+   "type": [
+    "1"
+   ],
+   "screen": 49,
+   "note": null
+  },
+  {
+   "code": 50,
+   "control": false,
+   "char": "2",
+   "type": [
+    "2"
+   ],
+   "screen": 50,
+   "note": null
+  },
+  {
+   "code": 51,
+   "control": false,
+   "char": "3",
+   "type": [
+    "3"
+   ],
+   "screen": 51,
+   "note": null
+  },
+  {
+   "code": 52,
+   "control": false,
+   "char": "4",
+   "type": [
+    "4"
+   ],
+   "screen": 52,
+   "note": null
+  },
+  {
+   "code": 53,
+   "control": false,
+   "char": "5",
+   "type": [
+    "5"
+   ],
+   "screen": 53,
+   "note": null
+  },
+  {
+   "code": 54,
+   "control": false,
+   "char": "6",
+   "type": [
+    "6"
+   ],
+   "screen": 54,
+   "note": null
+  },
+  {
+   "code": 55,
+   "control": false,
+   "char": "7",
+   "type": [
+    "7"
+   ],
+   "screen": 55,
+   "note": null
+  },
+  {
+   "code": 56,
+   "control": false,
+   "char": "8",
+   "type": [
+    "8"
+   ],
+   "screen": 56,
+   "note": null
+  },
+  {
+   "code": 57,
+   "control": false,
+   "char": "9",
+   "type": [
+    "9"
+   ],
+   "screen": 57,
+   "note": null
+  },
+  {
+   "code": 58,
+   "control": false,
+   "char": ":",
+   "type": [
+    ":"
+   ],
+   "screen": 58,
+   "note": null
+  },
+  {
+   "code": 59,
+   "control": false,
+   "char": ";",
+   "type": [
+    ";"
+   ],
+   "screen": 59,
+   "note": null
+  },
+  {
+   "code": 60,
+   "control": false,
+   "char": "<",
+   "type": [
+    "SHIFT+,",
+    "C=+,"
+   ],
+   "screen": 60,
+   "note": null
+  },
+  {
+   "code": 61,
+   "control": false,
+   "char": "=",
+   "type": [
+    "=",
+    "SHIFT+="
+   ],
+   "screen": 61,
+   "note": null
+  },
+  {
+   "code": 62,
+   "control": false,
+   "char": ">",
+   "type": [
+    "SHIFT+.",
+    "C=+."
+   ],
+   "screen": 62,
+   "note": null
+  },
+  {
+   "code": 63,
+   "control": false,
+   "char": "?",
+   "type": [
+    "SHIFT+/",
+    "C=+/"
+   ],
+   "screen": 63,
+   "note": null
+  },
+  {
+   "code": 64,
+   "control": false,
+   "char": "@",
+   "type": [
+    "@"
+   ],
+   "screen": 0,
+   "note": null
+  },
+  {
+   "code": 65,
+   "control": false,
+   "char": "A",
+   "type": [
+    "A"
+   ],
+   "screen": 1,
+   "note": null
+  },
+  {
+   "code": 66,
+   "control": false,
+   "char": "B",
+   "type": [
+    "B"
+   ],
+   "screen": 2,
+   "note": null
+  },
+  {
+   "code": 67,
+   "control": false,
+   "char": "C",
+   "type": [
+    "C"
+   ],
+   "screen": 3,
+   "note": null
+  },
+  {
+   "code": 68,
+   "control": false,
+   "char": "D",
+   "type": [
+    "D"
+   ],
+   "screen": 4,
+   "note": null
+  },
+  {
+   "code": 69,
+   "control": false,
+   "char": "E",
+   "type": [
+    "E"
+   ],
+   "screen": 5,
+   "note": null
+  },
+  {
+   "code": 70,
+   "control": false,
+   "char": "F",
+   "type": [
+    "F"
+   ],
+   "screen": 6,
+   "note": null
+  },
+  {
+   "code": 71,
+   "control": false,
+   "char": "G",
+   "type": [
+    "G"
+   ],
+   "screen": 7,
+   "note": null
+  },
+  {
+   "code": 72,
+   "control": false,
+   "char": "H",
+   "type": [
+    "H"
+   ],
+   "screen": 8,
+   "note": null
+  },
+  {
+   "code": 73,
+   "control": false,
+   "char": "I",
+   "type": [
+    "I"
+   ],
+   "screen": 9,
+   "note": null
+  },
+  {
+   "code": 74,
+   "control": false,
+   "char": "J",
+   "type": [
+    "J"
+   ],
+   "screen": 10,
+   "note": null
+  },
+  {
+   "code": 75,
+   "control": false,
+   "char": "K",
+   "type": [
+    "K"
+   ],
+   "screen": 11,
+   "note": null
+  },
+  {
+   "code": 76,
+   "control": false,
+   "char": "L",
+   "type": [
+    "L"
+   ],
+   "screen": 12,
+   "note": null
+  },
+  {
+   "code": 77,
+   "control": false,
+   "char": "M",
+   "type": [
+    "M"
+   ],
+   "screen": 13,
+   "note": null
+  },
+  {
+   "code": 78,
+   "control": false,
+   "char": "N",
+   "type": [
+    "N"
+   ],
+   "screen": 14,
+   "note": null
+  },
+  {
+   "code": 79,
+   "control": false,
+   "char": "O",
+   "type": [
+    "O"
+   ],
+   "screen": 15,
+   "note": null
+  },
+  {
+   "code": 80,
+   "control": false,
+   "char": "P",
+   "type": [
+    "P"
+   ],
+   "screen": 16,
+   "note": null
+  },
+  {
+   "code": 81,
+   "control": false,
+   "char": "Q",
+   "type": [
+    "Q"
+   ],
+   "screen": 17,
+   "note": null
+  },
+  {
+   "code": 82,
+   "control": false,
+   "char": "R",
+   "type": [
+    "R"
+   ],
+   "screen": 18,
+   "note": null
+  },
+  {
+   "code": 83,
+   "control": false,
+   "char": "S",
+   "type": [
+    "S"
+   ],
+   "screen": 19,
+   "note": null
+  },
+  {
+   "code": 84,
+   "control": false,
+   "char": "T",
+   "type": [
+    "T"
+   ],
+   "screen": 20,
+   "note": null
+  },
+  {
+   "code": 85,
+   "control": false,
+   "char": "U",
+   "type": [
+    "U"
+   ],
+   "screen": 21,
+   "note": null
+  },
+  {
+   "code": 86,
+   "control": false,
+   "char": "V",
+   "type": [
+    "V"
+   ],
+   "screen": 22,
+   "note": null
+  },
+  {
+   "code": 87,
+   "control": false,
+   "char": "W",
+   "type": [
+    "W"
+   ],
+   "screen": 23,
+   "note": null
+  },
+  {
+   "code": 88,
+   "control": false,
+   "char": "X",
+   "type": [
+    "X"
+   ],
+   "screen": 24,
+   "note": null
+  },
+  {
+   "code": 89,
+   "control": false,
+   "char": "Y",
+   "type": [
+    "Y"
+   ],
+   "screen": 25,
+   "note": null
+  },
+  {
+   "code": 90,
+   "control": false,
+   "char": "Z",
+   "type": [
+    "Z"
+   ],
+   "screen": 26,
+   "note": null
+  },
+  {
+   "code": 91,
+   "control": false,
+   "char": "[",
+   "type": [
+    "SHIFT+:",
+    "C=+:"
+   ],
+   "screen": 27,
+   "note": null
+  },
+  {
+   "code": 92,
+   "control": false,
+   "char": "£",
+   "type": [
+    "£"
+   ],
+   "screen": 28,
+   "note": null
+  },
+  {
+   "code": 93,
+   "control": false,
+   "char": "]",
+   "type": [
+    "SHIFT+;",
+    "C=+;"
+   ],
+   "screen": 29,
+   "note": null
+  },
+  {
+   "code": 94,
+   "control": false,
+   "char": "↑",
+   "type": [
+    "↑"
+   ],
+   "screen": 30,
+   "note": null
+  },
+  {
+   "code": 95,
+   "control": false,
+   "char": "←",
+   "type": [
+    "←",
+    "SHIFT+←"
+   ],
+   "screen": 31,
+   "note": null
+  },
+  {
+   "code": 96,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 64,
+   "note": null
+  },
+  {
+   "code": 97,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 65,
+   "note": null
+  },
+  {
+   "code": 98,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 66,
+   "note": null
+  },
+  {
+   "code": 99,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 67,
+   "note": null
+  },
+  {
+   "code": 100,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 68,
+   "note": null
+  },
+  {
+   "code": 101,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 69,
+   "note": null
+  },
+  {
+   "code": 102,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 70,
+   "note": null
+  },
+  {
+   "code": 103,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 71,
+   "note": null
+  },
+  {
+   "code": 104,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 72,
+   "note": null
+  },
+  {
+   "code": 105,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 73,
+   "note": null
+  },
+  {
+   "code": 106,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 74,
+   "note": null
+  },
+  {
+   "code": 107,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 75,
+   "note": null
+  },
+  {
+   "code": 108,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 76,
+   "note": null
+  },
+  {
+   "code": 109,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 77,
+   "note": null
+  },
+  {
+   "code": 110,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 78,
+   "note": null
+  },
+  {
+   "code": 111,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 79,
+   "note": null
+  },
+  {
+   "code": 112,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 80,
+   "note": null
+  },
+  {
+   "code": 113,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 81,
+   "note": null
+  },
+  {
+   "code": 114,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 82,
+   "note": null
+  },
+  {
+   "code": 115,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 83,
+   "note": null
+  },
+  {
+   "code": 116,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 84,
+   "note": null
+  },
+  {
+   "code": 117,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 85,
+   "note": null
+  },
+  {
+   "code": 118,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 86,
+   "note": null
+  },
+  {
+   "code": 119,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 87,
+   "note": null
+  },
+  {
+   "code": 120,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 88,
+   "note": null
+  },
+  {
+   "code": 121,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 89,
+   "note": null
+  },
+  {
+   "code": 122,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 90,
+   "note": null
+  },
+  {
+   "code": 123,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 91,
+   "note": null
+  },
+  {
+   "code": 124,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 92,
+   "note": null
+  },
+  {
+   "code": 125,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 93,
+   "note": null
+  },
+  {
+   "code": 126,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 94,
+   "note": null
+  },
+  {
+   "code": 127,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 95,
+   "note": null
+  },
+  {
+   "code": 129,
+   "control": true,
+   "char": "ORANGE",
+   "type": [
+    "C=+1"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 133,
+   "control": true,
+   "char": "F1",
+   "type": [
+    "F1"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 134,
+   "control": true,
+   "char": "F3",
+   "type": [
+    "F3"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 135,
+   "control": true,
+   "char": "F5",
+   "type": [
+    "F5"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 136,
+   "control": true,
+   "char": "F7",
+   "type": [
+    "F7"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 137,
+   "control": true,
+   "char": "F2",
+   "type": [
+    "SHIFT+F1",
+    "C=+F1"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 138,
+   "control": true,
+   "char": "F4",
+   "type": [
+    "SHIFT+F3",
+    "C=+F3"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 139,
+   "control": true,
+   "char": "F6",
+   "type": [
+    "SHIFT+F5",
+    "C=+F5"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 140,
+   "control": true,
+   "char": "F8",
+   "type": [
+    "SHIFT+F7",
+    "C=+F7"
+   ],
+   "screen": null,
+   "note": 8
+  },
+  {
+   "code": 141,
+   "control": true,
+   "char": "SHIFT+RETURN",
+   "type": [
+    "SHIFT+RETURN",
+    "C=+RETURN"
+   ],
+   "screen": null,
+   "note": 7
+  },
+  {
+   "code": 142,
+   "control": true,
+   "char": "UPPER CASE",
+   "type": [],
+   "screen": null,
+   "note": 3
+  },
+  {
+   "code": 144,
+   "control": true,
+   "char": "BLACK",
+   "type": [
+    "CTRL+1"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 145,
+   "control": true,
+   "char": "CURSOR UP",
+   "type": [
+    "SHIFT+CRSR ↓",
+    "C=+CRSR ↓"
+   ],
+   "screen": null,
+   "note": 5
+  },
+  {
+   "code": 146,
+   "control": true,
+   "char": "REVERSE OFF",
+   "type": [
+    "CTRL+0"
+   ],
+   "screen": null,
+   "note": 2
+  },
+  {
+   "code": 147,
+   "control": true,
+   "char": "CLEAR",
+   "type": [
+    "SHIFT+CLR/HOME",
+    "C=+CLR/HOME"
+   ],
+   "screen": null,
+   "note": 5
+  },
+  {
+   "code": 148,
+   "control": true,
+   "char": "INSERT",
+   "type": [
+    "SHIFT+INST/DEL",
+    "C=+INST/DEL"
+   ],
+   "screen": null,
+   "note": 6
+  },
+  {
+   "code": 149,
+   "control": true,
+   "char": "BROWN",
+   "type": [
+    "C=+2"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 150,
+   "control": true,
+   "char": "LIGHT RED",
+   "type": [
+    "C=+3"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 151,
+   "control": true,
+   "char": "DARK GREY",
+   "type": [
+    "C=+4"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 152,
+   "control": true,
+   "char": "GREY",
+   "type": [
+    "C=+5"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 153,
+   "control": true,
+   "char": "LIGHT GREEN",
+   "type": [
+    "C=+6"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 154,
+   "control": true,
+   "char": "LIGHT BLUE",
+   "type": [
+    "C=+7"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 155,
+   "control": true,
+   "char": "LIGHT GREY",
+   "type": [
+    "C=+8"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 156,
+   "control": true,
+   "char": "PURPLE",
+   "type": [
+    "CTRL+5"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 157,
+   "control": true,
+   "char": "CURSOR LEFT",
+   "type": [
+    "SHIFT+CRSR →",
+    "C=+CRSR →"
+   ],
+   "screen": null,
+   "note": 5
+  },
+  {
+   "code": 158,
+   "control": true,
+   "char": "YELLOW",
+   "type": [
+    "CTRL+8"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 159,
+   "control": true,
+   "char": "CYAN",
+   "type": [
+    "CTRL+4"
+   ],
+   "screen": null,
+   "note": 1
+  },
+  {
+   "code": 160,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+SPACE",
+    "C=+SPACE"
+   ],
+   "screen": 96,
+   "note": null
+  },
+  {
+   "code": 161,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+K"
+   ],
+   "screen": 97,
+   "note": null
+  },
+  {
+   "code": 162,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+I"
+   ],
+   "screen": 98,
+   "note": null
+  },
+  {
+   "code": 163,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+T"
+   ],
+   "screen": 99,
+   "note": null
+  },
+  {
+   "code": 164,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+@"
+   ],
+   "screen": 100,
+   "note": null
+  },
+  {
+   "code": 165,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+G"
+   ],
+   "screen": 101,
+   "note": null
+  },
+  {
+   "code": 166,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=++"
+   ],
+   "screen": 102,
+   "note": null
+  },
+  {
+   "code": 167,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+M"
+   ],
+   "screen": 103,
+   "note": null
+  },
+  {
+   "code": 168,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+£"
+   ],
+   "screen": 104,
+   "note": null
+  },
+  {
+   "code": 169,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+£"
+   ],
+   "screen": 105,
+   "note": null
+  },
+  {
+   "code": 170,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+N"
+   ],
+   "screen": 106,
+   "note": null
+  },
+  {
+   "code": 171,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+Q"
+   ],
+   "screen": 107,
+   "note": null
+  },
+  {
+   "code": 172,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+D"
+   ],
+   "screen": 108,
+   "note": null
+  },
+  {
+   "code": 173,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+Z"
+   ],
+   "screen": 109,
+   "note": null
+  },
+  {
+   "code": 174,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+S"
+   ],
+   "screen": 110,
+   "note": null
+  },
+  {
+   "code": 175,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+P"
+   ],
+   "screen": 111,
+   "note": null
+  },
+  {
+   "code": 176,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+A"
+   ],
+   "screen": 112,
+   "note": null
+  },
+  {
+   "code": 177,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+E"
+   ],
+   "screen": 113,
+   "note": null
+  },
+  {
+   "code": 178,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+R"
+   ],
+   "screen": 114,
+   "note": null
+  },
+  {
+   "code": 179,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+W"
+   ],
+   "screen": 115,
+   "note": null
+  },
+  {
+   "code": 180,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+H"
+   ],
+   "screen": 116,
+   "note": null
+  },
+  {
+   "code": 181,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+J"
+   ],
+   "screen": 117,
+   "note": null
+  },
+  {
+   "code": 182,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+L"
+   ],
+   "screen": 118,
+   "note": null
+  },
+  {
+   "code": 183,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+Y"
+   ],
+   "screen": 119,
+   "note": null
+  },
+  {
+   "code": 184,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+U"
+   ],
+   "screen": 120,
+   "note": null
+  },
+  {
+   "code": 185,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+O"
+   ],
+   "screen": 121,
+   "note": null
+  },
+  {
+   "code": 186,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+@"
+   ],
+   "screen": 122,
+   "note": null
+  },
+  {
+   "code": 187,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+F"
+   ],
+   "screen": 123,
+   "note": null
+  },
+  {
+   "code": 188,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+C"
+   ],
+   "screen": 124,
+   "note": null
+  },
+  {
+   "code": 189,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+X"
+   ],
+   "screen": 125,
+   "note": null
+  },
+  {
+   "code": 190,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+V"
+   ],
+   "screen": 126,
+   "note": null
+  },
+  {
+   "code": 191,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+B"
+   ],
+   "screen": 127,
+   "note": null
+  },
+  {
+   "code": 192,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+*"
+   ],
+   "screen": 64,
+   "note": null
+  },
+  {
+   "code": 193,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+A"
+   ],
+   "screen": 65,
+   "note": null
+  },
+  {
+   "code": 194,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+B"
+   ],
+   "screen": 66,
+   "note": null
+  },
+  {
+   "code": 195,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+C"
+   ],
+   "screen": 67,
+   "note": null
+  },
+  {
+   "code": 196,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+D"
+   ],
+   "screen": 68,
+   "note": null
+  },
+  {
+   "code": 197,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+E"
+   ],
+   "screen": 69,
+   "note": null
+  },
+  {
+   "code": 198,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+F"
+   ],
+   "screen": 70,
+   "note": null
+  },
+  {
+   "code": 199,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+G"
+   ],
+   "screen": 71,
+   "note": null
+  },
+  {
+   "code": 200,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+H"
+   ],
+   "screen": 72,
+   "note": null
+  },
+  {
+   "code": 201,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+I"
+   ],
+   "screen": 73,
+   "note": null
+  },
+  {
+   "code": 202,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+J"
+   ],
+   "screen": 74,
+   "note": null
+  },
+  {
+   "code": 203,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+K"
+   ],
+   "screen": 75,
+   "note": null
+  },
+  {
+   "code": 204,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+L"
+   ],
+   "screen": 76,
+   "note": null
+  },
+  {
+   "code": 205,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+M"
+   ],
+   "screen": 77,
+   "note": null
+  },
+  {
+   "code": 206,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+N"
+   ],
+   "screen": 78,
+   "note": null
+  },
+  {
+   "code": 207,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+O"
+   ],
+   "screen": 79,
+   "note": null
+  },
+  {
+   "code": 208,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+P"
+   ],
+   "screen": 80,
+   "note": null
+  },
+  {
+   "code": 209,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+Q"
+   ],
+   "screen": 81,
+   "note": null
+  },
+  {
+   "code": 210,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+R"
+   ],
+   "screen": 82,
+   "note": null
+  },
+  {
+   "code": 211,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+S"
+   ],
+   "screen": 83,
+   "note": null
+  },
+  {
+   "code": 212,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+T"
+   ],
+   "screen": 84,
+   "note": null
+  },
+  {
+   "code": 213,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+U"
+   ],
+   "screen": 85,
+   "note": null
+  },
+  {
+   "code": 214,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+V"
+   ],
+   "screen": 86,
+   "note": null
+  },
+  {
+   "code": 215,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+W"
+   ],
+   "screen": 87,
+   "note": null
+  },
+  {
+   "code": 216,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+X"
+   ],
+   "screen": 88,
+   "note": null
+  },
+  {
+   "code": 217,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+Y"
+   ],
+   "screen": 89,
+   "note": null
+  },
+  {
+   "code": 218,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+Z"
+   ],
+   "screen": 90,
+   "note": null
+  },
+  {
+   "code": 219,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT++"
+   ],
+   "screen": 91,
+   "note": null
+  },
+  {
+   "code": 220,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+-"
+   ],
+   "screen": 92,
+   "note": null
+  },
+  {
+   "code": 221,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+-"
+   ],
+   "screen": 93,
+   "note": null
+  },
+  {
+   "code": 222,
+   "control": false,
+   "char": null,
+   "type": [
+    "SHIFT+↑",
+    "C=+↑"
+   ],
+   "screen": 94,
+   "note": null
+  },
+  {
+   "code": 223,
+   "control": false,
+   "char": null,
+   "type": [
+    "C=+*"
+   ],
+   "screen": 95,
+   "note": null
+  },
+  {
+   "code": 224,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 96,
+   "note": null
+  },
+  {
+   "code": 225,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 97,
+   "note": null
+  },
+  {
+   "code": 226,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 98,
+   "note": null
+  },
+  {
+   "code": 227,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 99,
+   "note": null
+  },
+  {
+   "code": 228,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 100,
+   "note": null
+  },
+  {
+   "code": 229,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 101,
+   "note": null
+  },
+  {
+   "code": 230,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 102,
+   "note": null
+  },
+  {
+   "code": 231,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 103,
+   "note": null
+  },
+  {
+   "code": 232,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 104,
+   "note": null
+  },
+  {
+   "code": 233,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 105,
+   "note": null
+  },
+  {
+   "code": 234,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 106,
+   "note": null
+  },
+  {
+   "code": 235,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 107,
+   "note": null
+  },
+  {
+   "code": 236,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 108,
+   "note": null
+  },
+  {
+   "code": 237,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 109,
+   "note": null
+  },
+  {
+   "code": 238,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 110,
+   "note": null
+  },
+  {
+   "code": 239,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 111,
+   "note": null
+  },
+  {
+   "code": 240,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 112,
+   "note": null
+  },
+  {
+   "code": 241,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 113,
+   "note": null
+  },
+  {
+   "code": 242,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 114,
+   "note": null
+  },
+  {
+   "code": 243,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 115,
+   "note": null
+  },
+  {
+   "code": 244,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 116,
+   "note": null
+  },
+  {
+   "code": 245,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 117,
+   "note": null
+  },
+  {
+   "code": 246,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 118,
+   "note": null
+  },
+  {
+   "code": 247,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 119,
+   "note": null
+  },
+  {
+   "code": 248,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 120,
+   "note": null
+  },
+  {
+   "code": 249,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 121,
+   "note": null
+  },
+  {
+   "code": 250,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 122,
+   "note": null
+  },
+  {
+   "code": 251,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 123,
+   "note": null
+  },
+  {
+   "code": 252,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 124,
+   "note": null
+  },
+  {
+   "code": 253,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 125,
+   "note": null
+  },
+  {
+   "code": 254,
+   "control": false,
+   "char": null,
+   "type": [],
+   "screen": 126,
+   "note": null
+  },
+  {
+   "code": 255,
+   "control": false,
+   "char": "π",
+   "type": [],
+   "screen": 94,
+   "note": null
+  }
+ ],
+ "verified": "Screen codes, colors, reverse, character set, lock, cursor, DELETE and INSERT verified on the C64; typing combinations read from the KERNAL's keyboard decode tables ($EB81, $EBC2, $EC03, $EC78)."
+}

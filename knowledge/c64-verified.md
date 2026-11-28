@@ -68,3 +68,15 @@ as they are verified. String-function edge cases live in `reference/entries/20-s
 | Unmapped keys (course site adds them) | RUN/STOP=Esc, RESTORE=Page Up, CLR/HOME=Home, clear=Shift+Home, INSERT=Insert or Shift+Backspace (vc64web ignores Shift on Backspace), ↑=^ |
 | Character ROM | Standard 901225-01 begins 3C 66 6E; the Japanese 906143-02 must not be used |
 | Not reliable for testing | auto-type and key events (see CLAUDE.md pitfalls) |
+
+## Characters (PETSCII and screen codes)
+
+| Fact | Detail |
+| --- | --- |
+| Two numbering systems | PETSCII (CHR$, ASC, PRINT) vs screen codes (screen memory, POKE/PEEK): A = 65 vs 1. Full verified table: `reference/30-petscii.json` (screen codes measured: `reference/data/petscii_probe.json`) |
+| Keyboard decode tables | KERNAL $EB79 holds pointers: plain $EB81, SHIFT $EBC2, C= $EC03, CTRL $EC78; 64 bytes each in matrix order (W=87 check). Source of every "type it" combination |
+| Color codes → color numbers | 144→0 black, 5→1 white, 28→2 red, 159→3 cyan, 156→4 purple, 30→5 green, 31→6 blue, 158→7 yellow, 129→8 orange, 149→9 brown, 150→10 light red, 151→11 dark grey, 152→12 grey, 153→13 light green, 154→14 light blue, 155→15 light grey |
+| Reverse | CHR$(18) then "A" → screen code 129 (1 + 128) |
+| Character sets | CHR$(14): 53272 goes 21 → 23 (lower/upper); CHR$(142) back to 21 |
+| Case lock | CHR$(8): location 657 = 128; CHR$(9): 0 |
+| Cursor and editing codes | 17 down, 145 up, 29 right, 157 left, 19 home, 147 clear, 20 delete (closes gap), 148 insert (opens gap): verified by position |

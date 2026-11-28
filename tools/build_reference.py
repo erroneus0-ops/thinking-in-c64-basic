@@ -64,11 +64,74 @@ def render_family(fam):
         md += ["**Related** " + ", ".join(f"[{code(r)}](#{anchor(r)})" for r in e["related"]), ""]
     return "\n".join(md)
 
+COLOR_NAMES = {144: (0, "black"), 5: (1, "white"), 28: (2, "red"), 159: (3, "cyan"), 156: (4, "purple"), 30: (5, "green"),
+  31: (6, "blue"), 158: (7, "yellow"), 129: (8, "orange"), 149: (9, "brown"), 150: (10, "light red"), 151: (11, "dark grey"),
+  152: (12, "grey"), 153: (13, "light green"), 154: (14, "light blue"), 155: (15, "light grey")}
+
+def render_petscii(d):
+    """The PETSCII chart: readable tables, with explanations as numbered notes after them."""
+    sup = "¹²³⁴⁵⁶⁷⁸⁹"
+    def typed(r):
+        return " or ".join(r["type"]) if r["type"] else "—"
+    md = ["# PETSCII and screen codes", "",
+          "The C64 uses two numbering systems for characters. **PETSCII** codes are what `CHR$` returns, what "
+          "`ASC` reads and what `PRINT` sends. **Screen codes** are what screen memory holds, so they are what "
+          "`POKE` writes to and `PEEK` reads from the screen (address 1024 onward). The letter A is PETSCII 65 "
+          "but screen code 1.", "",
+          "## Control codes", "",
+          "Printing a control code performs an action instead of showing a character. Codes not listed here "
+          "(within 0–31 and 128–159) do nothing when printed.", "",
+          "| Dec | Hex | Code | Type it | Note |", "| --- | --- | --- | --- | --- |"]
+    for r in d["rows"]:
+        if r["control"]:
+            n = sup[r["note"] - 1] if r["note"] else ""
+            md.append(f"| {r['code']} | ${r['code']:02X} | {r['char']} | {typed(r)} | {n} |")
+    md += ["", "## Printable characters", "",
+           "Graphics characters are identified by the key combination that types them, which matches the "
+           "symbols printed on the front of the C64's keys (SHIFT: right symbol; C=: left symbol). Several "
+           "codes show the same character; \"Same as\" gives the first code with the same screen code.", "",
+           "| Dec | Hex | Character | Type it | Screen code | Same as |", "| --- | --- | --- | --- | --- | --- |"]
+    first = {}
+    for r in d["rows"]:
+        if r["control"]:
+            continue
+        same = first.setdefault(r["screen"], r["code"])
+        ch = f"`{r['char']}`" if r["char"] and r["char"] != " " else ("space" if r["char"] == " " else "*graphic*")
+        md.append(f"| {r['code']} | ${r['code']:02X} | {ch} | {typed(r)} | {r['screen']} | {same if same != r['code'] else ''} |")
+    md += ["", "## Notes", ""]
+    colors = ", ".join(f"{code} {name} ({num})" for code, (num, name) in sorted(COLOR_NAMES.items(), key=lambda x: x[1][0]))
+    md += [f"1. **Color codes** set the color of characters printed afterwards. Code, color, and the color number used "
+           f"by `POKE` to color memory (55296 onward) and to the border and background registers: {colors}.",
+           "2. **REVERSE ON** prints the following characters in reverse (screen code plus 128) until **REVERSE OFF**.",
+           "3. **LOWER CASE** switches the whole screen at once to the lower-case/upper-case character set "
+           "(register 53272 changes from 21 to 23); **UPPER CASE** switches back to upper-case/graphics. In the "
+           "lower-case set, codes 65–90 display as lower-case letters and 193–218 as capitals. SHIFT + C= switches "
+           "the same way from the keyboard.",
+           "4. **LOCK CASE** prevents SHIFT + C= from switching character sets (location 657 becomes 128); "
+           "**UNLOCK CASE** allows it again (657 becomes 0).",
+           "5. **Cursor movement**: printing these moves the cursor exactly as the keys do. **HOME** moves it to the "
+           "top left corner; **CLEAR** also erases the screen.",
+           "6. **DELETE** removes the character to the left of the cursor and closes the gap; **INSERT** opens a gap "
+           "at the cursor.",
+           "7. **RETURN** moves the cursor to the start of the next line. Typed, SHIFT + RETURN moves to the next "
+           "line without entering the current one.",
+           "8. **Function keys** produce these codes when pressed, for programs to read with `GET`.",
+           "",
+           "Inside quotation marks, typed control codes are stored in the string instead of being performed, "
+           "and are shown as reversed characters (quote mode).", "",
+           f"*{d['verified']}*"]
+    return "\n".join(md)
+
 def main():
     # Markdown chapters and JSON families, together in file-name order (10-keywords, 20-strings, ...).
-    parts = sorted(list((ROOT / "reference").glob("*.md")) + list((ROOT / "reference" / "entries").glob("*.json")), key=lambda p: p.name)
-    text = "\n\n".join(render_family(json.loads(p.read_text(encoding="utf-8"))) if p.suffix == ".json" else p.read_text(encoding="utf-8")
-                       for p in parts).replace("<!--KEYWORD-INDEX-->", keyword_index())
+    parts = sorted(list((ROOT / "reference").glob("*.md")) + list((ROOT / "reference").glob("[0-9]*.json"))
+                   + list((ROOT / "reference" / "entries").glob("*.json")), key=lambda p: p.name)
+    def render(p):
+        if p.suffix != ".json":
+            return p.read_text(encoding="utf-8")
+        d = json.loads(p.read_text(encoding="utf-8"))
+        return render_petscii(d) if d.get("kind") == "petscii" else render_family(d)
+    text = "\n\n".join(render(p) for p in parts).replace("<!--KEYWORD-INDEX-->", keyword_index())
     out = ROOT / "docs" / "reference"
     out.mkdir(parents=True, exist_ok=True)
     html = pypandoc.convert_text(text, "html5", format="markdown-tex_math_dollars", extra_args=[   # $80 is a token number, not math
