@@ -38,6 +38,11 @@ Always rebuild both book editions, re-lock, then commit `docs/` with the source.
 
 ## Cost ladder: cheapest first
 
+**Answering is not publishing (editor's rule).** In conversation, answer from knowledge, this repo's
+files and reasoning, and say which it is ("I believe...", "from the reference..."). Run the emulator
+ONLY (a) to verify something before it goes into the book or the reference, or (b) when the editor
+asks ("validate that"). A question like "does X exist?" is a lookup, not a test run.
+
 1. **Read** `knowledge/c64-verified.md`, the reference JSON, and `HANDOFF.md` (search it). If the fact is there, no test.
 2. **Read the ROM's logic**, not the whole ROM: download once to /tmp and search, e.g.
    `curl -s -o /tmp/d.txt https://raw.githubusercontent.com/mist64/c64ref/master/src/c64disasm/c64disasm_en.txt`
