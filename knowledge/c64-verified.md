@@ -45,6 +45,8 @@ as they are verified. String-function edge cases live in `reference/entries/20-s
 | INPUT | Prompt needs `;` (`INPUT "NAME",N$` → ?SYNTAX  ERROR IN 10); INPUT adds "? " (prompt ending in ? shows ??); INPUT can't be used in direct mode |
 | PRINT | Commas → 10-column zones; `PRINT` alone prints an empty line; items side by side act like `;`. PRINT never erases the rest of a row (READY over READY! leaves READY!); spaces in quotes do overwrite |
 | SPC(n) on screen | Moves the cursor right WITHOUT erasing: SPC(3);"Y" over XXXXXXXX gives XXXYXXXX. No control code clears a line |
+| No STRING$ | `PRINT STRING$(5,"*")` → ?TYPE MISMATCH  ERROR (read as array element ST$(5,"*"): misleading for CoCo users). Substitutes: loop `B$=B$+"*"`, or LEFT$ of a long ready-made string |
+| Clear a line (editor's idiom) | `SS$` = 40 spaces; `PRINT SS$;CHR$(145);` blanks the row and returns to its start. On the BOTTOM row it works but scrolls the whole screen up one row first. Partial: `PRINT "READY";LEFT$(SP$,1)` overwrote a leftover "!" |
 | Control code in a variable | CS$=CHR$(147) then PRINT CS$;"LEVEL 1" clears and prints |
 | DEF FN | Program mode only; creates the parameter variable; parameter is restored after the call |
 

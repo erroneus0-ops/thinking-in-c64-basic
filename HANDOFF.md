@@ -488,6 +488,11 @@ and precedence, ST/TI/TI$, every error message.
   Regenerate: python tools/make_petscii.py runtime/roms/kernal.rom reference/data/petscii_probe.json.
   OPEN DECISION (editor): glyph images for graphics characters (from the character ROM: publish,
   course-site only, or Unicode legacy symbols). Until then graphics show as *graphic* + key combo.
+- PLANNED REFERENCE SECTION: "Not in BASIC V2, and what to use instead" (for readers from other
+  BASICs, e.g. the editor's CoCo): CLS -> PRINT CHR$(147); STRING$ -> LEFT$ of a filled string or a
+  loop (STRING$ gives a misleading ?TYPE MISMATCH); clear line -> 40-space SS$ + CHR$(145) (bottom
+  row scrolls); ELSE -> the three patterns; WHILE/REPEAT -> IF...THEN loops; INSTR -> MID$ loop;
+  PRINT USING -> STR$ + padding; LOCATE/PRINT@ -> cursor codes. Verify each with the harness.
 - Code font: ligatures off everywhere (the editor's phone font merged I+J, so "GHIJKL" read "GHUKL").
 - NEXT families: output/input, numbers, program flow, files/devices, memory/system; then the error
   message list, each verified.
