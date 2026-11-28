@@ -263,7 +263,7 @@ Conventions in chapter files:
   * Editor tested Ch 0 (28 Nov): asked for NOTES ON SAVE SLOTS (built: "What's new in this version?"),
     and found PRINT leaves old characters (READY over READY! shows READY!): now a Good to know in 2.4,
     with his named-control-code idea (CS$="{clr}"). SPC(n) only MOVES the cursor (verified), so
-    Lesson 4.2 was corrected. Editor's view has COPY FOR CLAUDE (since last copy/today/7 days/all;
+    Lesson 4.2 was corrected. Editor's view has COPY DATA TO CLIPBOARD (renamed from "Copy for Claude"; since last copy/today/7 days/all;
     grouped by person; visits condensed per day; copies through a hidden textarea, since plain-HTTP
     LAN pages can't use the clipboard API).
 

@@ -39,7 +39,7 @@
 <main>
   <h1>Editor’s view</h1>
   <div class="export">
-    <label for="since"><strong>Copy for Claude:</strong></label>
+    <label for="since"><strong>Copy data to clipboard:</strong></label>
     <select id="since">
       <option value="last">Since my last copy</option>
       <option value="today">Today</option>
@@ -156,7 +156,7 @@ const none = (box, what) => box.append(el('p', { className: 'quiet', textContent
     try { ok = document.execCommand('copy'); } catch (e) {}
     if (!ok && navigator.clipboard) navigator.clipboard.writeText(text).then(() => {}, () => {});
     try { localStorage.setItem('c64-last-copy', stamp(now)); } catch (e) {}
-    document.getElementById('copied').textContent = `Copied (${text.split('\n').length} lines). Paste it into the chat.`;
+    document.getElementById('copied').textContent = `Copied (${text.split('\n').length} lines) to the clipboard.`;
   };
 
   const vbox = document.getElementById('visits');
